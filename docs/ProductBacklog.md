@@ -1,0 +1,51 @@
+---
+title: Team 6 - Leaguer
+author: [ Nathaniel Foy, Guntas Grewal, Tomer Kimia, Andrew Murrell, Luke Shumaker, Davis Webb ]
+---
+
+Problem Statement
+-----------------
+
+In team-based tournament sports, often individual contributions are
+overshadowed by the binary end result: win or lose.  This
+winner-takes-all mentality may unfairly pair players in later stages
+of the tournament based on the team's score rather than their own in
+early stages.
+
+
+Background
+----------
+
+Generally, new team based competitions have been managed
+electronically using archaic methods.  The winning team advances and
+the losing team is defeated.  In the real world there are many
+examples of individual review (as in football) and handicaps (as in
+golf).  Our goal is to create software that allows teams to compete
+and review their peers to more accurately represent modern team
+competitions.  Our domain is online competition management and
+e-sports.  The targeted audience is defined on two levels, on a broad
+level it is for any individual wishing to manage a competitive event,
+on a niche level it is for individuals looking to manage and
+participate in team competitions (like League of Legends).
+
+TODO - Luke write about existing software.
+
+System Model
+------------
+
+![](./Diagram01.jpg)\ 
+
+Requirements
+------------
+
++---------+-----------------------------+-----------------------------+
+|         | Functional Requirements     | Non-Functional Requirements |
++=========+=============================+=============================+
+| Must be | - foo                       | - baz                       |
+| done    | - bar                       | - quux                      |
+|         |                             |                             |
++---------+-----------------------------+-----------------------------+
+| If time | - item                      | - stuff                     |
+| allows  |                             |                             |
+|         |                             |                             |
++---------+-----------------------------+-----------------------------+
