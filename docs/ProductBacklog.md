@@ -38,14 +38,18 @@ System Model
 Requirements
 ------------
 
-+---------+-----------------------------+-----------------------------+
-|         | Functional Requirements     | Non-Functional Requirements |
-+=========+=============================+=============================+
-| Must be | - foo                       | - baz                       |
-| done    | - bar                       | - quux                      |
-|         |                             |                             |
-+---------+-----------------------------+-----------------------------+
-| If time | - item                      | - stuff                     |
-| allows  |                             |                             |
-|         |                             |                             |
-+---------+-----------------------------+-----------------------------+
++---------+-----------------------------------+-----------------------------+
+|         | Functional Requirements           | Non-Functional Requirements |
++=========+===================================+=============================+
+| Must be | - Tournament Creation             | - None                      |
+| done    | - Tournament Settings Management  |                             |
+|         | - Tournament Registration         |                             |
+|         | - Tournament Pairings             |                             |
+|         | - Peer Review System              |                             |
+|         | - Standings                       |                             |
+|         | - Server File Backup              |                             |
++---------+-----------------------------------+-----------------------------+
+| If time | - Alert System                    | - Interactive Menu          |
+| allows  | - Private Message System          | - Twitch Integration        |
+|         | - Advanced Tournament Search      | - Mobile Access             |
++---------+-----------------------------------+-----------------------------+
