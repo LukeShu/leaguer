@@ -41,13 +41,13 @@ Requirements
 +---------+-----------------------------------+-----------------------------+
 |         | Functional Requirements           | Non-Functional Requirements |
 +=========+===================================+=============================+
-| Must be | - Tournament Creation             | - None                      |
-| done    | - Tournament Settings Management  |                             |
-|         | - Tournament Registration         |                             |
-|         | - Tournament Pairings             |                             |
-|         | - Peer Review System              |                             |
-|         | - Standings                       |                             |
-|         | - Server File Backup              |                             |
+| Must be | - As a host, I would like to create a new tournament.             | - None                      |
+| done    | - As a host, I would like to set some of the parameters of a tournamet, such as number of players per team, whether spectators ar allowed, and game type.  |                             |
+|         | - As a player, I would like to register for a tournament.         |                             |
+|         | - As a host, I would like to assign members to team, or have the option to randomly assign teams.             |                             |
+|         | - As a player, I would like to rate my peers, and would like to be reviewed by my peers.               |                             |
+|         | - As a player, or spectator, I would like to see the standings of all players.                       |                             |
+|         | - As a host, or a player, I would like my win/rating history to be stored so that I can have the same profile throughout many tournaments.             |                             |
 +---------+-----------------------------------+-----------------------------+
 | If time | - Alert System                    | - Interactive Menu          |
 | allows  | - Private Message System          | - Twitch Integration        |
