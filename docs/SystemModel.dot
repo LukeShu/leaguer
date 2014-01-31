@@ -21,7 +21,7 @@ digraph SystemModel {
 		peerReview[label="Peer Review"];
 		performance[label="Performance"];
 		standings[label="Standings"];
-		gs[label="GS"];
+		gs[label="Game Score"];
 		search[label="Search"];
 		pm[label="PM"];
 		alerts[label="Alerts"];
