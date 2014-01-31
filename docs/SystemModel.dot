@@ -23,14 +23,13 @@ digraph SystemModel {
 		standings[label="Standings"];
 		gs[label="Game Score"];
 		search[label="Search"];
-		pm[label="PM"];
+		pm[label="Private Message"];
 		alerts[label="Alerts"];
 		pairings[label="Pairings"];
 		details[label="Tournament Details"];
 		backup[label="Backup"];
 		registration[label="Registration"];
 	}
-
 
 	/* all the relationships */
 	spectator -> search;
@@ -58,6 +57,4 @@ digraph SystemModel {
 	details -> backup;
 	details -> pairings;
 	registration -> pairings;
-	
-	
 }
