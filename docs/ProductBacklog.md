@@ -28,7 +28,24 @@ level it is for any individual wishing to manage a competitive event,
 on a niche level it is for individuals looking to manage and
 participate in team competitions (like League of Legends).
 
-TODO - Luke write about existing software.
+All existing solutions that we found were limited by the binary
+win/lose.  Several open-souce options exist, which we could possibly
+extend.
+
+The most prominent of these is "XDojo". It has not been modified in
+roughly two years, but has been used for several national
+tournaments.  Unfortunately, the documentation is not in English.
+Because of this, evaluating it for possible adaptation is at the very
+least, a spike.
+
+Another current offering is "OMGT" (Open Manager for Game
+Tournaments).  It seems to be reasonably well developed and stable,
+though the install process is mostly undocumented, and while probably
+not very complex, we haven't figured it out yet.
+
+The third current open source offering looked at was "tournamentmngr",
+which seems to be unstable/incomplete.  It is written in C#, which
+gets in the way of our "easy to install" requirement.
 
 System Model
 ------------
@@ -38,6 +55,11 @@ System Model
 Requirements
 ------------
 
+ - Essential functional requirements
+ - Essential non-functional requirements
+ - Non-essential functional requirements
+ - Non-essential non-functional requirements
+ 
 +---------+-----------------------------------+-----------------------------+
 |         | Functional Requirements           | Non-Functional Requirements |
 +=========+===================================+=============================+
