@@ -72,10 +72,13 @@ Requirements
       tournaments.
  - Essential non-functional requirements
  - Non-essential functional requirements
-    - Alert System
-    - Private Message System
+    - As a host, I would like to be able to send public alerts to
+      players and spectators.
+    - As a player, I would like to be able to exchange private
+      messages with a host.
     - Advanced Tournament Search
  - Non-essential non-functional requirements
     - Interactive Menu
-    - Twitch Integration
-    - Mobile Access
+    - As a spectator, I would like to be able to watch matches on "Twitch".
+    - As a player, or a spectator, I would like to be able to access
+      the service on a mobile device.
