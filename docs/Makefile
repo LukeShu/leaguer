@@ -7,8 +7,11 @@ html: $(addsuffix .html,$(docs))
 	pandoc -s $< -o $@
 %.html: %.md Makefile
 	pandoc -s $< -o $@
+%.png: %.dot Makefile
+	dot -Tpng < $< > $@
 
 ProductBacklog.pdf: Diagram01.jpg
+SystemModel.png: stickman.png
 
 clean:
 	rm -f -- *.pdf *.html
