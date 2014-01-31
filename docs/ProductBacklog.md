@@ -50,7 +50,7 @@ gets in the way of our "easy to install" requirement.
 System Model
 ------------
 
-![](./Diagram01.jpg)\ 
+![](./SystemModel.png)\ 
 
 Requirements
 ------------

@@ -10,7 +10,7 @@ html: $(addsuffix .html,$(docs))
 %.png: %.dot Makefile
 	dot -Tpng < $< > $@
 
-ProductBacklog.pdf: Diagram01.jpg
+ProductBacklog.pdf: SystemModel.png
 SystemModel.png: stickman.png
 
 clean:
