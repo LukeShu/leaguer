@@ -76,9 +76,10 @@ Requirements
       players and spectators.
     - As a player, I would like to be able to exchange private
       messages with a host.
-    - Advanced Tournament Search
+    - As a player or spectator I would like access to Advanced 
+      Tournament Search facilities.
  - Non-essential non-functional requirements
-    - Interactive Menu
+    - As a player or spectator I would like to utilize an Interactive Menu.
     - As a spectator, I would like to be able to watch matches on "Twitch".
     - As a player, or a spectator, I would like to be able to access
       the service on a mobile device.
