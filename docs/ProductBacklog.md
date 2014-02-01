@@ -71,6 +71,10 @@ Requirements
       stored so that I can have the same profile throughout many
       tournaments.
  - Essential non-functional requirements
+    - As a host, player, or spectator I would like the Project Leaguer
+      interface to be simple and easy to use.
+    - As a host, player, or spectator I would like the Project Leaguer
+      server to be secure and to operate quickly.
  - Non-essential functional requirements
     - As a host, I would like to be able to send public alerts to
       players and spectators.
