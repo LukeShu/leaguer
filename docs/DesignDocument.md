@@ -34,13 +34,31 @@ TODO Guntas. Email dunsmore and marco about this, then fill it out.
 
 Project Leaguer is written on the Ruby on Rails platform and will use the Model 2 (MVC) design pattern/architecture. This architecture is comprised of three interacting components: Controllers, Views, and Models.
 
-Controllers – Requests received by the server are processed by a routing subroutine and directed to a controller responsible for handling them. Controllers accept these requests and manage any logic necessary to obtain the correct content for display, retrieving and updating information from the Model as needed.  It then creates a new request, places the content from the model in the request (if applicable), decides which view it will be passed to, and passes on the request.
+Controllers
+  : Requests received by the server are processed by a routing
+    subroutine and directed to a controller responsible for handling
+    them. Controllers accept these requests and manage any logic
+    necessary to obtain the correct content for display, retrieving
+    and updating information from the Model as needed.  It then
+    creates a new request, places the content from the model in the
+    request (if applicable), decides which view it will be passed to,
+    and passes on the request.
 
-Models – In Ruby on Rails, models are usually implemented as an interface to a table in the database and a Ruby file which queries this table and interacts with the other components.  For example, a "user" model would be connected to the "user" table and a file "user.rb" in the app/models directory would provide an interface to interact with the "user" controller.
+Models
+  : In Ruby on Rails, models are usually implemented as an interface
+    to a table in the database and a Ruby file which queries this
+    table and interacts with the other components.  For example, a
+    "user" model would be connected to the "user" table and a file
+    "user.rb" in the app/models directory would provide an interface
+    to interact with the "user" controller.
 
-Views – Views will primarily be dynamically generated HTML pages and will display the users desired content inside of the web browser. These may be implemented with inline Ruby scripts and tags within traditional HTML.
+Views
+  : Views will primarily be dynamically generated HTML pages and will
+    display the users desired content inside of the web browser. These
+    may be implemented with inline Ruby scripts and tags within
+    traditional HTML.
 
-Component Interaction
+## Component Interaction
 
 Controllers will be used to run all of the background work of Leaguer.  They will fetch the necessary data and will tell the view what to do.  We will be implementing seven controllers into Leaguer.  Those will be:
 
