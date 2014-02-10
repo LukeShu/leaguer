@@ -32,7 +32,10 @@ TODO Guntas. Email dunsmore and marco about this, then fill it out.
 
 ## Design Decisions and Components
 
-Project Leaguer is written on the Ruby on Rails platform and will use the Model 2 (MVC) design pattern/architecture. This architecture is comprised of three interacting components: Controllers, Views, and Models.
+Project Leaguer is written on the Ruby on Rails platform and will use
+the “Model 2” (often mis-identified as “MVC”) design
+pattern/architecture.  This architecture is comprised of three
+interacting components: Controllers, Views, and Models.
 
 Controllers
   : Requests received by the server are processed by a routing
