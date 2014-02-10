@@ -69,7 +69,13 @@ Webpage: An abstract HTML file, all entries below are webpages (we represent the
 Homepage: This page has 3 basic options. Visually simple – two large buttons on a white screen, and a search bar above them. The search bar will allow you to search upcoming or current searchable tournaments. Log in (which will take you to the login page) and “Go to Tournament” in which you enter a tournament title. This interacts with the Homepage Controller.
 Login: Page with form entries for username, password. If user clicks “new user” more forms entries will appear. One for repeating the password, and one for email. This interacts with the Login controller.
 Tournament: A tree-like display of pairs of matches, where each match consists of a pair of teams. All users can click on a match to go to that match’s page.  Host can see a gear on top left corner that represents tournament settings. This will open up more options for the host to change. This interacts with the tournament controller.
-Match: A display of both teams.
+Match: A display of both teams. Each team's players are clickable which leads to the player's profile. A link above both teams leads back to the tournament the match belongs to. This interacts with the Match controller.
+Search: A page with a searchbar and a list of searchable tournaments that match the search query. Each entry is clickable and leads to a tournament.
+UserProfile: A page with the user's information. One can view the player's reviews. If the user is viewing his/her own profile, they can edit it. This interacts with the UserProfile controller.
+
+
+CONTROLLERS
+Homepage Controller: 
 
 Server: Rails’ Server class handles all HTTP events. Our Server class is the class that is the main program. It instantiates other classes, manages requests from Views, and runs static methods.
 User: A class that represents someone using the Views (HTML, javascript) the user is in competitions and 
