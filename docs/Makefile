@@ -4,7 +4,7 @@ pdf: $(addsuffix .pdf,$(docs))
 html: $(addsuffix .html,$(docs))
 
 %.pdf: %.md Makefile
-	pandoc -s $< -o $@
+	pandoc $($@.args) -s $< -o $@
 %.html: %.md Makefile
 	pandoc -s $< -o $@
 %.png: %.dot Makefile
@@ -12,6 +12,7 @@ html: $(addsuffix .html,$(docs))
 
 ProductBacklog.pdf: SystemModel.png
 SystemModel.png: stickman.png
+DesignDocument.pdf.args = --table-of-contents --number-sections
 
 clean:
 	rm -f -- *.pdf *.html
