@@ -24,21 +24,6 @@ Davis Webb
 5.1Class Descriptions and Interactions	4
 5.2UML Diagram of Classes	4
 
-The purpose of this document is to outlay the desgin, intent, and structure of
-the Project Leaguer tournament organizing software.
-
-Released under an open license, Project Leaguer leverages powerful web
-technologies to provide everything needed to organize an online tournament.
-Whether it's League of Legends, Chess, Poker or more, Project Leaguer provides
-tournament organizers, participants, and spectators with an online
-interface to keep up with the score.
-
-The software itself operates as a stand-alone background application
-accessible and configurable though its web interface.
-
-NOT FINISHED -- JUST COMMITING
-ANDREW COMPLETE THIS.
- 
 1 Purpose
 
 The purpose of this document is to outlay the desgin, intent, and structure of
