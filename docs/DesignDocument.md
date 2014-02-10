@@ -8,7 +8,7 @@ Created 2014.02.09
 
 # Purpose
 
-The purpose of this document is to outlay the desgin, intent, and structure of
+The purpose of this document is to outlay the design, intent, and structure of
 the Project Leaguer tournament organizing software.
 
 Released under an open license, Project Leaguer leverages powerful web
@@ -24,9 +24,9 @@ The software itself operates as a stand-alone background server application
 accessible and configurable though its web interface which reveals to users a 
 sleek web application which manages tournaments.
  
-#Non-Functional Requirements
+# Non-Functional Requirements
 
-TODO Guntas. Email dunsmore and marco about this, then fill it out. 
+TODO Guntas. Email Dunsmore and Marco about this, then fill it out.
 
 # Design Outlines
 
@@ -99,9 +99,9 @@ Option 2: We could host Leaguer ourselves with our own server. All users would c
 
 Obtaining the statistics from the end of game or match is a vital step in Leaguer's function.  A quick and easy method for obtaining this information will ensure smooth usability.
 
-Option 1: In the case of online multiplayer games, such as League of Legends, it may be possible to obtain the information directly from the game-hosted server or even websites that already do so.  In the case of League of Legends, lolking.net and lolnexus.com already grab statistics from the server automatically.  There are also some open source projects, such as data-hut on github, that could be used to help extract and categorize the data itself. This option is complex, but also highly desirable for compatible games, as it ensures a fast and simple enviornment for our users.
+Option 1: In the case of online multiplayer games, such as League of Legends, it may be possible to obtain the information directly from the game-hosted server or even websites that already do so.  In the case of League of Legends, lolking.net and lolnexus.com already grab statistics from the server automatically.  There are also some open source projects, such as data-hut on GitHub, that could be used to help extract and categorize the data itself. This option is complex, but also highly desirable for compatible games, as it ensures a fast and simple environment for our users.
 
-Option 2: Uers manually enter the data themselves. Different games would require different methods for the users to implement.  In the case of online games, users could take screenshot of a match's score screen (and then the statistics would be manually entered in), or a select pool of users could be responsible for recording the information and then entering it in.  This option is tedious and undesirable.
+Option 2: Users manually enter the data themselves. Different games would require different methods for the users to implement.  In the case of online games, users could take screenshot of a match's score screen (and then the statistics would be manually entered in), or a select pool of users could be responsible for recording the information and then entering it in.  This option is tedious and undesirable.
 
 Option 3: Use Optical Character Recognition to obtain statistics from score screen screenshots. This option would require someone to take a screenshot in each match and submit it to Leaguer.  This would require more work than Option 1, but much less than Option 2.  An OCR plugin would have to be implemented for each game and thus support would be limited from game to game. Outside contributors could help widen the number of games with OCR support.
 
@@ -121,9 +121,9 @@ User
 
 layouts/application.html (abstract)
   : An abstract HTML file, all entries below are webpages (we
-    represent them as subclasses of the abstract “Webpage” class. All
+    represent them as sub-classes of the abstract “Webpage” class. All
     webpages will send HTTP requests to the server. Most of the visual
-    effects and update the display with Javascript methods. Each page
+    effects and update the display with JavaScript methods. Each page
     will have a login dialogue which will POST to the login controller
     or the logged in user’s page.
 
@@ -159,8 +159,8 @@ tournaments/index.html
 
 tournaments/edit.html
   : This view is a list of settings. Some are form entries, and some
-    are checkboxes. More settings will be added later in
-    develpment. This view interacts with the tournament controller.
+    are check-boxes. More settings will be added later in
+    development. This view interacts with the tournament controller.
 
 matches/show.html
   : A display of both teams. Each team's players are clickable which
@@ -169,10 +169,10 @@ matches/show.html
     its actions to the Match controller.
 
 search/form.html
-  : A page with a searchbar and a list of searchable tournaments that
-    match the search query. The searchbar causes a POST to the search
+  : A page with a search-bar and a list of searchable tournaments that
+    match the search query. The search-bar causes a POST to the search
     controller. Each entry is clickable and causes a GET to the
-    enrry's tournament.
+    entry's tournament.
 search/results.html
   : A page that shows search results.
 
@@ -192,7 +192,7 @@ MainController
     - `show_homepage()` Responds to GET requests by rendering the
       `main/homepage` view.
     - `edit_settings()` Responds to GET requests by (if the user is
-      authenticated and is a host) rendereing the `main/edit` view
+      authenticated and is a host) rendering the `main/edit` view
       that presents the user with a form to edit the server settings.
       If the user is not authenticated, it renders the
       `common/permission_denied` view.  This involves interacting with
@@ -206,17 +206,17 @@ MainController
       do this.
 
 LoginController
-  : This has doLogin() and doLogout(). Both have access to the HTTP
-    requrest. It will interact with the Users model to validate
+  : This controller This has doLogin() and doLogout(). Both have access to the HTTP
+    request. It will interact with the Users model to validate
     passwords and usernames.
 
 TournamentController
-  : This controller will have methods: newTorunament(),
+  : This controller will have methods: newTournament(),
     getTournament(), editTournament(), and endTournament(). All of
     these methods will interact with the Tournament model, and all of
     its fields including users matches and TournamentSettings. And all
     will interact with their tournament view, for example,
-    newTournament() will render newTorunament.
+    newTournament() will render newTournament.
 
 Server
   : Rails’ Server class handles all HTTP events. Our Server class is
@@ -224,7 +224,7 @@ Server
     manages requests from Views, and runs static methods.
 
 User
-  : A class that represents someone using the Views (HTML, javascript)
+  : A class that represents someone using the Views (HTML, JavaScript)
     the user is in competitions and
 
 
