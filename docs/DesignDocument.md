@@ -32,22 +32,30 @@ This document describes all components of the Leaguer Tournament management syst
 TODO Guntas. Email dunsmore and marco about this, then fill it out. 
 
 3 Design Outlines 
+
 3.1 Design Decisions and Components
 Our system will on the Model 2 design pattern/architecture. TODO: Davis – add the purpose of EACH component as a list.
 Controllers – The controllers will control any logic necessary to obtain the correct content for display.  It then places the content in the request and decides which view it will be passed to.
-Models – The classes in the  UML document below will reside in the model…
+
+Models – We will be using a Ruby on Rails model.  The Ruby on Rails framework maps to a table in the database and a Ruby file.  So a User will usually be difined as user.rb in the app/models directory and this will be linked to the table users in the database.
+
 Views – Views will be the HTML pages for Leaguer, and will display the users desired content inside of the web browser. 
+
 Component Interaction
 
      Controllers will be used to run all of the background work of Leaguer.  They will fetch the necessary data and will tell the view what to do.  We will be implementing seven controllers into Leaguer.  Those will be:
-	      I.   PM & Alerts – This controller will be used for sending and receiving private messages to and from the host.  Players will be able to message the host in order to inform him/her of anything during the tournament.  This will also allow the host to post any notifications he or she desires that will be displayed for all to see.  
-      II.  Homepage – Used to handle the homepage.  This will be the first web page seen by any user of the application.
-      III.  Login – This controller will be used when a user attempts to sign in to their profile on Leaguer.  
-      IV.  Search – This controller will be used to search the web-base for on going            tournaments, players and past tournaments.
-	     V.  Tournament – Used for setting up a tournament.  This will be restricted to the host 	  		          of the tournament.
+	  I.   PM & Alerts – This controller will be used for sending and receiving private messages to and from the host.  Players will be able to message the host in order to inform him/her of anything during the tournament.  This will also allow the host to post any notifications he or she desires that will be displayed for all to see.
+     II.  Homepage – Used to handle the homepage.  This will be the first web page seen by any user of the application.
+     III.  Login – This controller will be used when a user attempts to sign in to their profile on Leaguer.
+     IV.  Search – This controller will be used to search the web-base for on going tournaments, players and past tournaments.
+	 V.  Tournament – Used for setting up a tournament.  This will be restricted to the host of the tournament.
      VI.  User – The controller that will take each user to their own profile.
-     VII.  Match/Peer Review – used for gather game statistics and the separate player 		  reviews.
-Each of these controllers will fetch the data specified by its separate section.  The view will then be used to display all of this information, so Login will take the user to a login page, search will take the user to a search page and so on.  
+     VII.  Match/Peer Review – used for gather game statistics and the separate player reviews.
+
+Each of these controllers will fetch the data specified by its separate section.  The view will then be used to display all of this information, so Login will take the user to a login page, search will take the user to a search page and so on.
+
+The Model will be the data section that will map all of the information to their proper locations in the data base
+
 Design Issues
  
 Scoring Algorithm
