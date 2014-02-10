@@ -127,7 +127,7 @@ layouts/application.html (abstract)
 main/homepage.html
   : This page has 3 basic options. Visually simple – two large buttons
     on a white screen, and a search bar above them. The search bar
-    will cause a POST requeest to the search controller. Log in (which
+    will cause a POST request to the search controller. Log in (which
     will cause a POST to the login controller) and “Go to Tournament”
     in which you enter a tournament title. This interacts with the
     Homepage Controller.
