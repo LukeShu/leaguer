@@ -26,17 +26,17 @@ sleek web application which manages tournaments.
 2 Non-Functional Requirements
 TODO Guntas. Email dunsmore and marco about this, then fill it out. 
 
-3 Design Outlines 
+3 Design Outlines
 
 3.1 Design Decisions and Components
 
-Our system will on the Model 2 design pattern/architecture.
+Project Leaguer is written on the Ruby on Rails platform and will use the Model 2 (MVC) design pattern/architecture. This architecture is comprised of three interacting components: Controllers, Views, and Models.
 
-Controllers – The controllers will control any logic necessary to obtain the correct content for display.  It then places the content in the request and decides which view it will be passed to.
+Controllers – Requests received by the server are processed by a routing subroutine and directed to a controller responsible for handling them. Controllers accept these requests and manage any logic necessary to obtain the correct content for display, retrieving and updating information from the Model as needed.  It then creates a new request, places the content from the model in the request (if applicable), decides which view it will be passed to, and passes on the request.
 
-Models – We will be using a Ruby on Rails model.  The Ruby on Rails framework maps to a table in the database and a Ruby file.  So a User will usually be difined as user.rb in the app/models directory and this will be linked to the table users in the database.
+Models – In Ruby on Rails, models are usually implemented as an interface to a table in the database and a Ruby file which queries this table and interacts with the other components.  For example, a "user" model would be connected to the "user" table and a file "user.rb" in the app/models directory would provide an interface to interact with the "user" controller.
 
-Views – Views will be the HTML pages for Leaguer, and will display the users desired content inside of the web browser. 
+Views – Views will primarily be dynamically generated HTML pages and will display the users desired content inside of the web browser. These may be implemented with inline Ruby scripts and tags within traditional HTML.
 
 Component Interaction
 
