@@ -154,10 +154,6 @@ users/new.html
   : One for repeating the password, and one for email. This POST to
     the Login controller.
 
-tournaments/new.html
-  : A form that interacts with users who are either hosts or becoming
-    hosts. This interacts with tournament controller.
-
 tournaments/index.html
   : A tree-like display of matches, where each match consists of a
     pair of teams. All users can click on a match to go to that
@@ -166,11 +162,16 @@ tournaments/index.html
     view. There will be an end button that will redirect to back to
     the homepage after posting to the tournament controller. The
     tournament will POST to the tournament controller.
-
+tournaments/show.html
+  : Shows the information for a single tournament.  If the user is
+    authorized, it also shows an “edit” button that triggers a the
+    browser to GET `TournamentsController#edit()`.
+tournaments/new.html
+  : A form for creating a new tournament.  The form is POSTed to
+    `TournamentsController#create()`.
 tournaments/edit.html
-  : This view is a list of settings. Some are form entries, and some
-    are check-boxes. More settings will be added later in
-    development. This view interacts with the tournament controller.
+  : A form for editing an existing tournament.  The form is POSTed to
+    `TournamentsController#update()`.
 
 matches/show.html
   : A display of both teams. Each team's players are clickable which
@@ -193,6 +194,11 @@ users/show.html
 
 ### CONTROLLERS
 
+Any time "assuming the user has permission" it is mentioned, if the
+user doesn't have permission, it renders the
+`common/permission_denied` view.  This also means that the method
+interacts with a `User` model to evaluate the permissions.
+
 ApplicationController (abstract)
   : The base controller class that all other controllers inherit from.
 
@@ -203,17 +209,12 @@ MainController
       `main/homepage` view.
     - `edit_settings()` Responds to GET requests by (if the user is
       authenticated and is a host) rendering the `main/edit` view
-      that presents the user with a form to edit the server settings.
-      If the user is not authenticated, it renders the
-      `common/permission_denied` view.  This involves interacting with
-      the `User` model to determine whether the user is authorized to
-      see this.
+      that presents the user with a form to edit the server settings;
+      assuming the user has permission.
     - `update_settings()` Responds to POST requests by updating the
-      server configuration with the POSTed settings.  It then either
-      renders the `common/permission_denied` view, or the `main/edit`
-      view with the updated settings.  This involves interacting with
-      the `User` model to determine whether the user is authorized to
-      do this.
+      server configuration with the POSTed settings.  It then renders
+      the `main/edit` view with the updated settings.  This assumes
+      the user has the permissions.
 
 LoginController
   : This controller handles session management.  It contains two
@@ -233,21 +234,27 @@ LoginController
 TournamentsController
   : This controller will have methods:
 
-    - `new()` Renders the `tournaments/new` view, assuming the user
-      has permission.  Otherwise, renders `common/permission_denied`.
-    - `create`
-    - `show()`
-    - `edit()`
-    - `update()`
-    - `end()`
-    
-    All of these methods will interact with the Tournament model, and all of
-    its fields including users matches and TournamentSettings.
+    The following methods respond to GET requests by rendering the
+    `tournaments/*` view with the same name:
 
-Server
-  : Rails’ Server class handles all HTTP events. Our Server class is
-    the class that is the main program. It instantiates other classes,
-    manages requests from Views, and runs static methods.
+    - `index()`
+    - `show()`
+    - `new()` (assuming the user has permission)
+    - `edit()` (assuming the user has permission)
+
+    The following methods respond to POST requests, assuming the user
+    has permission:
+
+    - `create()` Creates a new `Tournament` with the POSTed data.
+      Then renders the `tournaments/show` view.
+    - `update()` Updates the specified `Tournament` with the POSTed
+      data.  Then renders the `tournaments/edit` view.
+    - `end()` Ends the specified `Tournament`.  Then redirects to
+      `MainController#show_hompage()`.
+    
+    All of these methods will interact with the `Tournament` model,
+    and all of its fields including users matches and
+    TournamentSettings.
 
 User
   : A class that represents someone using the Views (HTML, JavaScript)
