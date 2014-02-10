@@ -37,6 +37,8 @@ the “Model 2” (often mis-identified as “MVC”) design
 pattern/architecture.  This architecture is comprised of three
 interacting components: Controllers, Views, and Models.
 
+![](DesignDocument-architecture-model2.pdf)\ 
+
 Controllers
   : Requests received by the server are processed by a routing
     subroutine and directed to a controller responsible for handling
@@ -109,6 +111,8 @@ Option 3: Use Optical Character Recognition to obtain statistics from score scre
 ## Class Descriptions and Interactions
 
 ### MODELS
+
+![](DesignDocument-models.pdf)\ 
 
 ActiveRecord::Base (abstract)
   : The abstract model that all other models inherit from.
@@ -329,4 +333,4 @@ TODO – I’m working on this – see images.pptx ~ Tomer
 
 So am I: ~ Luke
 
-![](DesignDocument-classes.png)\ 
+![](DesignDocument-classes.pdf)\ 
