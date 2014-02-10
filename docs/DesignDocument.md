@@ -24,6 +24,20 @@ Davis Webb
 5.1Class Descriptions and Interactions	4
 5.2UML Diagram of Classes	4
 
+The purpose of this document is to outlay the desgin, intent, and structure of
+the Project Leaguer tournament organizing software.
+
+Released under an open license, Project Leaguer leverages powerful web
+technologies to provide everything needed to organize an online tournament.
+Whether it's League of Legends, Chess, Poker or more, Project Leaguer provides
+tournament organizers, participants, and spectators with an online
+interface to keep up with the score.
+
+The software itself operates as a stand-alone background application
+accessible and configurable though its web interface.
+
+NOT FINISHED -- JUST COMMITING
+ANDREW COMPLETE THIS.
  
 1 Purpose
 This document describes all components of the Leaguer Tournament management system. Leaguer is a software to be installed and run on a server. TODO. ANDREW COMPLETE THIS.
@@ -73,11 +87,34 @@ TODO – Nathaniel write this.
 5.1 Class Descriptions and Interactions
 
 VIEWS
-Webpage: An abstract HTML file, all entries below are webpages (we represent them as subclasses of the abstract “Webpage” class. All webpages will send HTTP requests to the server. Most of the visual effects and update the display with Javascript methods. Each page will have a link to either the login or the logged in user’s page. 
-Homepage: This page has 3 basic options. Visually simple – two large buttons on a white screen, and a search bar above them. The search bar will allow you to search upcoming or current searchable tournaments. Log in (which will take you to the login page) and “Go to Tournament” in which you enter a tournament title. This interacts with the Homepage Controller.
-Login: Page with form entries for username, password. If user clicks “new user” more forms entries will appear. One for repeating the password, and one for email. This interacts with the Login controller.
-Tournament: A tree-like display of pairs of matches, where each match consists of a pair of teams. All users can click on a match to go to that match’s page.  Host can see a gear on top left corner that represents tournament settings. This will open up more options for the host to change. This interacts with the tournament controller.
-Match: A display of both teams.
+Webpage: An abstract HTML file, all entries below are webpages (we represent them as subclasses of the abstract “Webpage” class. All webpages will send HTTP requests to the server. Most of the visual effects and update the display with Javascript methods. Each page will have a login dialogue which will POST to the login controller or the logged in user’s page. 
+
+Homepage: This page has 3 basic options. Visually simple – two large buttons on a white screen, and a search bar above them. The search bar will cause a POST requeest to the search controller. Log in (which will cause a POST to the login controller) and “Go to Tournament” in which you enter a tournament title. This interacts with the Homepage Controller.
+
+Login: Page with form entries for username, password. If user clicks “new user” more forms entries will appear. One for repeating the password, and one for email. This POST to the Login controller.
+
+newTorunament: A form that interacts with users who are either hosts or becoming hosts. This interacts with tournament controller.
+
+Tournament: A tree-like display of matches, where each match consists of a pair of teams. All users can click on a match to go to that match’s page.  Host can see a gear on top left corner that represents tournament settings, it will GET the edit Tournament view. There will be an end button that will redirect to back to the homepage after posting to the tournament controller. The tournament will POST to the tournament controller.
+
+editTorunament: This view is a list of settings. Some are form entries, and some are checkboxes. More settings will be added later in develpment. This view interacts with the tournament controller.
+
+Match: A display of both teams. Each team's players are clickable which causes a GET for the player's profile HTML. A link above both teams will GET the tournament the match belongs to. This will POST its actions to the Match controller.
+
+Search: A page with a searchbar and a list of searchable tournaments that match the search query. The searchbar causes a POST to the search controller. Each entry is clickable and causes a GET to the enrry's tournament.
+
+UserProfile: A page with the user's information. One can view the player's reviews. If the user is viewing his/her own profile, they can edit it causing a POST to the userProfile controller.
+
+
+CONTROLLERS
+HomepageController: This is the main controller. It has methods showHomepage() which renders the homepage view. It has editSettings() method, that gets the current settings of the entire server, provided that the host is viewing the homepage. 
+
+LoginController: This has doLogin() and doLogout(). Both have access to the HTTP requrest. It will interact with the Users model to validate passwords and usernames.
+
+TournamentController: This controller will have methods: newTorunament(), getTournament(), editTournament(), and endTournament(). All of these methods will interact with the Tournament model, and all of its fields including users matches and TournamentSettings. And all will interact with their tournament view, for example, newTournament() will render newTorunament.
+
+
+
 
 Server: Rails’ Server class handles all HTTP events. Our Server class is the class that is the main program. It instantiates other classes, manages requests from Views, and runs static methods.
 User: A class that represents someone using the Views (HTML, javascript) the user is in competitions and 

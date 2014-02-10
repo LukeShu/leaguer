@@ -1,4 +1,4 @@
-*.pdf
-*.html
-*.png
-!stickman.png
+.~lock.*
+*~
+*#
+.#*
