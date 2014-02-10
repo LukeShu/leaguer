@@ -188,14 +188,14 @@ MainController
 
     - `show_homepage()` Responds to GET requests by rendering the
       `main/homepage` view.
-	- `edit_settings()` Responds to GET requests by (if the user is
+    - `edit_settings()` Responds to GET requests by (if the user is
       authenticated and is a host) rendereing the `main/edit` view
       that presents the user with a form to edit the server settings.
       If the user is not authenticated, it renders the
       `common/permission_denied` view.  This involves interacting with
       the `User` model to determine whether the user is authorized to
       see this.
-	- `update_settings()` Responds to POST requests by updating the
+  - `update_settings()` Responds to POST requests by updating the
       server configuration with the POSTed settings.  It then either
       renders the `common/permission_denied` view, or the `main/edit`
       view with the updated settings.  This involves interacting with
@@ -223,7 +223,7 @@ Server
 User
   : A class that represents someone using the Views (HTML, javascript)
     the user is in competitions and
-		
+
 
 ## UML Diagram of Classes
 
