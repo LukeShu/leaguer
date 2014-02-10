@@ -62,9 +62,19 @@ The Model will be the data section that will map all of the information to their
 
 In an effort to keep our system broad, one of our requirements is that Leaguer is adaptable to many competitions, not just League of Legends. How do we assure that the different scoring systems of different sports are represented in Leaguer?
 
-Option 1: One of our interfaces could be “Scoring System” which will be implemented by many classes with common scoring systems. For example there would be a implementing class in which the highest score wins, and one in which the lowest score wins. This is likely to be the winning option, as there are not too many obscure scoring systems that we could not think of. 
+Option 1
+  : One of our interfaces could be “Scoring System” which will be
+    implemented by many classes with common scoring systems. For
+    example there would be a implementing class in which the highest
+    score wins, and one in which the lowest score wins. This is likely
+    to be the winning option, as there are not too many obscure
+    scoring systems that we could not think of.
 
-Option 2: We could design an API in which the host writes a method to update the scoring. This is pretty complex, and while it would allow more customization, it is hard to imagine completing this task without first completing option 1.
+Option 2
+  : We could design an API in which the host writes a method to update
+    the scoring. This is pretty complex, and while it would allow more
+    customization, it is hard to imagine completing this task without
+    first completing option 1.
 
 ## Offline Data Management
 
@@ -77,7 +87,8 @@ TODO – Nathaniel write this.
 # Design Details
 ## Class Descriptions and Interactions
 
-VIEWS
+### VIEWS
+
 layouts/application.html.erb
   : An abstract HTML file, all entries below are webpages (we
     represent them as subclasses of the abstract “Webpage” class. All
@@ -134,19 +145,35 @@ user/show.html.erb
     reviews. If the user is viewing his/her own profile, they can edit
     it causing a POST to the userProfile controller.
 
+### CONTROLLERS
 
-CONTROLLERS
-HomepageController: This is the main controller. It has methods showHomepage() which renders the homepage view. It has editSettings() method, that gets the current settings of the entire server, provided that the host is viewing the homepage. 
+HomepageController
+  : This is the main controller. It has methods showHomepage() which
+    renders the homepage view. It has editSettings() method, that gets
+    the current settings of the entire server, provided that the host
+    is viewing the homepage.
 
-LoginController: This has doLogin() and doLogout(). Both have access to the HTTP requrest. It will interact with the Users model to validate passwords and usernames.
+LoginController
+  : This has doLogin() and doLogout(). Both have access to the HTTP
+    requrest. It will interact with the Users model to validate
+    passwords and usernames.
 
-TournamentController: This controller will have methods: newTorunament(), getTournament(), editTournament(), and endTournament(). All of these methods will interact with the Tournament model, and all of its fields including users matches and TournamentSettings. And all will interact with their tournament view, for example, newTournament() will render newTorunament.
+TournamentController
+  : This controller will have methods: newTorunament(),
+    getTournament(), editTournament(), and endTournament(). All of
+    these methods will interact with the Tournament model, and all of
+    its fields including users matches and TournamentSettings. And all
+    will interact with their tournament view, for example,
+    newTournament() will render newTorunament.
 
+Server
+  : Rails’ Server class handles all HTTP events. Our Server class is
+    the class that is the main program. It instantiates other classes,
+    manages requests from Views, and runs static methods.
 
-
-
-Server: Rails’ Server class handles all HTTP events. Our Server class is the class that is the main program. It instantiates other classes, manages requests from Views, and runs static methods.
-User: A class that represents someone using the Views (HTML, javascript) the user is in competitions and 
+User
+  : A class that represents someone using the Views (HTML, javascript)
+    the user is in competitions and
 		
 
 ## UML Diagram of Classes
