@@ -119,13 +119,25 @@ User
 
 ### VIEWS
 
+Asynchronous JavaScript may be used to load one view inside of
+another.  From the core architecture, this does not matter, as the
+same HTTP requests are made, though the user interaction is a little
+cleaner.
+
 layouts/application.html (abstract)
-  : An abstract HTML file, all entries below are webpages (we
-    represent them as sub-classes of the abstract “Webpage” class. All
-    webpages will send HTTP requests to the server. Most of the visual
-    effects and update the display with JavaScript methods. Each page
-    will have a login dialogue which will POST to the login controller
-    or the logged in user’s page.
+  : An abstract HTML file, that contains the basic page layout that
+    all other views inherit.  If a user is not logged in, it contains
+    a login form, and a registration button.  The form causes a POST
+    to `LoginController#login()`, and the button causes a GET to
+    `UserController#new()`.  If a user is logged in, it displays a
+    logout button that causes a POST to `LoginController#logout()`.
+
+common/permission_denied.html
+  : A generic page for when a user attempts to do something for which
+    they don't have authorization.
+common/invalid.html
+  : A generic page for handling invalid requests (such as logging out
+    when not logged in).
 
 main/homepage.html
   : This page has 3 basic options. Visually simple – two large buttons
@@ -134,15 +146,13 @@ main/homepage.html
     will cause a POST to the login controller) and “Go to Tournament”
     in which you enter a tournament title. This interacts with the
     Homepage Controller.
-
 main/edit.html
   : This page is a form for editing the server-wide configuration,
     such as the language or the graphical theme.
 
-login/form.html
-  : Page with form entries for username, password. If user clicks “new
-    user” more forms entries will appear. One for repeating the
-    password, and one for email. This POST to the Login controller.
+users/new.html
+  : One for repeating the password, and one for email. This POST to
+    the Login controller.
 
 tournaments/new.html
   : A form that interacts with users who are either hosts or becoming
@@ -198,7 +208,7 @@ MainController
       `common/permission_denied` view.  This involves interacting with
       the `User` model to determine whether the user is authorized to
       see this.
-  - `update_settings()` Responds to POST requests by updating the
+    - `update_settings()` Responds to POST requests by updating the
       server configuration with the POSTed settings.  It then either
       renders the `common/permission_denied` view, or the `main/edit`
       view with the updated settings.  This involves interacting with
@@ -206,17 +216,33 @@ MainController
       do this.
 
 LoginController
-  : This controller This has doLogin() and doLogout(). Both have access to the HTTP
-    request. It will interact with the Users model to validate
-    passwords and usernames.
+  : This controller handles session management.  It contains two
+    methods:
 
-TournamentController
-  : This controller will have methods: newTournament(),
-    getTournament(), editTournament(), and endTournament(). All of
-    these methods will interact with the Tournament model, and all of
-    its fields including users matches and TournamentSettings. And all
-    will interact with their tournament view, for example,
-    newTournament() will render newTournament.
+    - `login()` Responds to POST requests by seting a session token
+      identifying the user.  If the credentials are correct, it sends
+      a redirect that directs the browser to the page it would
+      otherwise be on.  If the credentials are not correct, it renders
+      the `common/permission_denied` view.  This queries the `User`
+      model to validate the username and password.
+    - `logout()` Responds to POST requests by clearing the session
+      token, logging the user out, then redirects to the home page
+      (`MainController#show_homepage()`).  If the was not logged in,
+      it renders the `common/invalid` view.
+
+TournamentsController
+  : This controller will have methods:
+
+    - `new()` Renders the `tournaments/new` view, assuming the user
+      has permission.  Otherwise, renders `common/permission_denied`.
+    - `create`
+    - `show()`
+    - `edit()`
+    - `update()`
+    - `end()`
+    
+    All of these methods will interact with the Tournament model, and all of
+    its fields including users matches and TournamentSettings.
 
 Server
   : Rails’ Server class handles all HTTP events. Our Server class is

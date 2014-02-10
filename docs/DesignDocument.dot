@@ -1,82 +1,102 @@
 digraph systemModel {
 	rankdir="LR";
-	node[shape="record"];
+	splines="line";
 
-	#subgraph clusterModels {
-	#	label="Models"
-		User[label="<name> User | <attr_role> role | <attr_pw> password hash"];
-	#}
+	subgraph _clusterModels {
+		label="Models"
+		node[shape="record"];
+		
+		BaseModel[label="<main> ActiveRecord::Base (abstract)"]
+		User[label="<main> User | <attr_role> role | <attr_pw> password hash"];
+	}
 	
-	ApplicationController[label="ApplicationController (abstract base class)"];
-	#subgraph clusterControllers {
-	#	label="Controllers";
-		MainController[label="<name> MainController | <index> show_homepage() | <edit> edit_settings() | <update> update_settings()"];
-		TournamentController[label="<name> TournamentController | <index> listTournaments | <new> newTournament | <show> showTournament | <edit> editTournament | <delete> endTournament"];
-		MessageController;
-		LoginController[label="<name> LoginController | <index> showForm | <login> login | <logout> logout"];
-		SearchController;
-		UserController;
-		MatchController;
-	#}
-	#subgraph clusterViews {
-	#	label="views/";
-		subgraph clusterCommonViews {
+	subgraph _clusterControllers {
+		label="Controllers";
+		node[shape="record"];
+		
+		ApplicationController[label="<main> ApplicationController (abstract)"];
+		
+		MainController[label="<main> MainController | <index> show_homepage() | <edit> edit_settings() | <update> update_settings()"];
+		TournamentsController[label="<main> TournamentsController | <index> index() | <new> new() | <create> create() | <show> show() | <edit> edit() | <update> update() | <end> end()"];
+		MessagesController[label="<main> MessagesController"];
+		LoginController[label="<main> LoginController | <login> login() | <logout> logout()"];
+		SearchController[label="<main> SearchController"];
+		UsersController[label="<main> UsersController"];
+		MatchesController[label="<main> MatchesController"];
+	}
+
+	subgraph _clusterViews {
+		label="views/";
+		node[shape="rectangle"]
+
+		layouts_application[label="layouts/application.html (abstract)"]
+
+		subgraph clusterViewsCommon {
 			label="views/common/";
 			common_permission_denied;
 			common_invalid;
 		}
-		subgraph clusterMainViews {
+		
+		subgraph clusterViewsMain {
 			label="views/main/";
 			main_homepage;
 			main_edit;
 		}
-		subgraph clusterLoginViews {
-			label="views/login/";
-			login_form
-		}
-		subgraph clusterTournamentViews {
+		subgraph clusterViewsTournament {
 			label="views/tournament/";
-			tournament_index;
-			tournament_new;
-			tournament_show;
-			tournament_edit;
+			tournaments_index;
+			tournaments_new;
+			tournaments_show;
+			tournaments_edit;
 		}
-		subgraph clusterMessageViews {
-			label="views/message/";
-			message_private;
-			message_new_alert;
+		subgraph clusterViewsMessages {
+			label="views/messages/";
+			messages_private;
+			messages_new_alert;
 		}
-	#}
+	}
 
-	MainController -> ApplicationController[arrowhead="onormal"];
-	MainController:index -> main_homepage;
-	MainController:edit -> main_edit;
-	MainController:edit -> common_permission_denied;
-	MainController:update -> main_edit;
-	MainController:update -> common_permission_denied;
+	subgraph inheritance {
+		edge[arrowhead="onormal"];
+		MainController:main -> ApplicationController;
+		ApplicationController -> MainController:main[style=invis];
+		TournamentsController:main -> ApplicationController;
+		ApplicationController -> TournamentsController:main[style=invis];
+		MessagesController:main -> ApplicationController;
+		ApplicationController -> MessagesController:main[style=invis];
+		LoginController:main -> ApplicationController;
+		ApplicationController -> LoginController:main[style=invis];
+		SearchController:main -> ApplicationController;
+		ApplicationController -> SearchController:main[style=invis];
+		UsersController:main -> ApplicationController;
+		ApplicationController -> UsersController:main[style=invis];
+		MatchesController:main -> ApplicationController;
+		ApplicationController -> MatchesController:main[style=invis];
+	}
 
-	TournamentController -> ApplicationController[arrowhead="onormal"];
-	TournamentController:index -> tournament_index;
-	TournamentController:new -> tournament_new;
-	TournamentController:show -> tournament_show;
-	TournamentController:edit -> tournament_edit;
-	TournamentController:edit -> common_permission_denied;
-	TournamentController:delete -> common_permission_denied;
+	subgraph controller2view {
+		layouts_application -> LoginController:login;
+		layouts_application -> LoginController:logout;
 
-	MessageController -> ApplicationController[arrowhead="onormal"];
-	MessageController -> message_private;
-	MessageController -> message_new_alert;
+		MainController:index -> main_homepage;
+		MainController:edit -> main_edit -> MainController:update;
+		MainController:edit -> common_permission_denied;
+		MainController:update -> main_edit;
+		MainController:update -> common_permission_denied;
 
+		TournamentsController:index -> tournaments_index;
+		TournamentsController:new -> tournaments_new -> TournamentsController:create;
+		TournamentsController:create -> tournaments_edit -> TournamentsController:end;
+		TournamentsController:show -> tournaments_show;
+		TournamentsController:edit -> tournaments_edit -> TournamentsController:update;
+		TournamentsController:update -> tournaments_edit
+		TournamentsController:edit -> common_permission_denied;
+		TournamentsController:end -> common_permission_denied;
 
-	LoginController -> ApplicationController[arrowhead="onormal"];
-	LoginController:index -> login_form;
-	LoginController:login -> common_permission_denied;
-	LoginController:logout -> common_invalid;
+		MessagesController -> messages_private;
+		MessagesController -> messages_new_alert;
 
-	SearchController -> ApplicationController[arrowhead="onormal"];
-	
-	UserController -> ApplicationController[arrowhead="onormal"];
-	
-	MatchController -> ApplicationController[arrowhead="onormal"];
-
+		LoginController:login -> common_permission_denied;
+		LoginController:logout -> common_invalid;
+	}
 }
