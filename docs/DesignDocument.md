@@ -5,7 +5,7 @@ author: [ Nathaniel Foy, Guntas Grewal, Tomer Kimia, Andrew Murrell, Luke Shumak
 Version 1.0 – 2014.02.10
 Created 2014.02.09
 
-1 Purpose
+# Purpose
 
 The purpose of this document is to outlay the desgin, intent, and structure of
 the Project Leaguer tournament organizing software.
@@ -23,12 +23,13 @@ The software itself operates as a stand-alone background server application
 accessible and configurable though its web interface which reveals to users a 
 sleek web application which manages tournaments.
  
-2 Non-Functional Requirements
+#Non-Functional Requirements
+
 TODO Guntas. Email dunsmore and marco about this, then fill it out. 
 
-3 Design Outlines
+# Design Outlines
 
-3.1 Design Decisions and Components
+## Design Decisions and Components
 
 Project Leaguer is written on the Ruby on Rails platform and will use the Model 2 (MVC) design pattern/architecture. This architecture is comprised of three interacting components: Controllers, Views, and Models.
 
@@ -54,21 +55,26 @@ Each of these controllers will fetch the data specified by its separate section.
 
 The Model will be the data section that will map all of the information to their proper locations in the data base.
 
-Design Issues
+# Design Issues
  
-Scoring Algorithm
+## Scoring Algorithm
+
 In an effort to keep our system broad, one of our requirements is that Leaguer is adaptable to many competitions, not just League of Legends. How do we assure that the different scoring systems of different sports are represented in Leaguer?
+
 Option 1: One of our interfaces could be “Scoring System” which will be implemented by many classes with common scoring systems. For example there would be a implementing class in which the highest score wins, and one in which the lowest score wins. This is likely to be the winning option, as there are not too many obscure scoring systems that we could not think of. 
 
 Option 2: We could design an API in which the host writes a method to update the scoring. This is pretty complex, and while it would allow more customization, it is hard to imagine completing this task without first completing option 1.
 
-4.2 Offline Data Management
+## Offline Data Management
+
 TODO – Nathniel write this
-4.3 Fetching Data from Games
+
+## Fetching Data from Games
+
 TODO – Nathaniel write this.
 
-5 Design Details
-5.1 Class Descriptions and Interactions
+# Design Details
+## Class Descriptions and Interactions
 
 VIEWS
 Webpage: An abstract HTML file, all entries below are webpages (we represent them as subclasses of the abstract “Webpage” class. All webpages will send HTTP requests to the server. Most of the visual effects and update the display with Javascript methods. Each page will have a login dialogue which will POST to the login controller or the logged in user’s page. 
@@ -104,5 +110,6 @@ Server: Rails’ Server class handles all HTTP events. Our Server class is the c
 User: A class that represents someone using the Views (HTML, javascript) the user is in competitions and 
 		
 
-5.2 UML Diagram of Classes
+## UML Diagram of Classes
+
 TODO – I’m working on this – see images.pptx
