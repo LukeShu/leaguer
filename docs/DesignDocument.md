@@ -26,7 +26,10 @@ sleek web application which manages tournaments.
  
 # Non-Functional Requirements
 
-TODO Guntas. Email Dunsmore and Marco about this, then fill it out.
+1.	Security: - Security of Leaguer Database is a non-functional requirement because Leaguer is system that stores the information of a user like statistics, user-name, profile, etc.; The System may not be responsible for the theft of user information or even alterations made to the database from a source different from that of Leaguer.
+2.	Backup: - The Leaguer system provides a user with a database of user information and is updated and stored, which is functional. In contrast, the non-functional requirement of leaguer is its ability to back up all the information of the user when the user chooses to suspend or delete record or even when the user happens to disconnect from the server.
+3.	Platform Compatibility: - A non-functional requirement for the system is to be able to run on multiple platforms. Primarily a web based application, Leaguer may not be able to install into embedded gaming devices and special operation systems that do not run the interface that Leaguer was initially built on.
+
 
 # Design Outlines
 
