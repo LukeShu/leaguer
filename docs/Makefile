@@ -1,4 +1,4 @@
-docs = ProductBacklog ProjectCharter ProjectLeaguerWorkloadBreakup
+docs = ProductBacklog ProjectCharter ProjectLeaguerWorkloadBreakup DesignDocument
 
 pdf: $(addsuffix .pdf,$(docs))
 html: $(addsuffix .html,$(docs))
