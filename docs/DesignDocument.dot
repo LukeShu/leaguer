@@ -1,11 +1,16 @@
 digraph systemModel {
 	rankdir="LR";
 	node[shape="record"];
+
+	#subgraph clusterModels {
+	#	label="Models"
+		User[label="<name> User | <attr_role> role | <attr_pw> password hash"];
+	#}
 	
-	BaseController[label="Controller base class"];
+	BaseController[label="ApplicationController (abstract base class)"];
 	#subgraph clusterControllers {
 	#	label="Controllers";
-		MainController[label="<name> MainController | <index> showHomepage | <edit> editSettings"];
+		MainController[label="<name> MainController | <index> show_homepage() | <edit> edit_settings() | <update> update_settings()"];
 		TournamentController[label="<name> TournamentController | <index> listTournaments | <new> newTournament | <show> showTournament | <edit> editTournament | <delete> endTournament"];
 		MessageController;
 		LoginController[label="<name> LoginController | <index> showForm | <login> login | <logout> logout"];
@@ -23,7 +28,7 @@ digraph systemModel {
 		subgraph clusterMainViews {
 			label="views/main/";
 			main_homepage;
-			main_settings;
+			main_edit;
 		}
 		subgraph clusterLoginViews {
 			label="views/login/";
@@ -45,7 +50,10 @@ digraph systemModel {
 
 	BaseController -> MainController[arrowhead="onormal"];
 	MainController:index -> main_homepage;
-	MainController:edit -> main_settings;
+	MainController:edit -> main_edit;
+	MainController:edit -> common_permission_denied;
+	MainController:update -> main_edit;
+	MainController:update -> common_permission_denied;
 
 	BaseController -> TournamentController[arrowhead="onormal"];
 	TournamentController:index -> tournament_index;
