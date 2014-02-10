@@ -132,6 +132,10 @@ main/homepage.html
     in which you enter a tournament title. This interacts with the
     Homepage Controller.
 
+main/edit.html
+  : This page is a form for editing the server-wide configuration,
+    such as the language or the graphical theme.
+
 login/form.html
   : Page with form entries for username, password. If user clicks “new
     user” more forms entries will appear. One for repeating the
@@ -166,6 +170,8 @@ search/form.html
     match the search query. The searchbar causes a POST to the search
     controller. Each entry is clickable and causes a GET to the
     enrry's tournament.
+search/results.html
+  : A page that shows search results.
 
 users/show.html
   : A page with the user's information. One can view the player's
@@ -174,11 +180,27 @@ users/show.html
 
 ### CONTROLLERS
 
-HomepageController
-  : This is the main controller. It has methods showHomepage() which
-    renders the homepage view. It has editSettings() method, that gets
-    the current settings of the entire server, provided that the host
-    is viewing the homepage.
+ApplicationController (abstract)
+  : The base controller class that all other controllers inherit from.
+
+MainController
+  : This is the main controller. It has the following methods:
+
+    - `show_homepage()` Responds to GET requests by rendering the
+      `main/homepage` view.
+	- `edit_settings()` Responds to GET requests by (if the user is
+      authenticated and is a host) rendereing the `main/edit` view
+      that presents the user with a form to edit the server settings.
+      If the user is not authenticated, it renders the
+      `common/permission_denied` view.  This involves interacting with
+      the `User` model to determine whether the user is authorized to
+      see this.
+	- `update_settings()` Responds to POST requests by updating the
+      server configuration with the POSTed settings.  It then either
+      renders the `common/permission_denied` view, or the `main/edit`
+      view with the updated settings.  This involves interacting with
+      the `User` model to determine whether the user is authorized to
+      do this.
 
 LoginController
   : This has doLogin() and doLogout(). Both have access to the HTTP
