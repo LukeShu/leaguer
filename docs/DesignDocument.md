@@ -105,6 +105,15 @@ TODO – Nathaniel write this.
 # Design Details
 ## Class Descriptions and Interactions
 
+### MODELS
+
+ActiveRecord::Base (abstract)
+  : The abstract model that all other models inherit from.
+
+User
+  : This model represents all types of users; hosts, players, and
+    spectators.  These roles are identified by a “role” attribute.
+
 ### VIEWS
 
 layouts/application.html.erb
