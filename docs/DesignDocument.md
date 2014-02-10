@@ -1,30 +1,10 @@
-Design Document  
-Version 1.0 – 2014.02.09 
-Created 2014.02.09 
- 
-Leaguer
-Nathaniel Foy
-Guntas Grewal
-Tomer Kimia
-Andrew Murell
-Luke Shumaker
-Davis Webb
- 
-1. Contents
-1Purpose	3
-2Non-Functional Requirements	3
-3Design Outlines	3
-3.1Design Decisions and Components	3
-3.2Component Interaction	3
-4Design Issues	3
-4.1Scoring Algorithm	3
-4.2Offline Data Management	3
-4.3Fetching Data from Games	3
-5Design Details	4
-5.1Class Descriptions and Interactions	4
-5.2UML Diagram of Classes	4
+---
+title: Design Document
+author: [ Nathaniel Foy, Guntas Grewal, Tomer Kimia, Andrew Murrell, Luke Shumaker, Davis Webb ]
+---
+Version 1.0 – 2014.02.10
+Created 2014.02.09
 
- 
 1 Purpose
 This document describes all components of the Leaguer Tournament management system. Leaguer is a software to be installed and run on a server. TODO. ANDREW COMPLETE THIS.
  
