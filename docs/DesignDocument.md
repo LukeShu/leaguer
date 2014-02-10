@@ -116,7 +116,7 @@ User
 
 ### VIEWS
 
-layouts/application.html.erb
+layouts/application.html (abstract)
   : An abstract HTML file, all entries below are webpages (we
     represent them as subclasses of the abstract “Webpage” class. All
     webpages will send HTTP requests to the server. Most of the visual
@@ -124,7 +124,7 @@ layouts/application.html.erb
     will have a login dialogue which will POST to the login controller
     or the logged in user’s page.
 
-main/homepage.html.erb
+main/homepage.html
   : This page has 3 basic options. Visually simple – two large buttons
     on a white screen, and a search bar above them. The search bar
     will cause a POST requeest to the search controller. Log in (which
@@ -132,16 +132,16 @@ main/homepage.html.erb
     in which you enter a tournament title. This interacts with the
     Homepage Controller.
 
-login/form.html.erb
+login/form.html
   : Page with form entries for username, password. If user clicks “new
     user” more forms entries will appear. One for repeating the
     password, and one for email. This POST to the Login controller.
 
-tournament/new.html.erb
+tournaments/new.html
   : A form that interacts with users who are either hosts or becoming
     hosts. This interacts with tournament controller.
 
-tournament/index.html.erb
+tournaments/index.html
   : A tree-like display of matches, where each match consists of a
     pair of teams. All users can click on a match to go to that
     match’s page.  Host can see a gear on top left corner that
@@ -150,24 +150,24 @@ tournament/index.html.erb
     the homepage after posting to the tournament controller. The
     tournament will POST to the tournament controller.
 
-tournament/edit.html.erb
+tournaments/edit.html
   : This view is a list of settings. Some are form entries, and some
     are checkboxes. More settings will be added later in
     develpment. This view interacts with the tournament controller.
 
-match/show.html.erb
+matches/show.html
   : A display of both teams. Each team's players are clickable which
     causes a GET for the player's profile HTML. A link above both
     teams will GET the tournament the match belongs to. This will POST
     its actions to the Match controller.
 
-search/search.html.erb
+search/form.html
   : A page with a searchbar and a list of searchable tournaments that
     match the search query. The searchbar causes a POST to the search
     controller. Each entry is clickable and causes a GET to the
     enrry's tournament.
 
-user/show.html.erb
+users/show.html
   : A page with the user's information. One can view the player's
     reviews. If the user is viewing his/her own profile, they can edit
     it causing a POST to the userProfile controller.
