@@ -12,7 +12,7 @@ html: $(addsuffix .html,$(docs))
 
 ProductBacklog.pdf: SystemModel.png
 SystemModel.png: stickman.png
-DesignDocument.pdf.args = --table-of-contents --number-sections
+DesignDocument.pdf.args = --table-of-contents --number-sections -f markdown+definition_lists
 
 clean:
 	rm -f -- *.pdf *.html

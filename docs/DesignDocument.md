@@ -45,7 +45,7 @@ Component Interaction
 Controllers will be used to run all of the background work of Leaguer.  They will fetch the necessary data and will tell the view what to do.  We will be implementing seven controllers into Leaguer.  Those will be:
 
    i. PM & Alerts – This controller will be used for sending and receiving private messages to and from the host.  Players will be able to message the host in order to inform him/her of anything during the tournament.  This will also allow the host to post any notifications he or she desires that will be displayed for all to see.
-  ii.Homepage – Used to handle the homepage.  This will be the first web page seen by any user of the application.
+  ii. Homepage – Used to handle the homepage.  This will be the first web page seen by any user of the application.
  iii. Login – This controller will be used when a user attempts to sign in to their profile on Leaguer.
   iv. Search – This controller will be used to search the web-base for on going tournaments, players and past tournaments.
    v. Tournament – Used for setting up a tournament.  This will be restricted to the host of the tournament.
@@ -78,23 +78,61 @@ TODO – Nathaniel write this.
 ## Class Descriptions and Interactions
 
 VIEWS
-Webpage: An abstract HTML file, all entries below are webpages (we represent them as subclasses of the abstract “Webpage” class. All webpages will send HTTP requests to the server. Most of the visual effects and update the display with Javascript methods. Each page will have a login dialogue which will POST to the login controller or the logged in user’s page. 
+layouts/application.html.erb
+  : An abstract HTML file, all entries below are webpages (we
+    represent them as subclasses of the abstract “Webpage” class. All
+    webpages will send HTTP requests to the server. Most of the visual
+    effects and update the display with Javascript methods. Each page
+    will have a login dialogue which will POST to the login controller
+    or the logged in user’s page.
 
-Homepage: This page has 3 basic options. Visually simple – two large buttons on a white screen, and a search bar above them. The search bar will cause a POST requeest to the search controller. Log in (which will cause a POST to the login controller) and “Go to Tournament” in which you enter a tournament title. This interacts with the Homepage Controller.
+main/homepage.html.erb
+  : This page has 3 basic options. Visually simple – two large buttons
+    on a white screen, and a search bar above them. The search bar
+    will cause a POST requeest to the search controller. Log in (which
+    will cause a POST to the login controller) and “Go to Tournament”
+    in which you enter a tournament title. This interacts with the
+    Homepage Controller.
 
-Login: Page with form entries for username, password. If user clicks “new user” more forms entries will appear. One for repeating the password, and one for email. This POST to the Login controller.
+login/form.html.erb
+  : Page with form entries for username, password. If user clicks “new
+    user” more forms entries will appear. One for repeating the
+    password, and one for email. This POST to the Login controller.
 
-newTorunament: A form that interacts with users who are either hosts or becoming hosts. This interacts with tournament controller.
+tournament/new.html.erb
+  : A form that interacts with users who are either hosts or becoming
+    hosts. This interacts with tournament controller.
 
-Tournament: A tree-like display of matches, where each match consists of a pair of teams. All users can click on a match to go to that match’s page.  Host can see a gear on top left corner that represents tournament settings, it will GET the edit Tournament view. There will be an end button that will redirect to back to the homepage after posting to the tournament controller. The tournament will POST to the tournament controller.
+tournament/index.html.erb
+  : A tree-like display of matches, where each match consists of a
+    pair of teams. All users can click on a match to go to that
+    match’s page.  Host can see a gear on top left corner that
+    represents tournament settings, it will GET the edit Tournament
+    view. There will be an end button that will redirect to back to
+    the homepage after posting to the tournament controller. The
+    tournament will POST to the tournament controller.
 
-editTorunament: This view is a list of settings. Some are form entries, and some are checkboxes. More settings will be added later in develpment. This view interacts with the tournament controller.
+tournament/edit.html.erb
+  : This view is a list of settings. Some are form entries, and some
+    are checkboxes. More settings will be added later in
+    develpment. This view interacts with the tournament controller.
 
-Match: A display of both teams. Each team's players are clickable which causes a GET for the player's profile HTML. A link above both teams will GET the tournament the match belongs to. This will POST its actions to the Match controller.
+match/show.html.erb
+  : A display of both teams. Each team's players are clickable which
+    causes a GET for the player's profile HTML. A link above both
+    teams will GET the tournament the match belongs to. This will POST
+    its actions to the Match controller.
 
-Search: A page with a searchbar and a list of searchable tournaments that match the search query. The searchbar causes a POST to the search controller. Each entry is clickable and causes a GET to the enrry's tournament.
+search/search.html.erb
+  : A page with a searchbar and a list of searchable tournaments that
+    match the search query. The searchbar causes a POST to the search
+    controller. Each entry is clickable and causes a GET to the
+    enrry's tournament.
 
-UserProfile: A page with the user's information. One can view the player's reviews. If the user is viewing his/her own profile, they can edit it causing a POST to the userProfile controller.
+user/show.html.erb
+  : A page with the user's information. One can view the player's
+    reviews. If the user is viewing his/her own profile, they can edit
+    it causing a POST to the userProfile controller.
 
 
 CONTROLLERS
