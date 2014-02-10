@@ -1,0 +1,74 @@
+digraph systemModel {
+	rankdir="LR";
+	node[shape="record"];
+	
+	BaseController[label="Controller base class"];
+	#subgraph clusterControllers {
+	#	label="Controllers";
+		MainController[label="<name> MainController | <index> showHomepage | <edit> editSettings"];
+		TournamentController[label="<name> TournamentController | <index> listTournaments | <new> newTournament | <show> showTournament | <edit> editTournament | <delete> endTournament"];
+		MessageController;
+		LoginController[label="<name> LoginController | <index> showForm | <login> login | <logout> logout"];
+		SearchController;
+		UserController;
+		MatchController;
+	#}
+	#subgraph clusterViews {
+	#	label="views/";
+		subgraph clusterCommonViews {
+			label="views/common/";
+			common_permission_denied;
+			common_invalid;
+		}
+		subgraph clusterMainViews {
+			label="views/main/";
+			main_homepage;
+			main_settings;
+		}
+		subgraph clusterLoginViews {
+			label="views/login/";
+			login_form
+		}
+		subgraph clusterTournamentViews {
+			label="views/tournament/";
+			tournament_index;
+			tournament_new;
+			tournament_show;
+			tournament_edit;
+		}
+		subgraph clusterMessageViews {
+			label="views/message/";
+			message_private;
+			message_new_alert;
+		}
+	#}
+
+	BaseController -> MainController[arrowhead="onormal"];
+	MainController:index -> main_homepage;
+	MainController:edit -> main_settings;
+
+	BaseController -> TournamentController[arrowhead="onormal"];
+	TournamentController:index -> tournament_index;
+	TournamentController:new -> tournament_new;
+	TournamentController:show -> tournament_show;
+	TournamentController:edit -> tournament_edit;
+	TournamentController:edit -> common_permission_denied;
+	TournamentController:delete -> common_permission_denied;
+
+	BaseController -> MessageController[arrowhead="onormal"];
+	MessageController -> message_private;
+	MessageController -> message_new_alert;
+
+
+	BaseController -> LoginController[arrowhead="onormal"];
+	LoginController:index -> login_form;
+	LoginController:login -> common_permission_denied;
+	LoginController:logout -> common_invalid;
+
+	BaseController -> SearchController[arrowhead="onormal"];
+	
+	BaseController -> UserController[arrowhead="onormal"];
+	
+	BaseController -> MatchController[arrowhead="onormal"];
+
+}
