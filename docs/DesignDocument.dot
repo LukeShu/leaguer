@@ -7,7 +7,7 @@ digraph systemModel {
 		User[label="<name> User | <attr_role> role | <attr_pw> password hash"];
 	#}
 	
-	BaseController[label="ApplicationController (abstract base class)"];
+	ApplicationController[label="ApplicationController (abstract base class)"];
 	#subgraph clusterControllers {
 	#	label="Controllers";
 		MainController[label="<name> MainController | <index> show_homepage() | <edit> edit_settings() | <update> update_settings()"];
@@ -48,14 +48,14 @@ digraph systemModel {
 		}
 	#}
 
-	BaseController -> MainController[arrowhead="onormal"];
+	MainController -> ApplicationController[arrowhead="onormal"];
 	MainController:index -> main_homepage;
 	MainController:edit -> main_edit;
 	MainController:edit -> common_permission_denied;
 	MainController:update -> main_edit;
 	MainController:update -> common_permission_denied;
 
-	BaseController -> TournamentController[arrowhead="onormal"];
+	TournamentController -> ApplicationController[arrowhead="onormal"];
 	TournamentController:index -> tournament_index;
 	TournamentController:new -> tournament_new;
 	TournamentController:show -> tournament_show;
@@ -63,20 +63,20 @@ digraph systemModel {
 	TournamentController:edit -> common_permission_denied;
 	TournamentController:delete -> common_permission_denied;
 
-	BaseController -> MessageController[arrowhead="onormal"];
+	MessageController -> ApplicationController[arrowhead="onormal"];
 	MessageController -> message_private;
 	MessageController -> message_new_alert;
 
 
-	BaseController -> LoginController[arrowhead="onormal"];
+	LoginController -> ApplicationController[arrowhead="onormal"];
 	LoginController:index -> login_form;
 	LoginController:login -> common_permission_denied;
 	LoginController:logout -> common_invalid;
 
-	BaseController -> SearchController[arrowhead="onormal"];
+	SearchController -> ApplicationController[arrowhead="onormal"];
 	
-	BaseController -> UserController[arrowhead="onormal"];
+	UserController -> ApplicationController[arrowhead="onormal"];
 	
-	BaseController -> MatchController[arrowhead="onormal"];
+	MatchController -> ApplicationController[arrowhead="onormal"];
 
 }
