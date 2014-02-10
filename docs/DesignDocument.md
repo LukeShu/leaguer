@@ -113,9 +113,22 @@ Option 3: Use Optical Character Recognition to obtain statistics from score scre
 ActiveRecord::Base (abstract)
   : The abstract model that all other models inherit from.
 
+Server
+  : TODO
+
+Tournement
+  : TODO
+
+Match
+  : TODO
+
+Team
+  : TODO
+
 User
   : This model represents all types of users; hosts, players, and
     spectators.  These roles are identified by a “role” attribute.
+    TODO
 
 ### VIEWS
 
@@ -131,10 +144,12 @@ layouts/application.html (abstract)
     to `LoginController#login()`, and the button causes a GET to
     `UserController#new()`.  If a user is logged in, it displays a
     logout button that causes a POST to `LoginController#logout()`.
+    TODO: alerts, search
 
 common/permission_denied.html
   : A generic page for when a user attempts to do something for which
     they don't have authorization.
+
 common/invalid.html
   : A generic page for handling invalid requests (such as logging out
     when not logged in).
@@ -146,51 +161,81 @@ main/homepage.html
     will cause a POST to the login controller) and “Go to Tournament”
     in which you enter a tournament title. This interacts with the
     Homepage Controller.
+
 main/edit.html
   : This page is a form for editing the server-wide configuration,
     such as the language or the graphical theme.
 
-users/new.html
-  : One for repeating the password, and one for email. This POST to
-    the Login controller.
+search/results.html
+  : Shows the results of a search.  Each item is clickable and
+    triggers a GET request to the relevent controller method.
+
+messages/new_alert.html
+  : TODO
+
+messages/private.html
+  : TODO
 
 tournaments/index.html
-  : A tree-like display of matches, where each match consists of a
-    pair of teams. All users can click on a match to go to that
-    match’s page.  Host can see a gear on top left corner that
-    represents tournament settings, it will GET the edit Tournament
-    view. There will be an end button that will redirect to back to
-    the homepage after posting to the tournament controller. The
-    tournament will POST to the tournament controller.
+  : TODO: list of tournaments
+
 tournaments/show.html
   : Shows the information for a single tournament.  If the user is
     authorized, it also shows an “edit” button that triggers a the
-    browser to GET `TournamentsController#edit()`.
+    browser to GET `TournamentsController#edit()`.  This is a
+    tree-like display of matches, where each match consists of a pair
+    of teams. All users can click on a match to go to that match’s
+    page.  Host can see a gear on top left corner that represents
+    tournament settings, it will GET `TournamentsController#edit()`.
+    There will be an “end” button that will redirect to back to the
+    homepage after POSTing to `TournamentsController#end()`.
+
 tournaments/new.html
   : A form for creating a new tournament.  The form is POSTed to
     `TournamentsController#create()`.
+
 tournaments/edit.html
   : A form for editing an existing tournament.  The form is POSTed to
     `TournamentsController#update()`.
 
 matches/show.html
-  : A display of both teams. Each team's players are clickable which
-    causes a GET for the player's profile HTML. A link above both
-    teams will GET the tournament the match belongs to. This will POST
-    its actions to the Match controller.
+  : Shows an individual match; q display of both teams. Each team's
+    players are clickable which causes a GET for the player's profile
+    HTML (`UsersController#show()`).  A link above both teams will GET
+    the tournament the match belongs to
+    (`TournamentsController#show()`).  This will POST its actions to
+    the Match controller. TODO: What will POSTing do?
 
-search/form.html
-  : A page with a search-bar and a list of searchable tournaments that
-    match the search query. The search-bar causes a POST to the search
-    controller. Each entry is clickable and causes a GET to the
-    entry's tournament.
-search/results.html
-  : A page that shows search results.
+matches/edit.html
+  : TODO: form to adit a match
+
+teams/index.html
+  : TODO: show list of teams
+
+teams/show.html
+  : TODO: show individual team
+
+teams/new.html
+  : MAYBE TODO: form to create a new team
+
+teams/edit.html
+  : TODO: form to edit a team
+
+users/index.html
+  : TODO: list of users
+
+users/new.html
+  : One for repeating the password, and one for email. This POST to
+    the Login controller. TODO: complete sentences
 
 users/show.html
   : A page with the user's information. One can view the player's
     reviews. If the user is viewing his/her own profile, they can edit
-    it causing a POST to the userProfile controller.
+    it causing a POST to the userProfile controller. TODO: fix
+
+users/edit.html
+  : TODO
+
 
 ### CONTROLLERS
 
@@ -231,6 +276,19 @@ LoginController
       (`MainController#show_homepage()`).  If the was not logged in,
       it renders the `common/invalid` view.
 
+SearchController
+  : TODO
+
+    - `show_results()` TODO: RESPONDS TO POST
+
+MessagesController
+  : TODO
+
+    - `new_alert()` TODO: GET
+    - `post_alert()` TODO: POST
+    - `show_private()` TODO: GET
+    - `post_private()` TODO: POST
+
 TournamentsController
   : This controller will have methods:
 
@@ -251,15 +309,19 @@ TournamentsController
       data.  Then renders the `tournaments/edit` view.
     - `end()` Ends the specified `Tournament`.  Then redirects to
       `MainController#show_hompage()`.
-    
+
     All of these methods will interact with the `Tournament` model,
     and all of its fields including users matches and
     TournamentSettings.
 
-User
-  : A class that represents someone using the Views (HTML, JavaScript)
-    the user is in competitions and
+MatchesController
+  : TODO
 
+TeamsController
+  : TODO
+
+UsersController
+  : TODO
 
 ## UML Diagram of Classes
 
