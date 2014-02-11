@@ -328,9 +328,7 @@ MessagesController
       has permission.
 
 TournamentsController
-  : This controller will have methods:
-
-    The following methods respond to GET requests by rendering the
+  : The following methods respond to GET requests by rendering the
     `tournaments/*` view with the same name:
 
     - `index()`
@@ -353,36 +351,47 @@ TournamentsController
     TournamentSettings.
 
 MatchesController
-  : TODO
+  : The following methods respond to GET requests by rendering the
+    `matches/*` view with the same name:
 
-    - `index()`: TODO: GET
-    - `show()` TODO: GET
-    - `edit()` TODO: GET
-    - `update()` TODO: POST
+    - `index()`
+    - `show()`
+    - `edit()`
+
+    The following methods respond to POST requests, assuming the user
+    has permission:
+
+    - `update()` Updates the specified `Match` with the POSTed data.
 
 TeamsController
-  : TODO
+  : The following methods respond to GET requests by rendering the
+    `teams/*` view with the same name:
 
-    - `index()` TODO: GET
-    - `show()` TODO: GET
-    - `edit()` TODO: GET
+    - `index()`
+    - `show()`
+    - `edit()`
+
+    The following methods respond to POST requests, assuming the user
+    has permission:
+
     - `update()` TODO: POST
 
 UsersController
-  : TODO
+  : The following methods respond to GET requests by rendering the
+    `users/*` view with the same name:
 
-    - `index()` TODO: GET
-    - `show()` TODO: GET
-    - `new()` TODO: GET
+    - `index()`
+    - `show()`
+    - `new()`
+    - `edit()`
+
+    The following methods respond to POST requests, assuming the user
+    has permission:
+
     - `create()` TODO: POST
-    - `edit()` TODO: GET
     - `update()` TODO: POST
     - `delete()` TODO: POST
 
 ## UML Diagram of Classes
-
-TODO – I’m working on this – see images.pptx ~ Tomer
-
-So am I: ~ Luke
 
 ![](DesignDocument-classes.pdf)\ 
