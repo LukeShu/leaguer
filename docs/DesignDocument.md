@@ -290,8 +290,7 @@ SearchController
   : This controller handles user search terms. It has one method:
 
     - `show_results()` Responds to POST by accessing whichever model(s)
-      contains the information requested and renders the `search/results`
-      view.
+      contains the information requested and renders the `search/results` view.
 
 MessagesController
   : TODO
