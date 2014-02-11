@@ -25,9 +25,30 @@ sleek web application which manages tournaments.
  
 # Non-Functional Requirements
 
-1. Security: - Because Project Leaguer servers may store sensitive user information like name, email, statistics, user-name, profile, etc. it is an important non-functional requirement that such data is well secured from both accidental exposure and intentional tampering. Even so, the System may not be responsible for the theft of user information or even alterations made to the database from a source different from that of Leaguer.
-2. Platform Compatibility: - A non-functional requirement for the system is to be able to run on multiple platforms. Primarily a web based application, Leaguer may not be able to install into embedded gaming devices and special operation systems that do not run the interface that Leaguer was initially built on.
-3. Response Time: - Even though the "Model 2" architecture tends to scale well for medium/large applications and data sets, it is still important to keep the response time of the system in mind. Using efficient data structures, short time complexity algorithms, and minimizing network overhead whenever possible will help to keep the response time of the system reasonable even for large data sets or complex statists or scoring schemes.
+Security
+  : Because Project Leaguer servers may store sensitive user
+    information like name, email, statistics, user-name, profile,
+    etc. it is an important non-functional requirement that such data
+    is well secured from both accidental exposure and intentional
+    tampering.  Even so, the System may not be responsible for the
+    theft of user information or even alterations made to the database
+    from a source different from that of Leaguer.
+
+Platform Compatibility
+  : A non-functional requirement for the system is to be able to run
+    on multiple platforms.  Primarily a web based application, Leaguer
+    may not be able to install into embedded gaming devices and
+    special operation systems that do not run the interface that
+    Leaguer was initially built on.
+
+Response Time
+  : Even though the "Model 2" architecture tends to scale well for
+    medium/large applications and data sets, it is still important to
+    keep the response time of the system in mind.  Using efficient data
+    structures, short time complexity algorithms, and minimizing
+    network overhead whenever possible will help to keep the response
+    time of the system reasonable even for large data sets or complex
+    statists or scoring schemes.
 
 
 # Design Outlines
