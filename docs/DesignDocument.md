@@ -29,6 +29,7 @@ sleek web application which manages tournaments.
 1.	Security: - Because Project Leaguer servers may store sensitive user information like name, email, statistics, user-name, profile, etc. it is an important non-functional requirement that such data is well secured from both accidental exposure and intentional tampering. Even so, the System may not be responsible for the theft of user information or even alterations made to the database from a source different from that of Leaguer.
 2.	Backup: - The Leaguer system provides a user with a database of user information and is updated and stored, which is functional. In contrast, the non-functional requirement of leaguer is its ability to back up all the information of the user when the user chooses to suspend or delete record or even when the user happens to disconnect from the server.
 3.	Platform Compatibility: - A non-functional requirement for the system is to be able to run on multiple platforms. Primarily a web based application, Leaguer may not be able to install into embedded gaming devices and special operation systems that do not run the interface that Leaguer was initially built on.
+4.  Response Time: - Even though the "Model 2" architecture tends to scale well for medium/large applications and data sets, it is still important to keep the response time of the system in mind. Using efficient data structures, short time complexity algorithms, and minimizing network overhead whenever possible will help to keep the response time of the system reasonable even for large data sets or complex statists or scoring schemes.
 
 
 # Design Outlines
@@ -127,15 +128,14 @@ Tournement
   : This model represents the structure of a tournement.  It will have several data sections to it including:  The match settings, the matches contained inside of the tournement, a unique id for the tournement, and the registered players that are participating in the tournement.
 
 Match
-  : A match will be a single set of data that contains all of the statistics of one game.  This includes: players, scores, game time, the tournement that match took place in, and the date. 
+  : A match will be a single set of data that contains all of the statistics of one game.  This includes: players personal scores, team members, scores for each team, game time, the tournement that match took place in, and the date. 
 
 Team
-  : This model will consist of a list of players for a tournement/game. The team creation process is chosen by the host of the tournement and will either be pre-determined teams, or randomly assigned teams.
+  : This model will consist of a list of players for a tournement. The team creation process is chosen by the host of the tournement and team setup will either be pre-determined teams or randomly assigned teams.
 
 User
   : This model represents all types of users; hosts, players, and
     spectators.  These roles are identified by a “role” attribute.
-    TODO
 
 ### VIEWS
 
@@ -178,10 +178,22 @@ search/results.html
     triggers a GET request to the relevent controller method.
 
 messages/new_alert.html
-  : TODO
+  : This shows the user that a new message is available for view. 
+  	Clicking on the notification should cause a GET to the 
+    show_private controller and take the user to his/her messages. 
+	new_alert should interact with the Main controller's 
+    show_homepage to display the notification.
 
 messages/private.html
-  : TODO
+  : This page is used to handle user private messaging.  It should 
+  	display a list of private message and which user the private 
+    messages are communicating with.  Clicking on a message should
+    trigger a GET to show_private and display the message. A field
+    box for entering a message should be present.  When posting a 
+    message a POST should be sent to Message's post_private and 
+    then a POST to post_alert confirming that it was sent.  A 
+    new_alert should then be sent to the recieving user.
+    
 
 tournaments/index.html
   : TODO: list of tournaments
@@ -283,13 +295,15 @@ LoginController
       model to validate the username and password.
     - `logout()` Responds to POST requests by clearing the session
       token, logging the user out, then redirects to the home page
-      (`MainController#show_homepage()`).  If the was not logged in,
+      (`MainController#show_homepage()`).  If the user was not logged in,
       it renders the `common/invalid` view.
 
 SearchController
-  : TODO
+  : This controller handles user search terms. It has one method:
 
-    - `show_results()` TODO: RESPONDS TO POST
+    - `show_results()` Responds to POST by accessing whichever model(s)
+      contains the information requested and renders the `search/results`
+      view.
 
 MessagesController
   : TODO
