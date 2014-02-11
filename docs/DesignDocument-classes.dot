@@ -225,41 +225,41 @@ digraph systemModel {
 	###################################################################
 	# controller/model relations
 	###################################################################
-	Server -> MainController:edit;
-	MainController:update -> Server;
+	Server:main -> MainController:edit;
+	MainController:update -> Server:main;
 
-	User -> LoginController:login;
+	User:main -> LoginController:login;
 
-	Tournament -> SearchController:show_results;
-	Match -> SearchController:show_results;
-	Team -> SearchController:show_results;
-	User -> SearchController:show_results;
+	Tournament:main -> SearchController:show_results;
+	Match:main -> SearchController:show_results;
+	Team:main -> SearchController:show_results;
+	User:main -> SearchController:show_results;
 
-	Tournament -> TournamentsController:index;
-	Tournament -> TournamentsController:show;
-	Match -> TournamentsController:show;
-	Tournament -> TournamentsController:edit;
-	TournamentsController:create -> Tournament;
-	TournamentsController:update -> Tournament;
-	TournamentsController:end -> Tournament;
+	Tournament:main -> TournamentsController:index;
+	Tournament:main -> TournamentsController:show;
+	Match:main -> TournamentsController:show;
+	Tournament:main -> TournamentsController:edit;
+	TournamentsController:create -> Tournament:main;
+	TournamentsController:update -> Tournament:main;
+	TournamentsController:end -> Tournament:main;
 
-	Match -> MatchesController:index;
-	Match -> MatchesController:show;
-	Team -> MatchesController:show;
-	User -> MatchesController:show;
-	Match -> MatchesController:edit;
-	MatchesController:update -> Match;
+	Match:main -> MatchesController:index;
+	Match:main -> MatchesController:show;
+	Team:main -> MatchesController:show;
+	User:main -> MatchesController:show;
+	Match:main -> MatchesController:edit;
+	MatchesController:update -> Match:main;
 
-	Team -> TeamsController:index;
-	Team -> TeamsController:show;
-	User -> TeamsController:show;
-	Team -> TeamsController:edit;
-	TeamsController:update -> Team;
+	Team:main -> TeamsController:index;
+	Team:main -> TeamsController:show;
+	User:main -> TeamsController:show;
+	Team:main -> TeamsController:edit;
+	TeamsController:update -> Team:main;
 
-	User -> UsersController:index;
-	User -> UsersController:show;
-	User -> UsersController:edit;
-	UsersController:create -> User;
-	UsersController:update -> User;
-	UsersController:delete -> User;
+	User:main -> UsersController:index;
+	User:main -> UsersController:show;
+	User:main -> UsersController:edit;
+	UsersController:create -> User:main;
+	UsersController:update -> User:main;
+	UsersController:delete -> User:main;
 }
