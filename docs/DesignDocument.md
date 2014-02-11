@@ -153,7 +153,9 @@ layouts/application.html (abstract)
     logout button that causes a POST to `LoginController#logout()`.
     It may contain an alert box of recent alerts submitted by a
     tournament host.  It contains a searc form that is POSTed to
-    `SearchController#show_results`.
+    `SearchController#show_results`.  If the user is authorized to
+    publish alerts, it also contains a button that causes the browser
+    to GET `MessagesController#new_alert()`.
 
 common/permission_denied.html
   : A generic page for when a user attempts to do something for which
@@ -309,12 +311,21 @@ SearchController
       view.
 
 MessagesController
-  : TODO
+  : This controller handles inter-user messages.  It has a couple
+    methods that respond to GET requests:
 
-    - `new_alert()` TODO: GET
-    - `post_alert()` TODO: POST
-    - `show_private()` TODO: GET
-    - `post_private()` TODO: POST
+    - `new_alert()` Renders the `messages/new_alert` template,
+      assuming the user has permission.
+    - `show_private()` Renders the `messages/private template,
+      assuming the user has permission.
+
+    It also has methods that respond to POST requests:
+
+    - `post_alert()` Publishes a new system-wide alert, assuming the
+      user has permission.  It then redirects the browser to whichever
+      page it would otherwise be on.
+    - `post_private()` Sends a new private message, assuming the user
+      has permission.
 
 TournamentsController
   : This controller will have methods:
