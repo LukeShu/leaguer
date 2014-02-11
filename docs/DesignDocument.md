@@ -1,5 +1,5 @@
 ---
-title: Project Leaguer: Design Document
+title: "Project Leaguer: Design Document"
 author: [ Nathaniel Foy, Guntas Grewal, Tomer Kimia, Andrew Murrell, Luke Shumaker, Davis Webb ]
 ---
 
