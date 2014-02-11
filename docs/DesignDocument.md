@@ -121,16 +121,16 @@ ActiveRecord::Base (abstract)
   : The abstract model that all other models inherit from.
 
 Server
-  : TODO
+  : 
 
 Tournement
-  : TODO
+  : This model represents the structure of a tournement.  It will have several data sections to it including:  The match settings, the matches contained inside of the tournement, and the registered players that are participating in the tournement.
 
 Match
-  : TODO
+  : A match will be a single set of data that contains all of the statistics of one game.
 
 Team
-  : TODO
+  : This model will consist of a list of players for a tournement/game. The team creation process will either be pre-determined teams, or randomly assigned teams.  
 
 User
   : This model represents all types of users; hosts, players, and
