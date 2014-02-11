@@ -205,6 +205,9 @@ tournaments/edit.html
   : A form for editing an existing tournament.  The form is POSTed to
     `TournamentsController#update()`.
 
+matches/index.html
+  : TODO: list of matches
+
 matches/show.html
   : Shows an individual match; q display of both teams. Each team's
     players are clickable which causes a GET for the player's profile
@@ -324,6 +327,7 @@ TournamentsController
 MatchesController
   : TODO
 
+    - `index()`: TODO: GET
     - `show()` TODO: GET
     - `edit()` TODO: GET
     - `update()` TODO: POST
@@ -342,9 +346,9 @@ UsersController
   : TODO
 
     - `index()` TODO: GET
+    - `show()` TODO: GET
     - `new()` TODO: GET
     - `create()` TODO: POST
-    - `show()` TODO: GET
     - `edit()` TODO: GET
     - `update()` TODO: POST
     - `delete()` TODO: POST
