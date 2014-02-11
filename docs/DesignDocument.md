@@ -400,6 +400,9 @@ does not show interactions with the `User` model that solely check
 authorization to perform an action.  It does not show controller
 methods calling the error views.  It shows transitions from a view to
 a controller *only* when that is the *primary* purpose of the view; many
-workflows can be interupted at any time.
+workflows can be interupted at any time.  Arrows betwen models and
+controllers indicate which direction data is flowing.  Any data
+flowing from a model to the method of a controller is implicitly
+passed to the view that method renders.
 
 ![](DesignDocument-classes.pdf)\ 
