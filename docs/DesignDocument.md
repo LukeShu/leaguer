@@ -127,15 +127,14 @@ Tournement
   : This model represents the structure of a tournement.  It will have several data sections to it including:  The match settings, the matches contained inside of the tournement, a unique id for the tournement, and the registered players that are participating in the tournement.
 
 Match
-  : A match will be a single set of data that contains all of the statistics of one game.  This includes: players, scores, game time, the tournement that match took place in, and the date. 
+  : A match will be a single set of data that contains all of the statistics of one game.  This includes: players personal scores, team members, scores for each team, game time, the tournement that match took place in, and the date. 
 
 Team
-  : This model will consist of a list of players for a tournement/game. The team creation process is chosen by the host of the tournement and will either be pre-determined teams or randomly assigned teams.
+  : This model will consist of a list of players for a tournement. The team creation process is chosen by the host of the tournement and team setup will either be pre-determined teams or randomly assigned teams.
 
 User
   : This model represents all types of users; hosts, players, and
     spectators.  These roles are identified by a “role” attribute.
-    TODO
 
 ### VIEWS
 
