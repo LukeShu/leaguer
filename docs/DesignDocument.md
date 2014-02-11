@@ -130,7 +130,7 @@ Match
   : A match will be a single set of data that contains all of the statistics of one game.  This includes: players, scores, game time, the tournement that match took place in, and the date. 
 
 Team
-  : This model will consist of a list of players for a tournement/game. The team creation process is chosen by the host of the tournement and will either be pre-determined teams, or randomly assigned teams.
+  : This model will consist of a list of players for a tournement/game. The team creation process is chosen by the host of the tournement and will either be pre-determined teams or randomly assigned teams.
 
 User
   : This model represents all types of users; hosts, players, and
