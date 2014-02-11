@@ -151,7 +151,7 @@ layouts/application.html (abstract)
     `UserController#new()`.  If a user is logged in, it displays a
     logout button that causes a POST to `LoginController#logout()`.
     It may contain an alert box of recent alerts submitted by a
-    tournament host.  It contains a searc form that is POSTed to
+    tournament host.  It contains a search form that is POSTed to
     `SearchController#show_results`.  If the user is authorized to
     publish alerts, it also contains a button that causes the browser
     to GET `MessagesController#new_alert()`.
