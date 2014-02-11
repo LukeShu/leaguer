@@ -26,10 +26,10 @@ sleek web application which manages tournaments.
  
 # Non-Functional Requirements
 
-1.	Security: - Because Project Leaguer servers may store sensitive user information like name, email, statistics, user-name, profile, etc. it is an important non-functional requirement that such data is well secured from both accidental exposure and intentional tampering. Even so, the System may not be responsible for the theft of user information or even alterations made to the database from a source different from that of Leaguer.
-2.	Backup: - The Leaguer system provides a user with a database of user information and is updated and stored, which is functional. In contrast, the non-functional requirement of leaguer is its ability to back up all the information of the user when the user chooses to suspend or delete record or even when the user happens to disconnect from the server.
-3.	Platform Compatibility: - A non-functional requirement for the system is to be able to run on multiple platforms. Primarily a web based application, Leaguer may not be able to install into embedded gaming devices and special operation systems that do not run the interface that Leaguer was initially built on.
-4.  Response Time: - Even though the "Model 2" architecture tends to scale well for medium/large applications and data sets, it is still important to keep the response time of the system in mind. Using efficient data structures, short time complexity algorithms, and minimizing network overhead whenever possible will help to keep the response time of the system reasonable even for large data sets or complex statists or scoring schemes.
+1. Security: - Because Project Leaguer servers may store sensitive user information like name, email, statistics, user-name, profile, etc. it is an important non-functional requirement that such data is well secured from both accidental exposure and intentional tampering. Even so, the System may not be responsible for the theft of user information or even alterations made to the database from a source different from that of Leaguer.
+2. Backup: - The Leaguer system provides a user with a database of user information and is updated and stored, which is functional. In contrast, the non-functional requirement of leaguer is its ability to back up all the information of the user when the user chooses to suspend or delete record or even when the user happens to disconnect from the server.
+3. Platform Compatibility: - A non-functional requirement for the system is to be able to run on multiple platforms. Primarily a web based application, Leaguer may not be able to install into embedded gaming devices and special operation systems that do not run the interface that Leaguer was initially built on.
+4. Response Time: - Even though the "Model 2" architecture tends to scale well for medium/large applications and data sets, it is still important to keep the response time of the system in mind. Using efficient data structures, short time complexity algorithms, and minimizing network overhead whenever possible will help to keep the response time of the system reasonable even for large data sets or complex statists or scoring schemes.
 
 
 # Design Outlines
@@ -151,7 +151,9 @@ layouts/application.html (abstract)
     to `LoginController#login()`, and the button causes a GET to
     `UserController#new()`.  If a user is logged in, it displays a
     logout button that causes a POST to `LoginController#logout()`.
-    TODO: alerts, search
+    It may contain an alert box of recent alerts submitted by a
+    tournament host.  It contains a searc form that is POSTed to
+    `SearchController#show_results`.
 
 common/permission_denied.html
   : A generic page for when a user attempts to do something for which
@@ -162,29 +164,35 @@ common/invalid.html
     when not logged in).
 
 main/homepage.html
-  : This page has 3 basic options. Visually simple – two large buttons
-    on a white screen, and a search bar above them. The search bar
-    will cause a POST request to the search controller. Log in (which
-    will cause a POST to the login controller) and “Go to Tournament”
-    in which you enter a tournament title. This interacts with the
-    Homepage Controller.
+  : This page is visually simple.  In addition to the basic functions
+    of `layouts/application`, this page has a “Go to Tournament” text
+    area, in which you enter a tournament title, and will take you to
+    the relevent tournament page.
 
 main/edit.html
   : This page is a form for editing the server-wide configuration,
-    such as the language or the graphical theme.
+    such as the language or the graphical theme.  The form is
+    submitted to `MainController#update()`.
 
 search/results.html
   : Shows the results of a search.  Each item is clickable and
     triggers a GET request to the relevent controller method.
 
 messages/new_alert.html
-  : TODO
+  : This is a form for a host to submit a new system-wide alert.  The
+    form is POSTed to `MessagesController#post_alert()`.
 
 messages/private.html
-  : TODO
+  : This page is used to handle user private messaging.  It both
+    displays private messages, and contains a form for sending a new
+    private message.  Nes messages are POSTed to
+    `MessageController#post_private()`
 
 tournaments/index.html
-  : TODO: list of tournaments
+  : Shows a list of tournaments.  Clicking on any of them causes the
+    browser GET that tournament via `TournamentController#show()`.  If
+    the user is authorized, it also contains a button that causes the
+    browser to GET `TournamentsController#new()`.
 
 tournaments/show.html
   : Shows the information for a single tournament.  If the user is
@@ -206,46 +214,53 @@ tournaments/edit.html
     `TournamentsController#update()`.
 
 matches/index.html
-  : TODO: list of matches
+  : Shows a list of matches.  Clicking on any of them causes the
+    browser to GET that match via `MatchesController#show()`.
 
 matches/show.html
-  : Shows an individual match; q display of both teams. Each team's
+  : Shows an individual match; a display of both teams. Each team's
     players are clickable which causes a GET for the player's profile
     HTML (`UsersController#show()`).  A link above both teams will GET
     the tournament the match belongs to
-    (`TournamentsController#show()`).  This will POST its actions to
-    the Match controller. TODO: What will POSTing do?
+    (`TournamentsController#show()`).  If the user is authorized, it
+    also has a button to edit the match by GETting
+    `MatchesController#edit()`.
 
 matches/edit.html
-  : TODO: form to adit a match
+  : Shows a form to edit a match.  The form is POSTed to
+    `MatchesController#update()`.
 
 teams/index.html
-  : TODO: show list of teams
+  : Shows a list of teams.  Clicking any of them causers the browser
+    to GET that team via `TeamsController#show()`.
 
 teams/show.html
-  : TODO: show individual team
-
-teams/new.html
-  : MAYBE TODO: form to create a new team
+  : Show an individual team, including statistics, and links to
+    individual members (GET `UsersController#show()`).  If the user is
+    authorized, it also has a button do edit the team by GETting
+    `TeamsController#edit()`.
 
 teams/edit.html
-  : TODO: form to edit a team
+  : A form to manually edit a team, and its members.  The form
+    contents are POSTed to `TeamsController#update()`.
 
 users/index.html
-  : TODO: list of users
+  : Show a list of users.  Clicking any of them causers the browser
+    to GET that user via `UsersController#show()`.
 
 users/new.html
-  : One for repeating the password, and one for email. This POST to
-    the Login controller. TODO: complete sentences
+  : Shows a form for creatig a new user.  It includes fields for
+    username, email, password, and other information.  The form is
+    POSTed to `UsersController#create()`;
 
 users/show.html
   : A page with the user's information. One can view the player's
-    reviews. If the user is viewing his/her own profile, they can edit
-    it causing a POST to the userProfile controller. TODO: fix
+    reviews.  If the user is authorized, it also has a button do edit
+    the user by GETting `UsersController#edit()`.
 
 users/edit.html
-  : TODO
-
+  : A form to edit a user; including meta-data and tournament
+    registration.  The form is POSTed to `USersController#update()`.
 
 ### CONTROLLERS
 
@@ -338,8 +353,6 @@ TeamsController
 
     - `index()` TODO: GET
     - `show()` TODO: GET
-    - `new()` MAYBE TODO: GET
-    - `create()` MAYBE TODO: POST
     - `edit()` TODO: GET
     - `update()` TODO: POST
 

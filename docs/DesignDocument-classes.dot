@@ -1,12 +1,13 @@
 digraph systemModel {
 	rankdir="LR";
-	splines="ortho";
+	splines="line";
 
+	/*
 	subgraph _clusterModels {
 		label="Models"
 		node[shape="record"];
 
-		BaseModel[label="<main> ActiveRecord::Base (abstract)"]
+		//BaseModel[label="<main> ActiveRecord::Base (abstract)"]
 
 		Server[label="<main> Server"];
 		Tournament[label="<main> Tournament"];
@@ -14,53 +15,56 @@ digraph systemModel {
 		Team[label="<main> Team"];
 		User[label="<main> User | <attr_role> role | <attr_pw> password hash"];
 	}
+	*/
 
 	subgraph _clusterViews {
 		label="views/";
 		node[shape="rectangle"]
 
-		layouts_application[label="layouts_application (abstract)"]
+		/*
+		layouts_application[label="layouts/application (abstract)"]
 		subgraph clusterViewsCommon {
 			label="views/common/";
-			common_permission_denied;
-			common_invalid;
+			common_permission_denied[label="common/permission_denied"];
+			common_invalid[label="common/invalid"];
 		}
+		*/
 		subgraph clusterViewsMain {
 			label="views/main/";
-			main_homepage;
-			main_edit;
+			main_homepage[label="main/homepage"];
+			main_edit[label="main/edit"];
 		}
-		search_results;
+		search_results[label="search/results"];
 		subgraph clusterViewsMessages {
 			label="views/messages/";
-			messages_new_alert;
-			messages_private;
+			messages_new_alert[label="messages/new_alert"];
+			messages_private[label="messages/private"];
 		}
 		subgraph clusterViewsTournament {
 			label="views/tournament/";
-			tournaments_index;
-			tournaments_show;
-			tournaments_new;
-			tournaments_edit;
+			tournaments_index[label="tournaments/index"];
+			tournaments_show[label="tournaments/show"];
+			tournaments_new[label="tournaments/new"];
+			tournaments_edit[label="tournaments/edit"];
 		}
 		subgraph clusterViewsMatches {
 			label="views/matches/";
-			matches_show;
-			matches_edit;
+			matches_show[label="matches/show"];
+			matches_edit[label="matches/edit"];
 		}
 		subgraph clusterViewsTeams {
 			label="views/teams/";
-			teams_index;
-			teams_show;
-			teams_new;
-			teams_edit;
+			teams_index[label="teams/index"];
+			teams_show[label="teams/show"];
+			teams_new[label="teams/new"];
+			teams_edit[label="teams/edit"];
 		}
 		subgraph clusterViewsUsers {
 			label="views/users/";
-			users_index;
-			users_new;
-			users_show;
-			users_edit;
+			users_index[label="users/index"];
+			users_new[label="users/new"];
+			users_show[label="users/show"];
+			users_edit[label="users/edit"];
 		}
 	}
 
@@ -68,15 +72,15 @@ digraph systemModel {
 		label="Controllers";
 		node[shape="record"];
 
-		ApplicationController[label="<main> ApplicationController (abstract)"];
+		//ApplicationController[label="<main> ApplicationController (abstract)"];
 
 		MainController[label="<main> MainController | <index> show_homepage() | <edit> edit_settings() | <update> update_settings()"];
 		LoginController[label="<main> LoginController | <login> login() | <logout> logout()"];
 		SearchController[label="<main> SearchController | <show_results> show_results()"];
 		MessagesController[label="<main> MessagesController | <new_alert> new_alert() | <post_alert> post_alert() | <show_private> show_private() | <post_private> post_private()"];
-		TournamentsController[label="<main> TournamentsController | <index> index() | <new> new() | <create> create() | <show> show() | <edit> edit() | <update> update() | <end> end()"];
+		TournamentsController[label="<main> TournamentsController | <index> index() | <show> show() | <new> new() | <create> create() | <edit> edit() | <update> update() | <end> end()"];
 		MatchesController[label="<main> MatchesController | <index> index() | <show> show() | <edit> edit() | <update> update()"];
-		TeamsController[label="<main> TeamsController | <index> index() | <show> show() | <new> new() | <create> create() | <edit> edit() | <update> update()"]
+		TeamsController[label="<main> TeamsController | <index> index() | <show> show() | <create> create() | <edit> edit() | <update> update()"]
 		UsersController[label="<main> UsersController | <index> index() | <show> show() | <new> new() | <create> create() | <edit> edit() | <update> update() | <delete> delete()"]
 	}
 
@@ -191,10 +195,7 @@ digraph systemModel {
 
 	subgraph controller2view {
 		MainController:index -> main_homepage;
-		MainController:edit -> main_edit -> MainController:update;
-		#MainController:edit -> common_permission_denied;
-		MainController:update -> main_edit;
-		#MainController:update -> common_permission_denied;
+		MainController:edit -> main_edit -> MainController:update -> main_edit;
 
 		#LoginController:login -> common_permission_denied;
 		#LoginController:logout -> common_invalid;
@@ -202,45 +203,23 @@ digraph systemModel {
 		SearchController:show_results -> search_results;
 
 		MessagesController:new_alert -> messages_new_alert -> MessagesController:post_alert;
-		MessagesController:show_private -> messages_private;
-		MessagesController:post_private -> messages_private;
-		#MessagesController:new_alert -> commmon_permission_denied;
-		#MessagesController:post_alert -> commmon_permission_denied;
-		#Messagescontroller:show_private -> common_permission_denied;
-		#Messagescontroller:post_private -> common_permission_denied;
+		MessagesController:show_private -> messages_private -> MessagesController:post_private -> messages_private;
 
 		TournamentsController:index -> tournaments_index;
-		TournamentsController:new -> tournaments_new -> TournamentsController:create;
-		TournamentsController:create -> tournaments_edit -> TournamentsController:end;
 		TournamentsController:show -> tournaments_show;
-		TournamentsController:edit -> tournaments_edit -> TournamentsController:update;
-		TournamentsController:update -> tournaments_edit
-		#TournamentsController:new -> common_permission_denied;
-		#TournamentsController:create -> common_permission_denied;
-		#TournamentsController:edit -> common_permission_denied;
-		#TournamentsController:update -> common_permission_denied;
-		#TournamentsController:end -> common_permission_denied;
+		TournamentsController:new -> tournaments_new -> TournamentsController:create -> tournaments_edit -> TournamentsController:end;
+		TournamentsController:edit -> tournaments_edit -> TournamentsController:update -> tournaments_edit;
 
 		MatchesController:show -> matches_show;
-		MatchesController:edit -> matches_edit -> MatchesController:update;
-		#MatchesController:edit -> common_permission_denied;
-		#MatchesController:update -> common_permission_denied;
+		MatchesController:edit -> matches_edit -> MatchesController:update -> matches_edit;
 
 		TeamsController:index -> teams_index;
 		TeamsController:show -> teams_show;
-		TeamsController:new -> teams_new -> TeamsController:create;
-		TeamsController:create -> teams_edit;
-		TeamsController:edit -> teams_edit -> TeamsController_update;
-		#TeamsController:new -> common_permission_denied;
-		#TeamsController:create -> common_permission_denied;
-		#TeamsController:edit -> common_permission_denied;
-		#TeamsController:update -> common_permission_denied;
+		TeamsController:edit -> teams_edit -> TeamsController:update -> teams_edit;
 
 		UsersController:index -> users_index;
-		UsersController:new -> users_new -> UsersController:create;
-		UsersController:edit -> users_edit -> UsersController:delete;
 		UsersController:show -> users_show;
-		UsersController:edit -> users_edit -> UsersController:update
-		# TODO: permission_denied
+		UsersController:new -> users_new -> UsersController:create -> users_edit -> UsersController:delete;
+		UsersController:edit -> users_edit -> UsersController:update -> users_edit;
 	}
 }
