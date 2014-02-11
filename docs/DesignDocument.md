@@ -374,7 +374,7 @@ TeamsController
     The following methods respond to POST requests, assuming the user
     has permission:
 
-    - `update()` TODO: POST
+    - `update()` Update the specified `Team` with the POSTed data.
 
 UsersController
   : The following methods respond to GET requests by rendering the
@@ -388,10 +388,19 @@ UsersController
     The following methods respond to POST requests, assuming the user
     has permission:
 
-    - `create()` TODO: POST
-    - `update()` TODO: POST
-    - `delete()` TODO: POST
+    - `create()` Creates a new `User` with the POSTed data.
+    - `update()` Update the specified `User` with the POSTed data.
+    - `delete()` Deletes the specified `User` account.
 
 ## UML Diagram of Classes
+
+This diagram does not show all models inheriting from
+`ActiveRecord::Base`, all views inheriting from `layouts/application`,
+or all controllers inheriting from `ApplicationController`.  It
+does not show interactions with the `User` model that solely check
+authorization to perform an action.  It does not show controller
+methods calling the error views.  It shows transitions from a view to
+a controller *only* when that is the *primary* purpose of the view; many
+workflows can be interupted at any time.
 
 ![](DesignDocument-classes.pdf)\ 
