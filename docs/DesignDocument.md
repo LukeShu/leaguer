@@ -282,13 +282,15 @@ LoginController
       model to validate the username and password.
     - `logout()` Responds to POST requests by clearing the session
       token, logging the user out, then redirects to the home page
-      (`MainController#show_homepage()`).  If the was not logged in,
+      (`MainController#show_homepage()`).  If the user was not logged in,
       it renders the `common/invalid` view.
 
 SearchController
-  : TODO
+  : This controller handles user search terms. It has one method:
 
-    - `show_results()` TODO: RESPONDS TO POST
+    - `show_results()` Responds to POST by accessing whichever model(s)
+      contains the information requested and renders the `search/results`
+      view.
 
 MessagesController
   : TODO
