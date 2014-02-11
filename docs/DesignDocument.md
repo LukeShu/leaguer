@@ -27,9 +27,8 @@ sleek web application which manages tournaments.
 # Non-Functional Requirements
 
 1. Security: - Because Project Leaguer servers may store sensitive user information like name, email, statistics, user-name, profile, etc. it is an important non-functional requirement that such data is well secured from both accidental exposure and intentional tampering. Even so, the System may not be responsible for the theft of user information or even alterations made to the database from a source different from that of Leaguer.
-2. Backup: - The Leaguer system provides a user with a database of user information and is updated and stored, which is functional. In contrast, the non-functional requirement of leaguer is its ability to back up all the information of the user when the user chooses to suspend or delete record or even when the user happens to disconnect from the server.
-3. Platform Compatibility: - A non-functional requirement for the system is to be able to run on multiple platforms. Primarily a web based application, Leaguer may not be able to install into embedded gaming devices and special operation systems that do not run the interface that Leaguer was initially built on.
-4. Response Time: - Even though the "Model 2" architecture tends to scale well for medium/large applications and data sets, it is still important to keep the response time of the system in mind. Using efficient data structures, short time complexity algorithms, and minimizing network overhead whenever possible will help to keep the response time of the system reasonable even for large data sets or complex statists or scoring schemes.
+2. Platform Compatibility: - A non-functional requirement for the system is to be able to run on multiple platforms. Primarily a web based application, Leaguer may not be able to install into embedded gaming devices and special operation systems that do not run the interface that Leaguer was initially built on.
+3. Response Time: - Even though the "Model 2" architecture tends to scale well for medium/large applications and data sets, it is still important to keep the response time of the system in mind. Using efficient data structures, short time complexity algorithms, and minimizing network overhead whenever possible will help to keep the response time of the system reasonable even for large data sets or complex statists or scoring schemes.
 
 
 # Design Outlines
@@ -373,7 +372,7 @@ TeamsController
     The following methods respond to POST requests, assuming the user
     has permission:
 
-    - `update()` TODO: POST
+    - `update()` Update the specified `Team` with the POSTed data.
 
 UsersController
   : The following methods respond to GET requests by rendering the
@@ -387,10 +386,19 @@ UsersController
     The following methods respond to POST requests, assuming the user
     has permission:
 
-    - `create()` TODO: POST
-    - `update()` TODO: POST
-    - `delete()` TODO: POST
+    - `create()` Creates a new `User` with the POSTed data.
+    - `update()` Update the specified `User` with the POSTed data.
+    - `delete()` Deletes the specified `User` account.
 
 ## UML Diagram of Classes
+
+This diagram does not show all models inheriting from
+`ActiveRecord::Base`, all views inheriting from `layouts/application`,
+or all controllers inheriting from `ApplicationController`.  It
+does not show interactions with the `User` model that solely check
+authorization to perform an action.  It does not show controller
+methods calling the error views.  It shows transitions from a view to
+a controller *only* when that is the *primary* purpose of the view; many
+workflows can be interupted at any time.
 
 ![](DesignDocument-classes.pdf)\ 
