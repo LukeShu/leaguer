@@ -22,3 +22,5 @@ DesignDocument.pdf.args = --table-of-contents --number-sections -f markdown+defi
 
 clean:
 	rm -f -- *.pdf *.html
+
+.DELETE_ON_ERROR:
