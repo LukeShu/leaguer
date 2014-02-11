@@ -324,11 +324,30 @@ TournamentsController
 MatchesController
   : TODO
 
+    - `show()` TODO: GET
+    - `edit()` TODO: GET
+    - `update()` TODO: POST
+
 TeamsController
   : TODO
 
+    - `index()` TODO: GET
+    - `show()` TODO: GET
+    - `new()` MAYBE TODO: GET
+    - `create()` MAYBE TODO: POST
+    - `edit()` TODO: GET
+    - `update()` TODO: POST
+
 UsersController
   : TODO
+
+    - `index()` TODO: GET
+    - `new()` TODO: GET
+    - `create()` TODO: POST
+    - `show()` TODO: GET
+    - `edit()` TODO: GET
+    - `update()` TODO: POST
+    - `delete()` TODO: POST
 
 ## UML Diagram of Classes
 
