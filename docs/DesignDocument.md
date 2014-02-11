@@ -1,10 +1,9 @@
 ---
-title: Design Document
+title: Project Leaguer: Design Document
 author: [ Nathaniel Foy, Guntas Grewal, Tomer Kimia, Andrew Murrell, Luke Shumaker, Davis Webb ]
 ---
 
 Version 1.0 – 2014.02.10
-Created 2014.02.09
 
 # Purpose
 
