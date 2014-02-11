@@ -260,13 +260,13 @@ MainController
     - `show_homepage()` Responds to GET requests by rendering the
       `main/homepage` view.
     - `edit_settings()` Responds to GET requests by (if the user is
-      authenticated and is a host) rendering the `main/edit` view
-      that presents the user with a form to edit the server settings;
-      assuming the user has permission.
+      authenticated and is a host) rendering the `main/edit` view that
+      presents the user with a form to edit the `Server` model's
+      settings; assuming the user has permission.
     - `update_settings()` Responds to POST requests by updating the
-      server configuration with the POSTed settings.  It then renders
-      the `main/edit` view with the updated settings.  This assumes
-      the user has the permissions.
+      `Server` model configuration with the POSTed settings.  It then
+      renders the `main/edit` view with the updated settings.  This
+      assumes the user has the permissions.
 
 LoginController
   : This controller handles session management.  It contains two
