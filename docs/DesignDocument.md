@@ -171,7 +171,8 @@ main/homepage.html
 
 main/edit.html
   : This page is a form for editing the server-wide configuration,
-    such as the language or the graphical theme.
+    such as the language or the graphical theme.  The form is
+    submitted to `MainController#update()`.
 
 search/results.html
   : Shows the results of a search.  Each item is clickable and
@@ -214,43 +215,52 @@ tournaments/edit.html
 
 matches/index.html
   : Shows a list of matches.  Clicking on any of them causes the
-    browser GET that match via `MatchesController#show()`.
+    browser to GET that match via `MatchesController#show()`.
 
 matches/show.html
   : Shows an individual match; a display of both teams. Each team's
     players are clickable which causes a GET for the player's profile
     HTML (`UsersController#show()`).  A link above both teams will GET
     the tournament the match belongs to
-    (`TournamentsController#show()`).  This will POST its actions to
-    the Match controller. TODO: What will POSTing do?
+    (`TournamentsController#show()`).  If the user is authorized, it
+    also has a button to edit the match by GETting
+    `MatchesController#edit()`.
 
 matches/edit.html
-  : TODO: form to adit a match
+  : Shows a form to edit a match.  The form is POSTed to
+    `MatchesController#update()`.
 
 teams/index.html
-  : TODO: show list of teams
+  : Shows a list of teams.  Clicking any of them causers the browser
+    to GET that team via `TeamsController#show()`.
 
 teams/show.html
-  : TODO: show individual team
+  : Show an individual team, including statistics, and links to
+    individual members (GET `UsersController#show()`).  If the user is
+    authorized, it also has a button do edit the team by GETting
+    `TeamsController#edit()`.
 
 teams/edit.html
-  : TODO: form to edit a team
+  : A form to manually edit a team, and its members.  The form
+    contents are POSTed to `TeamsController#update()`.
 
 users/index.html
-  : TODO: list of users
+  : Show a list of users.  Clicking any of them causers the browser
+    to GET that user via `UsersController#show()`.
 
 users/new.html
-  : One for repeating the password, and one for email. This POST to
-    the Login controller. TODO: complete sentences
+  : Shows a form for creatig a new user.  It includes fields for
+    username, email, password, and other information.  The form is
+    POSTed to `UsersController#create()`;
 
 users/show.html
   : A page with the user's information. One can view the player's
-    reviews. If the user is viewing his/her own profile, they can edit
-    it causing a POST to the userProfile controller. TODO: fix
+    reviews.  If the user is authorized, it also has a button do edit
+    the user by GETting `UsersController#edit()`.
 
 users/edit.html
-  : TODO
-
+  : A form to edit a user; including meta-data and tournament
+    registration.  The form is POSTed to `USersController#update()`.
 
 ### CONTROLLERS
 
