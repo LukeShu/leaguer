@@ -11,13 +11,14 @@ The purpose of this document is to outlay the design, intent, and structure of
 the Project Leaguer tournament organizing software.
 
 Released under an open license, Project Leaguer leverages powerful web
-technologies to provide everything needed to organize an online tournament.
-Whether it's League of Legends, Chess, Poker, or more, Project Leaguer provides
-tournament organizers, participants, and spectators with an online
-interface to keep up with the score. Even better Project Leaguer offers scoring 
-features and options which would be very difficult to implement with traditional 
-tournament organizing practices such as peer review and team-independent 
-individual scoring.
+technologies to provide everything needed to organize an online
+tournament.  While it is designed with “League of Legends” in mind, it
+should provide an online tournament interface that is easy to use for
+tournament organizers, participants, and spectators for all kinds of
+games, such as Chess, Poker, and more.  Even better, Project Leaguer
+offers scoring features and options, such as peer review and
+team-independent individual scoring, which would be very difficult to
+implement with traditional tournament organizing practices.
 
 The software itself operates as a stand-alone background server application
 accessible and configurable though its web interface which reveals to users a 
