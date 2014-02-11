@@ -49,7 +49,7 @@ Response Time
     structures, short time complexity algorithms, and minimizing
     network overhead whenever possible will help to keep the response
     time of the system reasonable even for large data sets or complex
-    statists or scoring schemes.
+    statistics or scoring schemes.
 
 
 # Design Outlines
@@ -153,7 +153,7 @@ Option 1
   : In the case of online multiplayer games, such as League of
     Legends, it may be possible to obtain the information directly
     from the game-hosted server or even websites that already do so.
-    In the case of League of Legends, lolking.net and lolnexus.com
+    In the case of League of Legends, `lolking.net` and `lolnexus.com`
     already grab statistics from the server automatically.  There are
     also some open source projects, such as data-hut on GitHub, that
     could be used to help extract and categorize the data itself. This
@@ -191,14 +191,14 @@ ActiveRecord::Base (abstract)
 Server
   : Server model providing access to system settings such as Language, Time_Zone, Server_name, Owner_name, and Version. This class is edited and read by the MainController.
 
-Tournement
-  : This model represents the structure of a tournement.  It will have several data sections to it including:  The match settings, the matches contained inside of the tournement, a unique id for the tournement, and the registered players that are participating in the tournement. This class interacts with a multitude of other model classes (see UML) and all four tournament controllers.
+Tournament
+  : This model represents the structure of a tournament.  It will have several data sections to it including:  The match settings, the matches contained inside of the tournament, a unique id for the tournament, and the registered players that are participating in the tournament. This class interacts with a multitude of other model classes (see UML) and all four tournament controllers.
 
 Match
-  : A match will be a single set of data that contains all of the statistics of one game.  This includes: players personal scores, team members, scores for each team, game time, the tournement that match took place in, and the date. This model interacts with the match controller, and is both a part of and has a many to one relationship with a tournament object.
+  : A match will be a single set of data that contains all of the statistics of one game.  This includes: players personal scores, team members, scores for each team, game time, the tournament that match took place in, and the date. This model interacts with the match controller, and is both a part of and has a many to one relationship with a tournament object.
 
 Team
-  : This model will consist of a list of players for a tournement. The team creation process is chosen by the host of the tournement and team setup will either be pre-determined teams or randomly assigned teams. This model interacts with the tournament model class.
+  : This model will consist of a list of players for a tournament. The team creation process is chosen by the host of the tournament and team setup will either be pre-determined teams or randomly assigned teams. This model interacts with the tournament model class.
 
 User
   : This model represents all types of users; hosts, players, and
@@ -236,7 +236,7 @@ main/homepage.html
   : This page is visually simple.  In addition to the basic functions
     of `layouts/application`, this page has a “Go to Tournament” text
     area, in which you enter a tournament title, and will take you to
-    the relevent tournament page.
+    the relevant tournament page.
 
 main/edit.html
   : This page is a form for editing the server-wide configuration,
@@ -245,7 +245,7 @@ main/edit.html
 
 search/results.html
   : Shows the results of a search.  Each item is clickable and
-    triggers a GET request to the relevent controller method.
+    triggers a GET request to the relevant controller method.
 
 messages/new_alert.html
   : This is a form for a host to submit a new system-wide alert.  The
@@ -254,7 +254,7 @@ messages/new_alert.html
 messages/private.html
   : This page is used to handle user private messaging.  It both
     displays private messages, and contains a form for sending a new
-    private message.  Nes messages are POSTed to
+    private message.  New messages are POSTed to
     `MessageController#post_private()`
 
 tournaments/index.html
@@ -319,7 +319,7 @@ users/index.html
     to GET that user via `UsersController#show()`.
 
 users/new.html
-  : Shows a form for creatig a new user.  It includes fields for
+  : Shows a form for creating a new user.  It includes fields for
     username, email, password, and other information.  The form is
     POSTed to `UsersController#create()`;
 
@@ -330,7 +330,7 @@ users/show.html
 
 users/edit.html
   : A form to edit a user; including meta-data and tournament
-    registration.  The form is POSTed to `USersController#update()`.
+    registration.  The form is POSTed to `UsersController#update()`.
 
 ### CONTROLLERS
 
@@ -360,7 +360,7 @@ LoginController
   : This controller handles session management.  It contains two
     methods:
 
-    - `login()` Responds to POST requests by seting a session token
+    - `login()` Responds to POST requests by setting a session token
       identifying the user.  If the credentials are correct, it sends
       a redirect that directs the browser to the page it would
       otherwise be on.  If the credentials are not correct, it renders
@@ -469,7 +469,7 @@ does not show interactions with the `User` model that solely check
 authorization to perform an action.  It does not show controller
 methods calling the error views.  It shows transitions from a view to
 a controller *only* when that is the *primary* purpose of the view; many
-workflows can be interupted at any time.  Arrows betwen models and
+workflows can be interrupted at any time.  Arrows between models and
 controllers indicate which direction data is flowing.  Any data
 flowing from a model to the method of a controller is implicitly
 passed to the view that method renders.
