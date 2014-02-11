@@ -89,6 +89,8 @@ Views
 
 ## Component Interaction
 
+TODO: there are 9 controllers
+
 Controllers will be used to run all of the background work of Leaguer.  They will fetch the necessary data and will tell the view what to do.  We will be implementing seven controllers into Leaguer.  Those will be:
 
    i. PM & Alerts – This controller will be used for sending and receiving private messages to and from the host.  Players will be able to message the host in order to inform him/her of anything during the tournament.  This will also allow the host to post any notifications he or she desires that will be displayed for all to see.
@@ -109,27 +111,72 @@ The Model will be the data section that will map all of the information to their
 
 In an effort to keep our system broad, one of our requirements is that Leaguer is adaptable to many competitions, not just League of Legends. How do we assure that the different scoring systems of different sports are represented in Leaguer?
 
-Option 1: One of our interfaces could be “Scoring System” which will be implemented by many classes with common scoring systems. For example there would be a implementing class in which the highest score wins, and one in which the lowest score wins. This is likely to be the winning option, as there are not too many obscure scoring systems that we could not think of. 
+Option 1
+  : One of our interfaces could be “Scoring System” which will be
+    implemented by many classes with common scoring systems. For
+    example there would be a implementing class in which the highest
+    score wins, and one in which the lowest score wins. This is likely
+    to be the winning option, as there are not too many obscure
+    scoring systems that we could not think of.
 
-Option 2: We could design an API in which the host writes a method to update the scoring. This is pretty complex, and while it would allow more customization, it is hard to imagine completing this task without first completing option 1.
+Option 2
+  : We could design an API in which the host writes a method to update
+    the scoring. This is pretty complex, and while it would allow more
+    customization, it is hard to imagine completing this task without
+    first completing option 1.
 
 ## Offline Data Management
 
 Leaguer manages players and games within tournaments, but it also stores statistics about the games and players themselves.  We need a system to store this information after the server-host shuts down the server.
 
-Option 1: Perhaps the simplest and most intuitive option is to implement a database dump system. The server would dump the information into an SQL format.  All game and player data would be stored to the host and could be restored to a new server. The host would be responsible for preserving the data.  Additional security measures could be implemented to help protect data.  This option leaves the users with great control over the data.
+Option 1
+  : Perhaps the simplest and most intuitive option is to implement a
+    database dump system. The server would dump the information into
+    an SQL format.  All game and player data would be stored to the
+    host and could be restored to a new server. The host would be
+    responsible for preserving the data.  Additional security measures
+    could be implemented to help protect data.  This option leaves the
+    users with great control over the data.
 
-Option 2: We could host Leaguer ourselves with our own server. All users would connect to it instead of to a user-hosted server.  Game and player information would be stored and maintained on Leaguer's server and the users would not need to manage data themselves, but instead we would have to host the service.
+Option 2
+  : We could host Leaguer ourselves with our own server. All users
+    would connect to it instead of to a user-hosted server.  Game and
+    player information would be stored and maintained on Leaguer's
+    server and the users would not need to manage data themselves, but
+    instead we would have to host the service.
 
 ## Fetching Data from Games
 
 Obtaining the statistics from the end of game or match is a vital step in Leaguer's function.  A quick and easy method for obtaining this information will ensure smooth usability.
 
-Option 1: In the case of online multiplayer games, such as League of Legends, it may be possible to obtain the information directly from the game-hosted server or even websites that already do so.  In the case of League of Legends, lolking.net and lolnexus.com already grab statistics from the server automatically.  There are also some open source projects, such as data-hut on GitHub, that could be used to help extract and categorize the data itself. This option is complex, but also highly desirable for compatible games, as it ensures a fast and simple environment for our users.
+Option 1
+  : In the case of online multiplayer games, such as League of
+    Legends, it may be possible to obtain the information directly
+    from the game-hosted server or even websites that already do so.
+    In the case of League of Legends, lolking.net and lolnexus.com
+    already grab statistics from the server automatically.  There are
+    also some open source projects, such as data-hut on GitHub, that
+    could be used to help extract and categorize the data itself. This
+    option is complex, but also highly desirable for compatible games,
+    as it ensures a fast and simple environment for our users.
 
-Option 2: Users manually enter the data themselves. Different games would require different methods for the users to implement.  In the case of online games, users could take screenshot of a match's score screen (and then the statistics would be manually entered in), or a select pool of users could be responsible for recording the information and then entering it in.  This option is tedious and undesirable.
+Option 2
+  : Users manually enter the data themselves. Different games would
+    require different methods for the users to implement.  In the case
+    of online games, users could take screenshot of a match's score
+    screen (and then the statistics would be manually entered in), or
+    a select pool of users could be responsible for recording the
+    information and then entering it in.  This option is tedious and
+    undesirable.
 
-Option 3: Use Optical Character Recognition to obtain statistics from score screen screenshots. This option would require someone to take a screenshot in each match and submit it to Leaguer.  This would require more work than Option 1, but much less than Option 2.  An OCR plugin would have to be implemented for each game and thus support would be limited from game to game. Outside contributors could help widen the number of games with OCR support.
+Option 3
+  : Use Optical Character Recognition to obtain statistics from score
+    screen screenshots. This option would require someone to take a
+    screenshot in each match and submit it to Leaguer.  This would
+    require more work than Option 1, but much less than Option 2.  An
+    OCR plugin would have to be implemented for each game and thus
+    support would be limited from game to game. Outside contributors
+    could help widen the number of games with OCR support.
 
 # Design Details
 ## Class Descriptions and Interactions
