@@ -233,9 +233,6 @@ teams/index.html
 teams/show.html
   : TODO: show individual team
 
-teams/new.html
-  : MAYBE TODO: form to create a new team
-
 teams/edit.html
   : TODO: form to edit a team
 
@@ -347,8 +344,6 @@ TeamsController
 
     - `index()` TODO: GET
     - `show()` TODO: GET
-    - `new()` MAYBE TODO: GET
-    - `create()` MAYBE TODO: POST
     - `edit()` TODO: GET
     - `update()` TODO: POST
 

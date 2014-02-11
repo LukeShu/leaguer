@@ -80,7 +80,7 @@ digraph systemModel {
 		MessagesController[label="<main> MessagesController | <new_alert> new_alert() | <post_alert> post_alert() | <show_private> show_private() | <post_private> post_private()"];
 		TournamentsController[label="<main> TournamentsController | <index> index() | <show> show() | <new> new() | <create> create() | <edit> edit() | <update> update() | <end> end()"];
 		MatchesController[label="<main> MatchesController | <index> index() | <show> show() | <edit> edit() | <update> update()"];
-		TeamsController[label="<main> TeamsController | <index> index() | <show> show() | <new> new() | <create> create() | <edit> edit() | <update> update()"]
+		TeamsController[label="<main> TeamsController | <index> index() | <show> show() | <create> create() | <edit> edit() | <update> update()"]
 		UsersController[label="<main> UsersController | <index> index() | <show> show() | <new> new() | <create> create() | <edit> edit() | <update> update() | <delete> delete()"]
 	}
 
@@ -215,7 +215,6 @@ digraph systemModel {
 
 		TeamsController:index -> teams_index;
 		TeamsController:show -> teams_show;
-		TeamsController:new -> teams_new -> TeamsController:create -> teams_edit;
 		TeamsController:edit -> teams_edit -> TeamsController:update -> teams_edit;
 
 		UsersController:index -> users_index;
