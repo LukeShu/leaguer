@@ -2,7 +2,6 @@ digraph systemModel {
 	rankdir="LR";
 	splines="line";
 
-	/*
 	subgraph _clusterModels {
 		label="Models"
 		node[shape="record"];
@@ -15,7 +14,6 @@ digraph systemModel {
 		Team[label="<main> Team"];
 		User[label="<main> User | <attr_role> role | <attr_pw> password hash"];
 	}
-	*/
 
 	subgraph _clusterViews {
 		label="views/";
@@ -80,7 +78,7 @@ digraph systemModel {
 		MessagesController[label="<main> MessagesController | <new_alert> new_alert() | <post_alert> post_alert() | <show_private> show_private() | <post_private> post_private()"];
 		TournamentsController[label="<main> TournamentsController | <index> index() | <show> show() | <new> new() | <create> create() | <edit> edit() | <update> update() | <end> end()"];
 		MatchesController[label="<main> MatchesController | <index> index() | <show> show() | <edit> edit() | <update> update()"];
-		TeamsController[label="<main> TeamsController | <index> index() | <show> show() | <create> create() | <edit> edit() | <update> update()"]
+		TeamsController[label="<main> TeamsController | <index> index() | <show> show() | <edit> edit() | <update> update()"]
 		UsersController[label="<main> UsersController | <index> index() | <show> show() | <new> new() | <create> create() | <edit> edit() | <update> update() | <delete> delete()"]
 	}
 
@@ -193,33 +191,75 @@ digraph systemModel {
 	}
 	*/
 
-	subgraph controller2view {
-		MainController:index -> main_homepage;
-		MainController:edit -> main_edit -> MainController:update -> main_edit;
+	###################################################################
+	# controller/view relations
+	###################################################################
+	MainController:index -> main_homepage;
+	MainController:edit -> main_edit -> MainController:update -> main_edit;
 
-		#LoginController:login -> common_permission_denied;
-		#LoginController:logout -> common_invalid;
+	#LoginController:login -> common_permission_denied;
+	#LoginController:logout -> common_invalid;
 
-		SearchController:show_results -> search_results;
+	SearchController:show_results -> search_results;
 
-		MessagesController:new_alert -> messages_new_alert -> MessagesController:post_alert;
-		MessagesController:show_private -> messages_private -> MessagesController:post_private -> messages_private;
+	MessagesController:new_alert -> messages_new_alert -> MessagesController:post_alert;
+	MessagesController:show_private -> messages_private -> MessagesController:post_private -> messages_private;
 
-		TournamentsController:index -> tournaments_index;
-		TournamentsController:show -> tournaments_show;
-		TournamentsController:new -> tournaments_new -> TournamentsController:create -> tournaments_edit -> TournamentsController:end;
-		TournamentsController:edit -> tournaments_edit -> TournamentsController:update -> tournaments_edit;
+	TournamentsController:index -> tournaments_index;
+	TournamentsController:show -> tournaments_show;
+	TournamentsController:new -> tournaments_new -> TournamentsController:create -> tournaments_edit -> TournamentsController:end;
+	TournamentsController:edit -> tournaments_edit -> TournamentsController:update -> tournaments_edit;
 
-		MatchesController:show -> matches_show;
-		MatchesController:edit -> matches_edit -> MatchesController:update -> matches_edit;
+	MatchesController:show -> matches_show;
+	MatchesController:edit -> matches_edit -> MatchesController:update -> matches_edit;
 
-		TeamsController:index -> teams_index;
-		TeamsController:show -> teams_show;
-		TeamsController:edit -> teams_edit -> TeamsController:update -> teams_edit;
+	TeamsController:index -> teams_index;
+	TeamsController:show -> teams_show;
+	TeamsController:edit -> teams_edit -> TeamsController:update -> teams_edit;
 
-		UsersController:index -> users_index;
-		UsersController:show -> users_show;
-		UsersController:new -> users_new -> UsersController:create -> users_edit -> UsersController:delete;
-		UsersController:edit -> users_edit -> UsersController:update -> users_edit;
-	}
+	UsersController:index -> users_index;
+	UsersController:show -> users_show;
+	UsersController:new -> users_new -> UsersController:create -> users_edit -> UsersController:delete;
+	UsersController:edit -> users_edit -> UsersController:update -> users_edit;
+
+	###################################################################
+	# controller/model relations
+	###################################################################
+	Server -> MainController:edit;
+	MainController:update -> Server;
+
+	User -> LoginController:login;
+
+	Tournament -> SearchController:show_results;
+	Match -> SearchController:show_results;
+	Team -> SearchController:show_results;
+	User -> SearchController:show_results;
+
+	Tournament -> TournamentsController:index;
+	Tournament -> TournamentsController:show;
+	Match -> TournamentsController:show;
+	Tournament -> TournamentsController:edit;
+	TournamentsController:create -> Tournament;
+	TournamentsController:update -> Tournament;
+	TournamentsController:end -> Tournament;
+
+	Match -> MatchesController:index;
+	Match -> MatchesController:show;
+	Team -> MatchesController:show;
+	User -> MatchesController:show;
+	Match -> MatchesController:edit;
+	MatchesController:update -> Match;
+
+	Team -> TeamsController:index;
+	Team -> TeamsController:show;
+	User -> TeamsController:show;
+	Team -> TeamsController:edit;
+	TeamsController:update -> Team;
+
+	User -> UsersController:index;
+	User -> UsersController:show;
+	User -> UsersController:edit;
+	UsersController:create -> User;
+	UsersController:update -> User;
+	UsersController:delete -> User;
 }

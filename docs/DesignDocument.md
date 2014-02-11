@@ -1,10 +1,9 @@
 ---
-title: Design Document
+title: "Project Leaguer: Design Document"
 author: [ Nathaniel Foy, Guntas Grewal, Tomer Kimia, Andrew Murrell, Luke Shumaker, Davis Webb ]
 ---
 
 Version 1.0 – 2014.02.10
-Created 2014.02.09
 
 # Purpose
 
@@ -12,13 +11,14 @@ The purpose of this document is to outlay the design, intent, and structure of
 the Project Leaguer tournament organizing software.
 
 Released under an open license, Project Leaguer leverages powerful web
-technologies to provide everything needed to organize an online tournament.
-Whether it's League of Legends, Chess, Poker, or more, Project Leaguer provides
-tournament organizers, participants, and spectators with an online
-interface to keep up with the score. Even better Project Leaguer offers scoring 
-features and options which would be very difficult to implement with traditional 
-tournament organizing practices such as peer review and team-independent 
-individual scoring.
+technologies to provide everything needed to organize an online
+tournament.  While it is designed with “League of Legends” in mind, it
+should provide an online tournament interface that is easy to use for
+tournament organizers, participants, and spectators for all kinds of
+games, such as Chess, Poker, and more.  Even better, Project Leaguer
+offers scoring features and options, such as peer review and
+team-independent individual scoring, which would be very difficult to
+implement with traditional tournament organizing practices.
 
 The software itself operates as a stand-alone background server application
 accessible and configurable though its web interface which reveals to users a 
@@ -26,9 +26,30 @@ sleek web application which manages tournaments.
  
 # Non-Functional Requirements
 
-1. Security: - Because Project Leaguer servers may store sensitive user information like name, email, statistics, user-name, profile, etc. it is an important non-functional requirement that such data is well secured from both accidental exposure and intentional tampering. Even so, the System may not be responsible for the theft of user information or even alterations made to the database from a source different from that of Leaguer.
-2. Platform Compatibility: - A non-functional requirement for the system is to be able to run on multiple platforms. Primarily a web based application, Leaguer may not be able to install into embedded gaming devices and special operation systems that do not run the interface that Leaguer was initially built on.
-3. Response Time: - Even though the "Model 2" architecture tends to scale well for medium/large applications and data sets, it is still important to keep the response time of the system in mind. Using efficient data structures, short time complexity algorithms, and minimizing network overhead whenever possible will help to keep the response time of the system reasonable even for large data sets or complex statists or scoring schemes.
+Security
+  : Because Project Leaguer servers may store sensitive user
+    information like name, email, statistics, user-name, profile,
+    etc. it is an important non-functional requirement that such data
+    is well secured from both accidental exposure and intentional
+    tampering.  Even so, the System may not be responsible for the
+    theft of user information or even alterations made to the database
+    from a source different from that of Leaguer.
+
+Platform Compatibility
+  : A non-functional requirement for the system is to be able to run
+    on multiple platforms.  Primarily a web based application, Leaguer
+    may not be able to install into embedded gaming devices and
+    special operation systems that do not run the interface that
+    Leaguer was initially built on.
+
+Response Time
+  : Even though the "Model 2" architecture tends to scale well for
+    medium/large applications and data sets, it is still important to
+    keep the response time of the system in mind.  Using efficient data
+    structures, short time complexity algorithms, and minimizing
+    network overhead whenever possible will help to keep the response
+    time of the system reasonable even for large data sets or complex
+    statistics or scoring schemes.
 
 
 # Design Outlines
@@ -68,6 +89,8 @@ Views
 
 ## Component Interaction
 
+TODO: there are 9 controllers
+
 Controllers will be used to run all of the background work of Leaguer.  They will fetch the necessary data and will tell the view what to do.  We will be implementing seven controllers into Leaguer.  Those will be:
 
    i. PM & Alerts – This controller will be used for sending and receiving private messages to and from the host.  Players will be able to message the host in order to inform him/her of anything during the tournament.  This will also allow the host to post any notifications he or she desires that will be displayed for all to see.
@@ -88,27 +111,72 @@ The Model will be the data section that will map all of the information to their
 
 In an effort to keep our system broad, one of our requirements is that Leaguer is adaptable to many competitions, not just League of Legends. How do we assure that the different scoring systems of different sports are represented in Leaguer?
 
-Option 1: One of our interfaces could be “Scoring System” which will be implemented by many classes with common scoring systems. For example there would be a implementing class in which the highest score wins, and one in which the lowest score wins. This is likely to be the winning option, as there are not too many obscure scoring systems that we could not think of. 
+Option 1
+  : One of our interfaces could be “Scoring System” which will be
+    implemented by many classes with common scoring systems. For
+    example there would be a implementing class in which the highest
+    score wins, and one in which the lowest score wins. This is likely
+    to be the winning option, as there are not too many obscure
+    scoring systems that we could not think of.
 
-Option 2: We could design an API in which the host writes a method to update the scoring. This is pretty complex, and while it would allow more customization, it is hard to imagine completing this task without first completing option 1.
+Option 2
+  : We could design an API in which the host writes a method to update
+    the scoring. This is pretty complex, and while it would allow more
+    customization, it is hard to imagine completing this task without
+    first completing option 1.
 
 ## Offline Data Management
 
 Leaguer manages players and games within tournaments, but it also stores statistics about the games and players themselves.  We need a system to store this information after the server-host shuts down the server.
 
-Option 1: Perhaps the simplest and most intuitive option is to implement a database dump system. The server would dump the information into an SQL format.  All game and player data would be stored to the host and could be restored to a new server. The host would be responsible for preserving the data.  Additional security measures could be implemented to help protect data.  This option leaves the users with great control over the data.
+Option 1
+  : Perhaps the simplest and most intuitive option is to implement a
+    database dump system. The server would dump the information into
+    an SQL format.  All game and player data would be stored to the
+    host and could be restored to a new server. The host would be
+    responsible for preserving the data.  Additional security measures
+    could be implemented to help protect data.  This option leaves the
+    users with great control over the data.
 
-Option 2: We could host Leaguer ourselves with our own server. All users would connect to it instead of to a user-hosted server.  Game and player information would be stored and maintained on Leaguer's server and the users would not need to manage data themselves, but instead we would have to host the service.
+Option 2
+  : We could host Leaguer ourselves with our own server. All users
+    would connect to it instead of to a user-hosted server.  Game and
+    player information would be stored and maintained on Leaguer's
+    server and the users would not need to manage data themselves, but
+    instead we would have to host the service.
 
 ## Fetching Data from Games
 
 Obtaining the statistics from the end of game or match is a vital step in Leaguer's function.  A quick and easy method for obtaining this information will ensure smooth usability.
 
-Option 1: In the case of online multiplayer games, such as League of Legends, it may be possible to obtain the information directly from the game-hosted server or even websites that already do so.  In the case of League of Legends, lolking.net and lolnexus.com already grab statistics from the server automatically.  There are also some open source projects, such as data-hut on GitHub, that could be used to help extract and categorize the data itself. This option is complex, but also highly desirable for compatible games, as it ensures a fast and simple environment for our users.
+Option 1
+  : In the case of online multiplayer games, such as League of
+    Legends, it may be possible to obtain the information directly
+    from the game-hosted server or even websites that already do so.
+    In the case of League of Legends, `lolking.net` and `lolnexus.com`
+    already grab statistics from the server automatically.  There are
+    also some open source projects, such as data-hut on GitHub, that
+    could be used to help extract and categorize the data itself. This
+    option is complex, but also highly desirable for compatible games,
+    as it ensures a fast and simple environment for our users.
 
-Option 2: Users manually enter the data themselves. Different games would require different methods for the users to implement.  In the case of online games, users could take screenshot of a match's score screen (and then the statistics would be manually entered in), or a select pool of users could be responsible for recording the information and then entering it in.  This option is tedious and undesirable.
+Option 2
+  : Users manually enter the data themselves. Different games would
+    require different methods for the users to implement.  In the case
+    of online games, users could take screenshot of a match's score
+    screen (and then the statistics would be manually entered in), or
+    a select pool of users could be responsible for recording the
+    information and then entering it in.  This option is tedious and
+    undesirable.
 
-Option 3: Use Optical Character Recognition to obtain statistics from score screen screenshots. This option would require someone to take a screenshot in each match and submit it to Leaguer.  This would require more work than Option 1, but much less than Option 2.  An OCR plugin would have to be implemented for each game and thus support would be limited from game to game. Outside contributors could help widen the number of games with OCR support.
+Option 3
+  : Use Optical Character Recognition to obtain statistics from score
+    screen screenshots. This option would require someone to take a
+    screenshot in each match and submit it to Leaguer.  This would
+    require more work than Option 1, but much less than Option 2.  An
+    OCR plugin would have to be implemented for each game and thus
+    support would be limited from game to game. Outside contributors
+    could help widen the number of games with OCR support.
 
 # Design Details
 ## Class Descriptions and Interactions
@@ -121,20 +189,20 @@ ActiveRecord::Base (abstract)
   : The abstract model that all other models inherit from.
 
 Server
-  : Server model providing access to system settings such as Language, Time_Zone, Server_name, Owner_name, and Version.
+  : Server model providing access to system settings such as Language, Time_Zone, Server_name, Owner_name, and Version. This class is edited and read by the MainController.
 
-Tournement
-  : This model represents the structure of a tournement.  It will have several data sections to it including:  The match settings, the matches contained inside of the tournement, a unique id for the tournement, and the registered players that are participating in the tournement.
+Tournament
+  : This model represents the structure of a tournament.  It will have several data sections to it including:  The match settings, the matches contained inside of the tournament, a unique id for the tournament, and the registered players that are participating in the tournament. This class interacts with a multitude of other model classes (see UML) and all four tournament controllers.
 
 Match
-  : A match will be a single set of data that contains all of the statistics of one game.  This includes: players personal scores, team members, scores for each team, game time, the tournement that match took place in, and the date. 
+  : A match will be a single set of data that contains all of the statistics of one game.  This includes: players personal scores, team members, scores for each team, game time, the tournament that match took place in, and the date. This model interacts with the match controller, and is both a part of and has a many to one relationship with a tournament object.
 
 Team
-  : This model will consist of a list of players for a tournement. The team creation process is chosen by the host of the tournement and team setup will either be pre-determined teams or randomly assigned teams.
+  : This model will consist of a list of players for a tournament. The team creation process is chosen by the host of the tournament and team setup will either be pre-determined teams or randomly assigned teams. This model interacts with the tournament model class.
 
 User
   : This model represents all types of users; hosts, players, and
-    spectators.  These roles are identified by a “role” attribute.
+    spectators.  These roles are identified by a “role” attribute. The user is an object that is often referenced by other classes, including tournament, match, and team.
 
 ### VIEWS
 
@@ -151,7 +219,7 @@ layouts/application.html (abstract)
     `UserController#new()`.  If a user is logged in, it displays a
     logout button that causes a POST to `LoginController#logout()`.
     It may contain an alert box of recent alerts submitted by a
-    tournament host.  It contains a searc form that is POSTed to
+    tournament host.  It contains a search form that is POSTed to
     `SearchController#show_results`.  If the user is authorized to
     publish alerts, it also contains a button that causes the browser
     to GET `MessagesController#new_alert()`.
@@ -168,7 +236,7 @@ main/homepage.html
   : This page is visually simple.  In addition to the basic functions
     of `layouts/application`, this page has a “Go to Tournament” text
     area, in which you enter a tournament title, and will take you to
-    the relevent tournament page.
+    the relevant tournament page.
 
 main/edit.html
   : This page is a form for editing the server-wide configuration,
@@ -177,7 +245,7 @@ main/edit.html
 
 search/results.html
   : Shows the results of a search.  Each item is clickable and
-    triggers a GET request to the relevent controller method.
+    triggers a GET request to the relevant controller method.
 
 messages/new_alert.html
   : This is a form for a host to submit a new system-wide alert.  The
@@ -186,7 +254,7 @@ messages/new_alert.html
 messages/private.html
   : This page is used to handle user private messaging.  It both
     displays private messages, and contains a form for sending a new
-    private message.  Nes messages are POSTed to
+    private message.  New messages are POSTed to
     `MessageController#post_private()`
 
 tournaments/index.html
@@ -229,7 +297,8 @@ matches/show.html
 
 matches/edit.html
   : Shows a form to edit a match.  The form is POSTed to
-    `MatchesController#update()`.
+    `MatchesController#update()`.  After a match has been completed,
+    this included peer-review input by the players.
 
 teams/index.html
   : Shows a list of teams.  Clicking any of them causers the browser
@@ -250,7 +319,7 @@ users/index.html
     to GET that user via `UsersController#show()`.
 
 users/new.html
-  : Shows a form for creatig a new user.  It includes fields for
+  : Shows a form for creating a new user.  It includes fields for
     username, email, password, and other information.  The form is
     POSTed to `UsersController#create()`;
 
@@ -261,7 +330,7 @@ users/show.html
 
 users/edit.html
   : A form to edit a user; including meta-data and tournament
-    registration.  The form is POSTed to `USersController#update()`.
+    registration.  The form is POSTed to `UsersController#update()`.
 
 ### CONTROLLERS
 
@@ -291,7 +360,7 @@ LoginController
   : This controller handles session management.  It contains two
     methods:
 
-    - `login()` Responds to POST requests by seting a session token
+    - `login()` Responds to POST requests by setting a session token
       identifying the user.  If the credentials are correct, it sends
       a redirect that directs the browser to the page it would
       otherwise be on.  If the credentials are not correct, it renders
@@ -399,6 +468,9 @@ does not show interactions with the `User` model that solely check
 authorization to perform an action.  It does not show controller
 methods calling the error views.  It shows transitions from a view to
 a controller *only* when that is the *primary* purpose of the view; many
-workflows can be interupted at any time.
+workflows can be interrupted at any time.  Arrows between models and
+controllers indicate which direction data is flowing.  Any data
+flowing from a model to the method of a controller is implicitly
+passed to the view that method renders.
 
 ![](DesignDocument-classes.pdf)\ 
