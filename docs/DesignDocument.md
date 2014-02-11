@@ -297,7 +297,8 @@ matches/show.html
 
 matches/edit.html
   : Shows a form to edit a match.  The form is POSTed to
-    `MatchesController#update()`.
+    `MatchesController#update()`.  After a match has been completed,
+    this included peer-review input by the players.
 
 teams/index.html
   : Shows a list of teams.  Clicking any of them causers the browser
