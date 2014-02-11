@@ -26,7 +26,7 @@ sleek web application which manages tournaments.
  
 # Non-Functional Requirements
 
-1.	Security: - Security of Leaguer Database is a non-functional requirement because Leaguer is system that stores the information of a user like statistics, user-name, profile, etc.; The System may not be responsible for the theft of user information or even alterations made to the database from a source different from that of Leaguer.
+1.	Security: - Because Project Leaguer servers may store sensitive user information like name, email, statistics, user-name, profile, etc. it is an important non-functional requirement that such data is well secured from both accidental exposure and intentional tampering. Even so, the System may not be responsible for the theft of user information or even alterations made to the database from a source different from that of Leaguer.
 2.	Backup: - The Leaguer system provides a user with a database of user information and is updated and stored, which is functional. In contrast, the non-functional requirement of leaguer is its ability to back up all the information of the user when the user chooses to suspend or delete record or even when the user happens to disconnect from the server.
 3.	Platform Compatibility: - A non-functional requirement for the system is to be able to run on multiple platforms. Primarily a web based application, Leaguer may not be able to install into embedded gaming devices and special operation systems that do not run the interface that Leaguer was initially built on.
 
@@ -121,16 +121,16 @@ ActiveRecord::Base (abstract)
   : The abstract model that all other models inherit from.
 
 Server
-  : TODO
+  : Server model providing access to system settings such as Language, Time_Zone, Server_name, Owner_name, and Version.
 
 Tournement
-  : TODO
+  : This model represents the structure of a tournement.  It will have several data sections to it including:  The match settings, the matches contained inside of the tournement, a unique id for the tournement, and the registered players that are participating in the tournement.
 
 Match
-  : TODO
+  : A match will be a single set of data that contains all of the statistics of one game.  This includes: players, scores, game time, the tournement that match took place in, and the date. 
 
 Team
-  : TODO
+  : This model will consist of a list of players for a tournement/game. The team creation process is chosen by the host of the tournement and will either be pre-determined teams, or randomly assigned teams.
 
 User
   : This model represents all types of users; hosts, players, and
