@@ -121,7 +121,7 @@ ActiveRecord::Base (abstract)
   : The abstract model that all other models inherit from.
 
 Server
-  : 
+  : Server model providing access to system settings such as Language, Time_Zone, Server_name, Owner_name, and Version.
 
 Tournement
   : This model represents the structure of a tournement.  It will have several data sections to it including:  The match settings, the matches contained inside of the tournement, and the registered players that are participating in the tournement.
