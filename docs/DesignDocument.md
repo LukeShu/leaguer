@@ -89,17 +89,16 @@ Views
 
 ## Component Interaction
 
-TODO: there are 9 controllers
-
-Controllers will be used to run all of the background work of Leaguer.  They will fetch the necessary data and will tell the view what to do.  We will be implementing seven controllers into Leaguer.  Those will be:
+Controllers will be used to run all of the background work of Leaguer.  They will fetch the necessary data and will tell the view what to do.  We will be implementing eight controllers into Leaguer.  Those will be:
 
    i. PM & Alerts – This controller will be used for sending and receiving private messages to and from the host.  Players will be able to message the host in order to inform him/her of anything during the tournament.  This will also allow the host to post any notifications he or she desires that will be displayed for all to see.
-  ii. Homepage – Used to handle the homepage.  This will be the first web page seen by any user of the application.
+  ii. Settings & Homepage – Used to handle the homepage.  This will be the first web page seen by any user of the application.
  iii. Login – This controller will be used when a user attempts to sign in to their profile on Leaguer.
   iv. Search – This controller will be used to search the web-base for on going tournaments, players and past tournaments.
    v. Tournament – Used for setting up a tournament.  This will be restricted to the host of the tournament.
   vi. User – The controller that will take each user to their own profile.
  vii. Match/Peer Review – used for gather game statistics and the separate player reviews.
+viii. Teams - This controller will be used to handle the separate teams.  It will contain: a list of the team's members and will be used to handle team roster modifications. 
 
 Each of these controllers will fetch the data specified by its separate section.  The view will then be used to display all of this information, so Login will take the user to a login page, search will take the user to a search page and so on.
 
