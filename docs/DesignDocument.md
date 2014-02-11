@@ -178,10 +178,22 @@ search/results.html
     triggers a GET request to the relevent controller method.
 
 messages/new_alert.html
-  : TODO
+  : This shows the user that a new message is available for view. 
+  	Clicking on the notification should cause a GET to the 
+    show_private controller and take the user to his/her messages. 
+	new_alert should interact with the Main controller's 
+    show_homepage to display the notification.
 
 messages/private.html
-  : TODO
+  : This page is used to handle user private messaging.  It should 
+  	display a list of private message and which user the private 
+    messages are communicating with.  Clicking on a message should
+    trigger a GET to show_private and display the message. A field
+    box for entering a message should be present.  When posting a 
+    message a POST should be sent to Message's post_private and 
+    then a POST to post_alert confirming that it was sent.  A 
+    new_alert should then be sent to the recieving user.
+    
 
 tournaments/index.html
   : TODO: list of tournaments
