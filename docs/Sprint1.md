@@ -23,4 +23,6 @@ author: [ Nathaniel Foy, Guntas Grewal, Tomer Kimia, Andrew Murrell, Luke Shumak
 | Task Description | Time Approx. | Team Member | User Stories Affected|
 |:----------:|:-----------:|:------------:|:------------:|:------------:|
 |Set up server on 199.180.255.147| 1 Hour | Luke | All |
-
+|Create log-in system backend | 10 Hours | TBD | All |
+|Create log-in system UI | 4 Hours | TBD | All |
+|Set up Scaffolding for all Models, Views, Controllers | 2 Hours | All | All |
