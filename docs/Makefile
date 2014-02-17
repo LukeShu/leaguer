@@ -1,4 +1,4 @@
-docs = ProductBacklog ProjectCharter ProjectLeaguerWorkloadBreakup DesignDocument
+docs = $(patsubst %.md,%,$(wildcard *.md))
 
 pdf: $(addsuffix .pdf,$(docs))
 html: $(addsuffix .html,$(docs))
