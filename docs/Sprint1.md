@@ -12,5 +12,5 @@ author: [ Nathaniel Foy, Guntas Grewal, Tomer Kimia, Andrew Murrell, Luke Shumak
 3) As a host/player, I would like to enter scores for players.
 4) As an administrator, I want to specify how users become hosts.
 5) As an administrator, I would like to install and boot my own server.
-6) As a user I would like to see the progressof the tournament in my
+6) As a user I would like to see the progress of the tournament in my
    browser.
