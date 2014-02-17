@@ -35,4 +35,6 @@ author: [ Nathaniel Foy, Guntas Grewal, Tomer Kimia, Andrew Murrell, Luke Shumak
 |Create View Tournament Page | 5 | TBD | 6 |
 |Create Admin-level Server Management Page | 5 | TBD | 4 |
 |Create a Player-level Data Entry Page/Method for Results | 5 | TBD | 3 |
+|Create User Registration and Verification System | 5 | TBD | 1 |
+
 
