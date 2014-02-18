@@ -24,34 +24,38 @@ author: [ Nathaniel Foy, Guntas Grewal, Tomer Kimia, Andrew Murrell, Luke Shumak
 +---------------------------------------------------------+------+--------+----+
 | Task Description                                        | Size | Person | US |
 +=========================================================+======+========+====+
-| Set up Scaffolding for all Models, Views, Controllers   |    2 | All    |All |
+| Set up Scaffolding for all Models, Views, Controllers   |      | All    |  1 |
 +---------------------------------------------------------+------+--------+----+
-| Deploy rails on the server at 199.180.255.147           |    1 | Luke   |  7 |
-+---------------------------------------------------------+------+--------+----+
-| Create log-in system backend (verification, cookies,    |    5 | TBD    |  1 |
-| and redirection)                                        |      |        |    |
-+---------------------------------------------------------+------+--------+----+
-| Create log-in system UI (forms, CSS, and submission)    |    3 | TBD    |  1 |
-+---------------------------------------------------------+------+--------+----+
-| Set up SQL Database tables and relations (implement our |    5 | TBD    |All |
+| Set up SQL Database tables and relations (implement our |      | TBD    |  1 |
 | database schema)                                        |      |        |    |
 +---------------------------------------------------------+------+--------+----+
-| Create Preliminary Tournament Settings Page             |    5 | TBD    |  2 |
+| Deploy rails on the server at 199.180.255.147           |      | Luke   |  1 |
 +---------------------------------------------------------+------+--------+----+
-| Create Presentable Homepage                             |    3 | TBD    |  8 |
+| Peer review                                             |      | All    |  1 |
 +---------------------------------------------------------+------+--------+----+
-| Design/Code Scoring/Pairing Algorithms and Procedures   |    3 | TBD    |  2 |
+| Create log-in system backend (verification, cookies,    |      | TBD    |  2 |
+| and redirection)                                        |      |        |    |
 +---------------------------------------------------------+------+--------+----+
-| Implement Tournament Registration and Tournament        |    3 | TBD    |  2 |
+| Create log-in system UI (forms, CSS, and submission)    |      | TBD    |  2 |
++---------------------------------------------------------+------+--------+----+
+| Test it                                                 |      | TBD    |  2 |
++---------------------------------------------------------+------+--------+----+
+| Peer review                                             |      | TBD    |  2 |
++---------------------------------------------------------+------+--------+----+
+| Create Preliminary Tournament Settings Page             |      | TBD    |  3 |
++---------------------------------------------------------+------+--------+----+
+| Create Presentable Homepage                             |      | TBD    |  8 |
++---------------------------------------------------------+------+--------+----+
+| Design/Code Scoring/Pairing Algorithms and Procedures   |      | TBD    |  3 |
++---------------------------------------------------------+------+--------+----+
+| Implement Tournament Registration and Tournament        |      | TBD    |  2 |
 | Controller                                              |      |        |    |
 +---------------------------------------------------------+------+--------+----+
-|Create a Server Installer Package                        |    8 | TBD    |  5 |
+| Create View Tournament Page                             |      | TBD    |  6 |
 +---------------------------------------------------------+------+--------+----+
-|Create View Tournament Page                              |    5 | TBD    |  6 |
+| Create Admin-level Server Management Page               |      | TBD    |  4 |
 +---------------------------------------------------------+------+--------+----+
-|Create Admin-level Server Management Page                |    5 | TBD    |  4 |
+| Create a Player-level Data Entry Page/Method for Results|      | TBD    |  3 |
 +---------------------------------------------------------+------+--------+----+
-|Create a Player-level Data Entry Page/Method for Results |    5 | TBD    |  3 |
-+---------------------------------------------------------+------+--------+----+
-|Create User Registration and Verification System         |    5 | TBD    |  1 |
+| Create User Registration and Verification System        |      | TBD    |  1 |
 +---------------------------------------------------------+------+--------+----+
