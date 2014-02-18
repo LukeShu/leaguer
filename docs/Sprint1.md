@@ -25,6 +25,11 @@ author: [ Nathaniel Foy, Guntas Grewal, Tomer Kimia, Andrew Murrell, Luke Shumak
 
 # Tasks
 
+The "size" is using the modified Fibonacci scale.  A '1' is expected
+to take less than an hour.  A '3' is expected to take 3-6 hours.  A
+'5' should take the better part of a day or two.  An 8 should take
+several days.
+
 +---------------------------------------------------------+------+--------+----+
 | Task Description                                        | Size | Person | US |
 +=========================================================+======+========+====+
