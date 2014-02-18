@@ -28,42 +28,60 @@ author: [ Nathaniel Foy, Guntas Grewal, Tomer Kimia, Andrew Murrell, Luke Shumak
 +---------------------------------------------------------+------+--------+----+
 | Task Description                                        | Size | Person | US |
 +=========================================================+======+========+====+
-| Set up Scaffolding for all Models, Views, Controllers   |      | All    |  1 |
+| Learn Rails, set up Scaffolding for all Models, Views,  |    8 | All    |  1 |
+| Controllers                                             |      |        |    |
 +---------------------------------------------------------+------+--------+----+
-| Set up SQL Database tables and relations (implement our |      | TBD    |  1 |
-| database schema)                                        |      |        |    |
+| Deploy rails on the server at 199.180.255.147           |    3 | Luke   |  1 |
 +---------------------------------------------------------+------+--------+----+
-| Deploy rails on the server at 199.180.255.147           |      | Luke   |  1 |
+| Peer review                                             |    1 | All    |  1 |
 +---------------------------------------------------------+------+--------+----+
-| Peer review                                             |      | All    |  1 |
-+---------------------------------------------------------+------+--------+----+
-| Create log-in system backend (verification, cookies,    |      | TBD    |  2 |
+| Create log-in system backend (verification, cookies,    |    5 | Davis  |  2 |
 | and redirection)                                        |      |        |    |
 +---------------------------------------------------------+------+--------+----+
-| Create log-in system UI (forms, CSS, and submission)    |      | TBD    |  2 |
+| Create log-in system UI (forms, CSS, and submission)    |    2 | Tomer  |  2 |
 +---------------------------------------------------------+------+--------+----+
-| Test it                                                 |      | TBD    |  2 |
+| Test it                                                 |    1 | Foy    |  2 |
 +---------------------------------------------------------+------+--------+----+
-| Peer review                                             |      | TBD    |  2 |
+| Peer review                                             |    1 | All    |  2 |
 +---------------------------------------------------------+------+--------+----+
-| Create Preliminary Tournament Settings Page             |      | TBD    |  3 |
+| Create Preliminary Tournament Settings Page             |    3 | Guntas |  3 |
 +---------------------------------------------------------+------+--------+----+
-| Design/Code Scoring/Pairing Algorithms and Procedures   |      | TBD    |  3 |
+| Design/Code Scoring/Pairing Algorithms and Procedures   |    5 | Foy    |  3 |
 +---------------------------------------------------------+------+--------+----+
-| Implement Tournament Registration and Tournament        |      | TBD    |  3 |
+| Observe Foy Design/Code Scoring/Pairing Algorithms      |    2 | Dav+Foy|  3 |
++---------------------------------------------------------+------+--------+----+
+| Implement Tournament Registration and Tournament        |    2 | Andrew |  3 |
 | Controller                                              |      |        |    |
 +---------------------------------------------------------+------+--------+----+
-| Design and implement match score models                 |      | TBD    |  4 |
+| Test it                                                 |    1 | Andrew |  2 |
 +---------------------------------------------------------+------+--------+----+
-| Implement match controller                              |      | TBD    |  4 |
+| Peer review                                             |    1 | All    |  1 |
 +---------------------------------------------------------+------+--------+----+
-| Create a Player-level Data Entry Page/Method for Results|      | TBD    |  4 |
+| Design and implement match score models                 |    3 | Foy    |  4 |
 +---------------------------------------------------------+------+--------+----+
-| Implement permissions system over the users system      |      | TBD    |  5 |
+| Implement match controller                              |    3 | Dav+And|  4 |
 +---------------------------------------------------------+------+--------+----+
-| Create Admin-level Server Management Page               |      | TBD    |  5 |
+| Create a Player-level Data Entry Page/Method for Results|    3 | Tomer  |  4 |
 +---------------------------------------------------------+------+--------+----+
-| Create View Tournament Page                             |      | TBD    |  6 |
+| Test it                                                 |    1 | Andrew |  2 |
 +---------------------------------------------------------+------+--------+----+
-| Create Presentable Homepage                             |      | TBD    |  7 |
+| Peer review                                             |    1 | All    |  1 |
++---------------------------------------------------------+------+--------+----+
+| Implement permissions system over the users system      |    3 | Luke   |  5 |
++---------------------------------------------------------+------+--------+----+
+| Create Admin-level Server Management Page               |    2 | Luke   |  5 |
++---------------------------------------------------------+------+--------+----+
+| Test it                                                 |    1 | Tomer  |  2 |
++---------------------------------------------------------+------+--------+----+
+| Peer review                                             |    1 | All    |  1 |
++---------------------------------------------------------+------+--------+----+
+| Create View Tournament Page                             |    5 | All    |  6 |
++---------------------------------------------------------+------+--------+----+
+| Test it                                                 |    1 | All    |  2 |
++---------------------------------------------------------+------+--------+----+
+| Peer review                                             |    1 | All    |  1 |
++---------------------------------------------------------+------+--------+----+
+| Create Presentable Homepage                             |    5 | Guntas |  7 |
++---------------------------------------------------------+------+--------+----+
+| Peer review                                             |    1 | All    |  1 |
 +---------------------------------------------------------+------+--------+----+
