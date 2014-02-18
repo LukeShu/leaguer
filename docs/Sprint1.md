@@ -15,10 +15,13 @@ author: [ Nathaniel Foy, Guntas Grewal, Tomer Kimia, Andrew Murrell, Luke Shumak
    - For this task, we will be creating a base tournament system for a
      host to run.
 4) As a host/player, I would like to enter scores for players.
+	- For sprint own, the scores will be entered by hand.
 5) As an administrator, I want to specify how users become hosts.
 6) As a user I would like to see the progress of the tournament in my
    browser.
-7) As a user, I would like a purdy homepage.
+7) As a user, I would like a presentable homepage.
+	- For this task, we will be creating a Leaguer homepage and ensure that it
+	  is pleasing to the eye and easy to navigate.
 
 # Tasks
 
