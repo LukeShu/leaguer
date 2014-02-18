@@ -5,7 +5,9 @@ author: [ Nathaniel Foy, Guntas Grewal, Tomer Kimia, Andrew Murrell, Luke Shumak
 
 # User Stories
 
-1) As a developer, I would like a demo/testing server, with a basic Rails setup.
+1) As an administrator, I would like to install and boot my own server.
+   - Alternately: As a developer, I would like a demo/testing server,
+     with a basic Rails setup.
 2) As a host/player, I would like to register and have an account.
    - For this task, we will be creating the user registration and log
      in capabilities for Leaguer.
@@ -14,10 +16,9 @@ author: [ Nathaniel Foy, Guntas Grewal, Tomer Kimia, Andrew Murrell, Luke Shumak
      host to run.
 4) As a host/player, I would like to enter scores for players.
 5) As an administrator, I want to specify how users become hosts.
-6) As an administrator, I would like to install and boot my own server.
-7) As a user I would like to see the progress of the tournament in my
+6) As a user I would like to see the progress of the tournament in my
    browser.
-8) As a user, I would like a purdy homepage.
+7) As a user, I would like a purdy homepage.
 
 # Tasks
 
@@ -44,18 +45,22 @@ author: [ Nathaniel Foy, Guntas Grewal, Tomer Kimia, Andrew Murrell, Luke Shumak
 +---------------------------------------------------------+------+--------+----+
 | Create Preliminary Tournament Settings Page             |      | TBD    |  3 |
 +---------------------------------------------------------+------+--------+----+
-| Create Presentable Homepage                             |      | TBD    |  8 |
-+---------------------------------------------------------+------+--------+----+
 | Design/Code Scoring/Pairing Algorithms and Procedures   |      | TBD    |  3 |
 +---------------------------------------------------------+------+--------+----+
-| Implement Tournament Registration and Tournament        |      | TBD    |  2 |
+| Implement Tournament Registration and Tournament        |      | TBD    |  3 |
 | Controller                                              |      |        |    |
++---------------------------------------------------------+------+--------+----+
+| Design and implement match score models                 |      | TBD    |  4 |
++---------------------------------------------------------+------+--------+----+
+| Implement match controller                              |      | TBD    |  4 |
++---------------------------------------------------------+------+--------+----+
+| Create a Player-level Data Entry Page/Method for Results|      | TBD    |  4 |
++---------------------------------------------------------+------+--------+----+
+| Implement permissions system over the users system      |      | TBD    |  5 |
++---------------------------------------------------------+------+--------+----+
+| Create Admin-level Server Management Page               |      | TBD    |  5 |
 +---------------------------------------------------------+------+--------+----+
 | Create View Tournament Page                             |      | TBD    |  6 |
 +---------------------------------------------------------+------+--------+----+
-| Create Admin-level Server Management Page               |      | TBD    |  4 |
-+---------------------------------------------------------+------+--------+----+
-| Create a Player-level Data Entry Page/Method for Results|      | TBD    |  3 |
-+---------------------------------------------------------+------+--------+----+
-| Create User Registration and Verification System        |      | TBD    |  1 |
+| Create Presentable Homepage                             |      | TBD    |  7 |
 +---------------------------------------------------------+------+--------+----+
