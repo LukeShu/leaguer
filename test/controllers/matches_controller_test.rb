@@ -18,7 +18,7 @@ class MatchesControllerTest < ActionController::TestCase
 
   test "should create match" do
     assert_difference('Match.count') do
-      post :create, match: {  }
+      post :create, match: { tournament: @match.tournament }
     end
 
     assert_redirected_to match_path(assigns(:match))
@@ -35,7 +35,7 @@ class MatchesControllerTest < ActionController::TestCase
   end
 
   test "should update match" do
-    patch :update, id: @match, match: {  }
+    patch :update, id: @match, match: { tournament: @match.tournament }
     assert_redirected_to match_path(assigns(:match))
   end
 

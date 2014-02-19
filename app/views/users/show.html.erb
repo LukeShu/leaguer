@@ -1,4 +1,19 @@
 <p id="notice"><%= notice %></p>
 
+<p>
+  <strong>Name:</strong>
+  <%= @user.name %>
+</p>
+
+<p>
+  <strong>Pw hash:</strong>
+  <%= @user.pw_hash %>
+</p>
+
+<p>
+  <strong>Groups:</strong>
+  <%= @user.groups %>
+</p>
+
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
