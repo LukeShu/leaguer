@@ -2,10 +2,10 @@
 
 one:
   name: MyText
-  pw_hash: 
-  groups: 
+  pw_hash: MyText
+  groups: 1
 
 two:
   name: MyText
-  pw_hash: 
-  groups: 
+  pw_hash: MyText
+  groups: 1

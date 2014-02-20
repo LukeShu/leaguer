@@ -18,7 +18,7 @@ class AlertsControllerTest < ActionController::TestCase
 
   test "should create alert" do
     assert_difference('Alert.count') do
-      post :create, alert: { author: @alert.author, message: @alert.message }
+      post :create, alert: { author_id: @alert.author_id, message: @alert.message }
     end
 
     assert_redirected_to alert_path(assigns(:alert))
@@ -35,7 +35,7 @@ class AlertsControllerTest < ActionController::TestCase
   end
 
   test "should update alert" do
-    patch :update, id: @alert, alert: { author: @alert.author, message: @alert.message }
+    patch :update, id: @alert, alert: { author_id: @alert.author_id, message: @alert.message }
     assert_redirected_to alert_path(assigns(:alert))
   end
 

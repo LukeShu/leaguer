@@ -18,7 +18,7 @@ class PmsControllerTest < ActionController::TestCase
 
   test "should create pm" do
     assert_difference('Pm.count') do
-      post :create, pm: { author: @pm.author, message: @pm.message, recipient: @pm.recipient }
+      post :create, pm: { author_id: @pm.author_id, message: @pm.message, recipient_id: @pm.recipient_id }
     end
 
     assert_redirected_to pm_path(assigns(:pm))
@@ -35,7 +35,7 @@ class PmsControllerTest < ActionController::TestCase
   end
 
   test "should update pm" do
-    patch :update, id: @pm, pm: { author: @pm.author, message: @pm.message, recipient: @pm.recipient }
+    patch :update, id: @pm, pm: { author_id: @pm.author_id, message: @pm.message, recipient_id: @pm.recipient_id }
     assert_redirected_to pm_path(assigns(:pm))
   end
 
