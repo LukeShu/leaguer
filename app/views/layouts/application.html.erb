@@ -7,8 +7,19 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<header>
+	<h1 id="logo"> Leaguer </h1>
+	<%= form_tag("/search", method: "get", :id => "search-bar") do %>
+		<%= text_field_tag(:query, nil, :placeholder => "Search") %>
+		<%= submit_tag("Go") %> 
+	<% end %>
+</header>
 
 <%= yield %>
+
+<footer >
+<p> Tomer Kimia Andrew Murrell Luke Shumaker Nathaniel Foy Davis Webb Guntas Grewal </p> 
+<p> The Leaguer System &#169; <%= Time.now.year %> </p> </footer>
 
 </body>
 </html>
