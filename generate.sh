@@ -10,7 +10,7 @@
 
 set -x
 bundle exec rails generate scaffold server
-bundle exec rails generate scaffold tournament
+bundle exec rails generate scaffold tournament game:references
 bundle exec rails generate scaffold match tournament:references
 bundle exec rails generate scaffold team 
 bundle exec rails generate scaffold user name:text pw_hash:text groups:integer 
