@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140304015005) do
+ActiveRecord::Schema.define(version: 20140304015042) do
 
   create_table "alerts", force: true do |t|
     t.integer  "author_id"
@@ -21,6 +21,22 @@ ActiveRecord::Schema.define(version: 20140304015005) do
   end
 
   add_index "alerts", ["author_id"], name: "index_alerts_on_author_id"
+
+  create_table "game_attributes", force: true do |t|
+    t.integer  "game_id"
+    t.text     "key"
+    t.integer  "type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "game_attributes", ["game_id"], name: "index_game_attributes_on_game_id"
+
+  create_table "games", force: true do |t|
+    t.text     "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "matches", force: true do |t|
     t.integer  "tournament_id"

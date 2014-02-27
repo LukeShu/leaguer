@@ -1,4 +1,6 @@
 Leaguer::Application.routes.draw do
+  resources :games
+
   resources :pms
 
   resources :alerts
