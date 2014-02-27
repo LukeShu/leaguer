@@ -5,3 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+#
+league = Game.create([{name: "League of Legends"}, {players_per_team: 5}, {teams_per_match: 2}, {set_rounds: 1}, {randomized_teams: 0}])
+
+
