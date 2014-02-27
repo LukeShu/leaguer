@@ -18,7 +18,7 @@ bundle exec rails generate model user_team_pair user:references team:references
 bundle exec rails generate model team_match_pair team:references match:references
 bundle exec rails generate scaffold alert author:references message:text
 bundle exec rails generate scaffold pm author:references recipient:references message:text
-bundle exec rails generate scaffold game name:text
+bundle exec rails generate scaffold game name:text players_per_team:integer teams_per_match:integer set_rounds:integer randomized_teams:integer
 bundle exec rails generate model game_attribute game:references key:text type:integer
 bundle exec rails generate model server_settings
 bundle exec rails generate controller search

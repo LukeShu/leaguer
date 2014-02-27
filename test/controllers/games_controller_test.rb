@@ -18,7 +18,7 @@ class GamesControllerTest < ActionController::TestCase
 
   test "should create game" do
     assert_difference('Game.count') do
-      post :create, game: { name: @game.name }
+      post :create, game: { name: @game.name, players_per_team: @game.players_per_team, randomized_teams: @game.randomized_teams, set_rounds: @game.set_rounds, teams_per_match: @game.teams_per_match }
     end
 
     assert_redirected_to game_path(assigns(:game))
@@ -35,7 +35,7 @@ class GamesControllerTest < ActionController::TestCase
   end
 
   test "should update game" do
-    patch :update, id: @game, game: { name: @game.name }
+    patch :update, id: @game, game: { name: @game.name, players_per_team: @game.players_per_team, randomized_teams: @game.randomized_teams, set_rounds: @game.set_rounds, teams_per_match: @game.teams_per_match }
     assert_redirected_to game_path(assigns(:game))
   end
 

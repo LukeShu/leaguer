@@ -2,6 +2,14 @@
 
 one:
   name: MyText
+  players_per_team: 1
+  teams_per_match: 1
+  set_rounds: 1
+  randomized_teams: 1
 
 two:
   name: MyText
+  players_per_team: 1
+  teams_per_match: 1
+  set_rounds: 1
+  randomized_teams: 1
