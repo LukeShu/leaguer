@@ -1,6 +1,9 @@
 #!/bin/bash
 
-#
+# The generate.sh bash file is used to generate all of the necessary .rb files to run the website
+# 
+
+
 # To Start Rails Server:
 #   bundle exec rails server
 #
