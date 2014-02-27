@@ -4,7 +4,8 @@
 # To Start Rails Server:
 #   bundle exec rails server
 #
-#
+# To Clear the Generated Files:
+#   
 #
 
 set -x
@@ -20,6 +21,11 @@ bundle exec rails generate scaffold pm author:references recipient:references me
 bundle exec rails generate model server_settings
 bundle exec rails generate controller search
 bundle exec rails generate controller main
+
+#for the tournament controller to generate options
+bundle exec rails generate model tournament_options
+
 bundle exec rake db:drop RAILS_ENV=development
 bundle exec rake db:migrate RAILS_ENV=development
+
 #bundle exec rails generate scaffold 
