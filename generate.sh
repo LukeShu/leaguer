@@ -29,5 +29,5 @@ bundle exec rails generate model tournament_options
 
 bundle exec rake db:drop RAILS_ENV=development
 bundle exec rake db:migrate RAILS_ENV=development
-
+bundle exec rake db:seed
 #bundle exec rails generate scaffold 
