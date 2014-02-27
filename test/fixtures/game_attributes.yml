@@ -2,6 +2,10 @@
 
 one:
   game_id: 
+  key: MyText
+  type: 1
 
 two:
   game_id: 
+  key: MyText
+  type: 1
