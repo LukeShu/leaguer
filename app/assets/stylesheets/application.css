@@ -9,5 +9,16 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require_tree .
+ *= require_tree
+
  */
+
+#query{
+	background-color: #888;
+	border: 2px solid #ED9C28;
+	border-radius: 5px;
+	color: #FFF;
+	font-weight: bold;
+	height: 30px;
+
+}
