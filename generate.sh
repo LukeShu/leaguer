@@ -18,6 +18,7 @@ bundle exec rails generate scaffold tournament game:references $NOTEST
 bundle exec rails generate scaffold match tournament:references $NOTEST
 bundle exec rails generate scaffold team $NOTEST
 bundle exec rails generate controller users $NOTEST
+bundle exec rails generate controller Sessions
 bundle exec rails generate model user name:string email:string user_name:string $NOTEST
 bundle exec rails generate model user_team_pair user:references team:references $NOTEST
 bundle exec rails generate model team_match_pair team:references match:references $NOTEST
