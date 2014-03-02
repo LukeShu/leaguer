@@ -9,7 +9,9 @@
 <body>
 <div role="navigation" class="navbar navbar-inverse">
 <header>
-	<div class="navbar-brand"> Leaguer </div>
+	<div class="navbar-brand no-dec"> 
+	<%= link_to('Leaguer', '/', nil) %>
+	</div>
 	<div>
 	<%= form_tag("/search", method: "get", :class => "navbar-form navbar-right") do %>
 		<%= text_field_tag(:query, nil, :placeholder => "Search") %>
@@ -26,6 +28,6 @@
 <footer id="footer">
 <p> Tomer Kimia Andrew Murrell Luke Shumaker Nathaniel Foy Davis Webb Guntas Grewal </p> 
 <p> The Leaguer System &#169; <%= Time.now.year %> </p> </footer>
-
+ <%= debug(params) if Rails.env.development? %>
 </body>
 </html>
