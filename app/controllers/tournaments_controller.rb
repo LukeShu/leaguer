@@ -14,7 +14,7 @@ class TournamentsController < ApplicationController
 
   # GET /tournaments/new
   def new
-    @game_names = Game.all
+    @game_names = Game.all.collect
     @tournament = Tournament.new
   end
 
