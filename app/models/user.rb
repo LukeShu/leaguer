@@ -5,6 +5,14 @@ before_save { self.user_name = user_name.downcase }
 
 =begin
 
+Rails looks for the create_remember_token
+and runs it before anything else
+=end
+
+before_create :create_remember_token
+
+=begin
+
 VAILD_EMAIL is the regex used to valid a user given email.
 
 A break down of the regex is listed below.
@@ -71,6 +79,38 @@ has_secure_password which does all of this for me
 	has_secure_password
 
 	validates :password, length: { minimum: 6 }
+
+	# create a random remember token for the user
+  def User.new_remember_token
+    SecureRandom.urlsafe_base64
+  end
+	
+	# encrypt the remember token
+  def User.hash(token)
+    Digest::SHA1.hexdigest(token.to_s)
+  end
+
+=begin
+
+SHA-1 (Secure Hash Algorithm) is a US engineered hash
+function that produces a 20 byte hash value which typically
+forms a hexadecimal number 40 digits long. 
+The reason I am not using the Bcrypt algorithm is because
+SHA-1 is much faster and I will be calling this on
+every page a user accesses.
+
+https://en.wikipedia.org/wiki/SHA-1
+
+=end
+
+	# everything under private is hidden so you cannot call
+	# create_remember_token in order to ensure security
+	private
+		
+		#assign user a create remember token
+		  def create_remember_token
+		    self.remember_token = User.hash(User.new_remember_token)
+		  end
 
 =begin
 

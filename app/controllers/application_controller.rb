@@ -4,6 +4,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 	
 	#include sessionhelper for the session controller and view
-	include SessionHelper
+	include SessionsHelper
 
 end
