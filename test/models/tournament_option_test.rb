@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class TournamentOptionsTest < ActiveSupport::TestCase
+class TournamentOptionTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

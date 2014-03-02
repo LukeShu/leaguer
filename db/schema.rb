@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140304015517) do
+ActiveRecord::Schema.define(version: 20140304015559) do
 
   create_table "alerts", force: true do |t|
     t.integer  "author_id"
@@ -110,9 +110,9 @@ ActiveRecord::Schema.define(version: 20140304015517) do
   add_index "user_team_pairs", ["user_id"], name: "index_user_team_pairs_on_user_id"
 
   create_table "users", force: true do |t|
-    t.text     "name"
-    t.text     "pw_hash"
-    t.integer  "groups"
+    t.string   "name"
+    t.string   "email"
+    t.string   "user_name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

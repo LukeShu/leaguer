@@ -5,8 +5,6 @@ Leaguer::Application.routes.draw do
 
   resources :alerts
 
-  resources :users
-
   resources :teams
 
   resources :matches
