@@ -1,4 +1,9 @@
-*.pdf
+/api
+/app
+/guides
+
 *.html
+*.pdf
 *.png
-!stickman.png
+
+!/stickman.png
