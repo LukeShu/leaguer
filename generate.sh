@@ -28,6 +28,7 @@ bundle exec rails generate model game_attribute game:references key:text type:in
 bundle exec rails generate model server_settings $NOTEST
 bundle exec rails generate controller search $NOTEST
 bundle exec rails generate controller main $NOTEST
+bundle exec rails generate controller static $NOTEST
 
 #for the tournament controller to generate options
 bundle exec rails generate model tournament_option $NOTEST
