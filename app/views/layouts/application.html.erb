@@ -23,7 +23,9 @@
 		<li> <%= current_user.user_name.upcase %> </li>
 	<% end %>
      <li>
-      <%= link_to "Sign out", signout_path, method: "delete" %>
+      <%= if signed_in? do %>
+      	<%= link_to "Sign out", signout_path, method: "delete" %>
+      <% end; end %>
      </li>
 </header>
     </div>
