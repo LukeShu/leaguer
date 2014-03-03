@@ -5,8 +5,11 @@ before_save { self.user_name = user_name.downcase }
 
 =begin
 
-Rails looks for the create_remember_token
-and runs it before anything else
+Rails looks for the create_remember_token and runs the method
+before anything else.
+
+This method cannot be called by a user since it is denoted
+as private.
 
 =end
 
@@ -18,17 +21,17 @@ VAILD_EMAIL is the regex used to valid a user given email.
 
 A break down of the regex is listed below.
 
-/ -----------> Start of the regex
-\A ----------> match start of a string
-[\w+\-.]+ ---> at least one owrd character, plus, hyphen, or 
-			   dot
-@ -----------> literal ampersand
-[a-z\d\-.]+ -> at least one letter, digit, hyphen, or dot
-(?:\.[a-z]+) > ensures that the error of example@foo..com
-							 does not occur
-\z ----------> match end of a string
-/ -----------> end of the regex
-i -----------> case sensative
+/ -------------> Start of the regex
+\A ------------> match start of a string
+[\w+\-.]+ -----> at least one owrd character, plus, hyphen, or 
+			           dot
+@ -------------> literal ampersand
+[a-z\d\-.]+ ---> at least one letter, digit, hyphen, or dot
+(?:\.[a-z]+) --> ensures that the error of example@foo..com
+							   does not occur
+\z ------------> match end of a string
+/ -------------> end of the regex
+i -------------> case sensative
 
 =end
 		
@@ -73,7 +76,7 @@ attributes, requiring the presence of a password,
 requirin that pw and pw_com match, and add an authenticate
 method to compare an encrypted password to the
 password_digest to authenticate users, I can just add
-has_secure_password which does all of this for me
+has_secure_password which does all of this for me.
 
 =end
 
@@ -128,25 +131,27 @@ https://en.wikipedia.org/wiki/SHA-1
 
 =end
 
-	# Everything under private is hidden so you cannot call
+	# Everything under private is hidden so you cannot call.
 	private
-		
-	# Create_remember_token in order to ensure a user always has
-	# a remember token.
 
-		# Assign user a create remember token
+=begin		
+
+  Create_remember_token in order to ensure a user always has
+  a remember token.
+
+=end
 		  def create_remember_token
 		    self.remember_token = User.hash(User.new_remember_token)
 		  end
 
 =begin
 
-in order to ensure that someone did not accidently submit
+In order to ensure that someone did not accidently submit
 two accounts rapidly (which would throw off the validates 
-for user_name and email) I added an index to the Users 
+for user_name and email), I added an index to the Users 
 email and user_name in the database to ensure uniqueness
 This also gives and index to the user_name and email
-so finding a unique user SHOULD be easier
+so finding a user SHOULD be easier for the database.
 
 =end
 
