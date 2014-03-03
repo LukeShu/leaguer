@@ -128,11 +128,13 @@ https://en.wikipedia.org/wiki/SHA-1
 
 =end
 
-	# everything under private is hidden so you cannot call
-	# create_remember_token in order to ensure security
+	# Everything under private is hidden so you cannot call
 	private
 		
-		#assign user a create remember token
+	# Create_remember_token in order to ensure a user always has
+	# a remember token.
+
+		# Assign user a create remember token
 		  def create_remember_token
 		    self.remember_token = User.hash(User.new_remember_token)
 		  end
