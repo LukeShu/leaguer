@@ -7,6 +7,7 @@ before_save { self.user_name = user_name.downcase }
 
 Rails looks for the create_remember_token
 and runs it before anything else
+
 =end
 
 before_create :create_remember_token
