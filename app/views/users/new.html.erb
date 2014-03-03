@@ -1,5 +1,6 @@
 <h1> Sign Up </h1>
 
+<% if false %>
 <%= form_for :user do |f| %>
   <p>
     <%= f.label :name %><br>
@@ -25,3 +26,32 @@
     <%= f.submit %>
   </p>
 <% end %>
+
+
+<% end %>
+
+<form accept-charset="UTF-8" action="/users" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="6WQoPLFISlDYCsi4LhAgT0hgrht19yydD3w5TlKfb7I=" /></div>
+  <p>
+    <label for="user_name">Name</label><br>
+    <input id="user_name" name="user[name]" type="text" />
+  </p>
+ <p>
+    <label for="user_email">Email</label><br>
+    <input id="user_email" name="user[email]" type="text" />
+  </p>
+  <p>
+    <label for="user_user_name">User name</label><br>
+    <input id="user_user_name" name="user[user_name]" type="text" />
+  </p>
+   <p>
+    <label for="user_password">Password</label><br>
+    <input id="user_password" name="user[password]" type="text" />
+  </p>
+  <p>
+    <label for="user_password_confirm">Password confirm</label><br>
+    <input id="user_password_confirmation" name="user[password_confirmation]" type="text" />
+  </p>
+  <p>
+    <input name="commit" type="submit" value="Save User" />
+  </p>
+</form>
