@@ -15,7 +15,7 @@ NOTEST='--skip-test-unit'
 set -x
 bundle exec rails generate scaffold server --force $NOTEST
 bundle exec rails generate scaffold tournament game:references --force $NOTEST
-bundle exec rails generate scaffold match tournament:references --force $NOTEST
+bundle exec rails generate scaffold match tournament:references name:string --force $NOTEST
 bundle exec rails generate scaffold team $NOTEST
 bundle exec rails generate controller users $NOTEST
 bundle exec rails generate controller Sessions

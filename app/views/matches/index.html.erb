@@ -4,6 +4,7 @@
   <thead>
     <tr>
       <th>Tournament</th>
+      <th>Name</th>
       <th></th>
       <th></th>
       <th></th>
@@ -14,6 +15,7 @@
     <% @matches.each do |match| %>
       <tr>
         <td><%= match.tournament %></td>
+        <td><%= match.name %></td>
         <td><%= link_to 'Show', match %></td>
         <td><%= link_to 'Edit', edit_match_path(match) %></td>
         <td><%= link_to 'Destroy', match, method: :delete, data: { confirm: 'Are you sure?' } %></td>
