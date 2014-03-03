@@ -18,8 +18,15 @@
 		<%= submit_tag("Go", {:class => "btn btn-warning"}) %> 
 	<% end %>
 	</div>
+     <li>
+      <%= link_to "Sign out", signout_path, method: "delete" %>
+     </li>
 </header>
     </div>
+
+	<% if signed_in? %>
+		<li> <%= current_user.user_name %> </li>
+	<% end %>
 
 <div class="container"> 
 <%= yield %>
