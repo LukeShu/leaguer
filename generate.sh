@@ -31,6 +31,13 @@ bundle exec rails generate controller search $NOTEST
 bundle exec rails generate controller main $NOTEST
 bundle exec rails generate controller static $NOTEST
 
+#added some stuff to the database
+
+rails generate migration add_index_to_user_email
+rails generate migration add_index_to_user_name
+rails generate migration add_password_digest_to_users
+rails generate migration add_remember_token_to_users
+
 #for the tournament controller to generate options
 bundle exec rails generate model tournament_option $NOTEST
 
