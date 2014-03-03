@@ -81,12 +81,36 @@ has_secure_password which does all of this for me
 
 	validates :password, length: { minimum: 6 }
 
-	# create a random remember token for the user
+=begin
+
+	Create a random remember token for the user. This will be
+  changed every time the user creates a new session.
+
+	By changing the cookie every new session, any hijacked sessions
+	(where the attacker steals a cookie to sign in as a certain 
+	user) will expire the next time the user signs back in.
+ 
+  The random string is of length 16 composed of A-Z, a-z, 0-9
+	This is the browser's cookie value.
+
+=end
+ 
   def User.new_remember_token
     SecureRandom.urlsafe_base64
   end
-	
-	# encrypt the remember token
+
+=begin
+
+	Encrypt the remember token.
+	This is the encrypted version of the cookie stored on
+  the database.
+
+	The reasoning for storing a hashed token is so that even if
+	the database is compromised, the atacker won't be able to use
+	the remember tokens to sign in.
+
+=end
+
   def User.hash(token)
     Digest::SHA1.hexdigest(token.to_s)
   end
