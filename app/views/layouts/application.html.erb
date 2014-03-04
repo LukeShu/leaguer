@@ -16,15 +16,16 @@
 			<%= submit_tag("Go", {:class => "btn btn-warning"}) %>
 		<% end %>
 	</div>
-	<ul>
+
+	<div id="log-buttons">
 		<% if signed_in? %>
-			<li><%= current_user.user_name.upcase %></li>
-			<li><%= link_to "Sign out", session_path("current"), method: "delete" %></li>
+			<%= current_user.user_name.upcase %>
+			<button type="button" class="btn btn-danger" ><%= link_to "Sign out", session_path("current"), method: "delete" %></button>
 		<% else %>
-			<li><%= link_to "Log in", new_session_path %></li>
-			<li><%= link_to "Sign up", new_user_path %></li>
+			<button type="button" class="btn btn-info" ><%= link_to "Log in", new_session_path %></button>
+			<button type="button" class="btn btn-success"><%= link_to "Sign up", new_user_path %></button>
 		<% end %>
-	</ul>
+	</div>
 </nav></header>
 
 <% if notice %><div id="notice"><p><%= notice %></p></div><% end %>
