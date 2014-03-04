@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
 		respond_to do |format|
 			if @user && @user.authenticate(params[:session][:password])
 				sign_in @user
-				redirect_to root_path
+				format.html { redirect_to root_path }
 			else
         		format.html { render action: 'new' }
         		format.json { render json: @user.errors, status: :unprocessable_entity }
