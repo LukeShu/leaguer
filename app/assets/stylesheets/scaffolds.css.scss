@@ -25,10 +25,10 @@ pre {
 a {
   color: #000;
   &:visited {
-    color: white;
+    color: #000;
   }
   &:hover {
-      color: white;
+      color: green;
       text-decoration: none;
   }
 }
