@@ -1,13 +1,9 @@
 body {
-  background-color: #EEEEEE;
+  background-color: #fff;
   color: #333;
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
   line-height: 18px;
-
-  h1, h2, h3, h4, h5{
-    color: #0f0f0f;
-  }
 }
 
 p, ol, ul, td {
@@ -70,20 +66,4 @@ div {
     font-size: 12px;
     list-style: square;
   }
-}
-
-hr {
-  -moz-border-bottom-colors: none;
-  -moz-border-image: none;
-  -moz-border-left-colors: none;
-  -moz-border-right-colors: none;
-  -moz-border-top-colors: none;
-  border-color: #999 -moz-use-text-color #FFFFFF;
-  border-style: solid none;
-  border-width: 1px 0;
-  margin: 18px 0;
-}
-
-#footer{
-  text-align: center;
 }
