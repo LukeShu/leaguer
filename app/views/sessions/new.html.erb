@@ -1,5 +1,7 @@
 <h1>Sign in</h1>
-
+<% if @fail %>
+  <p class="error">Email and password combination not found</p>
+<% end %>
 <div class="row">
   <div class="span6 offset3">
     <%= form_for(:session, url: sessions_path) do |f| %>
