@@ -13,11 +13,10 @@
 	<div class="navbar-brand no-dec"> 
 	<%= link_to('Leaguer', '/', nil) %>
 	</div>
+	
+	<a id="log-out-btn" class="btn btn-warning navbar-left" href="/signout" role="button" style="margin-top: 9px;"> Log Out</a>
+	
 	<div>
-	<% if signed_in? %>
-		<a class="btn btn-warning" href="/signout" role="button">
-			Log Out </a>
-	<% end %>
 	<%= form_tag("/search", method: "get", :class => "navbar-form navbar-right") do %>
 		<%= text_field_tag(:query, nil, :placeholder => "Search") %>
 
