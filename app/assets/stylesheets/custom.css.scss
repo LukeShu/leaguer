@@ -1,1 +1,6 @@
 @import "bootstrap";
+
+header > nav {
+	@extend .navbar;
+	@extend .navbar-inverse;
+}

@@ -8,8 +8,7 @@
   <%= yield :head %>
 </head>
 <body>
-<div role="navigation" class="navbar navbar-inverse">
-<header>
+<header><nav>
 	<div class="navbar-brand no-dec"><%= link_to('Leaguer', root_path, nil) %></div>
 	<div>
 		<%= form_tag("/search", method: "get", :class => "navbar-form navbar-right") do %>
@@ -26,8 +25,7 @@
 			<li><%= link_to "Sign up", new_user_path %></li>
 		<% end %>
 	</ul>
-</header>
-</div>
+</nav></header>
 
 <% if notice %><div id="notice"><p><%= notice %></p></div><% end %>
 
