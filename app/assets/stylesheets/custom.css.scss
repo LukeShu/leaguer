@@ -1,6 +1,10 @@
 @import "bootstrap";
 
 header > nav {
-	@extend .navbar;
+	@extend .navbar; 
 	@extend .navbar-inverse;
+	color: white;	
+}
+header > nav > #log-buttons{
+	margin-top: 8px;
 }
