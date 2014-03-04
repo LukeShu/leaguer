@@ -1,0 +1,17 @@
+<p>
+  <strong>Author:</strong>
+  <%= @pm.author %>
+</p>
+
+<p>
+  <strong>Recipient:</strong>
+  <%= @pm.recipient %>
+</p>
+
+<p>
+  <strong>Message:</strong>
+  <%= @pm.message %>
+</p>
+
+<%= link_to 'Edit', edit_pm_path(@pm) %> |
+<%= link_to 'Back', pms_path %>

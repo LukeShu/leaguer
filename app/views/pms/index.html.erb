@@ -1,0 +1,31 @@
+<h1>Listing pms</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Author</th>
+      <th>Recipient</th>
+      <th>Message</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pms.each do |pm| %>
+      <tr>
+        <td><%= pm.author %></td>
+        <td><%= pm.recipient %></td>
+        <td><%= pm.message %></td>
+        <td><%= link_to 'Show', pm %></td>
+        <td><%= link_to 'Edit', edit_pm_path(pm) %></td>
+        <td><%= link_to 'Destroy', pm, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Pm', new_pm_path %>
