@@ -1,11 +1,7 @@
 Leaguer::Application.routes.draw do
 
-	#creates sessions as a resource but limits it to these actions
-	resources :sessions, only: [:new, :create, :destroy]
-
-	match '/signup', to: 'users#new', via: 'get'
-	match '/signin', to: 'sessions#new', via: 'get'
-	match '/signout', to: 'sessions#destroy', via: 'get'
+  #creates sessions as a resource but limits it to these actions
+  resources :sessions, only: [:new, :create, :destroy]
 
   resources :users
 

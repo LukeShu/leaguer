@@ -19,14 +19,15 @@
 		<%= submit_tag("Go", {:class => "btn btn-warning"}) %> 
 	<% end %>
 	</div>
-	<% if signed_in? %>
-		<li> <%= current_user.user_name.upcase %> </li>
-	<% end %>
-     <li>
-      <%= if signed_in? do %>
-      	<%= link_to "Sign out", signout_path, method: "delete" %>
-      <% end; end %>
-     </li>
+	<ul>
+		<% if signed_in? %>
+			<li><%= current_user.user_name.upcase %></li>
+			<li><%= link_to "Sign out", session_path("current"), method: "delete" %></li>
+		<% else %>
+			<li><%= link_to "Log in", new_session_path %></li>
+			<li><%= link_to "Sign up", new_user_path %></li>
+		<% end %>
+	</ul>
 </header>
     </div>
 
