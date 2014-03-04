@@ -14,8 +14,13 @@
 	<%= link_to('Leaguer', '/', nil) %>
 	</div>
 	<div>
+	<% if signed_in? %>
+		<a class="btn btn-warning" href="/signout" role="button">
+			Log Out </a>
+	<% end %>
 	<%= form_tag("/search", method: "get", :class => "navbar-form navbar-right") do %>
 		<%= text_field_tag(:query, nil, :placeholder => "Search") %>
+
 		<%= submit_tag("Go", {:class => "btn btn-warning"}) %> 
 	<% end %>
 	</div>
