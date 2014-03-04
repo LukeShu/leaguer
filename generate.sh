@@ -37,8 +37,8 @@ bundle exec rails generate controller sessions
 
 #added some stuff to the database
 
-bundle exec rails generate migration add_index_to_user_email
-bundle exec rails generate migration add_index_to_user_name
+bundle exec rails generate migration add_index_to_users_email
+bundle exec rails generate migration add_index_to_users_user_name
 bundle exec rails generate migration add_password_digest_to_users
 bundle exec rails generate migration add_remember_token_to_users
 
@@ -46,8 +46,8 @@ bundle exec rails generate migration add_remember_token_to_users
 bundle exec rails generate model tournament_option $NOTEST
 #bundle exec rails generate scaffold
 
-git add app test config/routes.rb db/migrate db/schema.rb
-
 bundle exec rake db:drop RAILS_ENV=development
 bundle exec rake db:migrate RAILS_ENV=development
 bundle exec rake db:seed
+
+git add app test config/routes.rb db/migrate db/schema.rb
