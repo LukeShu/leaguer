@@ -7,8 +7,11 @@
         <% if !signed_in? %>
         <%= link_to 'Log In', "/signin", :class => "btn btn-warning btn-lg", :role => "button" %> 
         <%= link_to 'Sign Up', "/signup", :class => "btn btn-warning btn-lg", :role => "button" %>
+        <% else %>
+        <%= link_to 'Start a Tournament', new_tournament_path, :class => "btn btn-warning btn-lg", :role => "button" %> 
         <% end %>
         <%= link_to 'See Ongoing Tournaments', tournaments_path, :class => "btn btn-warning btn-lg", :role => "button" %>
+
          </p>
       </div>
 
