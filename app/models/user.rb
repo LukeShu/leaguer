@@ -12,13 +12,13 @@ class User < ActiveRecord::Base
 	before_create :create_remember_token
 
 	##
-	# VAILD_EMAIL is the regex used to valid a user given email.
+	# VAILD_EMAIL is the regex used to validate a user given email.
 	#
 	# A break down of the regex is listed below.
 	#
 	#     / -------------> Start of the regex
 	#     \A ------------> match start of a string
-	#     [\w+\-.]+ -----> at least one owrd character, plus, hyphen,
+	#     [\w+\-.]+ -----> at least one word character, plus, hyphen,
 	#                      or dot
 	#     @ -------------> literal ampersand
 	#     [a-z\d\-.]+ ---> at least one letter, digit, hyphen, or dot
@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
 	#                      does not occur
 	#     \z ------------> match end of a string
 	#     / -------------> end of the regex
-	#     i -------------> case insensative
+	#     i -------------> case insensitive
 	VALID_EMAIL_REG = /\A[\w+\-.]+@[a-z\d\-.]+(?:\.[a-z]+)\z/i
 
 	##
@@ -35,11 +35,11 @@ class User < ActiveRecord::Base
 	VALID_USER_NAME_REG = /[a-zA-Z0-9\-]/
 
 	##
-	# The following lines put a user accout through a series of
+	# The following lines put a user account through a series of
 	# validations in order to make sure all of their information
 	# is in the proper format.
 	#
-	#     validates :symbol_to_be_valided
+	#     validates :symbol_to_be_validated
 	#
 	# - presence: determines whether or not a symbol is filled or not
 	# - length: ensures there is a length limit on the symbol
@@ -56,7 +56,7 @@ class User < ActiveRecord::Base
 	##
 	# Instead of adding password and password_confirmation
 	# attributes, requiring the presence of a password,
-	# requirin that pw and pw_com match, and add an authenticate
+	# requiring that pw and pw_com match, and add an authenticate
 	# method to compare an encrypted password to the
 	# password_digest to authenticate users, I can just add
 	# has_secure_password which does all of this for me.
@@ -84,7 +84,7 @@ class User < ActiveRecord::Base
 	# the database.
 	#
 	# The reasoning for storing a hashed token is so that even if
-	# the database is compromised, the atacker won't be able to use
+	# the database is compromised, the attacker won't be able to use
 	# the remember tokens to sign in.
 	def User.hash(token)
 		Digest::SHA1.hexdigest(token.to_s)
@@ -112,7 +112,7 @@ class User < ActiveRecord::Base
 	end
 
 	##
-	# In order to ensure that someone did not accidently submit
+	# In order to ensure that someone did not accidentally submit
 	# two accounts rapidly (which would throw off the validates
 	# for user_name and email), I added an index to the Users
 	# email and user_name in the database to ensure uniqueness
