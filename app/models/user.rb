@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
 
 	before_save { self.email = email.downcase }
-	before_save { self.user_name = user_name.downcase }
+	before_save { self.user_name = user_name }
 
 	##
 	# Rails looks for the create_remember_token and runs the method
