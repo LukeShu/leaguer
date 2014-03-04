@@ -1,6 +1,6 @@
 <h1>Sign in</h1>
-<% if @fail %>
-  <p class="error">Email and password combination not found</p>
+<% if @user.nil? %>
+  <p class="errors">  The username or password is incorrect. Verify that CAPS LOCK is not on, and then retype the current username and password. </p>
 <% end %>
 <div class="row">
   <div class="span6 offset3">
