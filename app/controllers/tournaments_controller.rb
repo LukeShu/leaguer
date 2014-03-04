@@ -15,17 +15,12 @@ class TournamentsController < ApplicationController
   # GET /tournaments/new
   def new
     @game_names = Game.all.collect
+    @game = params[:game]
     @tournament = Tournament.new
   end
 
   # GET /tournaments/1/edit
   def edit
-  end
-
-  def selected
-    render :update do |page|
-      page.replace_html 'ajax-form', :partial => 'selected'
-    end
   end
 
   # POST /tournaments
@@ -76,6 +71,6 @@ class TournamentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tournament_params
-      params.require(:tournament).permit(:game_id)
+      params.require(:tournament).permit(:game_id, :game)
     end
 end

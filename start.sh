@@ -1,4 +1,4 @@
 #!/bin/bash
 
-nohup bundle exec rails server &
+bundle exec rails server --daemon
 
