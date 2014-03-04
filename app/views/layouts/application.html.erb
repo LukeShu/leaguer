@@ -20,10 +20,11 @@
 	<div id="log-buttons">
 		<% if signed_in? %>
 			<%= current_user.user_name.upcase %>
-			<button type="button" class="btn btn-danger" ><%= link_to "Sign out", session_path("current"), method: "delete" %></button>
+			<%= link_to "Sign out", session_path("/signout"), method: "delete", :class => "signout", :role => "button" %>
 		<% else %>
-			<button type="button" class="btn btn-info" ><%= link_to "Log in", new_session_path %></button>
-			<button type="button" class="btn btn-success"><%= link_to "Sign up", new_user_path %></button>
+			<%= link_to "Log in", new_session_path, :class => "signin", :role => "button" %>
+			<%= link_to "Sign up", new_user_path, :class => "signup", :role => "button" 
+				%>
 		<% end %>
 	</div>
 </nav></header>
