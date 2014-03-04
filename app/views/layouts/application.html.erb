@@ -8,35 +8,33 @@
   <%= yield :head %>
 </head>
 <body>
-<div role="navigation" class="navbar navbar-inverse">
-<header>
-	<div class="navbar-brand no-dec"> 
-	<%= link_to('Leaguer', '/', nil) %>
-	</div>
+<header><nav>
+	<div class="navbar-brand no-dec"><%= link_to('Leaguer', root_path, nil) %></div>
 	<div>
-	<%= form_tag("/search", method: "get", :class => "navbar-form navbar-right") do %>
-		<%= text_field_tag(:query, nil, :placeholder => "Search") %>
-		<%= submit_tag("Go", {:class => "btn btn-warning"}) %> 
-	<% end %>
+		<%= form_tag("/search", method: "get", :class => "navbar-form navbar-right") do %>
+			<%= text_field_tag(:query, nil, :placeholder => "Search") %>
+			<%= submit_tag("Go", {:class => "btn btn-warning"}) %>
+		<% end %>
 	</div>
-	<% if signed_in? %>
-		<li> <%= current_user.user_name.upcase %> </li>
-	<% end %>
-     <li>
-      <%= if signed_in? do %>
-      	<%= link_to "Sign out", signout_path, method: "delete" %>
-      <% end; end %>
-     </li>
-</header>
-    </div>
+	<ul>
+		<% if signed_in? %>
+			<li><%= current_user.user_name.upcase %></li>
+			<li><%= link_to "Sign out", session_path("current"), method: "delete" %></li>
+		<% else %>
+			<li><%= link_to "Log in", new_session_path %></li>
+			<li><%= link_to "Sign up", new_user_path %></li>
+		<% end %>
+	</ul>
+</nav></header>
 
-<div class="container"> 
-<%= yield %>
-</div>
+<% if notice %><div id="notice"><p><%= notice %></p></div><% end %>
+
+<div class="container"><%= yield %></div>
+
 <hr>
 <footer id="footer">
-<p> Tomer Kimia Andrew Murrell Luke Shumaker Nathaniel Foy Davis Webb Guntas Grewal </p> 
-<p> The Leaguer System &#169; <%= Time.now.year %> </p> </footer>
- <%= debug(params) if Rails.env.development? %>
+	<p>Leaguer is copyright &copy; 2014, Tomer Kimia, Andrew Murrell, Luke Shumaker, Nathaniel Foy, Davis Webb, and Guntas Grewal</p>
+</footer>
+<%= debug(params) if Rails.env.development? %>
 </body>
 </html>

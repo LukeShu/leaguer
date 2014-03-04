@@ -16,11 +16,11 @@
   </p>
    <p>
     <%= f.label :password %><br>
-    <%= f.text_field :password %>
+    <%= f.password_field :password %>
   </p>
   <p>
     <%= f.label :password_confirm %><br>
-    <%= f.text_field :password_confirmation %>
+    <%= f.password_field :password_confirmation %>
   </p>
   <p>
     <%= f.submit %>
@@ -45,16 +45,16 @@
   </p>
    <p>
     <label for="user_password">Password</label><br>
-    <input id="user_password" name="user[password]" type="text" />
+    <input id="user_password" name="user[password]" type="password" />
   </p>
   <p>
     <label for="user_password_confirm">Password confirm</label><br>
-    <input id="user_password_confirmation" name="user[password_confirmation]" type="text" />
+    <input id="user_password_confirmation" name="user[password_confirmation]" type="password" />
   </p>
   <p>
     <input name="commit" type="submit" value="Save User" />
   </p>
 </form>
 
-<%= link_to 'Already Have an Account? Log in', "signin", :class => "btn btn-warning btn-lg" %>
+<%= link_to 'Already Have an Account? Log in', new_session_path, :class => "btn btn-warning btn-lg" %>
 

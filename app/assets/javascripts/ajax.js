@@ -5,7 +5,7 @@ function populate() {
 	var gameType = e.options[e.selectedIndex].text;
 	if (gameType != "Select a Game Type") {
 		alert(gameType + " was Selected!");
-		//populate optionArray
+		//populate optionArray via AJAX
 		//select * from tournament_settings where gametype = GameType
 		for(var option in optionArray){
 			//identify the number of 

@@ -1,0 +1,12 @@
+<p>
+  <strong>Tournament:</strong>
+  <%= @match.tournament %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @match.name %>
+</p>
+
+<%= link_to 'Edit', edit_match_path(@match) %> |
+<%= link_to 'Back', matches_path %>
