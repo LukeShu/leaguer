@@ -12,11 +12,19 @@ module SessionsHelper
 		self.current_user = user
 	end
 
-#method creating for self.current_user
+# The curret_user=(user) is the conversion of self.current_user = user
 	def current_user=(user)
-		remember_token = User.hash(cookies[:remember_token])
-		@current_user ||= User.find_by(remember_token: remember_token)
+		@current_user = user
 	end
+
+# sets the @current_user instance virable to the user corresponding
+# to the remember token, but only if @current_user is undefined
+# since the remember token is hashed, we need to hash the cookie
+# to find match the remember token
+  def current_user
+    remember_token = User.hash(cookies[:remember_token])
+    @current_user ||= User.find_by(remember_token: remember_token)
+  end
 
 	# checks if someone is currently signed in
 	def signed_in?

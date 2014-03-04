@@ -5,8 +5,12 @@ before_save { self.user_name = user_name.downcase }
 
 =begin
 
-Rails looks for the create_remember_token
-and runs it before anything else
+Rails looks for the create_remember_token and runs the method
+before anything else.
+
+This method cannot be called by a user since it is denoted
+as private.
+
 =end
 
 before_create :create_remember_token
@@ -17,17 +21,17 @@ VAILD_EMAIL is the regex used to valid a user given email.
 
 A break down of the regex is listed below.
 
-/ -----------> Start of the regex
-\A ----------> match start of a string
-[\w+\-.]+ ---> at least one owrd character, plus, hyphen, or 
-			   dot
-@ -----------> literal ampersand
-[a-z\d\-.]+ -> at least one letter, digit, hyphen, or dot
-(?:\.[a-z]+) > ensures that the error of example@foo..com
-							 does not occur
-\z ----------> match end of a string
-/ -----------> end of the regex
-i -----------> case sensative
+/ -------------> Start of the regex
+\A ------------> match start of a string
+[\w+\-.]+ -----> at least one owrd character, plus, hyphen, or 
+			           dot
+@ -------------> literal ampersand
+[a-z\d\-.]+ ---> at least one letter, digit, hyphen, or dot
+(?:\.[a-z]+) --> ensures that the error of example@foo..com
+							   does not occur
+\z ------------> match end of a string
+/ -------------> end of the regex
+i -------------> case sensative
 
 =end
 		
@@ -72,7 +76,7 @@ attributes, requiring the presence of a password,
 requirin that pw and pw_com match, and add an authenticate
 method to compare an encrypted password to the
 password_digest to authenticate users, I can just add
-has_secure_password which does all of this for me
+has_secure_password which does all of this for me.
 
 =end
 
@@ -80,12 +84,36 @@ has_secure_password which does all of this for me
 
 	validates :password, length: { minimum: 6 }
 
-	# create a random remember token for the user
+=begin
+
+	Create a random remember token for the user. This will be
+  changed every time the user creates a new session.
+
+	By changing the cookie every new session, any hijacked sessions
+	(where the attacker steals a cookie to sign in as a certain 
+	user) will expire the next time the user signs back in.
+ 
+  The random string is of length 16 composed of A-Z, a-z, 0-9
+	This is the browser's cookie value.
+
+=end
+ 
   def User.new_remember_token
     SecureRandom.urlsafe_base64
   end
-	
-	# encrypt the remember token
+
+=begin
+
+	Encrypt the remember token.
+	This is the encrypted version of the cookie stored on
+  the database.
+
+	The reasoning for storing a hashed token is so that even if
+	the database is compromised, the atacker won't be able to use
+	the remember tokens to sign in.
+
+=end
+
   def User.hash(token)
     Digest::SHA1.hexdigest(token.to_s)
   end
@@ -103,23 +131,27 @@ https://en.wikipedia.org/wiki/SHA-1
 
 =end
 
-	# everything under private is hidden so you cannot call
-	# create_remember_token in order to ensure security
+	# Everything under private is hidden so you cannot call.
 	private
-		
-		#assign user a create remember token
+
+=begin		
+
+  Create_remember_token in order to ensure a user always has
+  a remember token.
+
+=end
 		  def create_remember_token
 		    self.remember_token = User.hash(User.new_remember_token)
 		  end
 
 =begin
 
-in order to ensure that someone did not accidently submit
+In order to ensure that someone did not accidently submit
 two accounts rapidly (which would throw off the validates 
-for user_name and email) I added an index to the Users 
+for user_name and email), I added an index to the Users 
 email and user_name in the database to ensure uniqueness
 This also gives and index to the user_name and email
-so finding a unique user SHOULD be easier
+so finding a user SHOULD be easier for the database.
 
 =end
 

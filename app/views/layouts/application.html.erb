@@ -5,6 +5,7 @@
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
+  <%= yield :head %>
 </head>
 <body>
 <div role="navigation" class="navbar navbar-inverse">
@@ -18,6 +19,14 @@
 		<%= submit_tag("Go", {:class => "btn btn-warning"}) %> 
 	<% end %>
 	</div>
+	<% if signed_in? %>
+		<li> <%= current_user.user_name.upcase %> </li>
+	<% end %>
+     <li>
+      <%= if signed_in? do %>
+      	<%= link_to "Sign out", signout_path, method: "delete" %>
+      <% end; end %>
+     </li>
 </header>
     </div>
 

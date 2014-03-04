@@ -1,0 +1,12 @@
+<h1>New tournament</h1>
+
+<%= select_tag 'tournament_id', options_for_select(["Select a Game Type"] + Game.all.collect {|game| game.name}), :onchange => 'populate()' %>
+
+<br />
+<div id='ajax-form'>
+	<% render :partial => "selected" %>
+</div>
+<br /><br />
+
+
+<%= link_to 'Back', tournaments_path %>

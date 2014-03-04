@@ -22,6 +22,12 @@ class TournamentsController < ApplicationController
   def edit
   end
 
+  def selected
+    render :update do |page|
+      page.replace_html 'ajax-form', :partial => 'selected'
+    end
+  end
+
   # POST /tournaments
   # POST /tournaments.json
   def create

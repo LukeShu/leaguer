@@ -1,5 +1,5 @@
 #!/bin/bash
 
 generate.sh
-bundle exec rails server 2> server.talk &
+nohup bundle exec rails server &
 
