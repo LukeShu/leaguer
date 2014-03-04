@@ -13,12 +13,12 @@ class User < ActiveRecord::Base
 
 	##
 	# VAILD_EMAIL is the regex used to validate a user given email.
-	VALID_EMAIL_REG = /^\S+@\S+\.\S+$/i
+	VALID_EMAIL_REG = /\A\S+@\S+\.\S+\z/i
 
 	##
 	# VALID_USER_NAME checks to make sure a user's user_name
 	# is in the proper format.
-	VALID_USER_NAME_REG = /^[a-zA-Z0-9\-]+$/
+	VALID_USER_NAME_REG = /\A[a-zA-Z0-9\-]+\z/
 
 	##
 	# The following lines put a user account through a series of
