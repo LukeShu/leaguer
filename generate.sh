@@ -1,4 +1,5 @@
 #!/bin/bash
+set -x
 
 # The generate.sh bash file is used to generate all of the necessary .rb files to run the website
 # 
@@ -12,7 +13,9 @@
 #
 #NOTEST='--skip-test-unit'
 
-set -x
+git rm -rf app test config/routes.rb db/migrate
+git checkout clean-start -- app test config/routes.rb
+
 bundle exec rails generate scaffold server --force $NOTEST
 bundle exec rails generate scaffold tournament game:references $NOTEST
 bundle exec rails generate scaffold match tournament:references name:string --force $NOTEST
@@ -34,15 +37,17 @@ bundle exec rails generate controller sessions
 
 #added some stuff to the database
 
-rails generate migration add_index_to_user_email
-rails generate migration add_index_to_user_name
-rails generate migration add_password_digest_to_users
-rails generate migration add_remember_token_to_users
+bundle exec rails generate migration add_index_to_user_email
+bundle exec rails generate migration add_index_to_user_name
+bundle exec rails generate migration add_password_digest_to_users
+bundle exec rails generate migration add_remember_token_to_users
 
 #for the tournament controller to generate options
 bundle exec rails generate model tournament_option $NOTEST
+#bundle exec rails generate scaffold
+
+git add app test config/routes.rb db/migrate db/schema.rb
 
 bundle exec rake db:drop RAILS_ENV=development
 bundle exec rake db:migrate RAILS_ENV=development
 bundle exec rake db:seed
-#bundle exec rails generate scaffold 
