@@ -1,11 +1,13 @@
 <h1>Listing users</h1>
 
-<table>
+<table class="table table-hover">
   <thead>
     <tr>
+      <th>Username</th>
       <th>Name</th>
       <th>Email</th>
       <th>User name</th>
+      <th></th>
       <th></th>
       <th></th>
       <th></th>
@@ -15,8 +17,9 @@
   <tbody>
     <% @users.each do |user| %>
       <tr>
+        <td><%= link_to("#{user.user_name}", user, nil) %></td>
         <td><%= user.name %></td>
-        <td><%= user.email %></td>
+        <td> ******* </td>
         <td><%= user.user_name %></td>
         <td><%= link_to 'Show', user %></td>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>
