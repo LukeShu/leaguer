@@ -7,17 +7,13 @@ header > nav {
 
 	#log-buttons {
 		margin-top: 8px;
-	}
-		.signup {
+		form { display: inline; }
+		a, input[type="submit"] {
 			@extend .btn;
-			@extend .btn-success;
-		}
-		.signin {
-			@extend .btn;
-			@extend .btn-info;
-		}
-		.signout {
-			@extend .btn;
-			@extend .btn-danger;
+			&.user { @extend .btn-info; }
+			&.signup { @extend .btn-success; }
+			&.signin { @extend .btn-info; }
+			&.signout { @extend .btn-danger; }
 		}
 	}
+}
