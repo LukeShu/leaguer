@@ -4,7 +4,20 @@ header > nav {
 	@extend .navbar; 
 	@extend .navbar-inverse;
 	color: white;	
-}
-header > nav > #log-buttons{
-	margin-top: 8px;
-}
+
+	#log-buttons {
+		margin-top: 8px;
+	}
+		.signup {
+			@extend .btn;
+			@extend .btn-success;
+		}
+		.signin {
+			@extend .btn;
+			@extend .btn-info;
+		}
+		.signout {
+			@extend .btn;
+			@extend .btn-danger;
+		}
+	}
