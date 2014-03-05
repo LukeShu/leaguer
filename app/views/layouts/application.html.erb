@@ -9,7 +9,7 @@
 </head>
 <body>
 <header><nav>
-	<div class="navbar-brand no-dec"><%= link_to('Leaguer', root_path, nil) %></div>
+	<div class="navbar-brand no-dec"><%= link_to('Leaguer', root_path, :style => "color:white") %></div>
 	<div>
 		<%= form_tag("/search", method: "get", :class => "navbar-form navbar-right") do %>
 			<%= text_field_tag(:query, nil, :placeholder => "Search") %>
@@ -19,12 +19,11 @@
 
 	<div id="log-buttons">
 		<% if signed_in? %>
-			<%= current_user.user_name.upcase %>
-			<%= link_to "Sign out", "/signout", method: "delete", :class => "signout", :role => "button" %>
+			<%= link_to current_user.user_name, current_user, :class => "user" %>
+			<%= render "common/signout" %>
 		<% else %>
-			<%= link_to "Log in", new_session_path, :class => "signin", :role => "button" %>
-			<%= link_to "Sign up", new_user_path, :class => "signup", :role => "button" 
-				%>
+			<%= link_to "Log in", new_session_path, :class => "signin" %>
+			<%= link_to "Sign up", new_user_path, :class => "signup" %>
 		<% end %>
 	</div>
 </nav></header>

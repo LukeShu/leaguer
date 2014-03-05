@@ -1,25 +1,5 @@
-<form accept-charset="UTF-8" action="/users" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="6WQoPLFISlDYCsi4LhAgT0hgrht19yydD3w5TlKfb7I=" /></div>
-  <p>
-    <label for="GameType">Game</label><br>
-    <input id="GameType" name="League of Legends" type="text" />
-  </p>
- <p>
-    <label for="players_per_team">Number of Players</label><br>
-    <input id="players_per_team" name="5" type="text" />
-  </p>
-  <p>
-    <label for="teams_per_match">Teams per Match</label><br>
-    <input id="teams_per_match" name="2" type="text" />
-  </p>
-   <p>
-    <label for="set_rounds">Set Number of Rounds?</label><br>
-    <input id="set_rounds" name="1" type="text" />
-  </p>
-  <p>
-    <label for="randomized_teams">Randomized Teams?</label><br>
-    <input id="randomized_teams" name="0" type="text" />
-  </p>
-  <p>
-    <input name="create" type="submit" value="Create Tournament" />
-  </p>
-</form>
+
+  <%= content_tag(:p, "Hello World") %>
+
+
+<%= tag(:label, for: 'GameType') %>

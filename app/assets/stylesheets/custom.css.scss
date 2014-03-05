@@ -7,6 +7,7 @@ header > nav {
 
 	#log-buttons {
 		margin-top: 8px;
+<<<<<<< HEAD
 	}
 	.signup {
 		@extend .btn;
@@ -43,3 +44,15 @@ p.errors {
 
 }
 
+=======
+		form { display: inline; }
+		a, input[type="submit"] {
+			@extend .btn;
+			&.user { @extend .btn-info; }
+			&.signup { @extend .btn-success; }
+			&.signin { @extend .btn-info; }
+			&.signout { @extend .btn-danger; }
+		}
+	}
+}
+>>>>>>> 6db29eb669a85e5b0aac7a1e8879781a1cb77772
