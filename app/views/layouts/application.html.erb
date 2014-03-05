@@ -9,7 +9,7 @@
 </head>
 <body>
 <header><nav>
-	<div class="navbar-brand no-dec"><%= link_to('Leaguer', root_path, nil) %></div>
+	<div class="navbar-brand no-dec"><%= link_to('Leaguer', root_path, :style => "color:white") %></div>
 	<div>
 		<%= form_tag("/search", method: "get", :class => "navbar-form navbar-right") do %>
 			<%= text_field_tag(:query, nil, :placeholder => "Search") %>

@@ -12,4 +12,8 @@ function populate() {
 			;
 		}
 	};
+
+//$.ajax(url: "/selected").done (html) ->  $("#ajax-form").append html
+
 }
+

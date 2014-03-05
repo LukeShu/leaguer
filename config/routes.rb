@@ -17,6 +17,8 @@ Leaguer::Application.routes.draw do
 
   resources :tournaments
 
+  #set 'selected' to: 'tournaments#selected' via: 'get'
+
   resources :servers
 
   root to: 'static#homepage'

@@ -1,0 +1,27 @@
+<h1>Listing tournaments</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Tournament ID</th>
+      <th>Show Tournament</th>
+      <th>Edit Tournament</th>
+      <th>Delete Tournament</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tournaments.each do |tournament| %>
+      <tr>
+        <td><%= tournament.id %></td>
+        <td><%= link_to 'Show', tournament %></td>
+        <td><%= link_to 'Edit', edit_tournament_path(tournament) %></td>
+        <td><%= link_to 'Destroy', tournament, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Tournament',  new_tournament_path, :class => "btn btn-warning btn-lg" %>
