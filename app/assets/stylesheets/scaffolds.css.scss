@@ -44,8 +44,9 @@ div {
 }
 
 .field_with_errors {
-  padding: 2px;
-  background-color: red;
+  padding: 1px;
+  background-color: #FF4C4C;
+  box-shadow: 0px 0px 5px red;
   display: table;
 }
 

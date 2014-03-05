@@ -8,16 +8,38 @@ header > nav {
 	#log-buttons {
 		margin-top: 8px;
 	}
-		.signup {
-			@extend .btn;
-			@extend .btn-success;
-		}
-		.signin {
-			@extend .btn;
-			@extend .btn-info;
-		}
-		.signout {
-			@extend .btn;
-			@extend .btn-danger;
-		}
+	.signup {
+		@extend .btn;
+		@extend .btn-success;
 	}
+	.signin {
+		@extend .btn;
+		@extend .btn-info;
+	}
+	.signout {
+		@extend .btn;
+		@extend .btn-danger;
+	}
+}
+
+p.errors {
+	background-color: #FCF8C7;
+	color: red;
+	border-radius: 7px;
+	padding: 10px;
+}
+
+#errorExplanation {
+	h2 {
+		font-size: 1em;
+		color: red;
+		font-weight: bold;
+	}
+	li {
+		font-size: 1em;
+		color: red;
+		font-style: italic;  
+	}
+
+}
+
