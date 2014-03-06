@@ -30,9 +30,11 @@ bundle exec rails generate scaffold session user:references
 # Just models
 bundle exec rails generate model game_attribute game:references key:text type:integer $NOTEST
 bundle exec rails generate model server_settings $NOTEST
-bundle exec rails generate model user_team_pair user:references team:references $NOTEST
-bundle exec rails generate model team_match_pair team:references match:references $NOTEST
 bundle exec rails generate model tournament_option $NOTEST
+
+bundle exec rails generate model user_team_pair user:references team:references $NOTEST
+bundle exec rails generate model user_tournament_pair user:references tournament:references
+bundle exec rails generate model team_match_pair team:references match:references $NOTEST
 
 # Just controllers
 bundle exec rails generate controller search $NOTEST
