@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  game_id: 
-  key: MyText
-  type: 1
+  user_id: 
+  match_id: 
+  value: 1
 
 two:
-  game_id: 
-  key: MyText
-  type: 1
+  user_id: 
+  match_id: 
+  value: 1

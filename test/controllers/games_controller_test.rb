@@ -18,7 +18,7 @@ class GamesControllerTest < ActionController::TestCase
 
   test "should create game" do
     assert_difference('Game.count') do
-      post :create, game: { name: @game.name, players_per_team: @game.players_per_team, randomized_teams: @game.randomized_teams, set_rounds: @game.set_rounds, teams_per_match: @game.teams_per_match }
+      post :create, game: { max_players_per_team: @game.max_players_per_team, max_teams_per_match: @game.max_teams_per_match, min_players_per_team: @game.min_players_per_team, min_teams_per_match: @game.min_teams_per_match, name: @game.name, randomized_teams: @game.randomized_teams, set_rounds: @game.set_rounds }
     end
 
     assert_redirected_to game_path(assigns(:game))
@@ -35,7 +35,7 @@ class GamesControllerTest < ActionController::TestCase
   end
 
   test "should update game" do
-    patch :update, id: @game, game: { name: @game.name, players_per_team: @game.players_per_team, randomized_teams: @game.randomized_teams, set_rounds: @game.set_rounds, teams_per_match: @game.teams_per_match }
+    patch :update, id: @game, game: { max_players_per_team: @game.max_players_per_team, max_teams_per_match: @game.max_teams_per_match, min_players_per_team: @game.min_players_per_team, min_teams_per_match: @game.min_teams_per_match, name: @game.name, randomized_teams: @game.randomized_teams, set_rounds: @game.set_rounds }
     assert_redirected_to game_path(assigns(:game))
   end
 
