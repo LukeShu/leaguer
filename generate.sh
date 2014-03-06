@@ -24,7 +24,7 @@ bundle exec rails generate scaffold team $NOTEST
 bundle exec rails generate scaffold alert author:references message:text $NOTEST
 bundle exec rails generate scaffold pm author:references recipient:references message:text $NOTEST
 bundle exec rails generate scaffold game name:text players_per_team:integer teams_per_match:integer set_rounds:integer randomized_teams:integer --force $NOTEST
-bundle exec rails generate scaffold user name:string email:string user_name:string $NOTEST
+bundle exec rails generate scaffold user name:string email:string:uniq user_name:string:uniq password_digest:string remember_token:string
 bundle exec rails generate scaffold session user:references
 
 # Just models
@@ -37,13 +37,6 @@ bundle exec rails generate model team_match_pair team:references match:reference
 bundle exec rails generate controller search $NOTEST
 bundle exec rails generate controller main $NOTEST
 bundle exec rails generate controller static $NOTEST
-
-#added some stuff to the database
-
-bundle exec rails generate migration add_index_to_users_email
-bundle exec rails generate migration add_index_to_users_user_name
-bundle exec rails generate migration add_password_digest_to_users
-bundle exec rails generate migration add_remember_token_to_users
 
 #for the tournament controller to generate options
 bundle exec rails generate model tournament_option $NOTEST
