@@ -21,7 +21,7 @@ Leaguer::Application.routes.draw do
     end
   end
 
-  resources :servers
+  resource :server, only: [:show, :edit, :update]
 
   root to: 'static#homepage'
 
