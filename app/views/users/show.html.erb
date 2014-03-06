@@ -15,5 +15,15 @@
   <%= @user.user_name %>
 </p>
 
+<p>
+  <strong>Password digest:</strong>
+  <%= @user.password_digest %>
+</p>
+
+<p>
+  <strong>Remember token:</strong>
+  <%= @user.remember_token %>
+</p>
+
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

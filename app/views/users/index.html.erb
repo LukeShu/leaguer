@@ -6,6 +6,8 @@
       <th>Name</th>
       <th>Email</th>
       <th>User name</th>
+      <th>Password digest</th>
+      <th>Remember token</th>
       <th></th>
       <th></th>
       <th></th>
@@ -18,6 +20,8 @@
         <td><%= user.name %></td>
         <td><%= user.email %></td>
         <td><%= user.user_name %></td>
+        <td><%= user.password_digest %></td>
+        <td><%= user.remember_token %></td>
         <td><%= link_to 'Show', user %></td>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>
         <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
