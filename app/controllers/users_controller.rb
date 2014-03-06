@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :perms_edit, only: [:edit, :update, :destroy]
+  before_action :perms_create, only: [:new, :create]
 
   # GET /users
   # GET /users.json
@@ -33,7 +35,7 @@ class UsersController < ApplicationController
         format.html { redirect_to root_path, notice: 'User was successfully created.' }
         format.json { render action: 'show', status: :created, location: @user }
       else
-        format.html { render action: 'new' }
+        format.html { render action: 'new', status: :unprocessable_entity }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
@@ -67,6 +69,24 @@ class UsersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
+    end
+
+    def perms_edit
+      unless (current_user == @user) or (signed_in? and current_user.in_group? :admin)
+        respond_to do |format|
+          format.html { render action: 'permission_denied', status: :forbidden }
+          format.json { render json: "Permission denied", status: :forbidden }
+        end
+      end
+    end
+
+    def perms_create
+      if signed_in?
+        respond_to do |format|
+          format.html { render action: 'already_signed_in', status: :unprocessable_entity }
+          format.json { render json: "Already signed in", status: :unprocessable_entity }
+        end
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
