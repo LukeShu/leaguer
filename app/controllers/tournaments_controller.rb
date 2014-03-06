@@ -71,7 +71,7 @@ class TournamentsController < ApplicationController
     end
 
 	def check_perms
-		unless (signed_in? and current_user.in_group(:host))
+		unless (signed_in? and current_user.in_group?(:host))
 			respond_to do |format|
 				format.html { render action: 'permission_denied', status: :forbidden }
 				format.json { render json: "Permission denied", status: :forbidden }
