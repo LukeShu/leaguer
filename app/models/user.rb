@@ -26,6 +26,32 @@ class User < ActiveRecord::Base
 		end
 	end
 
+	def join_groups(join=[])
+		# FIXME: race condition
+		join.each do |group|
+			case group
+			when :admin
+				groups |= 2
+			when :host
+				groups |= 1
+			else
+			end
+		end
+	end
+
+	def leave_groups(leave=[])
+		# FIXME: race condition
+		leave.each do |group|
+			case group
+			when :admin
+				groups &= ~ 2
+			when :host
+				groups &= ~ 1
+			else
+			end
+		end
+	end
+
 	##
 	# VAILD_EMAIL is the regex used to validate a user given email.
 	VALID_EMAIL_REG = /\A\S+@\S+\.\S+\z/i
