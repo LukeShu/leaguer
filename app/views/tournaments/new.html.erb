@@ -1,19 +1,16 @@
-<%= javascript_include_tag :defaults %>
-
 <h1>New Tournament</h1>
 
-<%= select_tag 'tournament_id', options_for_select(["Select a Game Type"] + Game.all.collect {|game| game.name}), :onchange => 'populate()' %> <%= link_to 'Select', 'new?game=1', :class => "btn btn-warning btn-lg" %>
+<%= form_tag(new_tournament_path, method: "get") do %>
+	<%= select_tag('game',
+	               options_from_collection_for_select(@games, 'id', 'name', @game.nil? || @game.id),
+	               :prompt => "Select a Game Type") %>
+	<%= submit_tag("Select", :class => "btn-warning btn-lg") %>
+<% end %>
 
-
-
-<br />
 <div id='ajax-form'>
-	<% if not @game.nil? %>
+	<% unless @game.nil? %>
 		<%= render 'selected' %>
 	<% end %>
 </div>
-<br /><br />
-
-<%= link_to 'Select', 'selected', :class => "btn btn-warning btn-lg" %>
 
 <%= link_to 'Back', tournaments_path %>

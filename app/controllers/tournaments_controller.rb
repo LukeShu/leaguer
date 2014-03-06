@@ -15,8 +15,8 @@ class TournamentsController < ApplicationController
 
   # GET /tournaments/new
   def new
-    @game_names = Game.all.collect
-    @game = params[:game]
+    @games = Game.all
+    @game = Game.find_by_id(params[:game])
     @tournament = Tournament.new
   end
 
