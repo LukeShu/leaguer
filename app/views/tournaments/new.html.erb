@@ -2,7 +2,7 @@
 
 <h1>New Tournament</h1>
 
-<%= select_tag 'tournament_id', options_for_select(["Select a Game Type"] + Game.all.collect {|game| game.name}), :onchange => 'populate()' %> <%= link_to 'Select', 'new?game=1', :class => "btn btn-warning btn-lg" %>
+<%= select_tag 'tournament_id', options_for_select(["Select a Game Type"] + Game.all.collect {|game| game.name}), :onchange => 'populate()' %> <%= link_to 'Select', 'new?game=1', :class => "btn btn-success btn-xs" %>
 
 
 
@@ -14,6 +14,6 @@
 </div>
 <br /><br />
 
-<%= link_to 'Select', 'selected', :class => "btn btn-warning btn-lg" %>
+<%= link_to 'Select', 'selected', :class => "btn btn-success btn-xs" %>
 
 <%= link_to 'Back', tournaments_path %>

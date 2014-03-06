@@ -20,7 +20,7 @@ header > nav {
 		@extend .navbar-form;
 		@extend .navbar-right;
 		input[type="submit"] {
-			@extend .btn-warning;
+			@extend .btn-warning; margin-top: -3px; margin-right: 8px;
 		}
 	}
 }
