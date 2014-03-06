@@ -15,9 +15,8 @@ class TournamentsController < ApplicationController
 
   # GET /tournaments/new
   def new
-    @game_names = Game.all.collect
-    @game = params[:game]
-    @tournament = Tournament.new
+    @games = Game.all
+    @tournament = Tournament.new(game: Game.find_by_id(params[:game]))
   end
 
   # GET /tournaments/1/edit
@@ -70,14 +69,14 @@ class TournamentsController < ApplicationController
       @tournament = Tournament.find(params[:id])
     end
 
-	def check_perms
-		unless (signed_in? and current_user.in_group?(:host))
-			respond_to do |format|
-				format.html { render action: 'permission_denied', status: :forbidden }
-				format.json { render json: "Permission denied", status: :forbidden }
-			end
-		end
-	end
+  	def check_perms
+  		unless (signed_in? and current_user.in_group?(:host))
+  			respond_to do |format|
+  				format.html { render action: 'permission_denied', status: :forbidden }
+  				format.json { render json: "Permission denied", status: :forbidden }
+  			end
+  		end
+  	end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tournament_params

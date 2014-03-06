@@ -1,31 +1,15 @@
 <%= form_for(@tournament) do |f| %>
-  <% if @tournament.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@tournament.errors.count, "error") %> prohibited this tournament from being saved:</h2>
+  <%= render "common/error_messages", :target => @tournament %>
+  <%= f.hidden_field(:game_id) %>
 
-      <ul>
-      <% @tournament.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <%# this is the dynamic script to output fields to the form %>
-  <% @chosen = Game.find(@game) %>
-  <% @chosen.attributes.each do |name, value| %>
-    <% if name == "id" %>
+  <% @tournament.attributes.each do |name, value| %>
+    <% if (name == "id") or (name =~ /.*_at$/) or (name == "game_id") %>
       <% next %>
     <% end %>
-    <% if name == "created_at" %>
-      <% break %> 
-    <% end %>
-  <p>
-    <label for=<%= name %>><%= name.capitalize.gsub('_', ' ') %></label>
-    <br />
-    <input type="text" id=<%= name %> value=<%= value %>>
-  </p>
+    <p>
+        <%= f.label name %><br>
+        <%= f.text_field name %>
+    </p>
   <% end %>
-
   <%= f.submit %>
 <% end %>
