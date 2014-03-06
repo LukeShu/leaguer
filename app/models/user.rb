@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+	has_many :tournaments, :through => :user_tournament_pair
 
 	before_save { self.email = email.downcase }
 	before_save { self.user_name = user_name }

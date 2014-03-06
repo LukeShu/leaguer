@@ -15,9 +15,11 @@ Leaguer::Application.routes.draw do
 
   resources :matches
 
-  resources :tournaments
-
-  #set 'selected' to: 'tournaments#selected' via: 'get'
+  resources :tournaments do
+    collection do
+      post 'join'
+    end
+  end
 
   resources :servers
 

@@ -1,3 +1,9 @@
+<% if @tournament.joinable_by?(current_user) %>
+	<%= form_tag(tournament_page(@tournament)+"/join", method: "get") do %>
+		<%= submit_tag("Join") %>
+	<% end %>
+<% end %>
+
 <p>
   <strong>Game:</strong>
   <%= @tournament.game %>

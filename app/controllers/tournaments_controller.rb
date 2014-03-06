@@ -1,5 +1,5 @@
 class TournamentsController < ApplicationController
-  before_action :set_tournament, only: [:show, :edit, :update, :destroy]
+  before_action :set_tournament, only: [:show, :edit, :update, :destroy, :join]
   before_action :check_perms, only: [:new, :create, :edit, :update, :destroy]
 
   # GET /tournaments
@@ -61,6 +61,19 @@ class TournamentsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to tournaments_url }
       format.json { head :no_content }
+    end
+  end
+
+  # POST /tournaments/1/join
+  # POST /tournaments/1/join.json
+  def join
+    respond_to do |format|
+      if @tournament.join(current_user)
+        format.html { redirect_to @tournament, notice: 'You have joined this tournament.' }
+        format.json { head :no_content }
+      end
+      format.html { render action: 'permission_denied', status: :forbidden }
+      format.json { render json: "Permission denied", status: :forbidden }
     end
   end
 
