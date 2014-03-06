@@ -72,17 +72,6 @@ div {
     list-style: square;
   }
 }
-hr {
-  -moz-border-bottom-colors: none;
-  -moz-border-image: none;
-  -moz-border-left-colors: none;
-  -moz-border-right-colors: none;
-  -moz-border-top-colors: none;
-  border-color: #999 -moz-use-text-color #FFFFFF;
-  border-style: solid none;
-  border-width: 1px 0;
-  margin: 18px 0;
-}
 
 .navbar-brand {
   a{
@@ -94,6 +83,9 @@ hr {
   }
 }
 
-#footer{
+footer {
   text-align: center;
+  border-top: solid 1px #999999;
+  padding-top: 18px;
+  margin-top: 18px;
 }
