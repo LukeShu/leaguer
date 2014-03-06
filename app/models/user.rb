@@ -11,6 +11,21 @@ class User < ActiveRecord::Base
 	# as private.
 	before_create :create_remember_token
 
+	def in_group?(group)
+		case group
+		when :admin
+			return ((groups & 2) != 0)
+		when :host
+			return ((groups & 1) != 0)
+		when :player
+			return true
+		when :specator
+			return true
+		else
+			return false
+		end
+	end
+
 	##
 	# VAILD_EMAIL is the regex used to validate a user given email.
 	VALID_EMAIL_REG = /\A\S+@\S+\.\S+\z/i
