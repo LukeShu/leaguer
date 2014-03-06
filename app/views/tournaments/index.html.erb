@@ -1,6 +1,7 @@
-<h1>Listing tournaments</h1>
+<h1>Listing Tournaments</h1>
 
-<table>
+<% if @tournaments.length > 0 %>
+<table class="table table-hover">
   <thead>
     <tr>
       <th>Tournament ID</th>
@@ -21,7 +22,9 @@
     <% end %>
   </tbody>
 </table>
-
+<% else %>
+  <p class="no-entries"> No tournaments going on right now... Why not start your own? </p>
+<% end %>
 <br>
 
 <%= link_to 'New Tournament',  new_tournament_path, :class => "btn btn-warning btn-lg" %>
