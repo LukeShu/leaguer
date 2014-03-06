@@ -12,11 +12,7 @@ class SessionsController < ApplicationController
 	def create
 		# find the user...
 
-		@user = User.find_by(email: params[:session][:email])
-		
-		if @user.nil?
-			@user = User.find_by_user_name(params[:session][:user_name]) 
-		end
+		@user = User.find_by_email(params[:session][:username_or_email]) || User.find_by_user_name(params[:session][:username_or_email])
 
 		#@session = Session.new(@user)
 		# ... and create a new session

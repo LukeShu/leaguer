@@ -2,22 +2,22 @@
 <% if @user.nil? %>
   <p class="errors">  The email or password is incorrect. Verify that CAPS LOCK is not on, and then retype the current email and password. </p>
 <% end %>
-<div class="row">
+
   <div class="span6 offset3">
     <%= form_for(:session, url: sessions_path) do |f| %>
-
-      <%= f.label :email %>
-      <%= f.text_field :email%>
-
-      <%= f.label :user_name %>
-      <%= f.text_field :user_name%>
-
-      <%= f.label :password %>
+    <p>
+      <%= f.label(:username_or_email, "Username/Email")  %><br/>
+      <%= f.text_field :username_or_email%>
+    </p>
+    <p>
+      <%= f.label :password %><br/>
       <%= f.password_field :password %>
-
+    </p>
+    <p>
       <%= f.submit "Sign in", class: "btn btn-large btn-primary" %>
+    </p>
     <% end %>
 
     <p>New user? <%= link_to "Sign up now!", new_user_path %></p>
   </div>
-</div>
+
