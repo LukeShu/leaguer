@@ -16,6 +16,13 @@ header > nav {
 			&.signout { @extend .btn-danger; }
 		}
 	}
+	form.search {
+		@extend .navbar-form;
+		@extend .navbar-right;
+		input[type="submit"] {
+			@extend .btn-warning;
+		}
+	}
 }
 
 p.errors {
@@ -38,4 +45,3 @@ p.errors {
 	}
 
 }
-

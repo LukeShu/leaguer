@@ -1,3 +1,5 @@
+@import "bootstrap";
+
 body {
   background-color: #fff;
   color: #333;
@@ -74,9 +76,11 @@ div {
 }
 
 .navbar-brand {
+  @extend .no-dec;
   a{
-    &:hover {
-      color: #FFF;
+    color: white;
+    &:hover, &:active, &:focus {
+      color: white;
       font-weight: normal;
       text-decoration: none;
     }
@@ -88,4 +92,8 @@ footer {
   border-top: solid 1px #999999;
   padding-top: 18px;
   margin-top: 18px;
+}
+
+button, input[type="submit"] {
+    @extend .btn;
 }

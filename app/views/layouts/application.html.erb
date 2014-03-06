@@ -9,11 +9,11 @@
 </head>
 <body>
 <header><nav>
-	<div class="navbar-brand no-dec"><%= link_to('Leaguer', root_path, :style => "color:white") %></div>
+	<div class="navbar-brand"><%= link_to('Leaguer', root_path) %></div>
 	<div>
-		<%= form_tag("/search", method: "get", :class => "navbar-form navbar-right") do %>
+		<%= form_tag("/search", method: "get", :class => "search") do %>
 			<%= text_field_tag(:query, nil, :placeholder => "Search") %>
-			<%= submit_tag("Go", {:class => "btn btn-warning"}) %>
+			<%= submit_tag("Go") %>
 		<% end %>
 	</div>
 
