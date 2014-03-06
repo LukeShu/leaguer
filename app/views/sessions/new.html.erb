@@ -1,13 +1,16 @@
 <h1>Sign in</h1>
 <% if @user.nil? %>
-  <p class="errors">  The username or password is incorrect. Verify that CAPS LOCK is not on, and then retype the current username and password. </p>
+  <p class="errors">  The email or password is incorrect. Verify that CAPS LOCK is not on, and then retype the current email and password. </p>
 <% end %>
 <div class="row">
   <div class="span6 offset3">
     <%= form_for(:session, url: sessions_path) do |f| %>
 
       <%= f.label :email %>
-      <%= f.text_field :email %>
+      <%= f.text_field :email%>
+
+      <%= f.label :user_name %>
+      <%= f.text_field :user_name%>
 
       <%= f.label :password %>
       <%= f.password_field :password %>
