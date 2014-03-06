@@ -20,7 +20,7 @@
 	<div id="log-buttons">
 		<% if signed_in? %>
 			<%= link_to current_user.user_name, current_user, :class => "user" %>
-			<%= render "common/signout" %>
+			<%= link_to "Sign out", session_path("current"), method: "delete", :class => "signout" %>
 		<% else %>
 			<%= link_to "Log in", new_session_path, :class => "signin" %>
 			<%= link_to "Sign up", new_user_path, :class => "signup" %>
