@@ -17,7 +17,8 @@
 
 # The above is from Rails.  The following is from Luke.
 /vendor/bundle
-# As noted aboce, you probably want to add the following to your global git config.
+nohup.out
+# As noted above, you probably want to add the following to your global git config.
 .~lock.*
 *~
 *#

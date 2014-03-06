@@ -1,4 +1,6 @@
 Leaguer::Application.routes.draw do
+  resources :sessions
+
   resources :users
 
   resources :games

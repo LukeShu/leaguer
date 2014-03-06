@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140304043700) do
+ActiveRecord::Schema.define(version: 20140306014132) do
 
   create_table "alerts", force: true do |t|
     t.integer  "author_id"
@@ -71,6 +71,14 @@ ActiveRecord::Schema.define(version: 20140304043700) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "sessions", force: true do |t|
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sessions", ["user_id"], name: "index_sessions_on_user_id"
 
   create_table "team_match_pairs", force: true do |t|
     t.integer  "team_id"

@@ -16,6 +16,7 @@ set -x
 git rm -rf app test config/routes.rb db/migrate
 git checkout clean-start -- app test config/routes.rb
 
+# The whole shebang, models, views, and controllers
 bundle exec rails generate scaffold server --force $NOTEST
 bundle exec rails generate scaffold tournament game:references $NOTEST
 bundle exec rails generate scaffold match tournament:references name:string --force $NOTEST
@@ -24,16 +25,18 @@ bundle exec rails generate scaffold alert author:references message:text $NOTEST
 bundle exec rails generate scaffold pm author:references recipient:references message:text $NOTEST
 bundle exec rails generate scaffold game name:text players_per_team:integer teams_per_match:integer set_rounds:integer randomized_teams:integer --force $NOTEST
 bundle exec rails generate scaffold user name:string email:string user_name:string $NOTEST
+bundle exec rails generate scaffold session user:references
 
+# Just models
 bundle exec rails generate model game_attribute game:references key:text type:integer $NOTEST
 bundle exec rails generate model server_settings $NOTEST
 bundle exec rails generate model user_team_pair user:references team:references $NOTEST
 bundle exec rails generate model team_match_pair team:references match:references $NOTEST
 
+# Just controllers
 bundle exec rails generate controller search $NOTEST
 bundle exec rails generate controller main $NOTEST
 bundle exec rails generate controller static $NOTEST
-bundle exec rails generate controller sessions
 
 #added some stuff to the database
 
