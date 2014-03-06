@@ -7,14 +7,7 @@ header > nav {
 
 	#log-buttons {
 		margin-top: 8px;
-	form { display: inline; }
-		a, input[type="submit"] {
-			@extend .btn;
-			&.user { @extend .btn-info; }
-			&.signup { @extend .btn-success; }
-			&.signin { @extend .btn-info; }
-			&.signout { @extend .btn-danger; }
-		}
+		form { display: inline; }
 	}
 	form.search {
 		@extend .navbar-form;
@@ -23,6 +16,14 @@ header > nav {
 			@extend .btn-warning; margin-top: -3px; margin-right: 8px;
 		}
 	}
+}
+
+a, input[type="submit"] {
+	@extend .btn;
+	&.user { @extend .btn-info; }
+	&.signup { @extend .btn-success; }
+	&.signin { @extend .btn-info; }
+	&.signout { @extend .btn-danger; }
 }
 
 p.errors {

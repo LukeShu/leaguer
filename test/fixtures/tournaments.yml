@@ -2,6 +2,20 @@
 
 one:
   game_id: 
+  min_players_per_team: 1
+  max_players_per_team: 1
+  min_teams_per_match: 1
+  max_teams_per_match: 1
+  set_rounds: 1
+  randomized_teams: false
+  status: 1
 
 two:
   game_id: 
+  min_players_per_team: 1
+  max_players_per_team: 1
+  min_teams_per_match: 1
+  max_teams_per_match: 1
+  set_rounds: 1
+  randomized_teams: false
+  status: 1

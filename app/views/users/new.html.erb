@@ -19,14 +19,14 @@
     <%= f.password_field :password %>
   </p>
   <p>
-    <%= f.label :password_confirm %><br>
+    <%= f.label(:password_confirmation, "Confirm Password") %><br>
     <%= f.password_field :password_confirmation %>
   </p>
   <p>
-    <%= f.submit %>
+    <%= f.submit("Be a Leaguer", :class => "signup") %>
   </p>
 <% end %>
 
 
-<%= link_to 'Already Have an Account? Log in', new_session_path, :class => "btn btn-warning btn-lg" %>
+<%= link_to 'Already Have an Account? Log in', new_session_path, :class => "signin" %>
 

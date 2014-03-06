@@ -11,8 +11,8 @@ class SessionsController < ApplicationController
 	# POST /sessions.json
 	def create
 		# find the user...
-		#find by email
 		@user = User.find_by_email(params[:session][:username_or_email]) || User.find_by_user_name(params[:session][:username_or_email])
+
 		#@session = Session.new(@user)
 		# ... and create a new session
 		respond_to do |format|
