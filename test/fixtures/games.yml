@@ -2,14 +2,18 @@
 
 one:
   name: MyText
-  players_per_team: 1
-  teams_per_match: 1
+  min_players_per_team: 1
+  max_players_per_team: 1
+  min_teams_per_match: 1
+  max_teams_per_match: 1
   set_rounds: 1
-  randomized_teams: 1
+  randomized_teams: false
 
 two:
   name: MyText
-  players_per_team: 1
-  teams_per_match: 1
+  min_players_per_team: 1
+  max_players_per_team: 1
+  min_teams_per_match: 1
+  max_teams_per_match: 1
   set_rounds: 1
-  randomized_teams: 1
+  randomized_teams: false

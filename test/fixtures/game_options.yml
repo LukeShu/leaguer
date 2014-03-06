@@ -1,7 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  match_id: 
+  vartype: 1
+  name: MyString
+  default: MyText
 
 two:
-  match_id: 
+  vartype: 1
+  name: MyString
+  default: MyText
