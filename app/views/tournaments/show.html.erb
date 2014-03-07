@@ -1,3 +1,10 @@
+<% if @tournament.joinable_by?(current_user) %>
+	<%= form_tag(tournament_path(@tournament), method: "put") do %>
+		<input type="hidden" name="update_action" value="join">
+		<%= submit_tag("Join") %>
+	<% end %>
+<% end %>
+
 <p>
   <strong>Game:</strong>
   <%= @tournament.game %>

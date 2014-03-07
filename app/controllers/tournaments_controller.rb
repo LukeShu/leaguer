@@ -1,6 +1,6 @@
 class TournamentsController < ApplicationController
-  before_action :set_tournament, only: [:show, :edit, :update, :destroy]
-  before_action :check_perms, only: [:new, :create, :edit, :update, :destroy]
+  before_action :set_tournament, only: [:show, :edit, :update, :destroy, :join]
+  before_action :check_perms, only: [:new, :create, :edit, :destroy]
 
   # GET /tournaments
   # GET /tournaments.json
@@ -42,13 +42,39 @@ class TournamentsController < ApplicationController
   # PATCH/PUT /tournaments/1
   # PATCH/PUT /tournaments/1.json
   def update
-    respond_to do |format|
-      if @tournament.update(tournament_params)
-        format.html { redirect_to @tournament, notice: 'Tournament was successfully updated.' }
-        format.json { head :no_content }
+    require 'pp'
+    pp params
+    if params[:update_action].nil?
+      check_perms
+      respond_to do |format|
+        if @tournament.update(tournament_params)
+          format.html { redirect_to @tournament, notice: 'Tournament was successfully updated.' }
+          format.json { head :no_content }
+        else
+          format.html { render action: 'edit' }
+          format.json { render json: @tournament.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      case params[:update_action]
+      when "join"
+        respond_to do |format|
+          if @tournament.join(current_user)
+            format.html { render action: 'show', notice: 'You have joined this tournament.' }
+            format.json { head :no_content }
+          end
+          format.html { render action: 'permission_denied', status: :forbidden }
+          format.json { render json: "Permission denied", status: :forbidden }
+        end
+      #when "open"
+        # TODO
+      #when "close"
+        # TODO
       else
-        format.html { render action: 'edit' }
-        format.json { render json: @tournament.errors, status: :unprocessable_entity }
+        respond_to do |format|
+          format.html { render action: 'show', notice: "Invalid action", status: :unprocessable_entity }
+          format.json { render json: @tournament.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -69,7 +95,7 @@ class TournamentsController < ApplicationController
       @tournament = Tournament.find(params[:id])
     end
 
-  	def check_perms
+	def check_perms
   		unless (signed_in? and current_user.in_group?(:host))
   			respond_to do |format|
   				format.html { render action: 'permission_denied', status: :forbidden }
