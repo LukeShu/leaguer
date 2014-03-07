@@ -3,6 +3,7 @@ class CreateMatches < ActiveRecord::Migration
     create_table :matches do |t|
       t.references :tournament, index: true
       t.string :name
+      t.references :winner, index: true
 
       t.timestamps
     end

@@ -3,7 +3,9 @@
 one:
   tournament_id: 
   name: MyString
+  winner_id: 
 
 two:
   tournament_id: 
   name: MyString
+  winner_id: 
