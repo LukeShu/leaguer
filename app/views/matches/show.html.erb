@@ -22,3 +22,13 @@
 
 <%= link_to 'Edit', edit_tournament_match_path(@tournament, @match) %> |
 <%= link_to 'Back', tournament_matches_path %>
+
+<% unless @match.winner.nil? %>
+	<p>
+		<strong>Winner:</strong>
+		<%= @match.winner.users.collect{|u| u.user_name}.join(", ") %>
+	</p>
+<% end %>
+<%= link_to 'Edit', edit_match_path(@match) %> |
+<%= link_to 'Back', matches_path %>
+
