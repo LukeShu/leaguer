@@ -11,7 +11,8 @@ class SessionsController < ApplicationController
 	# POST /sessions.json
 	def create
 		# find the user...
-		@user = User.find_by(email: params[:session][:email].downcase)
+		@user = User.find_by_email(params[:session][:username_or_email]) || User.find_by_user_name(params[:session][:username_or_email])
+
 		#@session = Session.new(@user)
 		# ... and create a new session
 		respond_to do |format|
@@ -39,13 +40,13 @@ class SessionsController < ApplicationController
 
 	private
 
-	# Use callbacks to share common setup or constraints between actions.
-	def set_session
-		#@session = Session.find(cookies[:remember_token])
-	end
+			# Use callbacks to share common setup or constraints between actions.
+			def set_session
+				#@session = Session.find(cookies[:remember_token])
+			end
 
-	# Never trust parameters from the scary internet, only allow the white list through.
-	def session_params
-		params.require(:session).permit(:session_email, :session_password)
-	end
+			# Never trust parameters from the scary internet, only allow the white list through.
+			def session_params
+				params.require(:session).permit(:session_email, :session_user_name, :session_password)
+			end
 end

@@ -1,5 +1,6 @@
 class Tournament < ActiveRecord::Base
 	belongs_to :game
+	has_many :matches
 	has_many :users, :through => :user_tournament_pair
 
 	def open?

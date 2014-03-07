@@ -2,13 +2,13 @@
 
 <%= form_tag(new_tournament_path, method: "get") do %>
 	<%= select_tag('game',
-	               options_from_collection_for_select(@games, 'id', 'name', @tournament.game.nil? || @tournament.game.id),
-	               :prompt => "Select a Game Type") %>
-	<%= submit_tag("Select", :class => "btn-warning btn-lg") %>
+	                options_from_collection_for_select(@games, 'id', 'name', @tournament.game.nil? || @tournament.game.id),
+	                :prompt => "Select a Game Type") %>
+	<%= submit_tag("Select", :class => "btn btn-success btn-xs") %>
 <% end %>
 
 <div id='ajax-form'>
-	<% unless @tournament.game.nil? %>
+	<% if not @tournament.game.nil? %>
 		<%= render 'selected' %>
 	<% end %>
 </div>
