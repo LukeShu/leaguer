@@ -39,10 +39,12 @@ bundle exec rails generate model server_settings $NOTEST
 bundle exec rails generate model tournament_option tournament:references vartype:integer name:string value:text $NOTEST
 bundle exec rails generate model game_option vartype:integer name:string default:text $NOTEST
 bundle exec rails generate model score user:references match:references value:integer $NOTEST
-# Bridge Models
-bundle exec rails generate model user_team_pair user:references team:references $NOTEST
-bundle exec rails generate model user_tournament_pair user:references tournament:references
-bundle exec rails generate model team_match_pair team:references match:references $NOTEST
+
+# Join tables
+bundle exec rails generate migration CreateTournamentPlayersJoinTable	players	tournaments
+bundle exec rails generate migration CreateTournamentHostsJoinTable	hosts	tournaments
+bundle exec rails generate migration CreateUserTeamJoinTable	users matches
+bundle exec rails generate migration CreateMatchTeamJoinTable	matches teams
 
 # Just controllers
 bundle exec rails generate controller search $NOTEST
