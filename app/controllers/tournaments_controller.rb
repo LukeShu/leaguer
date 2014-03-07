@@ -21,8 +21,7 @@ class TournamentsController < ApplicationController
   # GET /tournaments/new
   def new
     @games = Game.all
-    @tournament = Tournament.new(game: Game.find_by_id(params[:game]))
-    @tournament.status = 1
+    @tournament = Tournament.new(game: Game.find_by_id(params[:game]))  
   end
 
   # GET /tournaments/1/edit
@@ -39,6 +38,7 @@ class TournamentsController < ApplicationController
   # POST /tournaments.json
   def create
     @tournament = Tournament.new(tournament_params)
+    @tournament.status = 0
     respond_to do |format|
       if @tournament.save
         @tournament.hosts.push(current_user)
