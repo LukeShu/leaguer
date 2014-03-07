@@ -41,8 +41,8 @@ bundle exec rails generate model game_option vartype:integer name:string default
 bundle exec rails generate model score user:references match:references value:integer $NOTEST
 
 # Join tables
-bundle exec rails generate migration CreateTournamentPlayersJoinTable	users tournaments
-bundle exec rails generate migration CreateTournamentHostsJoinTable	users tournaments
+bundle exec rails generate migration CreateTournamentPlayersJoinTable	players	tournaments
+bundle exec rails generate migration CreateTournamentHostsJoinTable	hosts	tournaments
 bundle exec rails generate migration CreateUserTeamJoinTable	users matches
 bundle exec rails generate migration CreateMatchTeamJoinTable	matches teams
 

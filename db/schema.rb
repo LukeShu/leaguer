@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140307004100) do
+ActiveRecord::Schema.define(version: 20140307023557) do
 
   create_table "alerts", force: true do |t|
     t.integer  "author_id"
@@ -42,6 +42,11 @@ ActiveRecord::Schema.define(version: 20140307004100) do
     t.datetime "updated_at"
   end
 
+  create_table "hosts_tournaments", id: false, force: true do |t|
+    t.integer "host_id",       null: false
+    t.integer "tournament_id", null: false
+  end
+
   create_table "matches", force: true do |t|
     t.integer  "tournament_id"
     t.string   "name"
@@ -50,6 +55,21 @@ ActiveRecord::Schema.define(version: 20140307004100) do
   end
 
   add_index "matches", ["tournament_id"], name: "index_matches_on_tournament_id"
+
+  create_table "matches_teams", id: false, force: true do |t|
+    t.integer "match_id", null: false
+    t.integer "team_id",  null: false
+  end
+
+  create_table "matches_users", id: false, force: true do |t|
+    t.integer "user_id",  null: false
+    t.integer "match_id", null: false
+  end
+
+  create_table "players_tournaments", id: false, force: true do |t|
+    t.integer "player_id",     null: false
+    t.integer "tournament_id", null: false
+  end
 
   create_table "pms", force: true do |t|
     t.integer  "author_id"
@@ -91,16 +111,6 @@ ActiveRecord::Schema.define(version: 20140307004100) do
 
   add_index "sessions", ["user_id"], name: "index_sessions_on_user_id"
 
-  create_table "team_match_pairs", force: true do |t|
-    t.integer  "team_id"
-    t.integer  "match_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "team_match_pairs", ["match_id"], name: "index_team_match_pairs_on_match_id"
-  add_index "team_match_pairs", ["team_id"], name: "index_team_match_pairs_on_team_id"
-
   create_table "teams", force: true do |t|
     t.integer  "match_id"
     t.datetime "created_at"
@@ -134,26 +144,6 @@ ActiveRecord::Schema.define(version: 20140307004100) do
   end
 
   add_index "tournaments", ["game_id"], name: "index_tournaments_on_game_id"
-
-  create_table "user_team_pairs", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "team_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "user_team_pairs", ["team_id"], name: "index_user_team_pairs_on_team_id"
-  add_index "user_team_pairs", ["user_id"], name: "index_user_team_pairs_on_user_id"
-
-  create_table "user_tournament_pairs", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "tournament_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "user_tournament_pairs", ["tournament_id"], name: "index_user_tournament_pairs_on_tournament_id"
-  add_index "user_tournament_pairs", ["user_id"], name: "index_user_tournament_pairs_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "name"
