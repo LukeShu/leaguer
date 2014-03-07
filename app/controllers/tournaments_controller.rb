@@ -11,8 +11,10 @@ class TournamentsController < ApplicationController
   # GET /tournaments/1
   # GET /tournaments/1.json
   def show
-    unless @tournament.status
-      redirect_to tournament_matches_page(@tournament)
+    case @tournament.status
+    when 0
+    when 1..2
+      redirect_to "/tournaments/" + @tournament.id.to_s + "/matches" #tournament_matches_page(@tournament)
     end
   end
 
@@ -25,15 +27,20 @@ class TournamentsController < ApplicationController
 
   # GET /tournaments/1/edit
   def edit
+    if params['close_action'] == 'close'
+      @tournament.status = 1
+      @tournament.save
+      redirect_to "/tournaments"
+    end
   end
 
   # POST /tournaments
   # POST /tournaments.json
   def create
     @tournament = Tournament.new(tournament_params)
-
     respond_to do |format|
       if @tournament.save
+        @tournament.hosts.push(current_user)
         format.html { redirect_to @tournament, notice: 'Tournament was successfully created.' }
         format.json { render action: 'show', status: :created, location: @tournament }
       else
