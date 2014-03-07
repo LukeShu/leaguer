@@ -2,14 +2,21 @@
   <%= render "common/error_messages", :target => @tournament %>
   <%= f.hidden_field(:game_id) %>
 
+  <% @chosen = Game.find_by(params[:game]) %>
   <% @tournament.attributes.each do |name, value| %>
-    <% if (name == "id") or (name =~ /.*_at$/) or (name == "game_id") %>
+    <% if (name == "id") or (name =~ /.*_at$/) or (name == "game_id") or (name == "status") %>
       <% next %>
     <% end %>
     <p>
         <%= f.label name %><br>
-        <%= f.text_field name %>
+        <% if !@chosen.attributes[name].nil? %>
+          <%= f.text_field(name, :value => @chosen.attributes[name] ) %>
+        <% else %>
+          <%= f.text_field name %>
+        <% end  %>
+
     </p>
+
   <% end %>
   <%= f.submit %>
 <% end %>
