@@ -25,9 +25,17 @@ class Tournament < ActiveRecord::Base
 		for i in 0..num_matches
 			self.matches.create(name: "Match #{i}")
 		end
-		#self.players.each_slice(num_teams) do |team_players|
-		#	Team.new(users: team_players)
-		#end
+		match_num = 0
+		team_num = 0
+		self.players.each_slice(@tournament.max_players) do |players|
+			matches[match_num].teams[team_num] = Team.new(users: players)
+			if (team_num == 0 and team_num % @tournament.max_teams_per_match == 0)
+				match_num += 1
+				team_num = 0
+			else
+				team_num += 1
+			end
+		end
 	end
 
 
