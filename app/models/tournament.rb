@@ -19,4 +19,17 @@ class Tournament < ActiveRecord::Base
 		pair = UserTournamentPair.new(tournament: self, user: user)
 		return pair.save
 	end
+
+	def setup
+		num_teams = (self.users.count/self.players_per_team).floor
+		num_matches = num_teams - 1
+		for i in 0..num_matches
+			self.matches.create(name: "Match #{i}")
+		end
+		#self.players.each_slice(num_teams) do |team_players|
+		#	Team.new(users: team_players)
+		#end
+	end
+
+
 end

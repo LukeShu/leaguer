@@ -46,8 +46,7 @@ class TournamentsController < ApplicationController
   # PATCH/PUT /tournaments/1
   # PATCH/PUT /tournaments/1.json
   def update
-    require 'pp'
-    pp params
+  	
     if params[:update_action].nil?
       check_perms
       respond_to do |format|
@@ -70,8 +69,15 @@ class TournamentsController < ApplicationController
           format.html { render action: 'permission_denied', status: :forbidden }
           format.json { render json: "Permission denied", status: :forbidden }
         end
-      #when "open"
-        # TODO
+      when "open"
+        respond_to do |format|
+          if @tournament.setup
+            format.html { render action: 'show', notice: 'You have joined this tournament.' }
+            format.json { head :no_content }
+          end
+          format.html { render action: 'permission_denied', status: :forbidden }
+          format.json { render json: "Permission denied", status: :forbidden }
+        end
       #when "close"
         # TODO
       else
