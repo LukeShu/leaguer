@@ -30,6 +30,7 @@ class TournamentsController < ApplicationController
     if params['close_action'] == 'close'
       @tournament.status = 1
       @tournament.save
+      @tournament.setup(@tournament)
       redirect_to "/tournaments"
     end
   end
