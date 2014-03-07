@@ -7,19 +7,17 @@ Leaguer::Application.routes.draw do
 
   resources :games
 
-  resources :tournaments
-
   resources :pms
 
   resources :alerts
 
-  resources :teams
-
-  resources :matches
-
-  resources :tournaments
-
   resource :server, only: [:show, :edit, :update]
+
+  resources :teams
+  resources :tournaments do
+    resources :matches
+  end
+
 
   root to: 'static#homepage'
 

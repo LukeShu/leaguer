@@ -12,13 +12,13 @@
   </thead>
 
   <tbody>
-    <% @matches.each do |match| %>
+    <% @tournament.matches.each do |match| %>
       <tr>
         <td><%= match.tournament %></td>
         <td><%= match.name %></td>
-        <td><%= link_to 'Show', match %></td>
-        <td><%= link_to 'Edit', edit_match_path(match) %></td>
-        <td><%= link_to 'Destroy', match, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', tournament_match_path(@tournament, match) %></td>
+        <td><%= link_to 'Edit', edit_tournament_match_path(@tournament, match) %></td>
+        <td><%= link_to 'Destroy', tournament_match_path(@tournament, match), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +26,4 @@
 
 <br>
 
-<%= link_to 'New Match', new_match_path %>
+<%= link_to 'New Match', new_tournament_match_path %>
