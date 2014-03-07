@@ -9,11 +9,7 @@ Leaguer::Application.routes.draw do
 
   resources :matches
 
-  resources :tournaments do
-    collection do
-      post 'join'
-    end
-  end
+  resources :tournaments
 
   resource :server, only: [:show, :edit, :update]
 

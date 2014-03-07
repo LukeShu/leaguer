@@ -1,7 +1,8 @@
 class Tournament < ActiveRecord::Base
 	belongs_to :game
 	has_many :matches
-	has_many :users, :through => :user_tournament_pair
+	has_many :user_tournament_pairs
+	has_many :users, :through => :user_tournament_pairs
 
 	def open?
 		return true
@@ -12,10 +13,10 @@ class Tournament < ActiveRecord::Base
 	end
 
 	def join(user)
-		unless joinable?(user)
+		unless joinable_by?(user)
 			return false
 		end
-		pair = new_user_tournament_pair(user: user)
+		pair = UserTournamentPair.new(tournament: self, user: user)
 		return pair.save
 	end
 end
