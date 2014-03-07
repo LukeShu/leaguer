@@ -22,7 +22,8 @@ class TournamentsController < ApplicationController
   def new
     @games = Game.all
     @tournament = Tournament.new(game: Game.find_by_id(params[:game]))
-    @tournament.status = 1
+    @tournament.status = 0
+    @tournament.save
   end
 
   # GET /tournaments/1/edit
