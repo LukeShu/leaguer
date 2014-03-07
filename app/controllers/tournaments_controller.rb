@@ -65,18 +65,20 @@ class TournamentsController < ApplicationController
           if @tournament.join(current_user)
             format.html { render action: 'show', notice: 'You have joined this tournament.' }
             format.json { head :no_content }
+          else
+            format.html { render action: 'permission_denied', status: :forbidden }
+            format.json { render json: "Permission denied", status: :forbidden }
           end
-          format.html { render action: 'permission_denied', status: :forbidden }
-          format.json { render json: "Permission denied", status: :forbidden }
         end
       when "open"
         respond_to do |format|
           if @tournament.setup
-            format.html { render action: 'show', notice: 'You have joined this tournament.' }
+            format.html { render action: 'show', notice: 'You have opend this tournament.' }
             format.json { head :no_content }
+          else
+            format.html { render action: 'permission_denied', status: :forbidden }
+            format.json { render json: "Permission denied", status: :forbidden }
           end
-          format.html { render action: 'permission_denied', status: :forbidden }
-          format.json { render json: "Permission denied", status: :forbidden }
         end
       #when "close"
         # TODO
