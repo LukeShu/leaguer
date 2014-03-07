@@ -7,17 +7,9 @@ Leaguer::Application.routes.draw do
 
   resources :games
 
-  resources :pms
-
-  resources :alerts
-
-  resources :teams
-
   resources :matches
 
   resources :tournaments
-
-  #set 'selected' to: 'tournaments#selected' via: 'get'
 
   resources :servers
 

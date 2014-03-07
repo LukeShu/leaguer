@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140306222447) do
+ActiveRecord::Schema.define(version: 20140307004100) do
 
   create_table "alerts", force: true do |t|
     t.integer  "author_id"
@@ -120,25 +120,15 @@ ActiveRecord::Schema.define(version: 20140306222447) do
 
   add_index "tournament_options", ["tournament_id"], name: "index_tournament_options_on_tournament_id"
 
-  create_table "tournament_user_pairs", force: true do |t|
-    t.integer  "tournament_id"
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "tournament_user_pairs", ["tournament_id"], name: "index_tournament_user_pairs_on_tournament_id"
-  add_index "tournament_user_pairs", ["user_id"], name: "index_tournament_user_pairs_on_user_id"
-
   create_table "tournaments", force: true do |t|
     t.integer  "game_id"
+    t.integer  "status"
     t.integer  "min_players_per_team"
     t.integer  "max_players_per_team"
     t.integer  "min_teams_per_match"
     t.integer  "max_teams_per_match"
     t.integer  "set_rounds"
     t.boolean  "randomized_teams"
-    t.integer  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -154,6 +144,16 @@ ActiveRecord::Schema.define(version: 20140306222447) do
 
   add_index "user_team_pairs", ["team_id"], name: "index_user_team_pairs_on_team_id"
   add_index "user_team_pairs", ["user_id"], name: "index_user_team_pairs_on_user_id"
+
+  create_table "user_tournament_pairs", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "tournament_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_tournament_pairs", ["tournament_id"], name: "index_user_tournament_pairs_on_tournament_id"
+  add_index "user_tournament_pairs", ["user_id"], name: "index_user_tournament_pairs_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "name"
