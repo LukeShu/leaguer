@@ -11,12 +11,16 @@ class TournamentsController < ApplicationController
   # GET /tournaments/1
   # GET /tournaments/1.json
   def show
+    unless @tournament.status
+      redirect_to tournament_matches_page(@tournament)
+    end
   end
 
   # GET /tournaments/new
   def new
     @games = Game.all
     @tournament = Tournament.new(game: Game.find_by_id(params[:game]))
+    @tournament.status = 1
   end
 
   # GET /tournaments/1/edit
