@@ -12,7 +12,7 @@
 	<%= form_for([@tournament, @match], method: "put") do |f| %>
 		<ul>
 			<% @match.teams.each do |team| %>
-				<li><label><%= f.radio_button(:winner_id, team.id) %>
+				<li><label><%= f.radio_button(:winner, team.id) %>
 					<%= team.users.collect{|u| u.user_name}.join(", ") %></label></li>
 		  <% end %>
 		</ul>
