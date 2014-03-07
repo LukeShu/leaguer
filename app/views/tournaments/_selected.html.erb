@@ -4,7 +4,7 @@
 
   <% @chosen = Game.find_by(params[:game]) %>
   <% @tournament.attributes.each do |name, value| %>
-    <% if (name == "id") or (name =~ /.*_at$/) or (name == "game_id") or (name == "statuss") %>
+    <% if (name == "id") or (name =~ /.*_at$/) or (name == "game_id") or (name == "status") %>
       <% next %>
     <% end %>
     <p>

@@ -1,12 +1,24 @@
 <p>
   <strong>Tournament:</strong>
-  <%= @match.tournament %>
+  <%= @match.tournament.id %>
 </p>
 
 <p>
   <strong>Name:</strong>
   <%= @match.name %>
 </p>
+
+<% if @tournament.hosts.include?(current_user) %>
+	<%= form_tag(tournament_match_path(@tournament, @match), method: "put") do %>
+		<ul>
+			<% @match.teams.each do |team| %>
+				<li><label><input type="radio" name="winner" value="<%= team.id %>">
+					<%= team.users.collect{|u| u.user_name}.join(", ") %></label></li>
+		  <% end %>
+		</ul>
+		<%= submit_tag("Select winner") %>
+	<% end %>
+<% end %>
 
 <%= link_to 'Edit', edit_tournament_match_path(@tournament, @match) %> |
 <%= link_to 'Back', tournament_matches_path %>
