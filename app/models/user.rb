@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
 		when :admin
 			return ((groups & 2) != 0)
 		when :host
-			return true #((groups & 1) != 0)
+			return ((groups & 1) != 0)
 		when :player
 			return true
 		when :specator
