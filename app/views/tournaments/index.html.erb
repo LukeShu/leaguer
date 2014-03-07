@@ -4,13 +4,13 @@
   <thead>
     <tr>
       <th>Game</th>
+      <th>Status</th>
       <th>Min players per team</th>
       <th>Max players per team</th>
       <th>Min teams per match</th>
       <th>Max teams per match</th>
       <th>Set rounds</th>
       <th>Randomized teams</th>
-      <th>Status</th>
       <th></th>
       <th></th>
       <th></th>
@@ -21,13 +21,13 @@
     <% @tournaments.each do |tournament| %>
       <tr>
         <td><%= tournament.game %></td>
+        <td><%= tournament.status %></td>
         <td><%= tournament.min_players_per_team %></td>
         <td><%= tournament.max_players_per_team %></td>
         <td><%= tournament.min_teams_per_match %></td>
         <td><%= tournament.max_teams_per_match %></td>
         <td><%= tournament.set_rounds %></td>
         <td><%= tournament.randomized_teams %></td>
-        <td><%= tournament.status %></td>
         <td><%= link_to 'Show', tournament %></td>
         <td><%= link_to 'Edit', edit_tournament_path(tournament) %></td>
         <td><%= link_to 'Destroy', tournament, method: :delete, data: { confirm: 'Are you sure?' } %></td>
