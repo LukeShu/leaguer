@@ -16,12 +16,20 @@
     <%= f.text_area :name %>
   </div>
   <div class="field">
-    <%= f.label :players_per_team %><br>
-    <%= f.number_field :players_per_team %>
+    <%= f.label :min_players_per_team %><br>
+    <%= f.number_field :min_players_per_team %>
   </div>
   <div class="field">
-    <%= f.label :teams_per_match %><br>
-    <%= f.number_field :teams_per_match %>
+    <%= f.label :max_players_per_team %><br>
+    <%= f.number_field :max_players_per_team %>
+  </div>
+  <div class="field">
+    <%= f.label :min_teams_per_match %><br>
+    <%= f.number_field :min_teams_per_match %>
+  </div>
+  <div class="field">
+    <%= f.label :max_teams_per_match %><br>
+    <%= f.number_field :max_teams_per_match %>
   </div>
   <div class="field">
     <%= f.label :set_rounds %><br>
@@ -29,7 +37,7 @@
   </div>
   <div class="field">
     <%= f.label :randomized_teams %><br>
-    <%= f.number_field :randomized_teams %>
+    <%= f.check_box :randomized_teams %>
   </div>
   <div class="actions">
     <%= f.submit %>
