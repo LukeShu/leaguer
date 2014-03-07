@@ -43,7 +43,7 @@ bundle exec rails generate model score user:references match:references value:in
 # Join tables
 bundle exec rails generate migration CreateTournamentPlayersJoinTable	players	tournaments
 bundle exec rails generate migration CreateTournamentHostsJoinTable	hosts	tournaments
-bundle exec rails generate migration CreateUserTeamJoinTable	users matches
+bundle exec rails generate migration CreateTeamUserJoinTable	teams	users
 bundle exec rails generate migration CreateMatchTeamJoinTable	matches teams
 
 # Just controllers
