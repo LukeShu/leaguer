@@ -13,12 +13,10 @@ Leaguer::Application.routes.draw do
 
   resources :teams
 
-  resources :matches
-
-  resources :tournaments
-
-  #set 'selected' to: 'tournaments#selected' via: 'get'
-
+  resources :tournaments do
+    resources :matches
+  end
+  
   resources :servers
 
   root to: 'static#homepage'
