@@ -1,8 +1,6 @@
 class TournamentsController < ApplicationController
-  # put #update in with before_show, because in special cases the
-  # permissions are relaxed, so we do that right in the #update method
-  before_action :before_show, only: [:show, :update]
-  before_action :before_edit, only: [:new, :create, :edit, :destroy]
+  before_action :set_tournament, only: [:show, :edit, :update, :destroy, :join]
+  before_action :check_perms, only: [:new, :create, :edit, :destroy]
 
   # GET /tournaments
   # GET /tournaments.json
@@ -42,7 +40,7 @@ class TournamentsController < ApplicationController
     @tournament = Tournament.new(tournament_params)
     respond_to do |format|
       if @tournament.save
-        #@tournament.hosts.push(current_user)
+        @tournament.hosts.push(current_user)
         format.html { redirect_to @tournament, notice: 'Tournament was successfully created.' }
         format.json { render action: 'show', status: :created, location: @tournament }
       else
@@ -55,8 +53,9 @@ class TournamentsController < ApplicationController
   # PATCH/PUT /tournaments/1
   # PATCH/PUT /tournaments/1.json
   def update
+  	
     if params[:update_action].nil?
-      before_edit
+      check_perms
       respond_to do |format|
         if @tournament.update(tournament_params)
           format.html { redirect_to @tournament, notice: 'Tournament was successfully updated.' }
@@ -73,20 +72,18 @@ class TournamentsController < ApplicationController
           if @tournament.join(current_user)
             format.html { render action: 'show', notice: 'You have joined this tournament.' }
             format.json { head :no_content }
-          else
-            format.html { render action: 'permission_denied', status: :forbidden }
-            format.json { render json: "Permission denied", status: :forbidden }
           end
+          format.html { render action: 'permission_denied', status: :forbidden }
+          format.json { render json: "Permission denied", status: :forbidden }
         end
       when "open"
         respond_to do |format|
           if @tournament.setup
-            format.html { render action: 'show', notice: 'You have opend this tournament.' }
+            format.html { render action: 'show', notice: 'You have joined this tournament.' }
             format.json { head :no_content }
-          else
-            format.html { render action: 'permission_denied', status: :forbidden }
-            format.json { render json: "Permission denied", status: :forbidden }
           end
+          format.html { render action: 'permission_denied', status: :forbidden }
+          format.json { render json: "Permission denied", status: :forbidden }
         end
       #when "close"
         # TODO
@@ -111,19 +108,18 @@ class TournamentsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def before_show
+    def set_tournament
       @tournament = Tournament.find(params[:id])
     end
 
-    def before_edit
-      @tournament = Tournament.find(params[:id])
-      unless (signed_in? and (@tournament.hosts.include?(current_user) or current_user.in_group?(:admin)))
-        respond_to do |format|
-          format.html { render action: 'permission_denied', status: :forbidden }
-          format.json { render json: "Permission denied", status: :forbidden }
-        end
-      end
-    end
+	def check_perms
+  		unless (signed_in? and current_user.in_group?(:host))
+  			respond_to do |format|
+  				format.html { render action: 'permission_denied', status: :forbidden }
+  				format.json { render json: "Permission denied", status: :forbidden }
+  			end
+  		end
+  	end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tournament_params
