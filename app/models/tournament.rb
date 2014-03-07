@@ -1,8 +1,8 @@
 class Tournament < ActiveRecord::Base
 	belongs_to :game
 	has_many :matches
-	has_many :user_tournament_pairs
-	has_many :users, :through => :user_tournament_pairs
+	has_and_belongs_to_many :players, class_name: "User", join_table: "tournaments_players"
+	has_and_belongs_to_many :hosts,   class_name: "User", join_table: "tournaments_hosts"
 
 	def open?
 		return true
