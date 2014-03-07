@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
-	has_and_belongs_to_many :tournaments_played, class_name: "Tournament", join_table: "tournaments_players"
-	has_and_belongs_to_many :tournaments_hosted, class_name: "Tournament", join_table: "tournaments_hosts"
+	has_and_belongs_to_many :tournaments_played, class_name: "Tournament", foreign_key: "tournament_id", join_table: "players_tournaments"
+	has_and_belongs_to_many :tournaments_hosted, class_name: "Tournament", foreign_key: "tournament_id", join_table: "hosts_tournaments"
 
 	before_save { self.email = email.downcase }
 	before_save { self.user_name = user_name }
