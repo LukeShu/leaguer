@@ -1,10 +1,11 @@
 <% if @tournament.joinable_by?(current_user) %>
 	<%= form_tag(tournament_path(@tournament), method: "put") do %>
 		<input type="hidden" name="update_action" value="join">
-		<%= submit_tag("Join") %>
+		<%= current_user.name %><%= submit_tag("Join") %>
 	<% end %>
 <% end %>
 
+<% if current_user.in_group?(:host) %>
 <p>
   <strong>Game:</strong>
   <%= @tournament.game %>
@@ -45,5 +46,12 @@
   <%= @tournament.status %>
 </p>
 
+<%= form_tag(tournaments_path.to_s + "/" + @tournament.id.to_s + "/edit", method: "get") do %>
+  <input type="hidden" name="close_action" value="close">
+  <%= submit_tag("Close Tournament Registration") %>
+<% end %>
+
 <%= link_to 'Edit', edit_tournament_path(@tournament) %> |
 <%= link_to 'Back', tournaments_path %>
+
+<% end %>
