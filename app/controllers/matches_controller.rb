@@ -1,5 +1,5 @@
 class MatchesController < ApplicationController
-  before_action :set_tournament, only: [:index]
+  before_action :set_tournament, only: [:index, :new, :create]
   before_action :set_match, only: [:show, :edit, :update, :destroy]
   # GET /matches
   # GET /matches.json
@@ -72,6 +72,6 @@ class MatchesController < ApplicationController
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def match_params
-      params.require(:match).permit(:tournament_id, :name)
+      params.require(:match).permit(:tournament_id, :name, :winner_id)
     end
 end
