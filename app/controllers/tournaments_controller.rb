@@ -38,9 +38,9 @@ class TournamentsController < ApplicationController
   # POST /tournaments.json
   def create
     @tournament = Tournament.new(tournament_params)
-
     respond_to do |format|
       if @tournament.save
+        @tournament.hosts.push(current_user)
         format.html { redirect_to @tournament, notice: 'Tournament was successfully created.' }
         format.json { render action: 'show', status: :created, location: @tournament }
       else
@@ -53,8 +53,7 @@ class TournamentsController < ApplicationController
   # PATCH/PUT /tournaments/1
   # PATCH/PUT /tournaments/1.json
   def update
-    require 'pp'
-    pp params
+  	
     if params[:update_action].nil?
       check_perms
       respond_to do |format|
@@ -77,8 +76,15 @@ class TournamentsController < ApplicationController
           format.html { render action: 'permission_denied', status: :forbidden }
           format.json { render json: "Permission denied", status: :forbidden }
         end
-      #when "open"
-        # TODO
+      when "open"
+        respond_to do |format|
+          if @tournament.setup
+            format.html { render action: 'show', notice: 'You have joined this tournament.' }
+            format.json { head :no_content }
+          end
+          format.html { render action: 'permission_denied', status: :forbidden }
+          format.json { render json: "Permission denied", status: :forbidden }
+        end
       #when "close"
         # TODO
       else
@@ -117,6 +123,6 @@ class TournamentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tournament_params
-      params.require(:tournament).permit(:game, :game_id, :min_players_per_team, :max_players_per_team, :min_teams_per_match, :max_teams_per_match, :set_rounds, :randomized_teams, :status)
+      params.require(:tournament).permit(:game, :game_id, :status, :min_players_per_team, :max_players_per_team, :min_teams_per_match, :max_teams_per_match, :set_rounds, :randomized_teams)
     end
 end

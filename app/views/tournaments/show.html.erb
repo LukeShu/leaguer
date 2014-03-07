@@ -12,6 +12,11 @@
 </p>
 
 <p>
+  <strong>Status:</strong>
+  <%= @tournament.status %>
+</p>
+
+<p>
   <strong>Min players per team:</strong>
   <%= @tournament.min_players_per_team %>
 </p>
@@ -55,3 +60,4 @@
 <%= link_to 'Back', tournaments_path %>
 
 <% end %>
+

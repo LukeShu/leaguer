@@ -16,6 +16,10 @@
     <%= f.text_field :game_id %>
   </div>
   <div class="field">
+    <%= f.label :status %><br>
+    <%= f.number_field :status %>
+  </div>
+  <div class="field">
     <%= f.label :min_players_per_team %><br>
     <%= f.number_field :min_players_per_team %>
   </div>
@@ -38,10 +42,6 @@
   <div class="field">
     <%= f.label :randomized_teams %><br>
     <%= f.check_box :randomized_teams %>
-  </div>
-  <div class="field">
-    <%= f.label :status %><br>
-    <%= f.number_field :status %>
   </div>
   <div class="actions">
     <%= f.submit %>

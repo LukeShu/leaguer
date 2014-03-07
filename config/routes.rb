@@ -11,13 +11,13 @@ Leaguer::Application.routes.draw do
 
   resources :alerts
 
-  resources :teams
+  resource :server, only: [:show, :edit, :update]
 
+  resources :teams
   resources :tournaments do
     resources :matches
   end
 
-  resource :server, only: [:show, :edit, :update]
 
   root to: 'static#homepage'
 
