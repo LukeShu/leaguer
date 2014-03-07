@@ -42,7 +42,7 @@ class MatchesController < ApplicationController
   def update
     respond_to do |format|
       if @match.update(match_params)
-        format.html { redirect_to @match, notice: 'Match was successfully updated.' }
+        format.html { redirect_to [@tournament, @match], notice: 'Match was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

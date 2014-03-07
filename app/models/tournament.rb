@@ -16,7 +16,7 @@ class Tournament < ActiveRecord::Base
 		unless joinable_by?(user)
 			return false
 		end
-		players<<user
+		players.push(user)
 	end
 
 	def setup(tournament)
@@ -28,7 +28,7 @@ class Tournament < ActiveRecord::Base
 		match_num = 0
 		team_num = 0
 		self.players.each_slice(tournament.max_players_per_team) do |players|
-			self.matches[match_num].teams[team_num] = Team.new(users: players)
+			self.matches[match_num].teams.push(Team.create(users: players))
 			if (team_num == 0 and team_num % tournament.max_teams_per_match == 0)
 				match_num += 1
 				team_num = 0
