@@ -40,7 +40,7 @@ class TournamentsController < ApplicationController
     @tournament = Tournament.new(tournament_params)
     respond_to do |format|
       if @tournament.save
-        @tournament.hosts.push(current_user)
+        #@tournament.hosts.push(current_user)
         format.html { redirect_to @tournament, notice: 'Tournament was successfully created.' }
         format.json { render action: 'show', status: :created, location: @tournament }
       else
