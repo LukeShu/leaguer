@@ -14,9 +14,13 @@
         <% else %>
           <%= f.text_field name %>
         <% end  %>
-
     </p>
-
   <% end %>
+
+  <div class="field">
+    <%= f.label :status %><br>
+    <%= f.number_field :status %>
+  </div>
+
   <%= f.submit %>
 <% end %>

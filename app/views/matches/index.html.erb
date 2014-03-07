@@ -15,7 +15,7 @@
   <tbody>
     <% @tournament.matches.each do |match| %>
       <tr>
-        <td><%= match.tournament %></td>
+        <td><%= match.tournament.id %></td>
         <td><%= match.name %></td>
         <td><%= match.winner %></td>
         <td><%= link_to 'Show', tournament_match_path(@tournament, match) %></td>
