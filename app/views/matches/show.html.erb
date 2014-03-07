@@ -9,14 +9,14 @@
 </p>
 
 <% if @tournament.hosts.include?(current_user) %>
-	<%= form_tag(tournament_match_path(@tournament, @match), method: "put") do %>
+	<%= form_for(@match, method: "put") do |f| %>
 		<ul>
 			<% @match.teams.each do |team| %>
-				<li><label><input type="radio" name="winner" value="<%= team.id %>">
+				<li><label><%= f.radio_button(:winner, team.id) %>
 					<%= team.users.collect{|u| u.user_name}.join(", ") %></label></li>
 		  <% end %>
 		</ul>
-		<%= submit_tag("Select winner") %>
+		<%= f.submit("Select winner") %>
 	<% end %>
 <% end %>
 
