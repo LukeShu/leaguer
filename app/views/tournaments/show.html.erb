@@ -61,7 +61,7 @@
 
 <%= form_tag(tournaments_path.to_s + "/" + @tournament.id.to_s + "/edit", method: "get") do %>
   <input type="hidden" name="close_action" value="close">
-  <% if @tournament.players.count > @tournament.min_players_per_team * @tournament.min_teams_per_match  %> 
+  <% if @tournament.players.count >= @tournament.min_players_per_team * @tournament.min_teams_per_match  %> 
     <%= submit_tag("Close Tournament Registration") %>
   <% else %>
     <%= submit_tag("Close Tournament Registration", disabled: true) %>
