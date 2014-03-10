@@ -1,6 +1,6 @@
 ---
-title: "Project Leaguer: Sprint 2"
-author: [ "Team 6:", Nathaniel Foy, Guntas Grewal, Tomer Kimia, Andrew Murrell, Luke Shumaker, Davis Webb ]
+title: "Team 6 - Project Leaguer: Sprint 2"
+author: [ Nathaniel Foy, Guntas Grewal, Tomer Kimia, Andrew Murrell, Luke Shumaker, Davis Webb ]
 ---
 
 # User Stories
