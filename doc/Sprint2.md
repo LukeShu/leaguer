@@ -13,15 +13,24 @@ author: [ "Team 6:", Nathaniel Foy, Guntas Grewal, Tomer Kimia, Andrew Murrell, 
 
 4) LoL API Integration
 
-5) Active Status Update and AJAX
+5) As a host/player, I would like my pages to actively update without
+   refreshing my current page.
+   	- For this task, we will implent an Active Status Update system with AJAX.
 
-6) Setting up a Tournament View for matches and tree
+6) As a host/player, I would like to see an interactive tournament lobby page
+   that displays tournament information and its matches.
 
-7) Increased Usability
+7) As a host/player, I would like the Leaguer application to be more intuitive
+   and easy to use.
 
-8) History and Persistent Storage Search
+8) As a user, I would like past tournament and player information to be 
+   persistent and searchable.
+   	- A working search bar should be implemented that will find specific
+   	  players or tournaments and return their pages.
 
-9) Player Profiles
+9) As a user, I would like Player Profile pages.
+	- For this task, we will be creating profile pages for registered users
+	  that have player-specific information: name, tournament history, etc.
 
 # Tasks
 
