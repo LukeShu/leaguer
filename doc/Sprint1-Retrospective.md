@@ -35,55 +35,94 @@ several days.
 | Tasks Implemented and Working                           | Size | Person | US |
 +=========================================================+======+========+====+
 | [Learn Rails, set up Scaffolding for all Models, Views, |    8 | All    |  1 |
-| Controllers](#1)                                        |      |        |    |
+| Controllers](#learn-rails)                              |      |        |    |
 +---------------------------------------------------------+------+--------+----+
-| Deploy rails on the server at 199.180.255.147           |    3 | Luke   |  1 |
+| [Deploy rails on Luke's server](#deploy-rails)          |    3 | Luke   |  1 |
 +---------------------------------------------------------+------+--------+----+
-| Create log-in system backend (verification, cookies,    |    5 | Davis  |  2 |
-| and redirection)                                        |      |        |    |
+| [Create log-in system backend (verification, cookies,   |    5 | Davis  |  2 |
+| and redirection)](#login-backend)                       |      |        |    |
 +---------------------------------------------------------+------+--------+----+
-| Create log-in system UI (forms, CSS, and submission)    |    2 | Tomer  |  2 |
+| [Create log-in system UI](#login-ui)                    |    2 | Tomer  |  2 |
 +---------------------------------------------------------+------+--------+----+
-| Create Preliminary Tournament Settings Page             |    3 | Guntas |  3 |
+| [Create Tournament Settings Page](#tourney-settings)    |    3 | Guntas |  3 |
 +---------------------------------------------------------+------+--------+----+
-| Implement Tournament Registration and Tournament        |    2 | Andrew |  3 |
-| Controller                                              |      |        |    |
+| [Implement Tournament Registration and Tournament       |    2 | Andrew |  3 |
+| Controller](#tourney-registration)                      |      |        |    |
 +---------------------------------------------------------+------+--------+----+
-| Implement match controller                              |    3 | Dav+And|  4 |
+| [Implement match controller](#match-controller)         |    3 | Dav+And|  4 |
 +---------------------------------------------------------+------+--------+----+
-| Implement permissions system over the users system      |    3 | Luke   |  5 |
+| [Implement permissions system over the users            |    3 | Luke   |  5 |
+| system](#permissions)                                   |      |        |    |
 +---------------------------------------------------------+------+--------+----+
-| Create View Tournament Page                             |    5 | All    |  6 |
+| [Create View Tournament Page](#tourney-view)            |    5 | All    |  6 |
 +---------------------------------------------------------+------+--------+----+
-| Create Presentable Homepage                             |    5 | Guntas |  7 |
+| [Create Presentable Homepage](#homepage)                |    5 | Guntas |  7 |
 +---------------------------------------------------------+------+--------+----+
 
 
 +---------------------------------------------------------+------+--------+----+
 | Tasks Implemented and Not Working Well                  | Size | Person | US |
 +=========================================================+======+========+====+
-| Design and implement match score models                 |    3 | Foy    |  4 |
+| [Design and implement match score models](#match-score) |    3 | Foy    |  4 |
 +---------------------------------------------------------+------+--------+----+
-| Create Admin-level Server Management Page               |    2 | Luke   |  5 |
+| [Create Admin-level Server Management Page](#srv-man)   |    2 | Luke   |  5 |
 +---------------------------------------------------------+------+--------+----+
 
 
 +---------------------------------------------------------+------+--------+----+
 | Tasks Not Implemented                                   | Size | Person | US |
 +=========================================================+======+========+====+
-| Design/Code Scoring/Pairing Algorithms and Procedures   |    5 | Foy    |  3 |
+| [Design/Code Scoring/Pairing Algorithms and             |    5 | Foy    |  3 |
+| Procedures](#score-algo)                                |      |        |    |
 +---------------------------------------------------------+------+--------+----+
-| Observe Foy Design/Code Scoring/Pairing Algorithms      |    2 | Dav+Foy|  3 |
+| [Observe Foy Design/Code Scoring/Pairing                |    2 | Dav+Foy|  3 |
+| Algorithms](#score-algo)                                |      |        |    |
 +---------------------------------------------------------+------+--------+----+
-| Create a Player-level Data Entry Page/Method for Results|    3 | Tomer  |  4 |
+| [Create a Player-level Data Entry Page/Method for       |    3 | Tomer  |  4 |
+| Results](#data-entry)                                   |      |        |    |
 +---------------------------------------------------------+------+--------+----+
 
-Link to [text](#target)
+# Implemented and working
 
-[label]: #target
+## Learn Rails {#learn-rails}
 
-[Learn Rails]: #1
+This task went OK.
 
+## Deploy Rails {#deploy-rails}
+
+f
+
+## Login (backend) {#login-backend}
+
+f
+
+## Login (UI) {#login-ui}
+
+## Tournament settings {#tourney-settings}
+
+## Tournament registration {#tourney-registration}
+
+## Match controller {#match-controller}
+
+## Permissions system {#permissions}
+
+## Tournament view {#tourney-view}
+
+## Homepage {#homepage}
+
+# Implemented but not working well
+
+## Match score models {#match-score}
+
+## Server management {#srv-man}
+
+# Not implemented
+
+## Scoring Algorithms {#score-algo}
+
+## Data entry {#data-entry}
+
+# End
 
 1. Each task must be mentioned under the right category (implemented
    and working, implemented but did not work well, or not implemented
