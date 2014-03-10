@@ -1,17 +1,25 @@
 ---
-title: "Project Leaguer: Sprint 2"
-author: [ "Team 6:", Nathaniel Foy, Guntas Grewal, Tomer Kimia, Andrew Murrell, Luke Shumaker, Davis Webb ]
+title: "Team 6 - Project Leaguer: Sprint 2"
+author: [ Nathaniel Foy, Guntas Grewal, Tomer Kimia, Andrew Murrell, Luke Shumaker, Davis Webb ]
 ---
 
 # User Stories
 
-1) Security/Verification
+1) As a host/player, I would like to have only the options my group entitles me to.
 
-2) Peer Review
+Security/Verification 
 
-3) Settings/Preferences
+2) As a player I would like to review my peers and like to have our scores reflect these reviews.
 
-4) LoL API Integration
+Peer Review
+
+3) As a host I would like to have both game type specific settings and tournament specific preferences available when creating a new tournament.
+
+Settings/Preferences
+
+4) As a host/player spectator I would like to have Riot Games League of Legends API integration. 
+
+LoL API Integration
 
 5) As a host/player, I would like my pages to actively update without
    refreshing my current page.
