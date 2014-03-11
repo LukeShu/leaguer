@@ -94,7 +94,7 @@ has been an impressive journey.
 
 The entire team became familiar with deploying Rails in our rather
 diverse working environments and successfully deployed a server
-instance located at demo.projectleaguer.net.
+instance located at demo.projectleaguer.net as well as on our local boxes.
 
 ## Login (back-end) {#login-backend}
 
@@ -110,7 +110,17 @@ place, this has been fixed).
 
 ## Tournament settings {#tourney-settings}
 
+Tournament settings were implemented at a basic level, instituting those
+items which are similar to all tournaments, regardless of type, orginating
+from the game model.
+
 ## Tournament registration {#tourney-registration}
+
+Tournament registration and the tournament contoller were completed which
+allowed users to join and participate in basic tournaments of several types.
+The tournament controller handled a variety of tournament related tasks,
+including creating and updating tournaments and validating tournament related
+operations.
 
 ## Match controller {#match-controller}
 
@@ -129,12 +139,7 @@ only had it working where the tournament host would decide who won.
 
 ## Server management {#srv-man}
 
-The server management software interface is implemented, and working
-fine.  The other modules use it.  However, what we didn't implement is
-an actual *page* to edit these settings.  We had this task in the
-iteration because other items depended on it.  Though we did not
-implement the full story, we implemented the core reason that we
-wanted it.
+
 
 # Not implemented
 
