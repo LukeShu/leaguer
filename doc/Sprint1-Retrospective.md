@@ -109,15 +109,11 @@ designations (although for the demo some of the hooks were not in
 place, this has been fixed).
 
 ## Tournament settings {#tourney-settings}
-<<<<<<< HEAD
 
 Tournament settings were implemented at a basic level, instituting those
 items which are similar to all tournaments, regardless of type, orginating
 from the game model.
 
-=======
-  
->>>>>>> 5f96d780def7c33a6d6e452b558ac136ee4d06bc
 ## Tournament registration {#tourney-registration}
 
 Tournament registration and the tournament contoller were completed which
@@ -177,7 +173,12 @@ only had it working where the tournament host would decide who won.
 
 ## Server management {#srv-man}
 
-
+The server management software interface is implemented, and working
+fine.  The other modules use it.  However, what we didn't implement is
+an actual *page* to edit these settings.  We had this task in the
+iteration because other items depended on it.  Though we did not
+implement the full story, we implemented the core reason that we
+wanted it.
 
 # Not implemented
 
