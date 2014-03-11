@@ -137,7 +137,12 @@ only had it working where the tournament host would decide who won.
 
 ## Server management {#srv-man}
 
-
+The server management software interface is implemented, and working
+fine.  The other modules use it.  However, what we didn't implement is
+an actual *page* to edit these settings.  We had this task in the
+iteration because other items depended on it.  Though we did not
+implement the full story, we implemented the core reason that we
+wanted it.
 
 # Not implemented
 
