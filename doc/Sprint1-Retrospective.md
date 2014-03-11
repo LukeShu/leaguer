@@ -147,12 +147,6 @@ to view pages which are html.erb pages that provide styles and functionality
 of each of the tournament setting features. Show, Edit, Destroy, all have 
 views of their own to perform each of the above actions.
 
-The tournament view lists the tournaments on one page as a table of rows. Each
-row lists sample tournament information (game name, players per team, etc)
-along with buttons for different tasks, such as joining or viewing a tourny.
-You can also create a new tournament here. The functionality we want is
-here.
-
 ## Homepage {#homepage}
 The homepage is mainly controlled by the views that are associated with each 
 model and controller. The main view for the homepage is the one found in the 
