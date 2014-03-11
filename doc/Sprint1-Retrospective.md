@@ -11,7 +11,7 @@ author: [ Nathaniel Foy, Guntas Grewal, Tomer Kimia, Andrew Murrell, Luke Shumak
 2) As a host/player, I would like to register and have an account.
     - For this task, we will be creating the user registration and log
       in capabilities for Leaguer.
-3) As a host, I would like to start a tournamnet.
+3) As a host, I would like to start a tournament.
     - For this task, we will be creating a base tournament system for a
       host to run.
 4) As a host/player, I would like to enter scores for players.
@@ -22,7 +22,6 @@ author: [ Nathaniel Foy, Guntas Grewal, Tomer Kimia, Andrew Murrell, Luke Shumak
 7) As a user, I would like a presentable homepage.
     - For this task, we will be creating a Leaguer homepage and ensure that it
       is pleasing to the eye and easy to navigate.
-
 
 # Tasks
 
@@ -39,7 +38,7 @@ several days.
 +---------------------------------------------------------+------+--------+----+
 | [Deploy rails on Luke's server](#deploy-rails)          |    3 | Luke   |  1 |
 +---------------------------------------------------------+------+--------+----+
-| [Create log-in system backend (verification, cookies,   |    5 | Davis  |  2 |
+| [Create log-in system back-end (verification, cookies,  |    5 | Davis  |  2 |
 | and redirection)](#login-backend)                       |      |        |    |
 +---------------------------------------------------------+------+--------+----+
 | [Create log-in system UI](#login-ui)                    |    2 | Tomer  |  2 |
@@ -86,18 +85,29 @@ several days.
 
 ## Learn Rails {#learn-rails}
 
-This task went OK.
+Learning Rails has been a growing experience for the majority of the
+team. Some of us coming from no significant experience to being able
+to put together a relatively functional product in only three weeks
+has been an impressive journey.
 
 ## Deploy Rails {#deploy-rails}
 
-f
+The entire team became familiar with deploying Rails in our rather
+diverse working environments and successfully deployed a server
+instance located at demo.projectleaguer.net.
 
-## Login (backend) {#login-backend}
+## Login (back-end) {#login-backend}
 
-f
+Our login back-end successfully logs users in and our and can handle
+user registrations and first-come-first-serve uniqueness validation.
 
 ## Login (UI) {#login-ui}
-  
+
+Our login user interface successfully differentiates between logged in
+and logged out users as well as between users of different
+designations (although for the demo some of the hooks were not in
+place, this has been fixed).
+
 ## Tournament settings {#tourney-settings}
   
 ## Tournament registration {#tourney-registration}
@@ -130,7 +140,12 @@ only had it working where the tournament host would decide who won.
 
 ## Server management {#srv-man}
 
-
+The server management software interface is implemented, and working
+fine.  The other modules use it.  However, what we didn't implement is
+an actual *page* to edit these settings.  We had this task in the
+iteration because other items depended on it.  Though we did not
+implement the full story, we implemented the core reason that we
+wanted it.
 
 # Not implemented
 
