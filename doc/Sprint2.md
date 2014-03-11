@@ -23,7 +23,7 @@ LoL API Integration
 
 5) As a host/player, I would like my pages to actively update without
    refreshing my current page.
-   	- For this task, we will implent an Active Status Update system with AJAX.
+   	- For task 2, we will implement an Active Status Update system with AJAX.
 
 6) As a host/player, I would like to see an interactive tournament lobby page
    that displays tournament information and its matches.
