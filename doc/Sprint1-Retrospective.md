@@ -113,14 +113,27 @@ f
 # Implemented but not working well
 
 ## Match score models {#match-score}
+This only functioned properly for noting which team would win a match. We want
+more information to be included, such as individual player scores.  We also
+only had it working where the tournament host would decide who won.
 
 ## Server management {#srv-man}
+
+
 
 # Not implemented
 
 ## Scoring Algorithms {#score-algo}
 
+Scoring algorithms was not implemented because we did not have time for 
+implementing player statistics in the first sprint.  There were some
+preliminary approaches, but the task lost priority and was abandoned.
+
 ## Data entry {#data-entry}
+
+It was decided to not be a priority for sprint one due to time constraints. 
+Also, we want to implement data entry for League of Legends through 
+Riot Games (TM)'s API for grabbing match data.
 
 # End
 
