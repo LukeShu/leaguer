@@ -10,34 +10,38 @@ author: [ Nathaniel Foy, Guntas Grewal, Tomer Kimia, Andrew Murrell, Luke Shumak
 
 2) As an admin, I would like anti-spam measures for registration.
 
-3) As a player I would like to review my peers and like to have our
+3) As a player I would like to review my peers and have our
    scores reflect these reviews.
 
-4) As a host I would like to have both game type specific settings and
+4) As a host I would like to have both game-type specific settings and
    tournament specific preferences available when creating a new
    tournament.
+    - These settings and preferences were moved to sprint 2 from sprint 1
+      because we did not have the API functionality for any specific game yet.
 
-5) As a host/player spectator I would like to have Riot Games League
-   of Legends API integration.
+5) As a host/player/spectator I would like to have Riot Games League
+   of Legends API integration for match and player statistics and results for
+   League of Legends tournaments.
 
 6) As a host/player, I would like my pages to actively update without
    refreshing my current page.
     - For this task, we will implement an Active Status Update system with AJAX.
 
 7) As a host/player, I would like to see an interactive tournament lobby page
-   that displays tournament information and its matches.
+   that displays tournament and match information.
+    - This will be accomplished with dynamic graphs, trees, and status bars.
 
 8) As a host/player, I would like the Leaguer application to be more intuitive
    and easy to use.
 
 9) As a user, I would like past tournament and player information to be
    persistent and search-able.
-    - A working search bar should be implemented that will find specific
+    - A working search utility should be implemented that will find specific
       players or tournaments and return their pages.
 
-10) As a user, I would like Player Profile pages.
-    - For this task, we will be creating profile pages for registered users
-      that have player-specific information: name, tournament history, etc.
+10) As a user, I would like to see Player Profile pages.
+    - For this task, we will be creating profile pages for registered users that
+      have player-specific information such as tournament history and activity.
 
 # Tasks
 
