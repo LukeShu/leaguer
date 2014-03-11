@@ -150,20 +150,28 @@ It was decided to not be a priority for sprint one due to time constraints.
 Also, we want to implement data entry for League of Legends through 
 Riot Games (TM)'s API for grabbing match data.
 
-# End
+# How to improve
 
-1. Each task must be mentioned under the right category (implemented
-   and working, implemented but did not work well, or not implemented
-   and the team must mention why/how it worked or why/how did not
-   work: 3.5 points ( - 1.0) for each unmentioned task, ( - 0.5) for
-   each task that is not properly described or placed under the wrong
-   category.
+Peer reviews and testing were our biggest pitfalls.
 
-2. How to improve: Please mention at least 3 ways  about  how to
-   improve your work.  - 0.5 for each  missing point. (Total: 1.5
-   points)
 
-3. For the tasks that were not implemented or did not work well, the
-   team should implement or fix these as necessary in the next
-   Sprint. We will use this Retrospective document in the next Demo
-   Meeting.
+1. All testing was just manual, in-browser testing, rather than unit
+   tests.  We really need write unit tests this iteration, as we had
+   breakages where we said "this is exactly why we need unit
+   testing."  However, that happened late enough in the iteration that
+   we didn't have time to do anything about it.
+
+2. That leads us into time management. Our commit activity plotted
+   against time has humps each weak, each growing a little.  That is,
+   we started slow, and ended with a lot of work.  This wasn't exactly
+   poor planing, but we had a poor idea of how much time things would
+   take.  We plan to fix this by front-loading this iteration instead
+   of back-loading it.
+
+3. We had the approach of "show everyone everything" with peer
+   reviews, as we anticipated that this would be nescessary for
+   everyone learning Rails.  However, in effect it meant that
+   sometimes information was spread very thin, or because things were
+   being done "in the open", we didn't ever explicitly review them.
+   We plan on fixing this next iteration by committing to do very
+   specific peer reviews with just a couple members of the team.
