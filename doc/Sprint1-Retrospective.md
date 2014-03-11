@@ -137,6 +137,11 @@ by clicking the 'delete' button on the no longer desired match on the page.
 
 ## Permissions system {#permissions}
 
+The permissions system is implemented, easy to use, and works well.
+In some places, it appears to be broken (overly-permisive), but this
+is because the relevant page doesn't hook into the permission system.
+This needs to be fixed with unit tests.
+
 ## Tournament view {#tourney-view}
 The view page for tournaments contains a table that lists all on going 
 tournaments for all types of games. It also lists other game attribute like
