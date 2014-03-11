@@ -94,7 +94,7 @@ has been an impressive journey.
 
 The entire team became familiar with deploying Rails in our rather
 diverse working environments and successfully deployed a server
-instance located at demo.projectleaguer.net.
+instance located at demo.projectleaguer.net as well as on our local boxes.
 
 ## Login (back-end) {#login-backend}
 
@@ -110,21 +110,56 @@ place, this has been fixed).
 
 ## Tournament settings {#tourney-settings}
 
+Tournament settings were implemented at a basic level, instituting those
+items which are similar to all tournaments, regardless of type, orginating
+from the game model.
+
 ## Tournament registration {#tourney-registration}
+
+Tournament registration and the tournament contoller were completed which
+allowed users to join and participate in basic tournaments of several types.
+The tournament controller handled a variety of tournament related tasks,
+including creating and updating tournaments and validating tournament related
+operations.
 
 ## Match controller {#match-controller}
 
+The Match Controller creates the separate matches for a specific tournament.
+When a tournament is started, it begins with an initial match that contains
+no players.  Currently, a player must join a match by entering the specific
+tournament (by clicking the 'show' button on the tournament), 
+then they must enter the match (again by clicking the 'show' button but this
+time on the match they desire to participate in) and then finally clicking
+the 'join' button.  This updates the match with the user as a participant in
+the matc and then finally clicking the 'join' button.  This updates the match
+with the user as a participant in the match.  A match can also be destroyed 
+by clicking the 'delete' button on the no longer desired match on the page.
+
 ## Permissions system {#permissions}
 
-## Tournament view {#tourney-view}
+The permissions system is implemented, easy to use, and works well.
+In some places, it appears to be broken (overly-permisive), but this
+is because the relevant page doesn't hook into the permission system.
+This needs to be fixed with unit tests.
 
-The tournament view lists the tournaments on one page as a table of rows. Each
-row lists sample tournament information (game name, players per team, etc)
-along with buttons for different tasks, such as joining or viewing a tourny.
-You can also create a new tournament here. The functionality we want is
-here.
+## Tournament view {#tourney-view}
+The view page for tournaments contains a table that lists all on going 
+tournaments for all types of games. It also lists other game attribute like
+Players per team, Teams per match, whether or not teams were randomized 
+and also has links to Show, Edit, Destroy, Join a particular tournament. 
+A link to create a tournament is also provided. Each of the links correspond 
+to view pages which are html.erb pages that provide styles and functionality 
+of each of the tournament setting features. Show, Edit, Destroy, all have 
+views of their own to perform each of the above actions.
 
 ## Homepage {#homepage}
+The homepage is mainly controlled by the views that are associated with each 
+model and controller. The main view for the homepage is the one found in the 
+layouts called application.html.erb, this view is responsible for display of
+all the headings, navigation bars, forms and containers. This view page 
+contains mostly links to other view pages and yields whatever the other view
+pages have to offer. The Homepage redirects to Login, Signup, See Ongoing
+Tournaments and shows the view for those models.
 
 
 # Implemented but not working well
@@ -158,20 +193,28 @@ It was decided to not be a priority for sprint one due to time constraints.
 Also, we want to implement data entry for League of Legends through 
 Riot Games (TM)'s API for grabbing match data.
 
-# End
+# How to improve
 
-1. Each task must be mentioned under the right category (implemented
-   and working, implemented but did not work well, or not implemented
-   and the team must mention why/how it worked or why/how did not
-   work: 3.5 points ( - 1.0) for each unmentioned task, ( - 0.5) for
-   each task that is not properly described or placed under the wrong
-   category.
+Peer reviews and testing were our biggest pitfalls.
 
-2. How to improve: Please mention at least 3 ways  about  how to
-   improve your work.  - 0.5 for each  missing point. (Total: 1.5
-   points)
 
-3. For the tasks that were not implemented or did not work well, the
-   team should implement or fix these as necessary in the next
-   Sprint. We will use this Retrospective document in the next Demo
-   Meeting.
+1. All testing was just manual, in-browser testing, rather than unit
+   tests.  We really need write unit tests this iteration, as we had
+   breakages where we said "this is exactly why we need unit
+   testing."  However, that happened late enough in the iteration that
+   we didn't have time to do anything about it.
+
+2. That leads us into time management. Our commit activity plotted
+   against time has humps each weak, each growing a little.  That is,
+   we started slow, and ended with a lot of work.  This wasn't exactly
+   poor planing, but we had a poor idea of how much time things would
+   take.  We plan to fix this by front-loading this iteration instead
+   of back-loading it.
+
+3. We had the approach of "show everyone everything" with peer
+   reviews, as we anticipated that this would be nescessary for
+   everyone learning Rails.  However, in effect it meant that
+   sometimes information was spread very thin, or because things were
+   being done "in the open", we didn't ever explicitly review them.
+   We plan on fixing this next iteration by committing to do very
+   specific peer reviews with just a couple members of the team.
