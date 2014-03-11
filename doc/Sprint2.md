@@ -5,9 +5,10 @@ author: [ Nathaniel Foy, Guntas Grewal, Tomer Kimia, Andrew Murrell, Luke Shumak
 
 # User Stories
 
-1) As a host/player, I would like to have only the options my group entitles me to.
+1) As an admin, I would like hosts/players, to have only the options
+   their group entitles them to.
 
-Security/Verification 
+2) As an admin, I would like anti-spam measures for registration.
 
 2) As a player I would like to review my peers and like to have our scores reflect these reviews.
 
