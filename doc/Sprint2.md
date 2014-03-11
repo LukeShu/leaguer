@@ -22,7 +22,7 @@ author: [ Nathaniel Foy, Guntas Grewal, Tomer Kimia, Andrew Murrell, Luke Shumak
 
 6) As a host/player, I would like my pages to actively update without
    refreshing my current page.
-    - For this task, we will implent an Active Status Update system with AJAX.
+    - For this task, we will implement an Active Status Update system with AJAX.
 
 7) As a host/player, I would like to see an interactive tournament lobby page
    that displays tournament information and its matches.
@@ -31,7 +31,7 @@ author: [ Nathaniel Foy, Guntas Grewal, Tomer Kimia, Andrew Murrell, Luke Shumak
    and easy to use.
 
 9) As a user, I would like past tournament and player information to be
-   persistent and searchable.
+   persistent and search-able.
     - A working search bar should be implemented that will find specific
       players or tournaments and return their pages.
 
@@ -59,7 +59,7 @@ several days.
 +---------------------------------------------------------+------+--------+----+
 | Design/Code Scoring/Pairing Algorithms and Procedures   |    5 | D&F&A  |  3 |
 +---------------------------------------------------------+------+--------+----+
-| Implement gametype specific and tournament              |    8 | Luke&A |  4 |
+| Implement game-type specific and tournament             |    8 | Luke&A |  4 |
 | specific settings and preferences                       |      | Guntas |    |
 +---------------------------------------------------------+------+--------+----+
 | Retrieve data from Riot Games (TM) API                  |    3 | Foy    |  5 |
@@ -74,7 +74,7 @@ several days.
 +---------------------------------------------------------+------+--------+----+
 | Increase Usability                                      |    3 | All-L  |  8 |
 +---------------------------------------------------------+------+--------+----+
-| ProjectLeaguer Logo                                     | spike| D&G    |  8 |
+| Project Leaguer Logo                                    | spike| D&G    |  8 |
 +---------------------------------------------------------+------+--------+----+
 | Develop comprehensive data storage for s&p&other        |    5 | Luke&A |  9 |
 +---------------------------------------------------------+------+--------+----+
