@@ -11,7 +11,7 @@ author: [ Nathaniel Foy, Guntas Grewal, Tomer Kimia, Andrew Murrell, Luke Shumak
 2) As a host/player, I would like to register and have an account.
     - For this task, we will be creating the user registration and log
       in capabilities for Leaguer.
-3) As a host, I would like to start a tournamnet.
+3) As a host, I would like to start a tournament.
     - For this task, we will be creating a base tournament system for a
       host to run.
 4) As a host/player, I would like to enter scores for players.
@@ -22,7 +22,6 @@ author: [ Nathaniel Foy, Guntas Grewal, Tomer Kimia, Andrew Murrell, Luke Shumak
 7) As a user, I would like a presentable homepage.
     - For this task, we will be creating a Leaguer homepage and ensure that it
       is pleasing to the eye and easy to navigate.
-
 
 # Tasks
 
@@ -39,7 +38,7 @@ several days.
 +---------------------------------------------------------+------+--------+----+
 | [Deploy rails on Luke's server](#deploy-rails)          |    3 | Luke   |  1 |
 +---------------------------------------------------------+------+--------+----+
-| [Create log-in system backend (verification, cookies,   |    5 | Davis  |  2 |
+| [Create log-in system back-end (verification, cookies,  |    5 | Davis  |  2 |
 | and redirection)](#login-backend)                       |      |        |    |
 +---------------------------------------------------------+------+--------+----+
 | [Create log-in system UI](#login-ui)                    |    2 | Tomer  |  2 |
@@ -86,23 +85,45 @@ several days.
 
 ## Learn Rails {#learn-rails}
 
-This task went OK.
+Learning Rails has been a growing experience for the majority of the
+team. Some of us coming from no significant experience to being able
+to put together a relatively functional product in only three weeks
+has been an impressive journey.
 
 ## Deploy Rails {#deploy-rails}
 
-f
+The entire team became familiar with deploying Rails in our rather
+diverse working environments and successfully deployed a server
+instance located at demo.projectleaguer.net.
 
-## Login (backend) {#login-backend}
+## Login (back-end) {#login-backend}
 
-f
+Our login back-end successfully logs users in and our and can handle
+user registrations and first-come-first-serve uniqueness validation.
 
 ## Login (UI) {#login-ui}
 
-## Tournament settings {#tourney-settings}
+Our login user interface successfully differentiates between logged in
+and logged out users as well as between users of different
+designations (although for the demo some of the hooks were not in
+place, this has been fixed).
 
+## Tournament settings {#tourney-settings}
+  
 ## Tournament registration {#tourney-registration}
 
 ## Match controller {#match-controller}
+
+The Match Controller creates the separate matches for a specific tournament.
+When a tournament is started, it begins with an initial match that contains
+no players.  Currently, a player must join a match by entering the specific
+tournament (by clicking the 'show' button on the tournament), 
+then they must enter the match (again by clicking the 'show' button but this
+time on the match they desire to participate in) and then finally clicking
+the 'join' button.  This updates the match with the user as a participant in
+the matc and then finally clicking the 'join' button.  This updates the match
+with the user as a participant in the match.  A match can also be destroyed 
+by clicking the 'delete' button on the no longer desired match on the page.
 
 ## Permissions system {#permissions}
 
@@ -116,6 +137,12 @@ to view pages which are html.erb pages that provide styles and functionality
 of each of the tournament setting features. Show, Edit, Destroy, all have 
 views of their own to perform each of the above actions.
 
+The tournament view lists the tournaments on one page as a table of rows. Each
+row lists sample tournament information (game name, players per team, etc)
+along with buttons for different tasks, such as joining or viewing a tourny.
+You can also create a new tournament here. The functionality we want is
+here.
+
 ## Homepage {#homepage}
 The homepage is mainly controlled by the views that are associated with each 
 model and controller. The main view for the homepage is the one found in the 
@@ -125,16 +152,23 @@ contains mostly links to other view pages and yields whatever the other view
 pages have to offer. The Homepage redirects to Login, Signup, See Ongoing
 Tournaments and shows the view for those models.
 
+
 # Implemented but not working well
 
 ## Match score models {#match-score}
+
 This only functioned properly for noting which team would win a match. We want
 more information to be included, such as individual player scores.  We also
 only had it working where the tournament host would decide who won.
 
 ## Server management {#srv-man}
 
-
+The server management software interface is implemented, and working
+fine.  The other modules use it.  However, what we didn't implement is
+an actual *page* to edit these settings.  We had this task in the
+iteration because other items depended on it.  Though we did not
+implement the full story, we implemented the core reason that we
+wanted it.
 
 # Not implemented
 
