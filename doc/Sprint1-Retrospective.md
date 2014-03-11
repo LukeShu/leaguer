@@ -109,11 +109,15 @@ designations (although for the demo some of the hooks were not in
 place, this has been fixed).
 
 ## Tournament settings {#tourney-settings}
+<<<<<<< HEAD
 
 Tournament settings were implemented at a basic level, instituting those
 items which are similar to all tournaments, regardless of type, orginating
 from the game model.
 
+=======
+  
+>>>>>>> 5f96d780def7c33a6d6e452b558ac136ee4d06bc
 ## Tournament registration {#tourney-registration}
 
 Tournament registration and the tournament contoller were completed which
@@ -124,15 +128,49 @@ operations.
 
 ## Match controller {#match-controller}
 
+The Match Controller creates the separate matches for a specific tournament.
+When a tournament is started, it begins with an initial match that contains
+no players.  Currently, a player must join a match by entering the specific
+tournament (by clicking the 'show' button on the tournament), 
+then they must enter the match (again by clicking the 'show' button but this
+time on the match they desire to participate in) and then finally clicking
+the 'join' button.  This updates the match with the user as a participant in
+the matc and then finally clicking the 'join' button.  This updates the match
+with the user as a participant in the match.  A match can also be destroyed 
+by clicking the 'delete' button on the no longer desired match on the page.
+
 ## Permissions system {#permissions}
 
 ## Tournament view {#tourney-view}
+The view page for tournaments contains a table that lists all on going 
+tournaments for all types of games. It also lists other game attribute like
+Players per team, Teams per match, whether or not teams were randomized 
+and also has links to Show, Edit, Destroy, Join a particular tournament. 
+A link to create a tournament is also provided. Each of the links correspond 
+to view pages which are html.erb pages that provide styles and functionality 
+of each of the tournament setting features. Show, Edit, Destroy, all have 
+views of their own to perform each of the above actions.
+
+The tournament view lists the tournaments on one page as a table of rows. Each
+row lists sample tournament information (game name, players per team, etc)
+along with buttons for different tasks, such as joining or viewing a tourny.
+You can also create a new tournament here. The functionality we want is
+here.
 
 ## Homepage {#homepage}
+The homepage is mainly controlled by the views that are associated with each 
+model and controller. The main view for the homepage is the one found in the 
+layouts called application.html.erb, this view is responsible for display of
+all the headings, navigation bars, forms and containers. This view page 
+contains mostly links to other view pages and yields whatever the other view
+pages have to offer. The Homepage redirects to Login, Signup, See Ongoing
+Tournaments and shows the view for those models.
+
 
 # Implemented but not working well
 
 ## Match score models {#match-score}
+
 This only functioned properly for noting which team would win a match. We want
 more information to be included, such as individual player scores.  We also
 only had it working where the tournament host would decide who won.
