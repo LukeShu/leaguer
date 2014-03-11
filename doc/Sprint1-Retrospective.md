@@ -107,8 +107,23 @@ f
 ## Permissions system {#permissions}
 
 ## Tournament view {#tourney-view}
+The view page for tournaments contains a table that lists all on going 
+tournaments for all types of games. It also lists other game attribute like
+Players per team, Teams per match, whether or not teams were randomized 
+and also has links to Show, Edit, Destroy, Join a particular tournament. 
+A link to create a tournament is also provided. Each of the links correspond 
+to view pages which are html.erb pages that provide styles and functionality 
+of each of the tournament setting features. Show, Edit, Destroy, all have 
+views of their own to perform each of the above actions.
 
 ## Homepage {#homepage}
+The homepage is mainly controlled by the views that are associated with each 
+model and controller. The main view for the homepage is the one found in the 
+layouts called application.html.erb, this view is responsible for display of
+all the headings, navigation bars, forms and containers. This view page 
+contains mostly links to other view pages and yields whatever the other view
+pages have to offer. The Homepage redirects to Login, Signup, See Ongoing
+Tournaments and shows the view for those models.
 
 # Implemented but not working well
 
