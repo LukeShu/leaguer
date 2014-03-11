@@ -109,15 +109,11 @@ designations (although for the demo some of the hooks were not in
 place, this has been fixed).
 
 ## Tournament settings {#tourney-settings}
-<<<<<<< HEAD
 
 Tournament settings were implemented at a basic level, instituting those
 items which are similar to all tournaments, regardless of type, orginating
 from the game model.
 
-=======
-  
->>>>>>> 5f96d780def7c33a6d6e452b558ac136ee4d06bc
 ## Tournament registration {#tourney-registration}
 
 Tournament registration and the tournament contoller were completed which
@@ -141,6 +137,11 @@ by clicking the 'delete' button on the no longer desired match on the page.
 
 ## Permissions system {#permissions}
 
+The permissions system is implemented, easy to use, and works well.
+In some places, it appears to be broken (overly-permisive), but this
+is because the relevant page doesn't hook into the permission system.
+This needs to be fixed with unit tests.
+
 ## Tournament view {#tourney-view}
 The view page for tournaments contains a table that lists all on going 
 tournaments for all types of games. It also lists other game attribute like
@@ -150,12 +151,6 @@ A link to create a tournament is also provided. Each of the links correspond
 to view pages which are html.erb pages that provide styles and functionality 
 of each of the tournament setting features. Show, Edit, Destroy, all have 
 views of their own to perform each of the above actions.
-
-The tournament view lists the tournaments on one page as a table of rows. Each
-row lists sample tournament information (game name, players per team, etc)
-along with buttons for different tasks, such as joining or viewing a tourny.
-You can also create a new tournament here. The functionality we want is
-here.
 
 ## Homepage {#homepage}
 The homepage is mainly controlled by the views that are associated with each 
@@ -177,7 +172,12 @@ only had it working where the tournament host would decide who won.
 
 ## Server management {#srv-man}
 
-
+The server management software interface is implemented, and working
+fine.  The other modules use it.  However, what we didn't implement is
+an actual *page* to edit these settings.  We had this task in the
+iteration because other items depended on it.  Though we did not
+implement the full story, we implemented the core reason that we
+wanted it.
 
 # Not implemented
 
