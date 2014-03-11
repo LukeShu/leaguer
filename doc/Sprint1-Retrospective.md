@@ -108,11 +108,19 @@ f
 
 ## Tournament view {#tourney-view}
 
+The tournament view lists the tournaments on one page as a table of rows. Each
+row lists sample tournament information (game name, players per team, etc)
+along with buttons for different tasks, such as joining or viewing a tourny.
+You can also create a new tournament here. The functionality we want is
+here.
+
 ## Homepage {#homepage}
+
 
 # Implemented but not working well
 
 ## Match score models {#match-score}
+
 This only functioned properly for noting which team would win a match. We want
 more information to be included, such as individual player scores.  We also
 only had it working where the tournament host would decide who won.
