@@ -97,12 +97,23 @@ f
 f
 
 ## Login (UI) {#login-ui}
-
+  
 ## Tournament settings {#tourney-settings}
-
+  
 ## Tournament registration {#tourney-registration}
 
 ## Match controller {#match-controller}
+
+The Match Controller creates the separate matches for a specific tournament.
+When a tournament is started, it begins with an initial match that contains
+no players.  Currently, a player must join a match by entering the specific
+tournament (by clicking the 'show' button on the tournament), 
+then they must enter the match (again by clicking the 'show' button but this
+time on the match they desire to participate in) and then finally clicking
+the 'join' button.  This updates the match with the user as a participant in
+the matc and then finally clicking the 'join' button.  This updates the match
+with the user as a participant in the match.  A match can also be destroyed 
+by clicking the 'delete' button on the no longer desired match on the page.
 
 ## Permissions system {#permissions}
 
