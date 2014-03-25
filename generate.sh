@@ -22,7 +22,7 @@ bundle exec rails generate scaffold match tournament:references name:string winn
 bundle exec rails generate scaffold team match:references $NOTEST
 bundle exec rails generate scaffold alert author:references message:text $NOTEST
 bundle exec rails generate scaffold pm author:references recipient:references message:text $NOTEST
-bundle exec rails generate scaffold tournament game:references status:integer \
+bundle exec rails generate scaffold tournament name:string:unique game:references status:integer \
 	min_players_per_team:integer max_players_per_team:integer \
 	min_teams_per_match:integer max_teams_per_match:integer \
 	set_rounds:integer randomized_teams:boolean

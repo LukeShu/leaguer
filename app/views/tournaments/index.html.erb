@@ -3,6 +3,7 @@
 <table>
   <thead>
     <tr>
+      <th>Name</th>
       <th>Game</th>
       <th>Status</th>
       <th>Min players per team</th>
@@ -20,6 +21,7 @@
   <tbody>
     <% @tournaments.each do |tournament| %>
       <tr>
+        <td><%= tournament.name %></td>
         <td><%= tournament.game %></td>
         <td><%= tournament.status %></td>
         <td><%= tournament.min_players_per_team %></td>

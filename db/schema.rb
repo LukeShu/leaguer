@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140325201109) do
+ActiveRecord::Schema.define(version: 20140325202910) do
 
   create_table "alerts", force: true do |t|
     t.integer  "author_id"
@@ -139,6 +139,7 @@ ActiveRecord::Schema.define(version: 20140325201109) do
   add_index "tournament_options", ["tournament_id"], name: "index_tournament_options_on_tournament_id"
 
   create_table "tournaments", force: true do |t|
+    t.string   "name"
     t.integer  "game_id"
     t.integer  "status"
     t.integer  "min_players_per_team"
