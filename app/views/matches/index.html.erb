@@ -3,6 +3,7 @@
 <table>
   <thead>
     <tr>
+      <th>Status</th>
       <th>Tournament</th>
       <th>Name</th>
       <th>Winner</th>
@@ -15,6 +16,7 @@
   <tbody>
     <% @matches.each do |match| %>
       <tr>
+        <td><%= match.status %></td>
         <td><%= match.tournament %></td>
         <td><%= match.name %></td>
         <td><%= match.winner %></td>
