@@ -18,7 +18,7 @@ git checkout clean-start -- app test config/routes.rb
 
 # The whole shebang, models, views, and controllers
 bundle exec rails generate scaffold server --force $NOTEST
-bundle exec rails generate scaffold match tournament:references name:string winner:references --force $NOTEST
+bundle exec rails generate scaffold match status:integer tournament:references name:string winner:references --force $NOTEST
 bundle exec rails generate scaffold team match:references $NOTEST
 bundle exec rails generate scaffold alert author:references message:text $NOTEST
 bundle exec rails generate scaffold pm author:references recipient:references message:text $NOTEST

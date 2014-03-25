@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140325202910) do
+ActiveRecord::Schema.define(version: 20140325212906) do
 
   create_table "alerts", force: true do |t|
     t.integer  "author_id"
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 20140325202910) do
   end
 
   create_table "matches", force: true do |t|
+    t.integer  "status"
     t.integer  "tournament_id"
     t.string   "name"
     t.integer  "winner_id"

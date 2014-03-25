@@ -5,36 +5,10 @@
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
-  <%= yield :head %>
 </head>
 <body>
-<header><nav>
-	<div class="navbar-brand"><%= link_to('Leaguer', root_path) %></div>
-	<div>
-		<%= form_tag("/search", method: "get", :class => "search") do %>
-			<%= text_field_tag(:query, nil, :placeholder => "Search") %>
-			<%= submit_tag("Go") %>
-		<% end %>
-	</div>
 
-	<div id="log-buttons">
-		<% if signed_in? %>
-			<%= link_to current_user.user_name, current_user, :class => "user" %>
-			<%= link_to "Sign out", session_path("current"), method: "delete", :class => "signout" %>
-		<% else %>
-			<%= link_to "Log in", new_session_path, :class => "signin" %>
-			<%= link_to "Sign up", new_user_path, :class => "signup" %>
-		<% end %>
-	</div>
-</nav></header>
+<%= yield %>
 
-<% if notice %><div id="notice"><p><%= notice %></p></div><% end %>
-
-<div class="container"><%= yield %></div>
-
-<footer>
-	<p>Leaguer &copy; 2014, Tomer Kimia, Andrew Murrell, Luke Shumaker, Nathaniel Foy, Davis Webb, and Guntas Grewal</p>
-</footer>
-<%= debug(params) if Rails.env.development? %>
 </body>
 </html>

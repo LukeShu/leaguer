@@ -1,32 +1,5 @@
-<h1> Sign Up </h1>
+<h1>New user</h1>
 
-<%= form_for @user do |f| %>
-  <%= render "common/error_messages", :target => @user %>
-  <p>
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-  </p>
-  <p>
-    <%= f.label :user_name %><br>
-    <%= f.text_field :user_name %>
-  </p>
-  <p>
-    <%= f.label :password %><br>
-    <%= f.password_field :password %>
-  </p>
-  <p>
-    <%= f.label(:password_confirmation, "Confirm Password") %><br>
-    <%= f.password_field :password_confirmation %>
-  </p>
-  <p>
-    <%= f.submit("Be a Leaguer", :class => "signup") %>
-  </p>
-<% end %>
+<%= render 'form' %>
 
-
-<%= link_to 'Already Have an Account? Log in', new_session_path, :class => "signin" %>
-
+<%= link_to 'Back', users_path %>

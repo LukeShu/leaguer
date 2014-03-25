@@ -1,6 +1,13 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @match.status %>
+</p>
+
 <p>
   <strong>Tournament:</strong>
-  <%= @match.tournament.id %>
+  <%= @match.tournament %>
 </p>
 
 <p>
@@ -8,23 +15,10 @@
   <%= @match.name %>
 </p>
 
-<% if (@tournament.hosts.include?(current_user) and @match.winner.nil?) %>
-	<%= form_for([@tournament, @match], method: "put") do |f| %>
-		<ul>
-			<% @match.teams.each do |team| %>
-				<li><label><%= f.radio_button(:winner, team.id) %>
-					<%= team.users.collect{|u| u.user_name}.join(", ") %></label></li>
-		  <% end %>
-		</ul>
-		<%= f.submit("Select winner") %>
-	<% end %>
-<% end %>
+<p>
+  <strong>Winner:</strong>
+  <%= @match.winner %>
+</p>
 
-<% unless @match.winner.nil? %>
-	<p>
-		<strong>Winner:</strong>
-		<%= @match.winner.users.collect{|u| u.user_name}.join(", ") %>
-	</p>
-<% end %>
-
-<%= link_to 'Back', tournament_matches_path %>
+<%= link_to 'Edit', edit_match_path(@match) %> |
+<%= link_to 'Back', matches_path %>
