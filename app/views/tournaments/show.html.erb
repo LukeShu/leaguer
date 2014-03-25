@@ -15,6 +15,11 @@
 
 <% if current_user.in_group?(:host) %>
 <p>
+  <strong>Name:</strong>
+  <%= @tournament.name %>
+</p>
+
+<p>
   <strong>Game:</strong>
   <%= @tournament.id %>
 </p>

@@ -4,6 +4,7 @@
 <table class="table table-hover">
   <thead>
     <tr>
+      <th>Name</th>
       <th>Game</th>
       <th>Status</th>
       <th>Players per team</th>
@@ -18,7 +19,7 @@
   <tbody>
     <% @tournaments.each do |tournament| %>
       <tr>
-        <td><%= tournament.id %></td>
+        <td><%= tournament.name %></td>
         <td><% case tournament.status
               when 0 %>
               <%= form_tag(tournament_path(tournament), method: "put") do %>
