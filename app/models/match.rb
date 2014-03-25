@@ -1,4 +1,8 @@
 class Match < ActiveRecord::Base
   belongs_to :tournament
-  belongs_to :winner
+
+  has_and_belongs_to_many :teams
+
+  belongs_to :winner, class_name: "Team"
+
 end

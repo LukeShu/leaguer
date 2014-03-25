@@ -1,9 +1,15 @@
+@import "bootstrap";
+
 body {
   background-color: #fff;
   color: #333;
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
   line-height: 18px;
+}
+
+h1, h2, h3, h4, h5{
+  color: #0f0f0f;
 }
 
 p, ol, ul, td {
@@ -21,11 +27,11 @@ pre {
 a {
   color: #000;
   &:visited {
-    color: #666;
+    color: #000;
   }
   &:hover {
-    color: #fff;
-    background-color: #000;
+      color: green;
+      text-decoration: none;
   }
 }
 
@@ -40,8 +46,9 @@ div {
 }
 
 .field_with_errors {
-  padding: 2px;
-  background-color: red;
+  padding: 1px;
+  background-color: #FF4C4C;
+  box-shadow: 0px 0px 5px red;
   display: table;
 }
 
@@ -66,4 +73,27 @@ div {
     font-size: 12px;
     list-style: square;
   }
+}
+
+.navbar-brand {
+  @extend .no-dec;
+  a{
+    color: white;
+    &:hover, &:active, &:focus {
+      color: white;
+      font-weight: normal;
+      text-decoration: none;
+    }
+  }
+}
+
+footer {
+  text-align: center;
+  border-top: solid 1px #999999;
+  padding-top: 18px;
+  margin-top: 18px;
+}
+
+button, input[type="submit"] {
+    @extend .btn;
 }

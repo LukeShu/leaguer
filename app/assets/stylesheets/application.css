@@ -11,3 +11,15 @@
  *= require_self
  *= require_tree .
  */
+
+#query{
+	background-color: white;
+	border: 2px solid #ED9C28;
+	border-radius: 5px;
+	color: #FFF;
+	font-weight: bold;
+	height: 30px;
+}
+.navbar{
+	background-color: white;
+}

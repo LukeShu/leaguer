@@ -1,0 +1,53 @@
+@import "bootstrap";
+
+header > nav {
+	@extend .navbar; 
+	@extend .navbar-inverse;
+	color: white;	
+
+	#log-buttons {
+		margin-top: 8px;
+		form { display: inline; }
+	}
+	form.search {
+		@extend .navbar-form;
+		@extend .navbar-right;
+		input[type="submit"] {
+			@extend .btn-warning; margin-top: -3px; margin-right: 8px;
+		}
+	}
+}
+
+a, input[type="submit"] {
+	@extend .btn;
+	&.user { @extend .btn-info; }
+	&.signup { @extend .btn-success; }
+	&.signin { @extend .btn-info; }
+	&.signout { @extend .btn-danger; }
+}
+
+p.errors {
+	background-color: #FCF8C7;
+	color: red;
+	border-radius: 7px;
+	padding: 10px;
+}
+
+#errorExplanation {
+	h2 {
+		font-size: 1em;
+		color: red;
+		font-weight: bold;
+	}
+	li {
+		font-size: 1em;
+		color: red;
+		font-style: italic;  
+	}
+
+}
+
+#notice {
+	text-align: center;
+	font-weight: bold;
+}

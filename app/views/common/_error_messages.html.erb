@@ -1,0 +1,11 @@
+<%# http://railscasts.com/episodes/211-validations-in-rails-3 %>
+<% if target.errors.any? %>
+<div id="errorExplanation">
+  <h2><%= pluralize(target.errors.count, "error") %> prohibited this form from being submitted:</h2>
+  <ul>
+  <% target.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+  </ul>
+</div>
+<% end %>

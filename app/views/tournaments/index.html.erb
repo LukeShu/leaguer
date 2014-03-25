@@ -1,16 +1,14 @@
-<h1>Listing tournaments</h1>
+<h1>Listing Tournaments</h1>
 
-<table>
+<% if @tournaments.length > 0 %>
+<table class="table table-hover">
   <thead>
     <tr>
       <th>Name</th>
       <th>Game</th>
       <th>Status</th>
-      <th>Min players per team</th>
-      <th>Max players per team</th>
-      <th>Min teams per match</th>
-      <th>Max teams per match</th>
-      <th>Set rounds</th>
+      <th>Players per team</th>
+      <th>Teams per match</th>
       <th>Randomized teams</th>
       <th></th>
       <th></th>
@@ -22,13 +20,28 @@
     <% @tournaments.each do |tournament| %>
       <tr>
         <td><%= tournament.name %></td>
-        <td><%= tournament.game %></td>
-        <td><%= tournament.status %></td>
-        <td><%= tournament.min_players_per_team %></td>
-        <td><%= tournament.max_players_per_team %></td>
-        <td><%= tournament.min_teams_per_match %></td>
-        <td><%= tournament.max_teams_per_match %></td>
-        <td><%= tournament.set_rounds %></td>
+        <td><% case tournament.status
+              when 0 %>
+              <%= form_tag(tournament_path(tournament), method: "put") do %>
+              <input type="hidden" name="update_action" value="join">
+                <%= submit_tag("Join") %>
+              <% end %>
+            <% when 1 %>
+              Ongoing
+            <% else %>
+              Closed
+            <%end %>
+          </td>
+        <td><%= tournament.min_players_per_team %>
+            <% if tournament.min_players_per_team != tournament.max_players_per_team %>
+              to <%= tournament.max_players_per_team %>
+              <% end %>
+        </td>
+        <td><%= tournament.min_teams_per_match %>
+         <% if tournament.min_teams_per_match != tournament.max_teams_per_match %>
+              to <%= tournament.max_teams_per_match %>
+              <% end %>
+          </td>
         <td><%= tournament.randomized_teams %></td>
         <td><%= link_to 'Show', tournament %></td>
         <td><%= link_to 'Edit', edit_tournament_path(tournament) %></td>
@@ -37,7 +50,9 @@
     <% end %>
   </tbody>
 </table>
-
+<% else %>
+  <p class="no-entries"> No tournaments going on right now... Why not start your own? </p>
+<% end %>
 <br>
 
-<%= link_to 'New Tournament', new_tournament_path %>
+<%= link_to 'New Tournament',  new_tournament_path, :class => "btn btn-warning btn-lg" %>

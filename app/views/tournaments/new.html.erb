@@ -1,5 +1,16 @@
-<h1>New tournament</h1>
+<h1>New Tournament</h1>
 
-<%= render 'form' %>
+<%= form_tag(new_tournament_path, method: "get") do %>
+	<%= select_tag('game',
+	                options_from_collection_for_select(@games, 'id', 'name', @tournament.game.nil? || @tournament.game.id),
+	                :prompt => "Select a Game Type") %>
+	<%= submit_tag("Select", :class => "btn btn-success btn-xs") %>
+<% end %>
+
+<div id='ajax-form'>
+	<% if not @tournament.game.nil? %>
+		<%= render 'selected' %>
+	<% end %>
+</div>
 
 <%= link_to 'Back', tournaments_path %>

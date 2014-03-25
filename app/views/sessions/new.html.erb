@@ -1,5 +1,23 @@
-<h1>New session</h1>
+<h1>Sign in</h1>
+<% if @user.nil? %>
+  <p class="errors"> The email/username or password is incorrect. Verify that CAPS LOCK is not on, and then retype the current email/username and password. </p>
+<% end %>
 
-<%= render 'form' %>
+  <div class="span6 offset3">
+    <%= form_for(:session, url: sessions_path) do |f| %>
+    <p>
+      <%= f.label(:username_or_email, "Username/Email") %><br/>
+      <%= f.text_field :username_or_email%>
+    </p>
+    <p>
+      <%= f.label :password %><br/>
+      <%= f.password_field :password %>
+    </p>
+    <p>
+      <%= f.submit "Sign in", class: "btn btn-large btn-primary" %>
+    </p>
+    <% end %>
 
-<%= link_to 'Back', sessions_path %>
+    <p>New user? <%= link_to("Sign up now!", new_user_path) %></p>
+  </div>
+

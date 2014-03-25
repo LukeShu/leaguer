@@ -1,5 +1,6 @@
 class ServersController < ApplicationController
   before_action :set_server, only: [:show, :edit, :update, :destroy]
+  before_action :check_perms
 
   # GET /servers
   # GET /servers.json
@@ -66,6 +67,15 @@ class ServersController < ApplicationController
     def set_server
       @server = Server.find(params[:id])
     end
+
+	def check_perms
+		unless (signed_in? and current_user.in_group?(:admin))
+			respond_to do |format|
+				format.html { render action: 'permission_denied', status: :forbidden }
+				format.json { render json: "Permission denied", status: :forbidden }
+			end
+		end
+	end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def server_params

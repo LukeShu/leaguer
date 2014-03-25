@@ -1,21 +1,25 @@
 Leaguer::Application.routes.draw do
-  resources :sessions
+
+  #creates sessions as a resource but limits it to these actions
+  resources :sessions, only: [:new, :create, :destroy]
 
   resources :users
 
   resources :games
 
-  resources :tournaments
-
   resources :pms
 
   resources :alerts
 
+  resource :server, only: [:show, :edit, :update]
+
   resources :teams
+  resources :tournaments do
+    resources :matches
+  end
 
-  resources :matches
 
-  resources :servers
+  root to: 'static#homepage'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
