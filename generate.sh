@@ -37,7 +37,7 @@ bundle exec rails generate scaffold session user:references
 # Just models
 bundle exec rails generate model server_settings $NOTEST
 bundle exec rails generate model tournament_option tournament:references vartype:integer name:string value:text $NOTEST
-bundle exec rails generate model game_option vartype:integer name:string default:text $NOTEST
+bundle exec rails generate model game_setting game:references type:integer name:string default:text discription:text type_opt:text display_order:integer $NOTEST
 bundle exec rails generate model score user:references match:references value:integer $NOTEST
 
 # Join tables
