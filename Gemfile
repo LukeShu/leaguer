@@ -1,5 +1,5 @@
 #!/usr/bin/ruby -h # not executable, but as a hint to text editors
-#Poop
+
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
