@@ -10,3 +10,33 @@ span.default-explanation {
 	color: gray;
 	font-style: italic;  
 }
+
+#players-needed {
+	text-align: center;
+	font-style: italic;
+}
+
+#tournament-side-params {
+    background: none repeat scroll 0 0 #ADD8E6;
+    border-radius: 5px;
+    float: right;
+    font-size: 7px;
+    padding: 10px;
+
+    p {
+    	font-size: 10px;
+    	margin-bottom: 5px;
+    }
+
+}
+
+#tournament-users{
+	
+	li {
+		color: green;
+	}
+
+	.black {
+		color: black;
+	}
+}
