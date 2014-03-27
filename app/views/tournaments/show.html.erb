@@ -1,3 +1,6 @@
+<h2 id="tournament-name"> 
+  <%= @tournament.name %>
+</h2>
 
 <div class="progress">
   <%= tag("div", {:class => "progress-bar progress-bar-warning",  :style => "width: " +(@tournament.players.count * 100 / (@tournament.min_players_per_team * @tournament.min_teams_per_match)).to_s + "%", "aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => (@tournament.players.count * 100 / (@tournament.min_players_per_team * @tournament.min_teams_per_match)).to_s, "role" => "progressbar"}) %>
@@ -6,15 +9,16 @@
 </div>
 <p id="players-needed"><%= pluralize(@tournament.players.count, "player has", "players have") %> signed up. <%= @tournament.min_players_per_team * @tournament.min_teams_per_match %> needed. </p>
 
-<div id="tournament-side-params">
-  <p>
-    <strong>Game:</strong>
-    <%= @tournament.id %>
-  </p>
+<span id="tournament-side-params">
+
 
   <p>
     <strong>Status:</strong>
-    <%= @tournament.status %>
+    <% if @tournament.status == 0 %>
+    	Waiting for players...
+    <% else %>
+    	Started
+    <% end %>
   </p>
 
   <p>
@@ -46,15 +50,19 @@
     <strong>Randomized teams:</strong>
     <%= @tournament.randomized_teams %>
   </p>
-</div>
+</span>
 
+<div >
 <%# Show all players in the tournament %>
 <% if @tournament.players.length > 0 %>
+<h3> Players Here: </h3>
   <ul id="tournament-users">
     <% @tournament.players.each do |p| %>
       <li><span class="black"> <%= p.user_name %> </span> </li>
     <% end %>
   </ul>
+ <% else %>
+ <h3 div="players-needed">Hmmm.... nobody's here yet! You and your friends should join the tournament.</h3> 
 <% end %>
 
 <%# If user can join, and user hasn't joined already, show the join tournment tag %>
@@ -79,5 +87,5 @@
   <%= link_to 'Back', tournaments_path %>
 <% end %>
 <%end %>
-
+</div>
 

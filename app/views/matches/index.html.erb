@@ -3,6 +3,7 @@
 <table>
   <thead>
     <tr>
+      <th>Status</th>
       <th>Tournament</th>
       <th>Name</th>
       <th>Winner</th>
@@ -16,6 +17,8 @@
     <% @tournament.matches.each do |match| %>
       <tr>
         <td><%= match.tournament.id %></td>
+        <td><%= match.status %></td>
+        <td><%= match.tournament %></td>
         <td><%= match.name %></td>
         <td><%= match.winner %></td>
         <td><%= link_to 'Show', tournament_match_path(@tournament, match) %></td>

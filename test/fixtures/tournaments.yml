@@ -1,6 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  name: MyString
   game_id: 
   status: 1
   min_players_per_team: 1
@@ -11,6 +12,7 @@ one:
   randomized_teams: false
 
 two:
+  name: MyString
   game_id: 
   status: 1
   min_players_per_team: 1

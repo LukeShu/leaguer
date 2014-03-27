@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140307052443) do
+ActiveRecord::Schema.define(version: 20140325214602) do
 
   create_table "alerts", force: true do |t|
     t.integer  "author_id"
@@ -22,13 +22,19 @@ ActiveRecord::Schema.define(version: 20140307052443) do
 
   add_index "alerts", ["author_id"], name: "index_alerts_on_author_id"
 
-  create_table "game_options", force: true do |t|
-    t.integer  "vartype"
+  create_table "game_settings", force: true do |t|
+    t.integer  "game_id"
+    t.integer  "type"
     t.string   "name"
     t.text     "default"
+    t.text     "discription"
+    t.text     "type_opt"
+    t.integer  "display_order"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "game_settings", ["game_id"], name: "index_game_settings_on_game_id"
 
   create_table "games", force: true do |t|
     t.text     "name"
@@ -48,6 +54,7 @@ ActiveRecord::Schema.define(version: 20140307052443) do
   end
 
   create_table "matches", force: true do |t|
+    t.integer  "status"
     t.integer  "tournament_id"
     t.string   "name"
     t.integer  "winner_id"
@@ -133,6 +140,7 @@ ActiveRecord::Schema.define(version: 20140307052443) do
   add_index "tournament_options", ["tournament_id"], name: "index_tournament_options_on_tournament_id"
 
   create_table "tournaments", force: true do |t|
+    t.string   "name"
     t.integer  "game_id"
     t.integer  "status"
     t.integer  "min_players_per_team"
