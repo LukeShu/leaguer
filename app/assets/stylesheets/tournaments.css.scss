@@ -40,3 +40,28 @@ span.default-explanation {
 		color: black;
 	}
 }
+
+div.tournament-listing {
+	margin-top: 10px;
+	border-radius: 5px;
+	box-shadow: 2px 2px 4px #B8B8B8;
+	border: 2px solid #AAAAAA;
+	min-height: 100px;
+	padding: 4px;
+
+
+	h3 {
+		margin-top: 0px;
+		color: #F0AD4E;
+		font-weight: bold;
+	}
+
+	h3:hover {
+		color: #D09D3E;
+	}
+
+	.host {
+		font-weight: bold;
+	}
+
+}
