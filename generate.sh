@@ -33,6 +33,7 @@ bundle exec rails generate scaffold game \
 	set_rounds:integer randomized_teams:boolean
 bundle exec rails generate scaffold user name:string email:string:uniq user_name:string:uniq
 bundle exec rails generate scaffold session user:references
+bundle exec rails generate scaffold remote_username game:references user:references user_name:string
 
 # Just models
 bundle exec rails generate model server_setting $NOTEST
