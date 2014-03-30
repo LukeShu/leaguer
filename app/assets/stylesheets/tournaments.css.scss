@@ -41,6 +41,8 @@ span.default-explanation {
 	}
 }
 
+
+/* Style of a tournament listing div */
 div.tournament-listing {
 	margin-top: 10px;
 	border-radius: 5px;
@@ -49,7 +51,7 @@ div.tournament-listing {
 	min-height: 100px;
 	padding: 4px;
 
-
+	/* AKA the listing title */
 	h3 {
 		margin-top: 0px;
 		color: #F0AD4E;
@@ -60,8 +62,15 @@ div.tournament-listing {
 		color: #D09D3E;
 	}
 
+	/* host of the tournament */
 	.host {
 		font-weight: bold;
 	}
 
+	.col-md-8 {
+		padding: 0;
+		a {
+			padding: 5px 0 0 0;
+		}
+	}
 }
