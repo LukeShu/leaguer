@@ -4,12 +4,10 @@ one:
   name: MyString
   game_id: 
   status: 1
-  ger: MyString
   randomized_teams: false
 
 two:
   name: MyString
   game_id: 
   status: 1
-  ger: MyString
   randomized_teams: false

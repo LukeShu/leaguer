@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140401205446) do
+ActiveRecord::Schema.define(version: 20140401215809) do
 
   create_table "alerts", force: true do |t|
     t.integer  "author_id"
@@ -155,7 +155,6 @@ ActiveRecord::Schema.define(version: 20140401205446) do
     t.string   "name"
     t.integer  "game_id"
     t.integer  "status"
-    t.string   "ger"
     t.boolean  "randomized_teams"
     t.datetime "created_at"
     t.datetime "updated_at"
