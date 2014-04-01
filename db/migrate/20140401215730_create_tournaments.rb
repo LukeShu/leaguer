@@ -4,7 +4,6 @@ class CreateTournaments < ActiveRecord::Migration
       t.string :name
       t.references :game, index: true
       t.integer :status
-      t.string :ger
       t.boolean :randomized_teams
 
       t.timestamps
