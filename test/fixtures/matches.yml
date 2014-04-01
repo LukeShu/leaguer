@@ -5,9 +5,11 @@ one:
   tournament_id: 
   name: MyString
   winner_id: 
+  remote_id: MyString
 
 two:
   status: 1
   tournament_id: 
   name: MyString
   winner_id: 
+  remote_id: MyString

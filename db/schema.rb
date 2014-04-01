@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140325214602) do
+ActiveRecord::Schema.define(version: 20140401215809) do
 
   create_table "alerts", force: true do |t|
     t.integer  "author_id"
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 20140325214602) do
     t.integer  "tournament_id"
     t.string   "name"
     t.integer  "winner_id"
+    t.string   "remote_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -85,6 +86,17 @@ ActiveRecord::Schema.define(version: 20140325214602) do
 
   add_index "pms", ["author_id"], name: "index_pms_on_author_id"
   add_index "pms", ["recipient_id"], name: "index_pms_on_recipient_id"
+
+  create_table "remote_usernames", force: true do |t|
+    t.integer  "game_id"
+    t.integer  "user_id"
+    t.text     "json_value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "remote_usernames", ["game_id"], name: "index_remote_usernames_on_game_id"
+  add_index "remote_usernames", ["user_id"], name: "index_remote_usernames_on_user_id"
 
   create_table "scores", force: true do |t|
     t.integer  "user_id"
@@ -128,7 +140,7 @@ ActiveRecord::Schema.define(version: 20140325214602) do
     t.integer "user_id", null: false
   end
 
-  create_table "tournament_options", force: true do |t|
+  create_table "tournament_preferences", force: true do |t|
     t.integer  "tournament_id"
     t.integer  "vartype"
     t.string   "name"
@@ -137,17 +149,12 @@ ActiveRecord::Schema.define(version: 20140325214602) do
     t.datetime "updated_at"
   end
 
-  add_index "tournament_options", ["tournament_id"], name: "index_tournament_options_on_tournament_id"
+  add_index "tournament_preferences", ["tournament_id"], name: "index_tournament_preferences_on_tournament_id"
 
   create_table "tournaments", force: true do |t|
     t.string   "name"
     t.integer  "game_id"
     t.integer  "status"
-    t.integer  "min_players_per_team"
-    t.integer  "max_players_per_team"
-    t.integer  "min_teams_per_match"
-    t.integer  "max_teams_per_match"
-    t.integer  "set_rounds"
     t.boolean  "randomized_teams"
     t.datetime "created_at"
     t.datetime "updated_at"

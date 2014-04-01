@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ServerSettingsTest < ActiveSupport::TestCase
+class RemoteUsernameTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

@@ -1,13 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
   game_id: 
-  status: 1
-  randomized_teams: false
+  user_id: 
+  json_value: MyText
 
 two:
-  name: MyString
   game_id: 
-  status: 1
-  randomized_teams: false
+  user_id: 
+  json_value: MyText
