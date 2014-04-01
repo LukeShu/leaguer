@@ -11,10 +11,20 @@ class TournamentsController < ApplicationController
   # GET /tournaments/1
   # GET /tournaments/1.json
   def show
-    case @tournament.status
-    when 0
-    when 1..2
-      redirect_to "/tournaments/" + @tournament.id.to_s + "/matches" #tournament_matches_page(@tournament)
+    respond_to do |format|
+      format.html {  
+        case @tournament.status
+        when 0
+          render action: 'show'
+        when 1..2
+          redirect_to "/tournaments/" + @tournament.id.to_s + "/matches" #tournament_matches_page(@tournament)
+        end
+      }
+      format.json { 
+        data = JSON.parse(@tournament.to_json)
+        data["players"] = @tournament.players;
+        render :json => data.to_json
+      }
     end
   end
 
