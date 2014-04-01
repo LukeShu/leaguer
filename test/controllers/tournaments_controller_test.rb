@@ -18,7 +18,7 @@ class TournamentsControllerTest < ActionController::TestCase
 
   test "should create tournament" do
     assert_difference('Tournament.count') do
-      post :create, tournament: { game_id: @tournament.game_id, ger: @tournament.ger, name: @tournament.name, randomized_teams: @tournament.randomized_teams, status: @tournament.status }
+      post :create, tournament: { game_id: @tournament.game_id, name: @tournament.name, randomized_teams: @tournament.randomized_teams, status: @tournament.status }
     end
 
     assert_redirected_to tournament_path(assigns(:tournament))
@@ -35,7 +35,7 @@ class TournamentsControllerTest < ActionController::TestCase
   end
 
   test "should update tournament" do
-    patch :update, id: @tournament, tournament: { game_id: @tournament.game_id, ger: @tournament.ger, name: @tournament.name, randomized_teams: @tournament.randomized_teams, status: @tournament.status }
+    patch :update, id: @tournament, tournament: { game_id: @tournament.game_id, name: @tournament.name, randomized_teams: @tournament.randomized_teams, status: @tournament.status }
     assert_redirected_to tournament_path(assigns(:tournament))
   end
 
