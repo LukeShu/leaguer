@@ -23,6 +23,14 @@
     <%= f.label :user_name %><br>
     <%= f.text_field :user_name %>
   </div>
+  <p>
+    <%= f.label(:password, "New Password (or use old)") %><br>
+    <%= f.password_field :password %>
+  </p>
+  <div>
+    <%= f.label(:password_confirmation, "Confirm Password") %><br>
+    <%= f.password_field :password_confirmation %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>
