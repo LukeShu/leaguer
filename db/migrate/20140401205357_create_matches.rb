@@ -5,6 +5,7 @@ class CreateMatches < ActiveRecord::Migration
       t.references :tournament, index: true
       t.string :name
       t.references :winner, index: true
+      t.string :remote_id
 
       t.timestamps
     end
