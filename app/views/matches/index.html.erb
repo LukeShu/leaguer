@@ -1,5 +1,6 @@
-<h1>Listing matches</h1>
+<h1><%= @tournament.name %> Matches</h1>
 
+<!--
 <table>
   <thead>
     <tr>
@@ -28,5 +29,17 @@
 </table>
 
 <br>
+-->
 
-<%= link_to 'New Match', new_tournament_match_path %>
+<SVG version="1.1"
+   baseProfile="full"
+   width="<%= 300 * @matches.count / 2 + 50 %>" height="<%= 200 * @matches.count + 50 %>"
+   xmlns="http://www.w3.org/2000/svg">
+
+   <% @matches.each do |tournament | %>
+    <g class="svg-match" >
+   
+    </g>
+   <% end %>
+
+</SVG>

@@ -76,7 +76,16 @@ class TournamentsController < ApplicationController
           end
           format.html { render action: 'permission_denied', status: :forbidden }
           format.json { render json: "Permission denied", status: :forbidden }
-        end
+      end
+      when "leave"
+        respond_to do |format|
+          if @tournament.leave(current_user)
+            format.html {redirect_to tournaments_url, notice: 'You have left the tournament.' }
+            format.json { head :no_content }
+          end
+          format.html {redirect_to @tournament, notice: 'You were\'t a part of this tournament.' }
+          format.json { render json: "Permission denied", status: :forbidden }
+      end         
       when "open"
         respond_to do |format|
           if @tournament.setup

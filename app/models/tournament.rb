@@ -19,6 +19,12 @@ class Tournament < ActiveRecord::Base
 		players.push(user)
 	end
 
+	def leave(user)
+		if players.include?(user)
+			players.delete(user)
+		end
+	end
+
 	def setup(tournament)
 		num_teams = (self.players.count/self.max_players_per_team).floor
 		num_matches = num_teams - 1

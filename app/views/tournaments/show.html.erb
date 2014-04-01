@@ -71,10 +71,17 @@
     <input type="hidden" name="update_action" value="join">
     <%= submit_tag("Join Tournamnet") %>
   <% end %>
+
+<% elsif @tournament.players.include?(current_user) %>
+    <%= form_tag(tournament_path(@tournament), method: "put") do %>
+    <input type="hidden" name="update_action" value="leave">
+    <%= submit_tag("Leave Tournamnet") %>
+  <% end %>
 <% end %>
 
 <%# If user is the host, let them start the tournment %>
 <% if @tournament.hosts.include?(current_user) %>
+  
   <%= form_tag(tournaments_path.to_s + "/" + @tournament.id.to_s + "/edit", method: "get") do %>
     <input type="hidden" name="close_action" value="close">
     <% if @tournament.players.count >= @tournament.min_players_per_team * @tournament.min_teams_per_match  %> 
@@ -83,9 +90,12 @@
       <%= submit_tag("Start Tournament", disabled: true) %>
     <% end %>
     <br />
-  <%= link_to 'Edit', edit_tournament_path(@tournament) %> |
-  <%= link_to 'Back', tournaments_path %>
-<% end %>
+    <%= link_to 'Edit', edit_tournament_path(@tournament) %> |
+    <%= link_to 'Back', tournaments_path %> |
+    <%= link_to 'Cancel Tournament', @tournament, method: :delete, data: { confirm: 'Are you sure?' } %>
+  <% end %>
+
+
 <%end %>
 </div>
 
