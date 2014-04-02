@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140401215809) do
+ActiveRecord::Schema.define(version: 20140402152924) do
 
   create_table "alerts", force: true do |t|
     t.integer  "author_id"
@@ -90,7 +90,7 @@ ActiveRecord::Schema.define(version: 20140401215809) do
   create_table "remote_usernames", force: true do |t|
     t.integer  "game_id"
     t.integer  "user_id"
-    t.text     "json_value"
+    t.string   "user_name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -155,6 +155,11 @@ ActiveRecord::Schema.define(version: 20140401215809) do
     t.string   "name"
     t.integer  "game_id"
     t.integer  "status"
+    t.integer  "min_players_per_team"
+    t.integer  "max_players_per_team"
+    t.integer  "min_teams_per_match"
+    t.integer  "max_teams_per_match"
+    t.integer  "set_rounds"
     t.boolean  "randomized_teams"
     t.datetime "created_at"
     t.datetime "updated_at"

@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Game:</strong>
+  <%= @remote_username.game %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @remote_username.user %>
+</p>
+
+<p>
+  <strong>User name:</strong>
+  <%= @remote_username.user_name %>
+</p>
+
+<%= link_to 'Edit', edit_remote_username_path(@remote_username) %> |
+<%= link_to 'Back', remote_usernames_path %>
