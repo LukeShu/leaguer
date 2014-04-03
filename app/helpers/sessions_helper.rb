@@ -7,67 +7,67 @@ module SessionsHelper
 		cookies.permanent[:remember_token] = remember_token
 		#save the hashed token to the database
 		user.update_attribute(:remember_token, 
-                         User.hash(remember_token))
+							  User.hash(remember_token))
 		#set the current user to be the given user
 		self.current_user = user
 	end
 
-# The curret_user=(user) is the conversion of self.current_user = user
+	# The curret_user=(user) is the conversion of self.current_user = user
 	def current_user=(user)
 		@current_user = user
 	end
 
-# sets the @current_user instance virable to the user corresponding
-# to the remember token, but only if @current_user is undefined
-# since the remember token is hashed, we need to hash the cookie
-# to find match the remember token
-  def current_user
-    remember_token = User.hash(cookies[:remember_token])
-    @current_user ||= User.find_by(remember_token: remember_token)
-  end
+	# sets the @current_user instance virable to the user corresponding
+	# to the remember token, but only if @current_user is undefined
+	# since the remember token is hashed, we need to hash the cookie
+	# to find match the remember token
+	def current_user
+		remember_token = User.hash(cookies[:remember_token])
+		@current_user ||= User.find_by(remember_token: remember_token)
+	end
 
 	# checks if someone is currently signed in
 	def signed_in?
 		!current_user.nil?
 	end
 
-  def sign_out
-    current_user.update_attribute(:remember_token, User.hash(User.new_remember_token))
-    cookies.delete(:remember_token)
-    self.current_user = nil
-  end
+	def sign_out
+		current_user.update_attribute(:remember_token, User.hash(User.new_remember_token))
+		cookies.delete(:remember_token)
+		self.current_user = nil
+	end
 
-=begin
+	=begin
 
-This is for anyone that cares about how long a user is signed
-in:
+		 This is for anyone that cares about how long a user is signed
+					 in:
 
-Currently I have a user to be signed in forever unless they
-log out (cookies.permanent....).
+						 Currently I have a user to be signed in forever unless they
+					 log out (cookies.permanent....).
 
-If you want to change that, change line 7 to this:
+						 If you want to change that, change line 7 to this:
 
-cookies[:remember_token] = { value: remember_token, 
-                            expires: 20.years.from_now.utc }
+						 cookies[:remember_token] = { value: remember_token, 
+				expires: 20.years.from_now.utc }
 
-which will expire the cookie in 20 years from its date of
-creation.
+					 which will expire the cookie in 20 years from its date of
+					 creation.
 
-Oddly enough, this line above is equivalent to the:
+						 Oddly enough, this line above is equivalent to the:
 
-cookies.permanent
+						 cookies.permanent
 
-This is just a short cut for this line since most people 
-create permanent cookies these days.
+					 This is just a short cut for this line since most people 
+												  create permanent cookies these days.
 
-Other times are:
+													  Other times are:
 
-10.weeks.from_now
+													  10.weeks.from_now
 
-5.days.ago
+												  5.days.ago
 
-etc...
+												  etc...
 
-=end
+													  =end
 
-end
+				 end

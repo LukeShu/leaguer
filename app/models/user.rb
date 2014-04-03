@@ -77,11 +77,11 @@ class User < ActiveRecord::Base
 	#   validity
 	validates(:name, presence: true, length: { maximum: 50 })
 	validates(:email, presence: true, format: {with:
-			VALID_EMAIL_REG},
-		uniqueness: { case_sensitive: false })
+				  VALID_EMAIL_REG},
+			  uniqueness: { case_sensitive: false })
 	validates(:user_name, presence: true, length:{maximum: 50},
-		format: {with: VALID_USER_NAME_REG },
-		uniqueness: {case_sensitive: false })
+			  format: {with: VALID_USER_NAME_REG },
+			  uniqueness: {case_sensitive: false })
 
 	##
 	# Instead of adding password and password_confirmation
