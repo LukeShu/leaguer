@@ -2,6 +2,8 @@
 
 one:
   user_id: 
+  token: MyString
 
 two:
   user_id: 
+  token: MyString

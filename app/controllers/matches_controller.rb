@@ -14,7 +14,6 @@ class MatchesController < ApplicationController
 
 	# GET /matches/new
 	def new
-
 	end
 
 	# GET /matches/1/edit
@@ -54,10 +53,10 @@ class MatchesController < ApplicationController
 	# DELETE /matches/1
 	# DELETE /matches/1.json
 	def destroy
-
 		@match.destroy
 		respond_to do |format|
 			format.html { redirect_to tournament_matches_path }
+			format.json { head :no_content }
 		end
 	end
 
@@ -70,6 +69,7 @@ class MatchesController < ApplicationController
 	def set_tournament
 		@tournament = Tournament.find(params[:tournament_id])
 	end
+
 	# Never trust parameters from the scary internet, only allow the white list through.
 	def match_params
 		params.require(:match).permit(:status, :tournament_id, :name, :winner_id, :remote_id)

@@ -3,7 +3,7 @@ class CreateRemoteUsernames < ActiveRecord::Migration
     create_table :remote_usernames do |t|
       t.references :game, index: true
       t.references :user, index: true
-      t.text :json_value
+      t.string :user_name
 
       t.timestamps
     end
