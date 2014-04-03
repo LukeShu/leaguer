@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
 	has_and_belongs_to_many :teams
 	has_many :sessions
 
+	apply_simple_captcha
+
 	before_save { self.email = email.downcase }
 	before_save { self.user_name = user_name }
 

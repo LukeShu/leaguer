@@ -23,6 +23,8 @@
     <%= f.password_field :password_confirmation %>
   </p>
   <p>
+	<%= show_simple_captcha %>
+
     <%= f.submit("Be a Leaguer", :class => "signup") %>
   </p>
 <% end %>
