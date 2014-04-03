@@ -5,4 +5,6 @@ class ApplicationController < ActionController::Base
 
 	#include sessionhelper for the session controller and view
 	include SessionsHelper
+
+	include SimpleCaptcha::ControllerHelpers
 end

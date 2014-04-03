@@ -4,6 +4,7 @@ class UsersController < ApplicationController
 	before_action :perms_create, only: [:new, :create]
 
 	# GET /users
+
 	# GET /users.json
 	def index
 		@users = User.all
@@ -26,15 +27,17 @@ class UsersController < ApplicationController
 	# POST /users
 	# POST /users.json
 	def create
-		@user = User.new(user_params)
-		respond_to do |format|
-			if @user.save
-				sign_in @user
-				format.html { redirect_to root_path, notice: 'User was successfully created.' }
-				format.json { render action: 'show', status: :created, location: @user }
-			else
-				format.html { render action: 'new', status: :unprocessable_entity }
-				format.json { render json: @user.errors, status: :unprocessable_entity }
+		if simple_captcha_valid?
+			@user = User.new(user_params)
+			respond_to do |format|
+				if @user.save
+					sign_in @user
+					format.html { redirect_to root_path, notice: 'User was successfully created.' }
+					format.json { render action: 'show', status: :created, location: @user }
+				else
+					format.html { render action: 'new', status: :unprocessable_entity }
+					format.json { render json: @user.errors, status: :unprocessable_entity }
+				end
 			end
 		end
 	end
