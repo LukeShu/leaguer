@@ -23,3 +23,8 @@
 .navbar{
 	background-color: white;
 }
+
+footer {
+	clear: both;
+	margin-top: 10px;
+}
