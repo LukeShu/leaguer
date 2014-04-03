@@ -32,7 +32,7 @@ bundle exec rails generate scaffold game \
 	min_teams_per_match:integer max_teams_per_match:integer \
 	set_rounds:integer randomized_teams:boolean
 bundle exec rails generate scaffold user name:string email:string:uniq user_name:string:uniq
-bundle exec rails generate scaffold session user:references
+bundle exec rails generate scaffold session user:references token:string:uniq
 bundle exec rails generate scaffold remote_username game:references user:references user_name:string
 
 # Just models
@@ -56,7 +56,7 @@ bundle exec rails generate controller static $NOTEST
 # Migrations
 # By having these separate from the original 'generate', it makes it
 # not stick these in the views or anything.
-bundle exec rails generate migration AddHiddenAttrsToUser password_digest:string remember_token:string:uniq groups:integer
+bundle exec rails generate migration AddHiddenAttrsToUser password_digest:string permissions:integer
 
 #for the tournament controller to generate options
 #bundle exec rails generate scaffold
