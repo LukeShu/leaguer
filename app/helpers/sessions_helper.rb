@@ -1,19 +1,13 @@
 module SessionsHelper
-
 	def sign_in(user)
-		#create a new remember token
-		remember_token = User.new_remember_token
-		#place token inside of the browser
-		cookies.permanent[:remember_token] = remember_token
-		#save the hashed token to the database
-		user.update_attribute(:remember_token,
-			User.hash(remember_token))
-		#set the current user to be the given user
-		self.current_user = user
-	end
+		@session = Session.new(user: user)
+		raw_token = @session.create_token
+		@session.save # FIXME: error handling
 
-	# The curret_user=(user) is the conversion of self.current_user = user
-	def current_user=(user)
+		@token = Session.hash_token(raw_token)
+		cookies.permanent[:remember_token] = raw_token
+
+		#set the current user to be the given user
 		@current_user = user
 	end
 
@@ -22,8 +16,9 @@ module SessionsHelper
 	# since the remember token is hashed, we need to hash the cookie
 	# to find match the remember token
 	def current_user
-		remember_token = User.hash(cookies[:remember_token])
-		@current_user ||= User.find_by(remember_token: remember_token)
+		@token ||= Session.hash_token(cookies[:remember_token])
+		@session ||= Session.find_by(token: @token)
+		@current_user ||= (@session.nil? ? nil : @session.user)
 	end
 
 	# checks if someone is currently signed in
@@ -32,9 +27,11 @@ module SessionsHelper
 	end
 
 	def sign_out
-		current_user.update_attribute(:remember_token, User.hash(User.new_remember_token))
+		if signed_in?
+			@session.destroy
+		end
+		@current_user = nil
 		cookies.delete(:remember_token)
-		self.current_user = nil
 	end
 
 	# This is for anyone that cares about how long a user is signed

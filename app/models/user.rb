@@ -2,17 +2,14 @@ class User < ActiveRecord::Base
 	has_and_belongs_to_many :tournaments_played, class_name: "Tournament", foreign_key: "player_id", join_table: "players_tournaments"
 	has_and_belongs_to_many :tournaments_hosted, class_name: "Tournament", foreign_key: "host_id", join_table: "hosts_tournaments"
 	has_and_belongs_to_many :teams
+	has_many :sessions
 
 	before_save { self.email = email.downcase }
 	before_save { self.user_name = user_name }
 
-	##
-	# Rails looks for the create_remember_token and runs the method
-	# before anything else.
-	#
-	# This method cannot be called by a user since it is denoted
-	# as private.
-	before_create :create_remember_token
+	def after_initialize
+		self.permissions = 0
+	end
 
 	def in_group?(group)
 		case group
@@ -93,59 +90,4 @@ class User < ActiveRecord::Base
 	has_secure_password
 
 	validates :password, length: { minimum: 6 }
-
-	##
-	# Create a random remember token for the user. This will be
-	# changed every time the user creates a new session.
-	#
-	# By changing the cookie every new session, any hijacked sessions
-	# (where the attacker steals a cookie to sign in as a certain
-	# user) will expire the next time the user signs back in.
-	#
-	# The random string is of length 16 composed of A-Z, a-z, 0-9
-	# This is the browser's cookie value.
-	def User.new_remember_token
-		SecureRandom.urlsafe_base64
-	end
-
-	##
-	# Encrypt the remember token.
-	# This is the encrypted version of the cookie stored on
-	# the database.
-	#
-	# The reasoning for storing a hashed token is so that even if
-	# the database is compromised, the attacker won't be able to use
-	# the remember tokens to sign in.
-	def User.hash(token)
-		Digest::SHA1.hexdigest(token.to_s)
-	end
-
-	##
-	# SHA-1 (Secure Hash Algorithm) is a US engineered hash
-	# function that produces a 20 byte hash value which typically
-	# forms a hexadecimal number 40 digits long.
-	# The reason I am not using the Bcrypt algorithm is because
-	# SHA-1 is much faster and I will be calling this on
-	# every page a user accesses.
-	#
-	# https://en.wikipedia.org/wiki/SHA-1
-
-
-	# Everything under private is hidden so you cannot call.
-	private
-
-	##
-	# Create_remember_token in order to ensure a user always has
-	# a remember token.
-	def create_remember_token
-		self.remember_token = User.hash(User.new_remember_token)
-	end
-
-	##
-	# In order to ensure that someone did not accidentally submit
-	# two accounts rapidly (which would throw off the validates
-	# for user_name and email), I added an index to the Users
-	# email and user_name in the database to ensure uniqueness
-	# This also gives and index to the user_name and email
-	# so finding a user SHOULD be easier for the database.
 end
