@@ -1,17 +1,13 @@
 #!/bin/bash
+
+# The generate.sh bash file is used to generate all of the necessary
+# .rb files to run the website
+
 set -x
 
-# The generate.sh bash file is used to generate all of the necessary .rb files to run the website
-# 
-
-
-# To Start Rails Server:
-#   bundle exec rails server
-#
-# To Clear the Generated Files:
-#   git clean -df
-#
-#NOTEST='--skip-test-unit'
+# figure out where we are running from
+srcdir=$(dirname "$(readlink -f "$0")")
+cd "$srcdir"
 
 git rm -rf app test config/routes.rb db/migrate
 git checkout clean-start -- app test config/routes.rb
@@ -64,5 +60,7 @@ bundle exec rails generate migration AddHiddenAttrsToUser password_digest:string
 bundle exec rake db:drop RAILS_ENV=development
 bundle exec rake db:migrate RAILS_ENV=development
 bundle exec rake db:seed
+
+find app -type f -name '*.rb' -exec bin/autoindent {} \;
 
 git add app test config/routes.rb db/migrate db/schema.rb
