@@ -91,3 +91,18 @@ class User < ActiveRecord::Base
 
 	validates :password, length: { minimum: 6 }
 end
+class NilUser
+	def nil?
+		return true
+	end
+	def can?(action)
+		return false
+	end
+	def method_missing(name, *args)
+		# Throw an error if User doesn't have this method
+		super unless User.new.respond_to?(name)
+		# User has this method -- return a blank value
+		# 'false' if the method ends with '?'; 'nil' otherwise.
+		name.ends_with?('?') ? false : nil
+	end
+end
