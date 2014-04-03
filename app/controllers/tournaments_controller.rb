@@ -36,12 +36,7 @@ class TournamentsController < ApplicationController
 
 	# GET /tournaments/1/edit
 	def edit
-		if params['close_action'] == 'close'
-			@tournament.status = 1
-			@tournament.save
-			@tournament.setup(@tournament)
-			redirect_to "/tournaments"
-		end
+	
 	end
 
 	# POST /tournaments
@@ -96,7 +91,10 @@ class TournamentsController < ApplicationController
 					format.html {redirect_to @tournament, notice: 'You were\'t a part of this tournament.' }
 					format.json { render json: "Permission denied", status: :forbidden }
 				end         
-			when "open"
+			when "start"
+				@tournament.status = 1
+				@tournament.save
+				@tournament.setup()
 				respond_to do |format|
 					if @tournament.setup
 						format.html { render action: 'show', notice: 'You have joined this tournament.' }
@@ -105,8 +103,6 @@ class TournamentsController < ApplicationController
 					format.html { render action: 'permission_denied', status: :forbidden }
 					format.json { render json: "Permission denied", status: :forbidden }
 				end
-				#when "close"
-				# TODO
 			else
 				respond_to do |format|
 					format.html { render action: 'show', notice: "Invalid action", status: :unprocessable_entity }
