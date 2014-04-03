@@ -1,0 +1,10 @@
+#!/bin/bash
+file=$1
+sed -i 's/^\s*//' "$file"
+emacs --batch "$file" \
+	--eval '(setq indent-tabs-mode t)' \
+	--eval '(setq ruby-indent-level 4)' \
+	--eval '(setq tab-width 4)' \
+	--eval '(setq make-backup-files nil)' \
+	--eval '(indent-region (point-min) (point-max) nil)' \
+	-f save-buffer

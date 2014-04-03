@@ -1,6 +1,6 @@
 Leaguer::Application.routes.draw do
+  resources :remote_usernames
 
-  #creates sessions as a resource but limits it to these actions
   resources :sessions, only: [:new, :create, :destroy]
 
   resources :users

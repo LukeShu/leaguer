@@ -36,9 +36,9 @@
    width="<%= 300 * @matches.count / 2 + 50 %>" height="<%= 200 * @matches.count + 50 %>"
    xmlns="http://www.w3.org/2000/svg">
 
-   <% @matches.each do |tournament | %>
+   <% (1..@matches.count).each do |i| %>
     <g class="svg-match" >
-   
+      
     </g>
    <% end %>
 

@@ -3,7 +3,7 @@
 </h2>
 
 <div class="progress">
-  <%= tag("div", {:class => "progress-bar progress-bar-warning",  :style => "width: " +(@tournament.players.count * 100 / (@tournament.min_players_per_team * @tournament.min_teams_per_match)).to_s + "%", "aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => (@tournament.players.count * 100 / (@tournament.min_players_per_team * @tournament.min_teams_per_match)).to_s, "role" => "progressbar"}) %>
+  <%= tag("div", {:id => "prog-bar", :class => "progress-bar progress-bar-warning",  :style => "width: " +(@tournament.players.count * 100 / (@tournament.min_players_per_team * @tournament.min_teams_per_match)).to_s + "%", "aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => (@tournament.players.count * 100 / (@tournament.min_players_per_team * @tournament.min_teams_per_match)).to_s, "role" => "progressbar"}) %>
     <span class="sr-only">60% Complete (warning)</span>
     </div>
 </div>
@@ -11,45 +11,70 @@
 
 <span id="tournament-side-params">
 
+<p>
+  <strong>Status:</strong>
+  <% if @tournament.status == 0 %>
+    Waiting for players...
+  <% else %>
+    Started
+  <% end %>
+</p>
 
-  <p>
-    <strong>Status:</strong>
-    <% if @tournament.status == 0 %>
-    	Waiting for players...
-    <% else %>
-    	Started
-    <% end %>
-  </p>
+<p>
+  <strong>Min players per team:</strong>
+  <%= @tournament.min_players_per_team %>
+</p>
 
-  <p>
-    <strong>Min players per team:</strong>
-    <%= @tournament.min_players_per_team %>
-  </p>
+<p>
+  <strong>Max players per team:</strong>
+  <%= @tournament.max_players_per_team %>
+</p>
 
-  <p>
-    <strong>Max players per team:</strong>
-    <%= @tournament.max_players_per_team %>
-  </p>
+<p>
+  <strong>Min teams per match:</strong>
+  <%= @tournament.min_teams_per_match %>
+</p>
 
-  <p>
-    <strong>Min teams per match:</strong>
-    <%= @tournament.min_teams_per_match %>
-  </p>
+<p>
+  <strong>Max teams per match:</strong>
+  <%= @tournament.max_teams_per_match %>
+</p>
 
-  <p>
-    <strong>Max teams per match:</strong>
-    <%= @tournament.max_teams_per_match %>
-  </p>
+<p>
+  <strong>Set rounds:</strong>
+  <%= @tournament.set_rounds %>
+</p>
 
-  <p>
-    <strong>Set rounds:</strong>
-    <%= @tournament.set_rounds %>
-  </p>
+<p>
+  <strong>Min players per team:</strong>
+  <%= @tournament.min_players_per_team %>
+</p>
 
-  <p>
-    <strong>Randomized teams:</strong>
-    <%= @tournament.randomized_teams %>
-  </p>
+<p>
+  <strong>Max players per team:</strong>
+  <%= @tournament.max_players_per_team %>
+</p>
+
+<p>
+  <strong>Min teams per match:</strong>
+  <%= @tournament.min_teams_per_match %>
+</p>
+
+<p>
+  <strong>Max teams per match:</strong>
+  <%= @tournament.max_teams_per_match %>
+</p>
+
+<p>
+  <strong>Set rounds:</strong>
+  <%= @tournament.set_rounds %>
+</p>
+
+<p>
+  <strong>Randomized teams:</strong>
+  <%= @tournament.randomized_teams %>
+</p>
+
 </span>
 
 <div >
@@ -65,6 +90,7 @@
  <h3 div="players-needed">Hmmm.... nobody's here yet! You and your friends should join the tournament.</h3> 
 <% end %>
 
+<div class="leave-buttons">
 <%# If user can join, and user hasn't joined already, show the join tournment tag %>
 <% if @tournament.joinable_by?(current_user) && !@tournament.players.include?(current_user) %> 
   <%= form_tag(tournament_path(@tournament), method: "put") do %>
@@ -94,8 +120,29 @@
     <%= link_to 'Back', tournaments_path %> |
     <%= link_to 'Cancel Tournament', @tournament, method: :delete, data: { confirm: 'Are you sure?' } %>
   <% end %>
-
+</div>
 
 <%end %>
 </div>
 
+<script>
+function donehandle( tournament ) {
+  if ( console && console.log ) {
+    var here = tournament["players"].length;
+    var needed = (tournament["min_teams_per_match"] * tournament["min_players_per_team"]);
+    var pct_complete =  here / needed;
+    $("#prog-bar").width( (pct_complete * 100) +"%");
+    $("#players-needed").text(here + " " + (here==1?"player has":"players have") + " signed up. " + needed + " players needed. ");
+    players = "";
+    for (var i = 0; i < tournament["players"].length; i++) {
+      players = players+"<li><span class=\"black\">"+tournament["players"][i]["user_name"]+"</span></li>"
+    }
+    $("#tournament-users").html(players);
+
+  }
+  setTimeout(function(){$.ajax({url: "<%= url_for @tournament %>.json"}).done(donehandle)}, 3000);
+}
+
+$.ajax({url: "<%= url_for @tournament %>.json"})
+  .done(donehandle);
+</script>

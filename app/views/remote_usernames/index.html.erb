@@ -1,0 +1,31 @@
+<h1>Listing remote_usernames</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Game</th>
+      <th>User</th>
+      <th>User name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @remote_usernames.each do |remote_username| %>
+      <tr>
+        <td><%= remote_username.game %></td>
+        <td><%= remote_username.user %></td>
+        <td><%= remote_username.user_name %></td>
+        <td><%= link_to 'Show', remote_username %></td>
+        <td><%= link_to 'Edit', edit_remote_username_path(remote_username) %></td>
+        <td><%= link_to 'Destroy', remote_username, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Remote username', new_remote_username_path %>

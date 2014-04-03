@@ -1,17 +1,13 @@
 #!/bin/bash
+
+# The generate.sh bash file is used to generate all of the necessary
+# .rb files to run the website
+
 set -x
 
-# The generate.sh bash file is used to generate all of the necessary .rb files to run the website
-# 
-
-
-# To Start Rails Server:
-#   bundle exec rails server
-#
-# To Clear the Generated Files:
-#   git clean -df
-#
-#NOTEST='--skip-test-unit'
+# figure out where we are running from
+srcdir=$(dirname "$(readlink -f "$0")")
+cd "$srcdir"
 
 git rm -rf app test config/routes.rb db/migrate
 git checkout clean-start -- app test config/routes.rb
@@ -22,14 +18,17 @@ bundle exec rails generate scaffold match status:integer tournament:references n
 bundle exec rails generate scaffold team match:references $NOTEST
 bundle exec rails generate scaffold alert author:references message:text $NOTEST
 bundle exec rails generate scaffold pm author:references recipient:references message:text $NOTEST
-bundle exec rails generate scaffold tournament name:string:unique game:references status:integer randomized_teams:boolean
+bundle exec rails generate scaffold tournament name:string:unique game:references status:integer \
+	min_players_per_team:integer max_players_per_team:integer \
+	min_teams_per_match:integer max_teams_per_match:integer \
+	set_rounds:integer randomized_teams:boolean
 bundle exec rails generate scaffold game \
 	name:text \
 	min_players_per_team:integer max_players_per_team:integer \
 	min_teams_per_match:integer max_teams_per_match:integer \
 	set_rounds:integer randomized_teams:boolean
 bundle exec rails generate scaffold user name:string email:string:uniq user_name:string:uniq
-bundle exec rails generate scaffold session user:references
+bundle exec rails generate scaffold session user:references token:string:uniq
 bundle exec rails generate scaffold remote_username game:references user:references user_name:string
 
 # Just models
@@ -53,7 +52,7 @@ bundle exec rails generate controller static $NOTEST
 # Migrations
 # By having these separate from the original 'generate', it makes it
 # not stick these in the views or anything.
-bundle exec rails generate migration AddHiddenAttrsToUser password_digest:string remember_token:string:uniq groups:integer
+bundle exec rails generate migration AddHiddenAttrsToUser password_digest:string permissions:integer
 
 #for the tournament controller to generate options
 #bundle exec rails generate scaffold
@@ -61,5 +60,7 @@ bundle exec rails generate migration AddHiddenAttrsToUser password_digest:string
 bundle exec rake db:drop RAILS_ENV=development
 bundle exec rake db:migrate RAILS_ENV=development
 bundle exec rake db:seed
+
+find app -type f -name '*.rb' -exec bin/autoindent {} \;
 
 git add app test config/routes.rb db/migrate db/schema.rb
