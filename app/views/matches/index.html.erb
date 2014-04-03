@@ -1,28 +1,23 @@
-<h1><%= @tournament.name %> Matches</h1>
+<h1><%= @tournament.name %> - Matches</h1>
 
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Status</th>
-      <th>Tournament</th>
       <th>Name</th>
       <th>Winner</th>
-      <th>Remote</th>
-      <th></th>
-      <th></th>
       <th></th>
     </tr>
   </thead>
 
-  <tbody>
+  <tbody class="table-hover">
     <% @tournament.matches.each do |match| %>
       <tr>
-        <td><%= match.tournament.id %></td>
         <td><%= match.status %></td>
-        <td><%= match.tournament %></td>
+        <td><%= match.id%></td>
         <td><%= match.name %></td>
-        <td><%= match.winner %></td>
+        <td><%= link_to "Show", tournament_match_path(@tournament, match) %>
       </tr>
     <% end %>
   </tbody>
@@ -37,7 +32,8 @@
    xmlns="http://www.w3.org/2000/svg">
 
    <% (1..@matches.count).each do |i| %>
-    <g class="svg-match" >
+    <g class="svg-match">
+      <rect rx="10"
       
     </g>
    <% end %>
