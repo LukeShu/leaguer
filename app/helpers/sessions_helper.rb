@@ -6,8 +6,8 @@ module SessionsHelper
 		#place token inside of the browser
 		cookies.permanent[:remember_token] = remember_token
 		#save the hashed token to the database
-		user.update_attribute(:remember_token, 
-							  User.hash(remember_token))
+		user.update_attribute(:remember_token,
+			User.hash(remember_token))
 		#set the current user to be the given user
 		self.current_user = user
 	end
@@ -37,37 +37,32 @@ module SessionsHelper
 		self.current_user = nil
 	end
 
-	=begin
-
-		 This is for anyone that cares about how long a user is signed
-					 in:
-
-						 Currently I have a user to be signed in forever unless they
-					 log out (cookies.permanent....).
-
-						 If you want to change that, change line 7 to this:
-
-						 cookies[:remember_token] = { value: remember_token, 
-				expires: 20.years.from_now.utc }
-
-					 which will expire the cookie in 20 years from its date of
-					 creation.
-
-						 Oddly enough, this line above is equivalent to the:
-
-						 cookies.permanent
-
-					 This is just a short cut for this line since most people 
-												  create permanent cookies these days.
-
-													  Other times are:
-
-													  10.weeks.from_now
-
-												  5.days.ago
-
-												  etc...
-
-													  =end
-
-				 end
+	# This is for anyone that cares about how long a user is signed
+	# in:
+	#
+	# Currently I have a user to be signed in forever unless they
+	# log out (cookies.permanent....).
+	#
+	# If you want to change that, change line 7 to this:
+	#
+	# cookies[:remember_token] = { value: remember_token,
+	#                             expires: 20.years.from_now.utc }
+	#
+	# which will expire the cookie in 20 years from its date of
+	# creation.
+	#
+	# Oddly enough, this line above is equivalent to the:
+	#
+	# cookies.permanent
+	#
+	# This is just a short cut for this line since most people
+	# create permanent cookies these days.
+	#
+	# Other times are:
+	#
+	# 10.weeks.from_now
+	#
+	# 5.days.ago
+	#
+	# etc...
+end
