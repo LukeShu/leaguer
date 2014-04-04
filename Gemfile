@@ -12,7 +12,7 @@ gem 'httparty'
 
 gem 'simple_captcha2', require: 'simple_captcha'
 
-gem 'rmagick'
+#gem 'rmagick'
 
 group :development, :test do
 	# Use sqlite3 as the database for Active Record

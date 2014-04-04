@@ -12,7 +12,24 @@
   <strong>Name:</strong>
   <%= @match.name %>
 </p>
+<!--
+	Match Status 0 =>	Pairings Stage
+	Match Status 1 =>	Match Active 
+	Match Status 2 =>	Match Finished (Peer Review Starts) 
+	Match Status 3 => 	Match Completed (Scores Completed OR Results Page)  	
 
+	Four views:- (status is Match status)
+	A. Pairings, when status is 0 for either Host or Player Or when status is 1 for player 
+	B. A page the host will see if status is 1 OR 2
+	C. The Peer review page that the players will see if status is 2.
+	D. The page everyone will see when status is 3.
+
+	Note:- The change of status from 1 to 2 is coming from League Data Pull (RIOT API)
+
+-->
+<!--
+	This is what the HOST will see when the Match Status is NOT 3
+-->
 <% if (@tournament.hosts.include?(current_user) and @match.winner.nil?) %>
 	<%= form_for([@tournament, @match], method: "put") do |f| %>
 		<ul>
@@ -24,6 +41,8 @@
 		<%= f.submit("Select winner") %>
 	<% end %>
 <% end %>
+
+
 
 <% unless @match.winner.nil? %>
 	<p>

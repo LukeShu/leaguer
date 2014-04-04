@@ -5,8 +5,8 @@ module SessionsHelper
 		@session.save # FIXME: error handling
 
 		@token = Session.hash_token(raw_token)
-		cookies.permanent[:remember_token] = raw_token
-
+		#cookies.permanent[:remember_token] = raw_token
+		cookies.permanent[:remember_token] = { value: remember_token, expires: 20.minutes.from_now.utc }
 		#set the current user to be the given user
 		@current_user = user
 	end
