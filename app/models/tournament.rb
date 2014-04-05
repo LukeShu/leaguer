@@ -9,7 +9,7 @@ class Tournament < ActiveRecord::Base
 	end
 
 	def joinable_by?(user)
-		return ((not user.nil?) and user.in_group?(:player) and open? and !players.include?(user))
+		return (open? and user.can?(:join_tournament) and !players.include?(user))
 	end
 
 	def join(user)

@@ -1,5 +1,4 @@
 class SessionsController < ApplicationController
-	before_action :set_session, only: [:destroy]
 
 	# GET /sessions/new
 	def new
@@ -41,11 +40,16 @@ class SessionsController < ApplicationController
 	private
 	# Use callbacks to share common setup or constraints between actions.
 	def set_session
-		#@session = Session.find(cookies[:remember_token])
+		@token = Session.hash_token(cookies[:remember_token])
+		@session = Session.find_by(token: @token)
 	end
 
 	# Never trust parameters from the scary internet, only allow the white list through.
 	def session_params
 		params.require(:session).permit(:session_email, :session_user_name, :session_password)
+	end
+
+	def is_owner?(object)
+		object.user == current_user
 	end
 end

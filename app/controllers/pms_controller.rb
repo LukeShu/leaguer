@@ -1,6 +1,4 @@
 class PmsController < ApplicationController
-	before_action :set_pm, only: [:show, :edit, :update, :destroy]
-
 	# GET /pms
 	# GET /pms.json
 	def index

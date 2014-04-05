@@ -1,3 +1,5 @@
+require 'user'
+
 module SessionsHelper
 	def sign_in(user)
 		@session = Session.new(user: user)

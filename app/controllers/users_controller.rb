@@ -1,7 +1,4 @@
 class UsersController < ApplicationController
-	before_action :set_user, only: [:show, :edit, :update, :destroy]
-	before_action :perms_edit, only: [:edit, :update, :destroy]
-	before_action :perms_create, only: [:new, :create]
 
 	# GET /users
 	# GET /users.json
@@ -69,22 +66,8 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])
 	end
 
-	def perms_edit
-		unless (current_user == @user) or (signed_in? and current_user.in_group? :admin)
-			respond_to do |format|
-				format.html { render action: 'permission_denied', status: :forbidden }
-				format.json { render json: "Permission denied", status: :forbidden }
-			end
-		end
-	end
-
-	def perms_create
-		if signed_in?
-			respond_to do |format|
-				format.html { render action: 'already_signed_in', status: :unprocessable_entity }
-				format.json { render json: "Already signed in", status: :unprocessable_entity }
-			end
-		end
+	def is_owner?(object)
+		object == current_user
 	end
 
 	# Never trust parameters from the scary internet, only allow the white list through.

@@ -15,9 +15,8 @@ Leaguer::Application.routes.draw do
 
   resources :teams
   resources :tournaments do
-    resources :matches
+    resources :matches, only: [:index, :show]
   end
-
 
   root to: 'static#homepage'
   get '/testsvg', to: 'static#test'

@@ -11,44 +11,36 @@ class User < ActiveRecord::Base
 		self.permissions = 0
 	end
 
-	def in_group?(group)
-		case group
-		when :admin
-			return ((groups & 2) != 0)
-		when :host
-			return true #((groups & 1) != 0)
-		when :player
-			return true
-		when :specator
-			return true
+	def can?(action)
+		case action
+		when :create_tournament
+		when :edit_tournament
+		when :join_tournament
+		when :delete_tournament
+
+		when :create_game
+		when :edit_game
+		when :delete_game
+
+		when :create_user
+			return false
+		when :edit_user
+		when :delete_user
+
+		when :create_alert
+		when :edit_alert
+		when :delete_alert
+
+		when :create_pm
+		when :edit_pm
+		when :delete_pm
+
+		when :create_session
+			return false
+		when :delete_session
+
 		else
 			return false
-		end
-	end
-
-	def join_groups(join=[])
-		# FIXME: race condition
-		join.each do |group|
-			case group
-			when :admin
-				groups |= 2
-			when :host
-				groups |= 1
-			else
-			end
-		end
-	end
-
-	def leave_groups(leave=[])
-		# FIXME: race condition
-		leave.each do |group|
-			case group
-			when :admin
-				groups &= ~ 2
-			when :host
-				groups &= ~ 1
-			else
-			end
 		end
 	end
 
@@ -96,7 +88,14 @@ class NilUser
 		return true
 	end
 	def can?(action)
-		return false
+		case action
+		when :create_user
+			return true
+		when :create_session
+			return true
+		else
+			return false
+		end
 	end
 	def method_missing(name, *args)
 		# Throw an error if User doesn't have this method

@@ -1,5 +1,4 @@
 class TeamsController < ApplicationController
-	before_action :set_team, only: [:show, :edit, :update, :destroy]
 
 	# GET /teams
 	# GET /teams.json
@@ -70,5 +69,9 @@ class TeamsController < ApplicationController
 	# Never trust parameters from the scary internet, only allow the white list through.
 	def team_params
 		params.require(:team).permit(:match_id)
+	end
+
+	def is_owner?(object)
+		object.users.include?(current_user)
 	end
 end
