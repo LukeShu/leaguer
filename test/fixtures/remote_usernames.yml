@@ -3,9 +3,9 @@
 one:
   game_id: 
   user_id: 
-  user_name: MyString
+  json_value: MyText
 
 two:
   game_id: 
   user_id: 
-  user_name: MyString
+  json_value: MyText

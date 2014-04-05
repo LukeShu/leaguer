@@ -5,7 +5,7 @@ class CreateGameSettings < ActiveRecord::Migration
       t.integer :type
       t.string :name
       t.text :default
-      t.text :discription
+      t.text :description
       t.text :type_opt
       t.integer :display_order
 

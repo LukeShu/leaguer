@@ -1,6 +1,4 @@
 Leaguer::Application.routes.draw do
-  resources :remote_usernames
-
   resources :sessions
 
   resources :users
