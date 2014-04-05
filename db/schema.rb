@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140403171427) do
+ActiveRecord::Schema.define(version: 20140405010527) do
 
   create_table "alerts", force: true do |t|
     t.integer  "author_id"
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20140403171427) do
     t.integer  "type"
     t.string   "name"
     t.text     "default"
-    t.text     "discription"
+    t.text     "description"
     t.text     "type_opt"
     t.integer  "display_order"
     t.datetime "created_at"
@@ -90,7 +90,7 @@ ActiveRecord::Schema.define(version: 20140403171427) do
   create_table "remote_usernames", force: true do |t|
     t.integer  "game_id"
     t.integer  "user_id"
-    t.string   "user_name"
+    t.text     "json_value"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -128,15 +128,6 @@ ActiveRecord::Schema.define(version: 20140403171427) do
 
   add_index "sessions", ["token"], name: "index_sessions_on_token", unique: true
   add_index "sessions", ["user_id"], name: "index_sessions_on_user_id"
-
-  create_table "simple_captcha_data", force: true do |t|
-    t.string   "key",        limit: 40
-    t.string   "value",      limit: 6
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "simple_captcha_data", ["key"], name: "idx_key"
 
   create_table "teams", force: true do |t|
     t.integer  "match_id"

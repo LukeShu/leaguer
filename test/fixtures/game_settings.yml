@@ -5,7 +5,7 @@ one:
   type: 1
   name: MyString
   default: MyText
-  discription: MyText
+  description: MyText
   type_opt: MyText
   display_order: 1
 
@@ -14,6 +14,6 @@ two:
   type: 1
   name: MyString
   default: MyText
-  discription: MyText
+  description: MyText
   type_opt: MyText
   display_order: 1
