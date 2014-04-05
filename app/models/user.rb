@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
 	end
 
 	def can?(action)
+		return true
 		case action
 		when :create_tournament
 		when :edit_tournament
