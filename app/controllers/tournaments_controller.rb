@@ -59,8 +59,8 @@ class TournamentsController < ApplicationController
 	# PATCH/PUT /tournaments/1
 	# PATCH/PUT /tournaments/1.json
 	def update
-
-		if params[:update_action].nil?
+		case params[:update_action]
+		when nil
 			check_perms
 			respond_to do |format|
 				if @tournament.update(tournament_params)
@@ -71,42 +71,39 @@ class TournamentsController < ApplicationController
 					format.json { render json: @tournament.errors, status: :unprocessable_entity }
 				end
 			end
+		when "join"
+			respond_to do |format|
+				if @tournament.join(current_user)
+					format.html { redirect_to @tournament, notice: 'You have joined this tournament.' }
+					format.json { head :no_content }
+				end
+				format.html { render action: 'permission_denied', status: :forbidden }
+				format.json { render json: "Permission denied", status: :forbidden }
+			end
+		when "leave"
+			respond_to do |format|
+				if @tournament.leave(current_user)
+					format.html { redirect_to tournaments_url, notice: 'You have left the tournament.' }
+					format.json { head :no_content }
+				end
+				format.html {redirect_to @tournament, notice: 'You were\'t a part of this tournament.' }
+				format.json { render json: "Permission denied", status: :forbidden }
+			end
+		when "start"
+			@tournament.status = 1
+			@tournament.save
+			respond_to do |format|
+				if @tournament.setup
+					format.html { redirect_to @tournament, notice: 'You have joined this tournament.' }
+					format.json { head :no_content }
+				end
+				format.html { render action: 'permission_denied', status: :forbidden }
+				format.json { render json: "Permission denied", status: :forbidden }
+			end
 		else
-			case params[:update_action]
-			when "join"
-				respond_to do |format|
-					if @tournament.join(current_user)
-						format.html { redirect_to @tournament, notice: 'You have joined this tournament.' }
-						format.json { head :no_content }
-					end
-					format.html { render action: 'permission_denied', status: :forbidden }
-					format.json { render json: "Permission denied", status: :forbidden }
-				end
-			when "leave"
-				respond_to do |format|
-					if @tournament.leave(current_user)
-						format.html { redirect_to tournaments_url, notice: 'You have left the tournament.' }
-						format.json { head :no_content }
-					end
-					format.html {redirect_to @tournament, notice: 'You were\'t a part of this tournament.' }
-					format.json { render json: "Permission denied", status: :forbidden }
-				end         
-			when "start"
-				@tournament.status = 1
-				@tournament.save
-				respond_to do |format|
-					if @tournament.setup
-						format.html { redirect_to @tournament, notice: 'You have joined this tournament.' }
-						format.json { head :no_content }
-					end
-					format.html { render action: 'permission_denied', status: :forbidden }
-					format.json { render json: "Permission denied", status: :forbidden }
-				end
-			else
-				respond_to do |format|
-					format.html { redirect_to @tournament, notice: "Invalid action", status: :unprocessable_entity }
-					format.json { render json: @tournament.errors, status: :unprocessable_entity }
-				end
+			respond_to do |format|
+				format.html { redirect_to @tournament, notice: "Invalid action", status: :unprocessable_entity }
+				format.json { render json: @tournament.errors, status: :unprocessable_entity }
 			end
 		end
 	end
