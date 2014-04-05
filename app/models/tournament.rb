@@ -25,7 +25,7 @@ class Tournament < ActiveRecord::Base
 		end
 	end
 
-	def setup()
+	def setup
 		num_teams = (self.players.count/self.min_players_per_team).floor
 		num_matches = num_teams - 1
 		for i in 1..num_matches
@@ -33,8 +33,11 @@ class Tournament < ActiveRecord::Base
 		end
 		match_num = 0
 		team_num = 0
+		#for each grouping of min_players_per_team
 		self.players.each_slice(min_players_per_team) do |players|
+			#create a new team in the current match
 			self.matches[match_num].teams.push(Team.create(users: players))
+			#if the match is full, move to the next match, otherwise move to the next team
 			if (team_num != 0 and team_num % max_teams_per_match == 0)
 				match_num += 1
 				team_num = 0
