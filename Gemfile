@@ -8,6 +8,12 @@ gem 'rails', '4.0.2'
 # bcrypt is used for password digesting
 gem 'bcrypt-ruby', '3.1.2'
 
+gem 'httparty'
+
+gem 'simple_captcha2', require: 'simple_captcha'
+
+#gem 'rmagick'
+
 group :development, :test do
 	# Use sqlite3 as the database for Active Record
 	gem 'sqlite3'
@@ -40,6 +46,9 @@ gem 'turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
+
+# Asynchronously handle longer or delayed tasks
+gem 'delayed_job'
 
 group :doc do
 	# bundle exec rake doc:rails generates the API under doc/api.
