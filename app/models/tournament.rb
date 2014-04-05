@@ -20,22 +20,22 @@ class Tournament < ActiveRecord::Base
 	end
 
 	def leave(user)
-		if players.include?(user)
+		if players.include?(user) && status == 0
 			players.delete(user)
 		end
 	end
 
-	def setup(tournament)
-		num_teams = (self.players.count/self.max_players_per_team).floor
+	def setup()
+		num_teams = (self.players.count/self.min_players_per_team).floor
 		num_matches = num_teams - 1
 		for i in 1..num_matches
-			self.matches.create(name: "Match #{i}")
+			self.matches.create(name: "Match #{i}", status: 0)
 		end
 		match_num = 0
 		team_num = 0
-		self.players.each_slice(tournament.max_players_per_team) do |players|
+		self.players.each_slice(min_players_per_team) do |players|
 			self.matches[match_num].teams.push(Team.create(users: players))
-			if (team_num != 0 and team_num % tournament.max_teams_per_match == 0)
+			if (team_num != 0 and team_num % max_teams_per_match == 0)
 				match_num += 1
 				team_num = 0
 			else

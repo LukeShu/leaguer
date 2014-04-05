@@ -11,6 +11,8 @@ class ApplicationController < ActionController::Base
 	#include sessionhelper for the session controller and view
 	include SessionsHelper
 
+	include SimpleCaptcha::ControllerHelpers
+
 	def check_permission(verb, object=nil)
 		unless current_user.can?((verb.to_s+"_"+noun).to_sym) or (!object.nil? and is_owner?(object))
 			respond_to do |format|

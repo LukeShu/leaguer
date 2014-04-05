@@ -13,6 +13,8 @@ Leaguer::Application.routes.draw do
 
   resource :server, only: [:show, :edit, :update]
 
+  #match 'simple_captcha/:id', :to => 'simple_captcha#show', :as => :simple_captcha
+
   resources :teams
   resources :tournaments do
     resources :matches, only: [:index, :show]

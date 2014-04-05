@@ -69,12 +69,11 @@ class TournamentsController < ApplicationController
 					format.json { render json: @tournament.errors, status: :unprocessable_entity }
 				end
 			end
-
 		when "join"
 			check_permission(:join)
 			respond_to do |format|
 				if @tournament.join(current_user)
-					format.html { render action: 'show', notice: 'You have joined this tournament.' }
+					format.html { redirect_to @tournament, notice: 'You have joined this tournament.' }
 					format.json { head :no_content }
 				end
 				format.html { render action: 'permission_denied', status: :forbidden }
@@ -83,17 +82,19 @@ class TournamentsController < ApplicationController
 		when "leave"
 			respond_to do |format|
 				if @tournament.leave(current_user)
-					format.html {redirect_to tournaments_url, notice: 'You have left the tournament.' }
+					format.html { redirect_to tournaments_url, notice: 'You have left the tournament.' }
 					format.json { head :no_content }
 				end
 				format.html {redirect_to @tournament, notice: 'You were\'t a part of this tournament.' }
 				format.json { render json: "Permission denied", status: :forbidden }
 			end
-		when "open"
+		when "start"
 			check_permission(:edit, @tournament)
+			@tournament.status = 1
+			@tournament.save
 			respond_to do |format|
 				if @tournament.setup
-					format.html { render action: 'show', notice: 'You have joined this tournament.' }
+					format.html { redirect_to @tournament, notice: 'You have joined this tournament.' }
 					format.json { head :no_content }
 				end
 				format.html { render action: 'permission_denied', status: :forbidden }
@@ -101,7 +102,7 @@ class TournamentsController < ApplicationController
 			end
 		else
 			respond_to do |format|
-				format.html { render action: 'show', notice: "Invalid action", status: :unprocessable_entity }
+				format.html { redirect_to @tournament, notice: "Invalid action", status: :unprocessable_entity }
 				format.json { render json: @tournament.errors, status: :unprocessable_entity }
 			end
 		end

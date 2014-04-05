@@ -12,6 +12,8 @@ cd "$srcdir"
 git rm -rf app test config/routes.rb db/migrate
 git checkout clean-start -- app test config/routes.rb
 
+bundle exec rails generate simple_captcha
+
 # The whole shebang, models, views, and controllers
 bundle exec rails generate scaffold server --force $NOTEST
 bundle exec rails generate scaffold match status:integer tournament:references name:string winner:references remote_id:string $NOTEST

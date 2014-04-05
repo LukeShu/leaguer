@@ -5,4 +5,7 @@ class Match < ActiveRecord::Base
 
 	belongs_to :winner, class_name: "Team"
 
+	def setup()
+		
+	end
 end
