@@ -31,11 +31,10 @@ bundle exec rails generate scaffold game \
 	set_rounds:integer randomized_teams:boolean
 bundle exec rails generate scaffold user name:string email:string:uniq user_name:string:uniq
 bundle exec rails generate scaffold session user:references token:string:uniq
-bundle exec rails generate scaffold remote_username game:references user:references user_name:string
 
 # Just models
 bundle exec rails generate model server_setting $NOTEST
-bundle exec rails generate model game_setting game:references type:integer name:string default:text discription:text type_opt:text display_order:integer $NOTEST
+bundle exec rails generate model game_setting game:references type:integer name:string default:text description:text type_opt:text display_order:integer $NOTEST
 bundle exec rails generate model tournament_preference tournament:references vartype:integer name:string value:text $NOTEST
 bundle exec rails generate model score user:references match:references value:integer $NOTEST
 bundle exec rails generate model remote_username game:references user:references json_value:text
