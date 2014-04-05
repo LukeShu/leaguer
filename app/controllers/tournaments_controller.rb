@@ -135,5 +135,6 @@ class TournamentsController < ApplicationController
 
 	# Turn of check_edit, since our #update is flexible
 	def check_edit
+		set_tournament
 	end
 end
