@@ -70,23 +70,25 @@ class TournamentsController < ApplicationController
 				end
 			end
 		when "join"
-			check_permission(:join)
+			# permission checking for join is done in the Tournament model
 			respond_to do |format|
 				if @tournament.join(current_user)
 					format.html { redirect_to @tournament, notice: 'You have joined this tournament.' }
 					format.json { head :no_content }
+				else
+					format.html { redirect_to @tournament, notice: "You can't join this tournament." }
+					format.json { render json: "Permission denied", status: :forbidden }
 				end
-				format.html { render action: 'permission_denied', status: :forbidden }
-				format.json { render json: "Permission denied", status: :forbidden }
 			end
 		when "leave"
 			respond_to do |format|
 				if @tournament.leave(current_user)
 					format.html { redirect_to tournaments_url, notice: 'You have left the tournament.' }
 					format.json { head :no_content }
+				else
+					format.html { redirect_to @tournament, notice: 'You were\'t a part of this tournament.' }
+					format.json { render json: "Permission denied", status: :forbidden }
 				end
-				format.html {redirect_to @tournament, notice: 'You were\'t a part of this tournament.' }
-				format.json { render json: "Permission denied", status: :forbidden }
 			end
 		when "start"
 			check_permission(:edit, @tournament)
@@ -96,9 +98,10 @@ class TournamentsController < ApplicationController
 				if @tournament.setup
 					format.html { redirect_to @tournament, notice: 'You have joined this tournament.' }
 					format.json { head :no_content }
+				else
+					format.html { render action: 'permission_denied', status: :forbidden }
+					format.json { render json: "Permission denied", status: :forbidden }
 				end
-				format.html { render action: 'permission_denied', status: :forbidden }
-				format.json { render json: "Permission denied", status: :forbidden }
 			end
 		else
 			respond_to do |format|
