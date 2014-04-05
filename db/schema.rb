@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140405010527) do
+ActiveRecord::Schema.define(version: 20140405012548) do
 
   create_table "alerts", force: true do |t|
     t.integer  "author_id"
@@ -128,6 +128,15 @@ ActiveRecord::Schema.define(version: 20140405010527) do
 
   add_index "sessions", ["token"], name: "index_sessions_on_token", unique: true
   add_index "sessions", ["user_id"], name: "index_sessions_on_user_id"
+
+  create_table "simple_captcha_data", force: true do |t|
+    t.string   "key",        limit: 40
+    t.string   "value",      limit: 6
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "simple_captcha_data", ["key"], name: "idx_key"
 
   create_table "teams", force: true do |t|
     t.integer  "match_id"

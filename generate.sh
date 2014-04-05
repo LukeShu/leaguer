@@ -3,7 +3,7 @@
 # The generate.sh bash file is used to generate all of the necessary
 # .rb files to run the website
 
-set -x
+set -xe
 
 # figure out where we are running from
 srcdir=$(dirname "$(readlink -f "$0")")
