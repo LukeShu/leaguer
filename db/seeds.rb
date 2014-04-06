@@ -10,9 +10,8 @@ Game.create(name: "League of Legends",min_players_per_team: 5,  max_players_per_
 Game.create(name: "Chess", min_players_per_team: 1,  max_players_per_team: 1, min_teams_per_match: 2, max_teams_per_match: 2, set_rounds: nil, randomized_teams: true)
 Game.create(name: "Hearthstone", min_players_per_team: 1, max_players_per_team: 1, min_teams_per_match: 2, max_teams_per_match: 2, set_rounds: 1, randomized_teams: false)
 
-
-GameSetting.create(game_id: 0, name: "Map", default: "Summoners Rift,Twisted Treeline,Crystal Scar,Haunted Abyss", description: "Select a map to play on.", type_opt: "Select", display_order: 1)
-GameSetting.create(game_id: 0, name: "Pick Type", default: "Blind Pick,Draft", description: "Select a pick type.", type_opt: "Select", display_order: 2)
+Game.find_by_name("League of Legends").settings.create(name: "Map", default: "Summoners Rift", type_opt: "Summoners Rift,Twisted Treeline,Crystal Scar,Haunted Abyss", description: "Select a map to play on.", stype: 5, display_order: 1)
+Game.find_by_name("League of Legends").settings.create(name: "Pick Type", type_opt: "Blind Pick,Draft", description: "Select a pick type.", stype: 5, display_order: 2)
 
 #Game_setting.create(game_id: , type: , name: , default: , description: , type_opt: , display_order: , created_at: , updated_at: )
 

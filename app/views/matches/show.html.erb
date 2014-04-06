@@ -38,11 +38,40 @@
 					<%= team.users.collect{|u| u.user_name}.join(", ") %></label></li>
 		  <% end %>
 		</ul>
-		<%= f.submit("Select winner") %>
+		<%= f.submit("Select Winner") %>
 	<% end %>
 <% end %>
 
+<!--
+	This is what the Players and the Hosts of the tournament will view when the Match Status is 0
+-->
+<% if (@match.status==0) %>
+	<% if (@tournament.players.include?(current_user) || @tournament.hosts.include?(current_user)) %>
+			<% @match.teams.each do |team| %>
+				<ul>
+					<% team.users.collect{|u| u.user_name}.each do |k| %>
+						<li><label><%= k %></label></li>
+					<% end %>
+				</ul>
+		  	<% end %>
+	<% end %>
+<% end %>
 
+<!--
+	Players see the Peer Review Page
+	Host see the Game Status
+-->
+<% if (@match.status==0) %>
+	<% if (@tournament.players.include?(current_user) %>
+		<% @match.teams.each do |team| %>
+			<ul>
+				<% team.users.collect{|u| u.user_name}.each do |k| %>
+					<li><label><%= k %></label></li>
+				<% end %>
+			</ul>
+		 <% end %>	
+	<% end %>
+<% end %>
 
 <% unless @match.winner.nil? %>
 	<p>

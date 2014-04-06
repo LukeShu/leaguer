@@ -18,6 +18,7 @@
         <td><%= match.id%></td>
         <td><%= match.name %></td>
         <td><%= link_to "Show", tournament_match_path(@tournament, match) %>
+        <td><%= submit_tag("Start Match") %>
       </tr>
     <% end %>
   </tbody>

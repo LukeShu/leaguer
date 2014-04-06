@@ -14,10 +14,14 @@ class User < ActiveRecord::Base
 	end
 
 	def can?(action)
+		return true
 		case action
 		when :create_tournament
+			return true
 		when :edit_tournament
+			return true
 		when :join_tournament
+			return true
 		when :delete_tournament
 
 		when :create_game
