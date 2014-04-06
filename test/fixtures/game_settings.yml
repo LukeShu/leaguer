@@ -2,7 +2,7 @@
 
 one:
   game_id: 
-  type: 1
+  stype: 1
   name: MyString
   default: MyText
   description: MyText
@@ -11,7 +11,7 @@ one:
 
 two:
   game_id: 
-  type: 1
+  stype: 1
   name: MyString
   default: MyText
   description: MyText
