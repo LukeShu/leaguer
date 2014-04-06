@@ -61,8 +61,8 @@
 	Players see the Peer Review Page
 	Host see the Game Status
 -->
-<% if (@match.status==0) %>
-	<% if (@tournament.players.include?(current_user) %>
+<% if @match.status == 0 %>
+	<% if @tournament.players.include?(current_user) %>
 		<% @match.teams.each do |team| %>
 			<ul>
 				<% team.users.collect{|u| u.user_name}.each do |k| %>
