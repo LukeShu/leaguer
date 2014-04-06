@@ -15,7 +15,7 @@ git checkout clean-start -- app test config/routes.rb
 bundle exec rails generate simple_captcha
 
 # The whole shebang, models, views, and controllers
-bundle exec rails generate scaffold server --force
+bundle exec rails generate scaffold server default_user_permissions:integer
 bundle exec rails generate scaffold match status:integer tournament:references name:string winner:references remote_id:string
 bundle exec rails generate scaffold team match:references
 bundle exec rails generate scaffold alert author:references message:text
