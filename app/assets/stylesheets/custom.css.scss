@@ -24,6 +24,7 @@ a, input[type="submit"] {
 	&.signup { @extend .btn-success; }
 	&.signin { @extend .btn-info; }
 	&.signout { @extend .btn-danger; }
+	&.server { @extend .btn-danger; }
 }
 
 p.errors {

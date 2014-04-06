@@ -21,6 +21,9 @@
 		<% if signed_in? %>
 			<%= link_to current_user.user_name, current_user, :class => "user" %>
 			<%= link_to "Sign out", session_path("current"), method: "delete", :class => "signout" %>
+			<% if current_user.can? :edit_server %>
+				<%= link_to "Server settings", edit_server_path, :class => "server" %>
+			<% end %>
 		<% else %>
 			<%= link_to "Log in", new_session_path, :class => "signin" %>
 			<%= link_to "Sign up", new_user_path, :class => "signup" %>
