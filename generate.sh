@@ -9,7 +9,7 @@ set -xe
 srcdir=$(dirname "$(readlink -f "$0")")
 cd "$srcdir"
 
-git rm -rf app test config/routes.rb db/migrate
+git rm -rf -- app test config/routes.rb db/migrate || true
 git checkout clean-start -- app test config/routes.rb
 
 bundle exec rails generate simple_captcha

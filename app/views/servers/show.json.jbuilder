@@ -1,1 +1,1 @@
-json.extract! @server, :id, :created_at, :updated_at
+json.extract! @server, :id, :default_user_permissions, :created_at, :updated_at

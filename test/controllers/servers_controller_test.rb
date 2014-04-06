@@ -18,7 +18,7 @@ class ServersControllerTest < ActionController::TestCase
 
   test "should create server" do
     assert_difference('Server.count') do
-      post :create, server: {  }
+      post :create, server: { default_user_permissions: @server.default_user_permissions }
     end
 
     assert_redirected_to server_path(assigns(:server))
@@ -35,7 +35,7 @@ class ServersControllerTest < ActionController::TestCase
   end
 
   test "should update server" do
-    patch :update, id: @server, server: {  }
+    patch :update, id: @server, server: { default_user_permissions: @server.default_user_permissions }
     assert_redirected_to server_path(assigns(:server))
   end
 
