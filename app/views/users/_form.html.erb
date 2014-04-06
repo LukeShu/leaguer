@@ -1,37 +1,45 @@
 <%= form_for(@user) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-      <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render "common/error_messages", :target => @user %>
 
   <div class="field">
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
+
   <div class="field">
     <%= f.label :email %><br>
     <%= f.text_field :email %>
   </div>
+
   <div class="field">
     <%= f.label :user_name %><br>
     <%= f.text_field :user_name %>
   </div>
-  <p>
+
+  <div>
     <%= f.label(:password, "New Password (or use old)") %><br>
     <%= f.password_field :password %>
-  </p>
+  </div>
   <div>
     <%= f.label(:password_confirmation, "Confirm Password") %><br>
     <%= f.password_field :password_confirmation %>
   </div>
+
+  <% if current_user.can? :edit_permissions %>
+  <fieldset>
+    <legend>User permissions</legend>
+    <ul>
+    <%= fields_for "user[abilities]", @user.abilities do |abilities_fields| %>
+      <% @user.abilities.keys.each do |ability| %>
+      <li><label><%= abilities_fields.check_box(ability) %> <%= ability.to_s.humanize %></label></li>
+      <% end %>
+    <% end %>
+    </ul>
+  </fieldset>
+  <% end %>
+
   <div class="actions">
     <%= f.submit %>
   </div>
+
 <% end %>
