@@ -68,6 +68,6 @@ class ServersController < ApplicationController
 
 	# Never trust parameters from the scary internet, only allow the white list through.
 	def server_params
-		params[:server]
+		params.require(:server).permit(:default_user_permissions)
 	end
 end
