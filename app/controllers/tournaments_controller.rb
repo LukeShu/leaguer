@@ -99,7 +99,7 @@ class TournamentsController < ApplicationController
 					format.html { redirect_to @tournament, notice: 'You have joined this tournament.' }
 					format.json { head :no_content }
 				else
-					format.html { render action: 'permission_denied', status: :forbidden }
+					format.html { redirect_to @tournament, notice: "You don't have permission to start this tournament." }
 					format.json { render json: "Permission denied", status: :forbidden }
 				end
 			end
