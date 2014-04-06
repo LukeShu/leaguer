@@ -1,20 +1,17 @@
 <%= form_for(@server) do |f| %>
-  <% if @server.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@server.errors.count, "error") %> prohibited this server from being saved:</h2>
+  <%= render "common/error_messages", :target => @server %>
 
-      <ul>
-      <% @server.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+  <fieldset>
+    <legend>Default permissions for new users</legend>
+    <ul>
+      <%= fields_for "server[default_user_abilities]", @server.default_user_abilities do |a| %>
+      <% @server.default_user_abilities.keys.each do |ability| %>
+      <li><label><%= a.check_box(ability) %> <%= ability.to_s.humanize %></label></li>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
+    <% end %>
+    </ul>
+  </fieldset>
 
-  <div class="field">
-    <%= f.label :default_user_permissions %><br>
-    <%= f.number_field :default_user_permissions %>
-  </div>
   <div class="actions">
     <%= f.submit %>
   </div>
