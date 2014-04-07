@@ -2,7 +2,7 @@
   <%= render "common/error_messages", :target => @tournament %>
   <%= f.hidden_field(:game_id) %>
 
-  <% @game = Game.find_by(params[:game]) %>
+  <% @game = Game.find(params[:game]) %>
   <% @tournament.attributes.each do |name, value| %>
     <% if (name == "id") or (name =~ /.*_at$/) or (name == "game_id") or (name == "status") or (name == "set_rounds") %>
       <% next %>
@@ -17,24 +17,5 @@
     </p>
   <% end %>
 
-  <% @settings = GameSetting.find_by(params[:game_id]) %>
-  <% unless @settings  %>
-  	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-  <% end %>
-  <% @settings.each do |setting| %>
-    <p>
-      <%= f.label setting.name %><br>
-      <% #eventually display by non-generic input method  %>
-      <%= f.select :setting options_from_collection_for_select([setting.description, ""].append setting.type_opt.split(',')) %>
-    </p>
-  <% end %>
-
-  <%= f.submit %>
+	<%= f.submit %>
 <% end %>

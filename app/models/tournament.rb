@@ -1,8 +1,55 @@
 class Tournament < ActiveRecord::Base
 	belongs_to :game
 	has_many :matches
+	has_many :preferences_raw, class_name: "TournamentPreference"
 	has_and_belongs_to_many :players, class_name: "User", association_foreign_key: "player_id", join_table: "players_tournaments"
 	has_and_belongs_to_many :hosts,   class_name: "User", association_foreign_key: "host_id",   join_table: "hosts_tournaments"
+
+	def preferences
+		@preferences ||= Preferences.new(self)
+	end
+	def preferences=(pref)
+		pref.each do |key, value|
+			value = false if valuedd == "0"
+			preferences[key] = value
+		end
+	end
+
+	class Preferences
+                def initialize(tournament)
+                        @tournament = tournament
+                end
+
+                def [](preference)
+                        p = @tournament.preferences_raw.find_by_name(preference)
+                        if p.nil?
+                                return nil
+                        else
+                                return p.value
+                        end
+                end
+
+                def []=(preference, value)
+                        p = @tournament.preferences_raw.find_by_name(preference)
+                        if p.nil?
+                                # TODO: create it
+                        else
+                                p.value = value
+                        end
+                end
+
+                def keys
+                        @tournament.preferences_raw.all.collect { |x| x.name }
+                end
+
+		def method_missing(name, *args)
+			if name.to_s.ends_with?('=')
+				self[name.to_s.sub(/=$/, '').to_sym] = args.first
+			else
+				return self[name.to_sym]
+			end
+		end
+	end
 
 	def open?
 		return true
