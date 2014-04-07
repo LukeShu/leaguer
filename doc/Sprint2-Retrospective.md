@@ -118,6 +118,14 @@ user's League of Legends summoner's name or summoner id. Our current developer
 key is limited to utilizing 10 pulls per 10 seconds.
 
 ## Parse Riot data and attach to scoring subsystem {#parse-riot}
+
+We successfully parse the data we recieve from the Riot servers. The information
+is stored in a JSON hash which we separate based on the information we want (like 
+kills, deaths, etc).  One issue with our current pull method is that it can exceed
+the pull limit that is on our current development key.  To fix this, we are planning
+on implementing a remote user id to link users Leaguer information to their Riot
+information.
+
 ## Teach Andrew and Tomer AJAX {#teach-ajax}
 ## Make pages auto-update with AJAX  {#ajax}
 ## Setting up a Tournament View for matches and tree {#match-gui}
