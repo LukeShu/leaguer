@@ -25,3 +25,18 @@
     padding-top: 10px;
     background-color: rgb(238, 238, 255);
 }
+
+#match-stats {
+    padding-bottom: 10px;
+    border-bottom: thick dashed #F0AD4E;
+}
+
+#match-winner {
+    margin: 0 auto;
+    text-align: center;
+    font-size: 2em;
+}
+
+#current-id {
+    display: none;
+}

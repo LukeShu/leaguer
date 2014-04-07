@@ -1,16 +1,29 @@
-<p>
-	<strong>Status:</strong>
-	<span id="current-id"> <%= @match.status %></span>
-</p>
-<p>
-	<strong>Tournament:</strong>
-	<%= @match.tournament.id %>
-</p>
+<div class="row" id="match-stats">
+	<div class="col-md-4 col-sm-3 ">
+		<strong>Status:</strong>
+		<% case @match.status %>
+		<% when 0 %>
+			Match Not Started
+		<% when 1 %>
+			Match in Progress
+		<% when 2 %>
+			Peer Review in Progress
+		<% when 3 %>
+			Finished
+		<% end %>
+		<span id="current-id"> <%= @match.status %></span>
 
-<p>
-	<strong>Name:</strong>
-	<%= @match.name %>
-</p>
+	</div>
+	<div class="col-md-4 col-sm-3">
+		<strong>Tournament:</strong>
+		<%= @match.tournament.name %>
+	</div>
+
+	<div class="col-md-4 col-sm-3">
+		<strong>Name:</strong>
+		<%= @match.name %>
+	</div>
+</div>
 <!--
 	Match Status 0 =>	Created, waiting to start
 	Match Status 1 =>	Match is running, waiting to finish
@@ -45,8 +58,8 @@
 </div>
 
 <% unless @match.winner.nil? %>
-	<p>
-		<strong>Winner:</strong>
+	<p id="match-winner">
+		<strong>Winning Team:</strong>
 		<%= @match.winner.users.collect{|u| u.user_name}.join(", ") %>
 	</p>
 <% end %>
