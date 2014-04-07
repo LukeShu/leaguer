@@ -172,8 +172,18 @@ Everything we implemented was implemented well, or else we didn't implement it.
 # Not implemented
 
 ## Email Verification Option (#email-verify)
+
+This was not implemented for lack of time. Luke probably would have been able to
+implement it with his time constraints if he wasn't busy frequently assisting
+other members with various problems. In the end, the email verification was also
+simply a low priority.
+
 ## Project Leaguer Logo {#logo} 
 
+The Project Leaguer Logo was discussed before the sprint started. We decided we
+would follow up on any opportunities to explore creating a Leauger Logo, but this
+simply did not happen. We greatly want one, but it's still just a low priority
+extra feature.
 
 # How to improve
 
