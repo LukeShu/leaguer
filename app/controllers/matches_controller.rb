@@ -9,7 +9,7 @@ class MatchesController < ApplicationController
   def index
     @matches = @tournament.matches
     # width of SVG
-    @width = 300 * (Math.log2(@matches.count).floor + 1) + 300;
+    @width = 300 * (Math.log2(@matches.count).floor + 1);
     # height of SVG
     @height = 200 * 2**Math.log2(@matches.count).floor + 100;
   end

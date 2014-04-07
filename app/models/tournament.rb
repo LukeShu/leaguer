@@ -38,7 +38,7 @@ class Tournament < ActiveRecord::Base
 			#create a new team in the current match
 			self.matches[match_num].teams.push(Team.create(users: players))
 			#if the match is full, move to the next match, otherwise move to the next team
-			if (team_num != 0 and team_num % max_teams_per_match == 0)
+			if (team_num > max_teams_per_match)
 				match_num -= 1
 				team_num = 0
 			else
