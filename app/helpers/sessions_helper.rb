@@ -20,7 +20,7 @@ module SessionsHelper
 	def current_user
 		@token ||= Session.hash_token(cookies[:remember_token])
 		@session ||= Session.find_by(token: @token)
-		@current_user ||= (@session.nil? ? NilUser.new : @session.user)
+		@current_user ||= (@session.nil? ? User::NilUser.new : @session.user)
 	end
 
 	# checks if someone is currently signed in
@@ -32,7 +32,7 @@ module SessionsHelper
 		if signed_in?
 			@session.destroy
 		end
-		@current_user = NilUser.new
+		@current_user = User::NilUser.new
 		cookies.delete(:remember_token)
 	end
 

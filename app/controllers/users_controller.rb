@@ -24,17 +24,29 @@ class UsersController < ApplicationController
 	# POST /users
 	# POST /users.json
 	def create
-		if simple_captcha_valid?
-			@user = User.new(user_params)
+		@user = User.new(user_params)
+		unless (simple_captcha_valid?)
 			respond_to do |format|
-				if @user.save
-					sign_in @user
-					format.html { redirect_to root_path, notice: 'User was successfully created.' }
-					format.json { render action: 'show', status: :created, location: @user }
-				else
-					format.html { render action: 'new', status: :unprocessable_entity }
-					format.json { render json: @user.errors, status: :unprocessable_entity }
+				format.html { render action: 'new', status: :unprocessable_entity }
+				format.json { render json: @user.errors, status: :unprocessable_entity }
+			end
+			return
+		end
+
+		@user.permissions = Server.first.default_user_permissions
+		respond_to do |format|
+			if @user.save
+				sign_in @user
+				if @user.id == 1
+					# This is the first user, so give them all the power
+					@user.permissions = 0xFFFFFFFF
+					@user.save
 				end
+				format.html { redirect_to root_path, notice: 'User was successfully created.' }
+				format.json { render action: 'show', status: :created, location: @user }
+			else
+				format.html { render action: 'new', status: :unprocessable_entity }
+				format.json { render json: @user.errors, status: :unprocessable_entity }
 			end
 		end
 	end
@@ -75,6 +87,10 @@ class UsersController < ApplicationController
 
 	# Never trust parameters from the scary internet, only allow the white list through.
 	def user_params
-		params.require(:user).permit(:name, :email, :user_name, :password, :password_confirmation)
+		permitted = [ :name, :email, :user_name, :password, :password_confirmation ]
+		if current_user.can? :edit_permissions
+			permitted.push(:abilities => User.permission_bits.keys)
+		end
+		params.require(:user).permit(permitted)
 	end
 end

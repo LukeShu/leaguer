@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140405012548) do
+ActiveRecord::Schema.define(version: 20140406171543) do
 
   create_table "alerts", force: true do |t|
     t.integer  "author_id"
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20140405012548) do
 
   create_table "game_settings", force: true do |t|
     t.integer  "game_id"
-    t.integer  "type"
+    t.integer  "stype"
     t.string   "name"
     t.text     "default"
     t.text     "description"
@@ -115,6 +115,7 @@ ActiveRecord::Schema.define(version: 20140405012548) do
   end
 
   create_table "servers", force: true do |t|
+    t.integer  "default_user_permissions"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

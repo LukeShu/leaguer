@@ -9,57 +9,109 @@ class User < ActiveRecord::Base
 	before_save { self.email = email.downcase }
 	before_save { self.user_name = user_name }
 
-	def after_initialize
-		self.permissions = 0
+	def self.permission_bits
+		return {
+			:create_tournament	=> (2**1),
+			:edit_tournament	=> (2**2),
+			:join_tournament	=> (2**3),
+			:delete_tournament	=> (2**4),
+
+			:create_game	=> (2**5),
+			:edit_game  	=> (2**6),
+			:delete_game	=> (2**7),
+
+			:create_user	=> (2**8),
+			:edit_user  	=> (2**9),
+			:delete_user	=> (2**10),
+
+			:create_alert	=> (2**11),
+			:edit_alert 	=> (2**12),
+			:delete_alert	=> (2**13),
+
+			:create_pm	=> (2**14),
+			:edit_pm	=> (2**15),
+			:delete_pm	=> (2**16),
+
+			:create_session	=> (2**17),
+			:delete_session	=> (2**18),
+
+			:edit_permissions	=> (2**19),
+			:edit_server    	=> (2**20),
+		}
 	end
 
 	def can?(action)
-		return true
-		case action
-		when :create_tournament
-			return true
-		when :edit_tournament
-			return true
-		when :join_tournament
-			return true
-		when :delete_tournament
-
-		when :create_game
-		when :edit_game
-		when :delete_game
-
-		when :create_user
+		bit = User.permission_bits[action]
+		if bit.nil?
 			return false
-		when :edit_user
-		when :delete_user
-
-		when :create_alert
-		when :edit_alert
-		when :delete_alert
-
-		when :create_pm
-		when :edit_pm
-		when :delete_pm
-
-		when :create_session
-			return false
-		when :delete_session
-
 		else
-			return false
+			return (self.permissions & bit != 0)
 		end
 	end
 
-	##
+	def add_ability(action)
+		bit = User.permission_bits[action.to_sym]
+		unless bit.nil?
+			self.permissions |= bit
+		end
+	end
+
+	def remove_ability(action)
+		bit = User.permission_bits[action.to_sym]
+		unless bit.nil?
+			self.permissions &= ~ bit
+		end
+	end
+
+
+	# A representation of the permission bits as a mock-array.
+	def abilities
+		@abilities ||= Abilities.new(self)
+	end
+	def abilities=(new)
+		new.each do |k,v|
+			if v == "0"
+				v = false
+			end
+			abilities[k] = v
+		end
+	end
+
+	# A thin array-like wrapper around the permission bits to make it
+	# easy to modify them using a form.
+	class Abilities
+		def initialize(user)
+			@user = user
+		end
+		def [](ability)
+			return @user.can?(ability)
+		end
+		def []=(ability, val)
+			if val
+				@user.add_ability(ability)
+			else
+				@user.remove_ability(ability)
+			end
+		end
+		def keys
+			User.permission_bits.keys
+		end
+		def method_missing(name, *args)
+			if name.to_s.ends_with?('=')
+				self[name.to_s.sub(/=$/, '').to_sym] = args.first
+			else
+				return self[name.to_sym]
+			end
+		end
+	end
+
 	# VAILD_EMAIL is the regex used to validate a user given email.
 	VALID_EMAIL_REG = /\A\S+@\S+\.\S+\z/i
 
-	##
 	# VALID_USER_NAME checks to make sure a user's user_name
 	# is in the proper format.
 	VALID_USER_NAME_REG = /\A[a-zA-Z0-9\-]+\z/
 
-	##
 	# The following lines put a user account through a series of
 	# validations in order to make sure all of their information
 	# is in the proper format.
@@ -78,7 +130,6 @@ class User < ActiveRecord::Base
 			  format: {with: VALID_USER_NAME_REG },
 			  uniqueness: {case_sensitive: false })
 
-	##
 	# Instead of adding password and password_confirmation
 	# attributes, requiring the presence of a password,
 	# requiring that pw and pw_com match, and add an authenticate
@@ -88,26 +139,27 @@ class User < ActiveRecord::Base
 	has_secure_password
 
 	validates :password, length: { minimum: 6 }
-end
-class NilUser
-	def nil?
-		return true
-	end
-	def can?(action)
-		case action
-		when :create_user
+
+	class NilUser
+		def nil?
 			return true
-		when :create_session
-			return true
-		else
-			return false
 		end
-	end
-	def method_missing(name, *args)
-		# Throw an error if User doesn't have this method
-		super unless User.new.respond_to?(name)
-		# User has this method -- return a blank value
-		# 'false' if the method ends with '?'; 'nil' otherwise.
-		name.ends_with?('?') ? false : nil
+		def can?(action)
+			case action
+			when :create_user
+				return true
+			when :create_session
+				return true
+			else
+				return false
+			end
+		end
+		def method_missing(name, *args)
+			# Throw an error if User doesn't have this method
+			super unless User.new.respond_to?(name)
+			# User has this method -- return a blank value
+			# 'false' if the method ends with '?'; 'nil' otherwise.
+			name.to_s.ends_with?('?') ? false : nil
+		end
 	end
 end
