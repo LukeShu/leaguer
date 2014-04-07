@@ -1,14 +1,21 @@
 class MatchesController < ApplicationController
-	before_action :set_tournament, only: [:index]
+	before_action :set_tournament, only: [:index, :update]
 
 	# GET /matches
 	# GET /matches.json
   require 'httparty'
   require 'json'
+  require 'delayed_job'
 
   def index
     @matches = @tournament.matches
+    # width of SVG
+    @width = 300 * (Math.log2(@matches.count).floor + 1);
+    # height of SVG
+    @height = 200 * 2**Math.log2(@matches.count).floor + 100;
   end
+
+
 
   def get_riot_info
 	if signed_in?
@@ -114,14 +121,64 @@ class MatchesController < ApplicationController
   end #end def
 	# GET /matches/1
 	# GET /matches/1.json
+
+	def is_match_over
+		response = HTTParty.get("https://prod.api.pvp.net/api/lol/na/v1.3/summoner/by-name/#{@first}?api_key=ad539f86-22fd-474d-9279-79a7a296ac38")
+		riot_id = response["#{@first}"]['id']
+		#recent game information
+		game_info = HTTParty.get("https://prod.api.pvp.net/api/lol/na/v1.3/game/by-summoner/#{riot_id}/recent?api_key=ad539f86-22fd-474d-9279-79a7a296ac38")
+		first_id = game_info["games"][0]["gameId"]
+
+		while true do 
+			sleep(240) #wait four minutes
+
+			recent = HTTParty.get("https://prod.api.pvp.net/api/lol/na/v1.3/game/by-summoner/#{riot_id}/recent?api_key=ad539f86-22fd-474d-9279-79a7a296ac38")
+			current_id = recent["games"][0]["gameId"]
+
+			if current_id != first_id
+				@match.status = 2
+			end
+		end #while
+	end
+	handle_asynchronously :is_match_over
+
 	def show
+		if @match.id == 1
+			is_match_over
+		end
+
+
+	end
+
+	def update
+		case params[:update_action]
+		when "start"
+			check_permission(:edit, @tournament)
+			status = 1
+			respond_to do |format|
+				if @match
+					format.html { redirect_to tournament_match_path(@tournament, self), notice: 'Match has started.' }
+					format.json { head :no_content }
+				else
+					format.html { redirect_to @tournament, notice: "You don't have permission to start this match." }
+					format.json { render json: "Permission denied", status: :forbidden }
+				end
+			end
+		else
+			respond_to do |format|
+				format.html { redirect_to @tournament, notice: "Invalid action", status: :unprocessable_entity }
+				format.json { render json: @tournament.errors, status: :unprocessable_entity }
+			end
+		end
+
 	end
 
 	private
 	# Use callbacks to share common setup or constraints between actions.
 	def set_match
 		set_tournament
-		@match = @tournament.matches.find(params[:id]);
+		@match = @tournament.matches.find(params[:id])
+		@first = @match.teams.first.users.first.user_name.downcase
 	end
 	def set_tournament
 		@tournament = Tournament.find(params[:tournament_id])

@@ -11,31 +11,32 @@ class User < ActiveRecord::Base
 
 	def self.permission_bits
 		return {
-			:create_tournament => 1,
-			:edit_tournament => 2,
-			:join_tournament => 3,
-			:delete_tournament => 4,
+			:create_tournament	=> (2**1),
+			:edit_tournament	=> (2**2),
+			:join_tournament	=> (2**3),
+			:delete_tournament	=> (2**4),
 
-			:create_game => 5,
-			:edit_game => 6,
-			:delete_game => 7,
+			:create_game	=> (2**5),
+			:edit_game  	=> (2**6),
+			:delete_game	=> (2**7),
 
-			:create_user => 8,
-			:edit_user => 9,
-			:delete_user => 10,
+			:create_user	=> (2**8),
+			:edit_user  	=> (2**9),
+			:delete_user	=> (2**10),
 
-			:create_alert => 11,
-			:edit_alert => 12,
-			:delete_alert => 13,
+			:create_alert	=> (2**11),
+			:edit_alert 	=> (2**12),
+			:delete_alert	=> (2**13),
 
-			:create_pm => 14,
-			:edit_pm => 15,
-			:delete_pm => 16,
+			:create_pm	=> (2**14),
+			:edit_pm	=> (2**15),
+			:delete_pm	=> (2**16),
 
-			:create_session => 17,
-			:delete_session => 18,
+			:create_session	=> (2**17),
+			:delete_session	=> (2**18),
 
-			:edit_permissions => 19,
+			:edit_permissions	=> (2**19),
+			:edit_server    	=> (2**20),
 		}
 	end
 
@@ -44,21 +45,21 @@ class User < ActiveRecord::Base
 		if bit.nil?
 			return false
 		else
-			return (self.permissions & (2**bit) != 0)
+			return (self.permissions & bit != 0)
 		end
 	end
 
 	def add_ability(action)
 		bit = User.permission_bits[action.to_sym]
 		unless bit.nil?
-			self.permissions |= 2**bit
+			self.permissions |= bit
 		end
 	end
 
 	def remove_ability(action)
 		bit = User.permission_bits[action.to_sym]
 		unless bit.nil?
-			self.permissions &= ~ (2**bit)
+			self.permissions &= ~ bit
 		end
 	end
 

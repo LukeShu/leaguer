@@ -18,7 +18,15 @@
         <td><%= match.id%></td>
         <td><%= match.name %></td>
         <td><%= link_to "Show", tournament_match_path(@tournament, match) %>
-        <td><%= submit_tag("Start Match") %>
+        <td> <%# If user is the host, let them start the tournment %>
+          <% if @tournament.hosts.include?(current_user) %>
+  
+            <%= form_tag(tournament_match_path(@tournament, match), method: "put") do %>
+             <input type="hidden" name="update_action" value="start">
+             <%= submit_tag("Start Match") %>
+            <% end %>
+          <% end %>
+</div></td>
       </tr>
     <% end %>
   </tbody>
@@ -26,17 +34,51 @@
 
 <br>
 
-
-<SVG version="1.1"
-   baseProfile="full"
-   width="<%= 300 * @matches.count / 2 + 50 %>" height="<%= 200 * @matches.count + 50 %>"
-   xmlns="http://www.w3.org/2000/svg">
-
-   <% (1..@matches.count).each do |i| %>
-    <g class="svg-match">
-      <rect rx="10"
-      
-    </g>
-   <% end %>
-
+<div id="match-tree">
+  <SVG version="1.1"
+  baseProfile="full"
+  width="<%= @width %>" height="<%= @height = [@height, 500].max %>"
+  xmlns="http://www.w3.org/2000/svg">
+   <script type="text/ecmascript"><![CDATA[
+    function redirect(i){
+      window.location.replace("<%= request.original_url %>"+"/"+i);
+    }
+    ]]>
+  </script>
+  <% (1..@matches.count).each do |i| %>
+  <g id="svg-match-<%= i %>" onmouseover="dispStats(<%= i %>)" onclick="redirect(<%= @matches[i-1].id %>)" cursor="pointer">
+    <rect height="120px" width="213px" 
+    x="<%= @width - (i-1)*50 - 250*(Math.log2(i).floor+1) %>"
+    y="<%= (@height/(Math.log2(i).floor+2)) - 60 + 250*(i - 2**(Math.log2(i).floor)) %>"
+    fill="#ffd281"
+    rx="20px"
+    stroke-width="2"
+    <% case @matches[i-1].status %>
+    <% when 0 %>
+    <% if @matches[i-1].teams.count < @tournament.min_teams_per_match %>
+    stroke="red"
+    fill-opacity="0.6"
+    <% else %>
+    stroke="green"
+    <% end %>
+    <% when 1 %>
+    stroke="orange"
+    <% when 2 %>
+    stroke="yellow"
+    <% when 3 %>
+    stroke="grey"
+    <% end %>
+    />
+  </g>
+  <% if i > 1 %>
+  <line 
+  stroke="black"
+  x1="<%= @width - (i-2)*50 -  250*(Math.log2(i-1).floor+1) %>"
+  y1="<%= (@height/(Math.log2(i-1).floor+2)) - 60 + 250*((i-1) - 2**(Math.log2(i-1).floor)) + 60 %>"
+  x2="<%= @width - (i-1)*50 -  250*(Math.log2(i).floor+1) + 213 %>"
+  y2="<%= (@height/(Math.log2(i).floor+2)) - 60 + 250*(i - 2**(Math.log2(i).floor)) + 60 %>"
+  />
+  <% end %>
+  <% end %>
 </SVG>
+</div>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140406015417) do
+ActiveRecord::Schema.define(version: 20140407000143) do
 
   create_table "alerts", force: true do |t|
     t.integer  "author_id"
@@ -21,6 +21,22 @@ ActiveRecord::Schema.define(version: 20140406015417) do
   end
 
   add_index "alerts", ["author_id"], name: "index_alerts_on_author_id"
+
+  create_table "delayed_jobs", force: true do |t|
+    t.integer  "priority",   default: 0, null: false
+    t.integer  "attempts",   default: 0, null: false
+    t.text     "handler",                null: false
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
 
   create_table "game_settings", force: true do |t|
     t.integer  "game_id"
@@ -115,6 +131,7 @@ ActiveRecord::Schema.define(version: 20140406015417) do
   end
 
   create_table "servers", force: true do |t|
+    t.integer  "default_user_permissions"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
