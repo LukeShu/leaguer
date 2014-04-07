@@ -127,8 +127,19 @@ on implementing a remote user id to link users Leaguer information to their Riot
 information.
 
 ## Teach Andrew and Tomer AJAX {#teach-ajax}
+
+Luke instructed Tomer on his AJAX tasks, but most of Andrew's were deferred to
+sprint 3 and he focused his efforts elsewhere.
+
 ## Make pages auto-update with AJAX  {#ajax}
+
+AJAX was used in tournament and match views to update the tournament progress bar
+and manage input options for tournament flow but still needs to be implemented 
+across the website in other areas.
+
 ## Setting up a Tournament View for matches and tree {#match-gui}
+
+
 
 ## Increase Usability  {#usability}
 
@@ -138,6 +149,10 @@ and Riot API integration all contribute towards an easier and more automatic
 web interface available for our users to utilize.
 
 ## Develop comprehensive data storage for s&p&other{#data-storage}
+
+Settings and Preferences (those options specific to tournaments of a game type
+or a specific tournament, respectively) are handled through a single
+TournamentPreference SQL (ActiveRecord) interface.
 
 ## Create Player Profile Pages {#profile}
 
