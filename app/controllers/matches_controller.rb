@@ -123,35 +123,6 @@ class MatchesController < ApplicationController
 	# GET /matches/1
 	# GET /matches/1.json
 
-	def is_match_over
-		response = HTTParty.get("https://prod.api.pvp.net/api/lol/na/v1.3/summoner/by-name/#{@first}?api_key=ad539f86-22fd-474d-9279-79a7a296ac38")
-		riot_id = response["#{@first}"]['id']
-		#recent game information
-		game_info = HTTParty.get("https://prod.api.pvp.net/api/lol/na/v1.3/game/by-summoner/#{riot_id}/recent?api_key=ad539f86-22fd-474d-9279-79a7a296ac38")
-		first_id = game_info["games"][0]["gameId"]
-
-		while true do 
-			sleep(240) #wait four minutes
-
-			recent = HTTParty.get("https://prod.api.pvp.net/api/lol/na/v1.3/game/by-summoner/#{riot_id}/recent?api_key=ad539f86-22fd-474d-9279-79a7a296ac38")
-			current_id = recent["games"][0]["gameId"]
-
-			if current_id != first_id
-				@match.status = 2
-			end
-		end #while
-	end
-	handle_asynchronously :is_match_over
-
-	def show
-		if Tournament.find_by_id(@match.tournament_id).game_id == 1
-			file_blue = "blue.yaml"
-			file_purple = "purple.yaml"
-			@blue2 = YAML.load_file(file_blue)
-			@purp2 = YAML.load_file(file_purple)
-		end
-	end
-
 	def update
 		case params[:update_action]
 		when "start"
