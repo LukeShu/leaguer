@@ -77,13 +77,25 @@ several days.
 ## Define Specific Unit Tests for Security   {#security-test}
 ## Implement Anti-spam measures {#anti-spam}   
 ## Implement Teammate Rating System (peer review view) {#peer-review}
+
+One of the more unique selling points of Project Leaguer lies with it's peer review
+system. This sprint covered both the database framework and actual implementation of
+the feature. Peer review was accomplished with both server-side processing and client-
+side manipulation of the DOM via a floating tactile dragable info-box interface.
+
 ## Design/Code Scoring/Pairing Algorithms and Procedures {#pair-alg}
 
-Several Scoring Algorithms were considered and a modified fibonachi peer review
-system was chosen to 
+Several Scoring Algorithms were considered for demonstration purposes for this sprint,
+eventually a modified fibonachi peer review system was chosen as the most fair system.
+This was the only scoring algorithm implemented in this sprint. A single-elimination
+pairing algorithm was chosen for similar reasons (as well as for simplicity in SVG
+generation).
 
 ## Implement game-type specific and tournament specific settings and preferences
    {(#setting-and-pref)}
+
+The input for settings and preferences for creating tournaments are displayed dynamically
+in both the substance of the content and form in which it is displayed.
 
 ## Retrieve data from Riot Games (TM) API {#riot-api}
 

@@ -48,6 +48,7 @@ author: [ Nathaniel Foy, Guntas Grewal, Tomer Kimia, Andrew Murrell, Luke Shumak
 
 12) As a host or player, I would like a larger set of peer evaluation settings.
 
+13) As a user, I would like public documentation, descriptions, and examples of the various scoring/pairing algorithms for tournaments.
 
 #Tasks
 
