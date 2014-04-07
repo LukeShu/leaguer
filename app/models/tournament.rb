@@ -34,27 +34,27 @@ class Tournament < ActiveRecord::Base
 			:range => 4
 		}
 
-                def initialize(tournament)
-                        @tournament = tournament
-                end
+		def initialize(tournament)
+			@tournament = tournament
+		end
 
-                def [](preference)
-                        p = @tournament.preferences_raw.find_by_name(preference)
-                        if p.nil?
-                                return nil
-                        else
-                                return p.value
-                        end
-                end
+		def [](preference)
+			p = @tournament.preferences_raw.find_by_name(preference)
+			if p.nil?
+				return nil
+			else
+				return p.value
+			end
+		end
 
-                def []=(preference, val)
-                        p = @tournament.preferences_raw.find_by_name(preference)
-                        if p.nil?
+		def []=(preference, val)
+			p = @tournament.preferences_raw.find_by_name(preference)
+			if p.nil?
 				TournamentPreference.create( tournament_id: @tournament.id, vartype: get_type(val), name: preference, value: val )
-                        else
-                                p.value = val
-                        end
-                end
+			else
+				p.value = val
+			end
+		end
 
 		def get_type(val)
 			case val
@@ -71,9 +71,9 @@ class Tournament < ActiveRecord::Base
 			end
 		end
 
-                def keys
-                        @tournament.preferences_raw.all.collect { |x| x.name }
-                end
+		def keys
+			@tournament.preferences_raw.all.collect { |x| x.name }
+		end
 
 		def method_missing(name, *args)
 			if name.to_s.ends_with?('=')

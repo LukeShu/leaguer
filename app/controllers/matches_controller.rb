@@ -22,8 +22,8 @@ class MatchesController < ApplicationController
 		tournament_matches_path(@tournament)
 	end
 
-	 def get_riot_info
-	if signed_in?
+	def get_riot_info
+		if signed_in?
 
 			pull = "Kaceytron"
 			#current user information
@@ -107,7 +107,7 @@ class MatchesController < ApplicationController
 					purple.merge!("#{place}" => info["games"][0]["stats"])
 				end
 				sleep(1)
-			end					
+			end
 
 			if 100 == recent["games"][0]["stats"]["team"]
 				blue.merge!("#{players[9]}" => recent["games"][0]["stats"])
@@ -118,8 +118,9 @@ class MatchesController < ApplicationController
 			@purp = purple
 			@blue = blue
 
-	end #end if
-  end #end def
+		end #end if
+	end #end def
+
 	# GET /matches/1
 	# GET /matches/1.json
 
