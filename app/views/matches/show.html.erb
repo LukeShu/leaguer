@@ -117,7 +117,7 @@
 <% if @tournament.players.include?(current_user) %>
 <br />
 <div id="host">
-    <%= form_tag(tournament_match_path(@tournament, @match), method: "put") do %>
+    <%= form_tag(tournament_match_path(@tournament, @match), method: "put", name: "peeris") do %>
     	<% case @match.status %>
 		<% when 0 %>
         	<input type="hidden" name="update_action" value="start">
@@ -126,8 +126,9 @@
             <input type="hidden" name="update_action" value="peer">
         	<%= submit_tag("Begin Peer Evaluation") %>
         <% when 2 %>
+		<input type="hidden" name="review_action" value="">
         	<input type="hidden" name="update_action" value="finish">
-        	<%= submit_tag("End Match") %>   
+        	<%= submit_tag("End Peer Evaluation", :onsubmit => "score_peers()") %>   
          <% when 3 %>
         	<input type="hidden" name="update_action" value="reset">
         	<%= submit_tag("Reset Status") %>   
@@ -136,3 +137,17 @@
 
 </div>
 <% end %>
+
+<script type="text/javascript">
+	//get each player in order and assign score here!
+	var $lisp = $('ol li peeris');
+	var comma = ","
+	for(var i=0; i < $lisp.length; i++) {
+		if ( i == lisp.length-1) {
+			comma = "";
+		} 
+		$('review_action').value +=  $('ol li peeris:eq(' + i + ')').text() + comma;
+	}
+</script>
+
+

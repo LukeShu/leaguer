@@ -193,6 +193,20 @@ class MatchesController < ApplicationController
 				end
 			end
 		when "finish"
+			order = params[:review_action]
+			base_score = 2
+			next_score = 3
+			order.split(",").reverse.each do |elem|
+				player_score = base_score
+				if @match.winner.user.include?(@current_user)
+					player_score += 10
+				else
+					player_score += 7
+				end
+				Score.create(user: elem, match: @match, value: player_score )
+				base_score = next_score
+				next_score += base_score  
+			end
 			@match.status = 3
 			respond_to do |format|
 				if @match.save
