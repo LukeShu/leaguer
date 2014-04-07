@@ -168,8 +168,6 @@ class MatchesController < ApplicationController
 				end
 			end
 		when "finish"
-			@match.status = 2
-
 			# Individual scores
 			scores = params["scores"]
 			scores.each do |user_name, score|
@@ -192,6 +190,15 @@ class MatchesController < ApplicationController
 			unless cur_match_num == 1
 				@match.winner.matches.push(@tournament.matches_ordered[cur_match_num/2])
 			end
+
+			# Skip peer evaluation if there aren't enough players per team
+			peer = false
+			@match.teams.each do |team|
+				if team.users.count > 2
+					peer = true
+				end
+			end
+			@match.status = peer ? 2 : 3
 
 			respond_to do |format|
 				if @match.save
