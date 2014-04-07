@@ -172,6 +172,18 @@ class MatchesController < ApplicationController
 			scores.each do |user_name, score|
 				Score.create(user: User.find_by_user_name(user_name), match: @match, value: score.to_i)
 			end
+
+			team_scores = {}
+			@match.teams.each do |team|
+				team_scores[team] = 0
+				team.users.each do |user|
+					team_scores[team] += scores[user.user_name]
+				end
+			end
+
+			teams = team_scores.invert
+			@match.winner = teams[teams.keys.sort.last]
+
 			respond_to do |format|
 				if @match.save
 					format.html { redirect_to tournament_match_path(@tournament, @match), notice: 'Peer evaluation started.' }
