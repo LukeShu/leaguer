@@ -1,10 +1,8 @@
-<p>
-  <%= image_tag 'http://www.gravatar.com/avatar/' + Digest::MD5.hexdigest(@user.email) + '?s=100&d=mm' %>
-</p>
+
+<h1> <%= @user.user_name %>'s Profile </h1>
 
 <p>
-  <strong>Name:</strong>
-  <%= @user.name %>
+  <%= image_tag 'http://www.gravatar.com/avatar/' + Digest::MD5.hexdigest(@user.email) + '?s=100&d=mm' %>
 </p>
 
 <p>
@@ -13,9 +11,35 @@
 </p>
 
 <p>
-  <strong>User name:</strong>
+  <strong>Preferred name:</strong>
   <%= @user.user_name %>
 </p>
+
+<p>
+  <strong>Relationship Status:</strong>
+  too single
+</p>
+
+<div class="row">
+	<div class="col-md-6">
+	  	<h3> Recent Tournaments Players </h3>
+		<ul>
+			<% @user.tournaments_played.each do |t| %>
+				<li><%= t.name %></li>
+			<% end %>
+		</ul>
+	  </div>
+    <div class="col-md-6">
+    	<h3> Recent Tournaments Hosted </h3>
+    	<% if  @user.tournaments_hosted.count == 0 %> <p> <%= @user.user_name %> has never hosted a tournament </p> <%end %>
+		<ul>
+			<% @user.tournaments_hosted.each do |t| %>
+				<li><%= t.name %></li>
+			<% end %>
+		</ul>
+	  </div>
+    </div>
+</div>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Users', users_path %>
