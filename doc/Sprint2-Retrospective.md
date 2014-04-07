@@ -3,32 +3,6 @@ title: "Team 6 - Project Leaguer: Sprint 2 Retrospective"
 author: [ Nathaniel Foy, Guntas Grewal, Tomer Kimia, Andrew Murrell, Luke Shumaker, Davis Webb ]
 ---
 
-# User Stories
-
-1) As a user, I would like intelligent error handling and 404 redirection.
-
-2) As a user, I would like a working search utility.
-
-3) As a player, I would like a way to enter my usernames for several different remote games.
-
-4) As an admin I would like an option and utility to require email verification for users.
-
-5) As a host, I would like to have multiple options for scoring.
-
-6) As a host, I would like to have multiple tournament structures and types for pairing and running tournaments.
-
-7) As a host, I would like to have an interface for adding tournament-specific preferences.
-
-8) As a host, I would like to allow a wider variety of kinds of settings to be set.
-
-9) As a user, I would like the Riot API to be asynchronously polled in the background so League of Legends tournaments proceed automatically.
-
-10) As a user, I would like to view and create brackets.
-
-11) As a user, I would like the web interface to look more professional.
-
-12) As a host or player, I would like a larger set of peer evaluation settings.
-
 # Tasks
 
 The "size" is using the modified Fibonacci scale.  A '1' is expected
@@ -104,6 +78,10 @@ several days.
 ## Implement Anti-spam measures {#anti-spam}   
 ## Implement Teammate Rating System (peer review view) {#peer-review}
 ## Design/Code Scoring/Pairing Algorithms and Procedures {#pair-alg}
+
+Several Scoring Algorithms were considered and a modified fibonachi peer review
+system was chosen to 
+
 ## Implement game-type specific and tournament specific settings and preferences
    {(#setting-and-pref)}
 
