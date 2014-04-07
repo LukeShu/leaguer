@@ -143,8 +143,8 @@ class MatchesController < ApplicationController
 	handle_asynchronously :is_match_over
 
 	def show
-		if @match.id == 1
-			is_match_over
+		if (@match.status == 1)
+			@scores = @match.scores
 		end
 
 
@@ -153,17 +153,41 @@ class MatchesController < ApplicationController
 	def update
 		case params[:update_action]
 		when "start"
-			check_permission(:edit, @tournament)
-			status = 1
+			@match.status = 1
 			respond_to do |format|
-				if @match
-					format.html { redirect_to tournament_match_path(@tournament, self), notice: 'Match has started.' }
+				if @match.save
+					format.html { redirect_to tournament_match_path(@tournament, @match), notice: 'Match has started.' }
 					format.json { head :no_content }
 				else
 					format.html { redirect_to @tournament, notice: "You don't have permission to start this match." }
 					format.json { render json: "Permission denied", status: :forbidden }
 				end
 			end
+		when "score"
+			scores = params["scores"]
+			scores.each do |user_name, score|
+				Score.create(user: User.find_by_user_name(user_name), match: @match, value: score.to_i)
+			end
+			respond_to do |format|
+				if @match.save
+					format.html { redirect_to tournament_match_path(@tournament, @match), notice: 'Peer evaluation started.' }
+					format.json { head :no_content }
+				else
+					format.html { redirect_to @tournament, notice: "You don't have permission to start this match." }
+					format.json { render json: "Permission denied", status: :forbidden }
+				end
+			end		
+		when "peer"
+			@match.status = 2;
+			respond_to do |format|
+				if @match.save
+					format.html { redirect_to tournament_match_path(@tournament, @match), notice: 'Scores submitted' }
+					format.json { head :no_content }
+				else
+					format.html { redirect_to @tournament, notice: "You don't have permission to start this match." }
+					format.json { render json: "Permission denied", status: :forbidden }
+				end
+			end		
 		else
 			respond_to do |format|
 				format.html { redirect_to @tournament, notice: "Invalid action", status: :unprocessable_entity }
@@ -187,5 +211,10 @@ class MatchesController < ApplicationController
 	# Never trust parameters from the scary internet, only allow the white list through.
 	def match_params
 		params.require(:match).permit(:status, :tournament_id, :name, :winner_id, :remote_id)
+	end
+
+		# Turn of check_edit, since our #update is flexible
+	def check_edit
+		set_match
 	end
 end

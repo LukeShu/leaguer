@@ -26,36 +26,71 @@
 	Note:- The change of status from 1 to 2 is coming from League Data Pull (RIOT API)
 
 -->
+<% if (@match.status== 0) || !@tournament.players.include?(current_user) %>
+	<% @match.teams.each do |team| %>
+		<ol>
+			<% team.users.collect{|u| u.user_name}.each do |k| %>
+				<li><%= k %></li>
+			<% end %>
+		</ol>
+	<% end %>
+
 
 <!--
 	This is what the Players and the Hosts of the tournament will view when the Match Status is 0
 -->
-<% if (@match.status==1) %>
-	<% if (@tournament.players.include?(current_user) || @tournament.hosts.include?(current_user)) %>
+<% elsif (@match.status==1) %>
+	<% if @tournament.hosts.include?(current_user) && @scores.empty? %>
+		<%= form_tag(tournament_match_path(@tournament, @match), method: "put") do %>
+	    	<input type="hidden" name="update_action" value="score">
+			<% @match.teams.each do |team| %>
+				<fieldset><legend>Team <%= team.id.to_s %></legend>
+					<% team.users.collect{|u| u.user_name}.each do |k| %>
+						<label>Score for <%= k %> 
+							<br> 
+							<%= text_field_tag("scores[#{k}]", 0, size: 3) %>
+						</label>
+					<% end %>
+				</fieldset>
+		  	<% end %>
+		  	<%= submit_tag("Enter Scores") %>
+		<% end %>
+	<% else %>
+		<% if  @scores.empty? %>
+			<p> The host has yet to post the scores of the match </p>
 			<% @match.teams.each do |team| %>
 				<ol>
 					<% team.users.collect{|u| u.user_name}.each do |k| %>
 						<li><%= k %></li>
 					<% end %>
 				</ol>
-		  	<% end %>
+			<% end %>
+		<% else %>
+			<% @match.teams.each do |team| %>
+				<ol>
+					<% team.users.each do |user| %>
+						<li><%= user.user_name %> - SCORE: <%= @scores.select{|s| s.user == user}.first.value %></li>
+					<% end %>
+				</ol>
+			<% end %>
+		<% end %>
 	<% end %>
-<% end %>
 
 <!--
 	When Match Status is 2
 	Players see the Peer Review Page
 	Host see the Game Status
 -->
-<% if (@match.status==0) %>
+<% elsif (@match.status==2) %>
 	<% if (@tournament.players.include?(current_user)) %>
 		<% @match.teams.each do |team| %>
-			<ol id="boxes" class="sortable">
-				<% team.users.collect{|u| u.user_name}.each do |k| %>
-					<li><%= k %></li>
-				<% end %>
-			</ol>
-			
+			<% if team.users.include?(current_user) %>
+				<ol id="boxes" class="sortable">
+					<% team.users.collect{|u| u.user_name}.each do |k| %>
+						<li><%= k %></li>
+					<% end %>
+				</ol>
+			<% end %>
 	  	<% end %>	
 	<% elsif (@tournament.hosts.include?(current_user)) %>
 		<label>Game Status Page Goes here! Because you are a Host that is not a player!</label>
@@ -69,3 +104,23 @@
 	</p>
 <% end %>
 
+<% if @tournament.hosts.include?(current_user) %>
+<br />
+<div id="host">
+    <%= form_tag(tournament_match_path(@tournament, @match), method: "put") do %>
+    	<% case @match.status %>
+		<% when 0 %>
+        	<input type="hidden" name="update_action" value="start">
+        	<%= submit_tag("Start Match") %>
+        <% when 1 %>
+            <input type="hidden" name="update_action" value="peer">
+        	<%= submit_tag("Begin Peer Evaluation") %>
+        <% when 2 %>
+        	<input type="hidden" name="update_action" value="finish">
+        	<%= submit_tag("End Match") %>   
+        <% end %>
+    <% end %>
+
+
+</div>
+<% end %>
