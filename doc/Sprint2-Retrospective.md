@@ -86,7 +86,7 @@ several days.
 +---------------------------------------------------------+------+------------+----+
 | [Create Player Profile Pages](#profile)                 |    2 | Tomer      | 10 |
 +---------------------------------------------------------+------+------------+----+
-| [Gravitar Integration](#gravitar)                       |    2 | Foy        | 10 |
+| [Gravatar Integration](#gravatar)                       |    2 | Foy        | 10 |
 +---------------------------------------------------------+------+------------+----+
 
 
@@ -126,10 +126,16 @@ several days.
 ## Setting up a Tournament View for matches and tree {#match-gui}
 ## Increase Usability  {#usability}
 ## Develop comprehensive data storage for s&p&other{#data-storage}
-## Create Player Profile Pages {#profile}    
-## Gravitar Integration {#gravitar}    
-## Test it {#test}
-## Peer review  {#peer}
+## Create Player Profile Pages {#profile}
+
+## Gravatar Integration {#gravatar}
+
+Gravatar images are fetched from the gravatar website. A user's e-mail is used to
+generate a hash key and that key is used to grab their gravatar image from a url.
+If their e-mail is not recognized by Gravatar we have a wide number of optionable
+default images to use. We currently use a mystery man default. It's also possible
+to utilize a number of other image options, such as sizing.
+
 
 
 # Implemented but not working well
