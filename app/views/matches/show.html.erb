@@ -87,7 +87,7 @@
 				<% @match.teams.each do |team| %>
 					<% if team.users.include?(current_user) %>
 						<ol id="boxes" class="sortable">
-							<% team.users.collect{|u| u.user_name}.each do |k| %>
+							<% team.users.collect { |u| (u.user_name == @current_user) ? u.user_name : "" }.each do |k| %>
 								<li><%= k%>
 									<br>
 									<% if (@tournament.game_id  == 1) %>
