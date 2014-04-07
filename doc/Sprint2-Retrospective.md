@@ -121,3 +121,4 @@ several days.
 
 # How to improve
 
+Our biggest fault this time around was the lack of motivation before spring break. Our commits slowed to a halt the week before spring break.
