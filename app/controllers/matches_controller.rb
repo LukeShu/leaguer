@@ -1,5 +1,5 @@
 class MatchesController < ApplicationController
-	before_action :set_tournament, only: [:index]
+	before_action :set_tournament, only: [:index, :update]
 
 	# GET /matches
 	# GET /matches.json
@@ -147,6 +147,29 @@ class MatchesController < ApplicationController
 			is_match_over
 		end
 
+
+	end
+
+	def update
+		case params[:update_action]
+		when "start"
+			check_permission(:edit, @tournament)
+			status = 1
+			respond_to do |format|
+				if @match
+					format.html { redirect_to tournament_match_path(@tournament, self), notice: 'Match has started.' }
+					format.json { head :no_content }
+				else
+					format.html { redirect_to @tournament, notice: "You don't have permission to start this match." }
+					format.json { render json: "Permission denied", status: :forbidden }
+				end
+			end
+		else
+			respond_to do |format|
+				format.html { redirect_to @tournament, notice: "Invalid action", status: :unprocessable_entity }
+				format.json { render json: @tournament.errors, status: :unprocessable_entity }
+			end
+		end
 
 	end
 

@@ -18,7 +18,15 @@
         <td><%= match.id%></td>
         <td><%= match.name %></td>
         <td><%= link_to "Show", tournament_match_path(@tournament, match) %>
-        <td><%= submit_tag("Start Match") %>
+        <td> <%# If user is the host, let them start the tournment %>
+          <% if @tournament.hosts.include?(current_user) %>
+  
+            <%= form_tag(tournament_match_path(@tournament, match), method: "put") do %>
+             <input type="hidden" name="update_action" value="start">
+             <%= submit_tag("Start Match") %>
+            <% end %>
+          <% end %>
+</div></td>
       </tr>
     <% end %>
   </tbody>
