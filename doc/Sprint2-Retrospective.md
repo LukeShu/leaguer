@@ -75,7 +75,14 @@ several days.
 # Implemented and working
 
 ## Define Specific Unit Tests for Security   {#security-test}
-## Implement Anti-spam measures {#anti-spam}   
+
+## Implement Anti-spam measures {#anti-spam}
+
+To handle potential spam problems, Project Leaguer has implemented Simple Captcha
+on the user sign up page.  Users must enter the correct code corresponding with
+Simple Captcha's generated image when registering. Usernames must also be unique.
+E-mail verification has been pushed to Sprint 3.
+
 ## Implement Teammate Rating System (peer review view) {#peer-review}
 
 One of the more unique selling points of Project Leaguer lies with it's peer review
