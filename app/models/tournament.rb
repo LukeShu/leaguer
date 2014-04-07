@@ -46,13 +46,20 @@ class Tournament < ActiveRecord::Base
                         end
                 end
 
-		def get_type(val) {
-			return vartypes[:true_false] if val == "true" or val == "false"
-			return vartypes[:range] if /\d+-\d+/ =~ val
-			return vartypes[:integer] if /\d+/ =~ val
-			return vartypes[:select] if /,/ =~ val
-			return vartypes[:string]
-		}
+		def get_type(val)
+			case val
+				when "true", "false"
+					vartypes[:true_false]
+				when /\d+-\d/ =~ val
+					vartypes[:range]
+				when /\d+/ =~ val
+					vartypes[:integer]
+				when /,/ =~ val
+					vartypes[:select]
+				else
+					vartypes[:string]
+			end
+		end
 
                 def keys
                         @tournament.preferences_raw.all.collect { |x| x.name }

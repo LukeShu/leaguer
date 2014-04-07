@@ -17,5 +17,24 @@
     </p>
   <% end %>
 
-	<%= f.submit %>
+  <%= fields_for "tournament[preferences]", @tournament.preferences do |setting_fields|  %>
+    <% @game.settings.each do |setting| %>
+      <% case setting.stype %>
+        <% when 0 %>
+           <%= setting_fields.text_field( setting.name, :name ) %>
+        <% when 1 %>
+           <%= setting_fields.text_area( setting.name, setting.name ) %>
+        <% when 2 %>
+           <%= setting_fields.collection_radio_buttons( setting.name, setting.type_opt.split(',') ) %>
+        <% when 3 %>
+           <%= setting_fields.collection_check_boxes( setting.name, setting.type_opt.split(',') ) %>
+        <% when 4 %>
+           <%= setting_fields.radio_button( setting.name, "true" ) %>
+           <%= setting_fields.radio_button( setting.name, "false" ) %>
+        <% when 5 %>
+           <%= setting_fields.select( setting.name, setting.type_opt.split(',') ) %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <%= f.submit %>
 <% end %>

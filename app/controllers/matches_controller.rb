@@ -9,10 +9,11 @@ class MatchesController < ApplicationController
 
 	def index
 		@matches = @tournament.matches
-		# width of SVG
-		@width = 300 * (Math.log2(@matches.count).floor + 1);
+		# depth of SVG tree
+		@depth = Math.log2(@matches.count).floor+1;
 		# height of SVG
 		@height = 200 * 2**Math.log2(@matches.count).floor + 100;
+		@h_sector = 2**(@depth-1)+1
 	end
 
 	# For compatability with the router assumptions made by ApplicationController#check_permission
