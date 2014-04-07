@@ -26,6 +26,7 @@
 	Note:- The change of status from 1 to 2 is coming from League Data Pull (RIOT API)
 
 -->
+
 <% if (@match.status== 0) || !@tournament.players.include?(current_user) %>
 	<% @match.teams.each do |team| %>
 		<ol>
@@ -37,7 +38,7 @@
 
 
 <!--
-	This is what the Players and the Hosts of the tournament will view when the Match Status is 0
+	This is what the Players and the Hosts of the tournament will view when the Match Status is 1
 -->
 <% elsif (@match.status==1) %>
 	<% if @tournament.hosts.include?(current_user) && @scores.empty? %>
@@ -87,7 +88,16 @@
 			<% if team.users.include?(current_user) %>
 				<ol id="boxes" class="sortable">
 					<% team.users.collect{|u| u.user_name}.each do |k| %>
-						<li><%= k %></li>
+						<li><%= k%>
+							<br>
+							<% if (@tournament.game_id  == 1) %>
+								<%= if @blue2["#{k}"] == nil
+										"Level: #{@purp2["#{k}"]["level"]}  K/D/A: #{@purp2["#{k}"]["championsKilled"]}/#{@purp2["#{k}"]["numDeaths"]}/#{@purp2["#{k}"]["assists"]}  Gold:#{@purp2["#{k}"]["goldEarned"]}"
+									else 
+										"Level: #{@blue2["#{k}"]["level"]}  K/D/A: #{@blue2["#{k}"]["championsKilled"]}/#{@blue2["#{k}"]["numDeaths"]}/#{@blue2["#{k}"]["assists"]}  Gold:#{@blue2["#{k}"]["goldEarned"]}"
+								end %>
+							<% end %>
+						</li>
 					<% end %>
 				</ol>
 			<% end %>
@@ -104,7 +114,7 @@
 	</p>
 <% end %>
 
-<% if @tournament.hosts.include?(current_user) %>
+<% if @tournament.players.include?(current_user) %>
 <br />
 <div id="host">
     <%= form_tag(tournament_match_path(@tournament, @match), method: "put") do %>
@@ -118,9 +128,11 @@
         <% when 2 %>
         	<input type="hidden" name="update_action" value="finish">
         	<%= submit_tag("End Match") %>   
+         <% when 3 %>
+        	<input type="hidden" name="update_action" value="reset">
+        	<%= submit_tag("Reset Status") %>   
         <% end %>
     <% end %>
-
 
 </div>
 <% end %>
