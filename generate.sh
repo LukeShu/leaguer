@@ -13,6 +13,7 @@ git rm -rf -- app test config/routes.rb db/migrate || true
 git checkout clean-start -- app test config/routes.rb
 
 bundle exec rails generate simple_captcha
+bundle exec rails generate delayed_job:active_record
 
 # The whole shebang, models, views, and controllers
 bundle exec rails generate scaffold server default_user_permissions:integer
