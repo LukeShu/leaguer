@@ -16,6 +16,14 @@ class Tournament < ActiveRecord::Base
 	end
 
 	class Preferences
+		@vartypes = {
+			:true_false => 0,
+			:integer => 1,
+			:string => 2,
+			:select => 3,
+			:range => 4
+		}
+
                 def initialize(tournament)
                         @tournament = tournament
                 end
@@ -29,14 +37,22 @@ class Tournament < ActiveRecord::Base
                         end
                 end
 
-                def []=(preference, value)
+                def []=(preference, val)
                         p = @tournament.preferences_raw.find_by_name(preference)
                         if p.nil?
-                                # TODO: create it
+				TournamentPreference.create( tournament_id: @tournament.id, vartype: get_type(val), name: preference, value: val )
                         else
-                                p.value = value
+                                p.value = val
                         end
                 end
+
+		def get_type(val) {
+			return vartypes[:true_false] if val == "true" or val == "false"
+			return vartypes[:range] if /\d+-\d+/ =~ val
+			return vartypes[:integer] if /\d+/ =~ val
+			return vartypes[:select] if /,/ =~ val
+			return vartypes[:string]
+		}
 
                 def keys
                         @tournament.preferences_raw.all.collect { |x| x.name }
