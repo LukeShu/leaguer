@@ -14,8 +14,11 @@ class TournamentsController < ApplicationController
 				case @tournament.status
 				when 0
 					render action: 'show'
-				when 1..2
-					redirect_to "/tournaments/" + @tournament.id.to_s + "/matches" #tournament_matches_page(@tournament)
+				when 1
+					#redirect_to tournament_matches_page(@tournament)
+					redirect_to "/tournaments/" + @tournament.id.to_s + "/matches"
+				when 2
+					redirect_to tournaments_page
 				end
 			}
 			format.json { 
