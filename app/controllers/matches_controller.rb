@@ -21,23 +21,19 @@ class MatchesController < ApplicationController
 		tournament_matches_path(@tournament)
 	end
 
-	def get_riot_info
-		if signed_in?
+	 def get_riot_info
+	if signed_in?
 
+			pull = "Kaceytron"
 			#current user information
-			response = HTTParty.get("https://prod.api.pvp.net/api/lol/na/v1.3/summoner/by-name/#{current_user.user_name}?api_key=ad539f86-22fd-474d-9279-79a7a296ac38")
+			response = HTTParty.get("https://prod.api.pvp.net/api/lol/na/v1.3/summoner/by-name/#{pull.downcase}?api_key=ad539f86-22fd-474d-9279-79a7a296ac38")
 
-			id = response["#{current_user.user_name.downcase}"]['id']
+			id = response["#{pull.downcase}"]['id']
 
 			#recent game information
-			recent = HTTParty.get("https://prod.api.pvp.net/api/lol/na/v1.3/game/by-summoner/#{response["#{current_user.user_name.downcase}"]['id']}/recent?api_key=ad539f86-22fd-474d-9279-79a7a296ac38")
+			recent = HTTParty.get("https://prod.api.pvp.net/api/lol/na/v1.3/game/by-summoner/#{response["#{pull.downcase}"]['id']}/recent?api_key=ad539f86-22fd-474d-9279-79a7a296ac38")
 
 			game_id = recent["games"][0]["gameId"]
-
-			#remote_user_id = 6651654651354
-			#remove_user_name = TeslasMind
-			#How to Add
-			#how do I access
 
 			#members of most recent game id's
 			player1 = recent["games"][0]["fellowPlayers"][0]["summonerId"]
@@ -121,8 +117,8 @@ class MatchesController < ApplicationController
 			@purp = purple
 			@blue = blue
 
-		end #end if
-	end #end def
+	end #end if
+  end #end def
 	# GET /matches/1
 	# GET /matches/1.json
 
@@ -150,7 +146,10 @@ class MatchesController < ApplicationController
 		if (@match.status == 1)
 			@scores = @match.scores
 		end
-
+		file_blue = "blue.yaml"
+		file_purple = "purple.yaml"
+		@blue2 = YAML.load_file(file_blue)
+		@purp2 = YAML.load_file(file_purple)
 
 	end
 
@@ -185,13 +184,36 @@ class MatchesController < ApplicationController
 			@match.status = 2;
 			respond_to do |format|
 				if @match.save
-					format.html { redirect_to tournament_match_path(@tournament, @match), notice: 'Scores submitted' }
+					format.html { redirect_to tournament_match_path(@tournament, @match), notice: 'Scores Submitted' }
 					format.json { head :no_content }
 				else
 					format.html { redirect_to @tournament, notice: "You don't have permission to start this match." }
 					format.json { render json: "Permission denied", status: :forbidden }
 				end
-			end		
+			end
+		when "finish"
+			@match.status = 3
+			respond_to do |format|
+				if @match.save
+					format.html { redirect_to tournament_match_path(@tournament, @match), notice: 'Peer Review Submitted' }
+					format.json { head :no_content }
+				else
+					format.html { redirect_to @tournament, notice: "You don't have permission to start this match." }
+					format.json { render json: "Permission denied", status: :forbidden }
+				end
+			end
+		when "reset"
+			@match.status = 0
+			respond_to do |format|
+				if @match.save
+					format.html { redirect_to tournament_match_path(@tournament, @match), notice: 'Match Status Reset to 0' }
+					format.json { head :no_content }
+				else
+					format.html { redirect_to @tournament, notice: "You don't have permission to start this match." }
+					format.json { render json: "Permission denied", status: :forbidden }
+				end
+			end
+
 		else
 			respond_to do |format|
 				format.html { redirect_to @tournament, notice: "Invalid action", status: :unprocessable_entity }
