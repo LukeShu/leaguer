@@ -66,13 +66,13 @@
 <% if @tournament.joinable_by?(current_user) && !@tournament.players.include?(current_user) %> 
   <%= form_tag(tournament_path(@tournament), method: "put") do %>
     <input type="hidden" name="update_action" value="join">
-    <%= submit_tag("Join Tournamnet") %>
+    <%= submit_tag("Join Tournament") %>
   <% end %>
 
 <% elsif @tournament.players.include?(current_user) %>
     <%= form_tag(tournament_path(@tournament), method: "put") do %>
     <input type="hidden" name="update_action" value="leave">
-    <%= submit_tag("Leave Tournamnet") %>
+    <%= submit_tag("Leave Tournament") %>
   <% end %>
 <% end %>
 
