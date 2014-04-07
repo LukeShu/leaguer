@@ -120,7 +120,17 @@ several days.
 ## Design/Code Scoring/Pairing Algorithms and Procedures {#pair-alg}
 ## Implement game-type specific and tournament specific settings and preferences
    {(#setting-and-pref)}
+
 ## Retrieve data from Riot Games (TM) API {#riot-api}
+
+Grabbing League of Legends user and match data from Riot's servers has been
+implemented using their newly available API. A developer key is necessary in
+order to retrieve data from their servers. We currently are using Davis's to do
+so. Information is grabbed with HTTParty.get and the correct url.  A hash of 
+information is stored this way. Grabbing information for a user requires the 
+user's League of Legends summoner's name or summoner id. Our current developer
+key is limited to utilizing 10 pulls per 10 seconds.
+
 ## Parse Riot data and attach to scoring subsystem {#parse-riot}
 ## Teach Andrew and Tomer AJAX {#teach-ajax}
 ## Make pages auto-update with AJAX  {#ajax}
