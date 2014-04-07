@@ -207,7 +207,10 @@ class MatchesController < ApplicationController
 				base_score = next_score
 				next_score += base_score  
 			end
-			@match.status = 3
+			@match.submitted_peer_reviews += 1
+			if (@match.submitted_peer_reviews == @match.players.count) 
+				@match.status = 3
+			end
 			respond_to do |format|
 				if @match.save
 					format.html { redirect_to tournament_match_path(@tournament, @match), notice: 'Peer Review Submitted' }
