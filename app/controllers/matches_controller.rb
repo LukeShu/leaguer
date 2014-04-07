@@ -177,7 +177,7 @@ class MatchesController < ApplicationController
 			@match.teams.each do |team|
 				team_scores[team] = 0
 				team.users.each do |user|
-					team_scores[team] += scores[user.user_name]
+					team_scores[team] += scores[user.user_name].to_i
 				end
 			end
 

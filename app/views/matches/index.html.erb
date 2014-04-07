@@ -4,26 +4,25 @@
 <table class="table">
   <thead>
     <tr>
-      <th>Status</th>
       <th>Name</th>
+      <th>Status</th>
       <th>Winner</th>
       <th></th>
     </tr>
   </thead>
 
   <tbody class="table-hover">
-    <% @tournament.matches.each do |match| %>
+    <% @tournament.matches.order(:id).reverse.each do |match| %>
       <tr>
-        <td><%= match.status %></td>
-        <td><%= match.id%></td>
         <td><%= match.name %></td>
+        <td><%= match.status %></td>
+        <td><%= (match.winner.nil? ? "-" : "Team #{match.winner.id}") %></td>
         <td><%= link_to "Show", tournament_match_path(@tournament, match) %>
         <td> <%# If user is the host, let them start the tournment %>
           <% if @tournament.hosts.include?(current_user) %>
-  
             <%= form_tag(tournament_match_path(@tournament, match), method: "put") do %>
              <input type="hidden" name="update_action" value="start">
-             <%= submit_tag("Start Match") %>
+             <%= submit_tag("Start Match", :dissabled => match.teams.count < @tournament.min_teams_per_match) %>
             <% end %>
           <% end %>
 </div></td>
