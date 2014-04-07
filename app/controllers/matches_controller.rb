@@ -1,12 +1,12 @@
 class MatchesController < ApplicationController
 	before_action :set_tournament, only: [:index, :update]
 
-	# GET /matches
-	# GET /matches.json
 	require 'httparty'
 	require 'json'
 	require 'delayed_job'
 
+	# GET /tournaments/1/matches
+	# GET /tournaments/1/matches.json
 	def index
 		@matches = @tournament.matches
 		# depth of SVG tree
@@ -22,8 +22,8 @@ class MatchesController < ApplicationController
 		tournament_matches_path(@tournament)
 	end
 
-	 def get_riot_info
-	if signed_in?
+	def get_riot_info
+		if signed_in?
 
 			pull = "Kaceytron"
 			#current user information
@@ -107,7 +107,7 @@ class MatchesController < ApplicationController
 					purple.merge!("#{place}" => info["games"][0]["stats"])
 				end
 				sleep(1)
-			end					
+			end
 
 			if 100 == recent["games"][0]["stats"]["team"]
 				blue.merge!("#{players[9]}" => recent["games"][0]["stats"])
@@ -118,10 +118,8 @@ class MatchesController < ApplicationController
 			@purp = purple
 			@blue = blue
 
-	end #end if
-  end #end def
-	# GET /matches/1
-	# GET /matches/1.json
+		end #end if
+	end #end def
 
 	def is_match_over
 		response = HTTParty.get("https://prod.api.pvp.net/api/lol/na/v1.3/summoner/by-name/#{@first}?api_key=ad539f86-22fd-474d-9279-79a7a296ac38")
@@ -143,6 +141,8 @@ class MatchesController < ApplicationController
 	end
 	handle_asynchronously :is_match_over
 
+	# GET /tournaments/1/matches/1
+	# GET /tournaments/1/matches/1.json
 	def show
 		if Tournament.find_by_id(@match.tournament_id).game_id == 1
 			file_blue = "blue.yaml"
@@ -152,6 +152,8 @@ class MatchesController < ApplicationController
 		end
 	end
 
+	# PATCH/PUT /tournaments/1/matches/1
+	# PATCH/PUT /tournaments/1/matches/1.json
 	def update
 		case params[:update_action]
 		when "start"
@@ -166,8 +168,6 @@ class MatchesController < ApplicationController
 				end
 			end
 		when "finish"
-			@match.status = 2
-
 			# Individual scores
 			scores = params["scores"]
 			scores.each do |user_name, score|
@@ -190,6 +190,15 @@ class MatchesController < ApplicationController
 			unless cur_match_num == 1
 				@match.winner.matches.push(@tournament.matches_ordered[cur_match_num/2])
 			end
+
+			# Skip peer evaluation if there aren't enough players per team
+			peer = false
+			@match.teams.each do |team|
+				if team.users.count > 2
+					peer = true
+				end
+			end
+			@match.status = peer ? 2 : 3
 
 			respond_to do |format|
 				if @match.save
