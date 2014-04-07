@@ -76,6 +76,8 @@ several days.
 
 ## Define Specific Unit Tests for Security   {#security-test}
 
+
+
 ## Implement Anti-spam measures {#anti-spam}
 
 To handle potential spam problems, Project Leaguer has implemented Simple Captcha
@@ -85,24 +87,24 @@ E-mail verification has been pushed to Sprint 3.
 
 ## Implement Teammate Rating System (peer review view) {#peer-review}
 
-One of the more unique selling points of Project Leaguer lies with it's peer review
-system. This sprint covered both the database framework and actual implementation of
-the feature. Peer review was accomplished with both server-side processing and client-
-side manipulation of the DOM via a floating tactile dragable info-box interface.
+This sprint covered both the database framework and actual implementation of the 
+peer review rating system. Peer review was accomplished with both server-side 
+processing and client-side manipulation of the DOM via a floating tactile dragable 
+info-box interface.
 
 ## Design/Code Scoring/Pairing Algorithms and Procedures {#pair-alg}
 
-Several Scoring Algorithms were considered for demonstration purposes for this sprint,
-eventually a modified fibonachi peer review system was chosen as the most fair system.
-This was the only scoring algorithm implemented in this sprint. A single-elimination
-pairing algorithm was chosen for similar reasons (as well as for simplicity in SVG
-generation).
+Several scoring algorithms were considered for demonstration purposes for this
+sprint and eventually a modified fibonachi peer review system was chosen as the 
+most fair system. This was the only scoring algorithm implemented in this sprint.
+A single-elimination pairing algorithm was chosen for similar reasons (as well 
+as for simplicity in SVG generation).
 
 ## Implement game-type specific and tournament specific settings and preferences
    {(#setting-and-pref)}
 
-The input for settings and preferences for creating tournaments are displayed dynamically
-in both the substance of the content and form in which it is displayed.
+The input for settings and preferences for creating tournaments are displayed 
+dynamically in both the substance of the content and form in which it is displayed.
 
 ## Retrieve data from Riot Games (TM) API {#riot-api}
 
@@ -193,5 +195,13 @@ extra feature.
 
 # How to improve
 
-Our biggest fault this time around was the lack of motivation before spring break.
-Our commits slowed to a halt the week before spring break.
+1. We can better document our code with proper commentation and indentation. The
+team has run into issues where we've become confused with our own code and wasted
+time reviewing code.
+
+2. Our commits slowed to a halt the week before spring break. In this upcoming 
+sprint we plan to take a stronger initiative and take a running start rather than
+a last lap dash.
+
+3. We can more carefully push and merge. We ran into a couple issues where team
+members broke each others work. These mistakes cost a lot of time to fix.
