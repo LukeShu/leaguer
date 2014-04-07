@@ -48,7 +48,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 
 # Asynchronously handle longer or delayed tasks
-gem 'delayed_job'
+gem 'delayed_job_active_record'
 
 group :doc do
 	# bundle exec rake doc:rails generates the API under doc/api.

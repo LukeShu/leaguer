@@ -15,13 +15,17 @@
               <h3><%= t.name %></h3>
             <% end %>
 
-             <div class="row">
+             <div class="row" style="margin-left:2%;">
               <div class="col-md-4 host">
                Hosted by: <%= t.hosts.first.name %>
               </div>
-              <div class="col-md-8 things">
-                <p> Players per team </p>
-                <p> two </p>
+              <div class="col-md-4 things">
+                <p> Players per team: <%= t.min_players_per_team %></p>
+                <p> Players signed up: <%= t.players.count %> </p>
+              </div>
+              <div class="col-md-4 things">
+                <p> <%= (t.randomized_teams)? "Teams are Random" : "Teams are Chosen" %></p>
+                <p> Players signed up: <%= t.players.count %> </p>
               </div>
             </div> 
           
@@ -36,7 +40,7 @@
                   <%= submit_tag("Join") %>
                 <% end %>
             <% else %>
-              <p> You've signed up for this tournament! </p>
+              <p style="margin-top:10px;"> You've signed up for this tournament! </p>
             <% end %>
           </div>
 
