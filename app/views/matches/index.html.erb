@@ -37,8 +37,19 @@
 <div id="match-tree">
   <SVG version="1.1"
   baseProfile="full"
-  width="<%= @width %>" height="<%= @height = [@height, 500].max %>"
+  width="100%" height="<%= @height = [@height, 500].max %>"
   xmlns="http://www.w3.org/2000/svg">
+     <% lastrx = 0
+       lastry = 0 
+       lastrh = 0
+       lastrw = 0 %>
+    <defs>
+    <radialGradient id="gradMatch" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" style="stop-color:#ffd281;
+      stop-opacity:0" />
+      <stop offset="100%" style="stop-color:#EEA236;stop-opacity:1" />
+    </radialGradient>
+  </defs>
    <script type="text/ecmascript"><![CDATA[
     function redirect(i){
       window.location.replace("<%= request.original_url %>"+"/"+i);
@@ -46,39 +57,54 @@
     ]]>
   </script>
   <% (1..@matches.count).each do |i| %>
-  <g id="svg-match-<%= i %>" onmouseover="dispStats(<%= i %>)" onclick="redirect(<%= @matches[i-1].id %>)" cursor="pointer">
-    <rect height="120px" width="213px" 
-    x="<%= @width - (i-1)*50 - 250*(Math.log2(i).floor+1) %>"
-    y="<%= (@height/(Math.log2(i).floor+2)) - 60 + 250*(i - 2**(Math.log2(i).floor)) %>"
-    fill="#ffd281"
-    rx="20px"
-    stroke-width="2"
-    <% case @matches[i-1].status %>
-    <% when 0 %>
-    <% if @matches[i-1].teams.count < @tournament.min_teams_per_match %>
-    stroke="red"
-    fill-opacity="0.6"
-    <% else %>
-    stroke="green"
-    <% end %>
-    <% when 1 %>
-    stroke="orange"
-    <% when 2 %>
-    stroke="yellow"
-    <% when 3 %>
-    stroke="grey"
-    <% end %>
+  <g id="svg-match-<%= i %>" onclick="redirect(<%= @matches[i-1].id %>)" cursor="pointer">
+    <rect height="<%= rh = 100/(2**(@depth-1)+1) - 5 %>%" 
+      width="<%= rw = 100/(@depth+1) - 5 %>%" 
+      x="<%= rx = 50/(@depth+1) + 100/(@depth+1)*(@depth-(Math.log2(i).ceil+1)) %>%"
+      y="<%= ry = ( 100/(2**(Math.log2(i).floor+1))) %>%"
+      fill="url(#gradMatch)"
+      rx="5px"
+      stroke-width="2"
+      <% case @matches[i-1].status %>
+      <% when 0 %>
+        <% if @matches[i-1].teams.count < @tournament.min_teams_per_match %>
+          stroke="red"
+          fill-opacity="0.6"
+        <% else %>
+          stroke="green"
+        <% end %>
+      <% when 1 %>
+      stroke="orange"
+      <% when 2 %>
+      stroke="yellow"
+      <% when 3 %>
+      stroke="grey"
+      <% end %>
     />
+    <rect width="<%= rw-5 %>%" height="<%= rh/4 %>%" x="<%= rx + 2.5 %>%" y="<%= ry + 4 %>%" fill="white" stroke="black" />
+    <text x="<%= rx + rw/4 %>%" y="<%= ry + 10 %>%" font-size="<%= rh %>">
+      <% if @matches[i-1].teams.first %>
+      Team <%= @matches[i-1].teams.first.id %>
+      <% end %>
+    </text>
+    <text x="<%= rx + rw/2 - 2 %>%" y="<%= ry + 16 %>%" font-size="<%= rh %>"> VS </text>
+    
+     <rect width="<%= rw-5 %>%" height="<%= rh/4 %>%" x="<%= rx + 2.5 %>%" y="<%= ry + 17 %>%" fill="white" stroke="black" />
+    <text x="<%= rx + rw/4 %>%" y="<%= ry + 23 %>%" font-size="<%= rh %>">
+      <% if @matches[i-1].teams[1] %>
+         Team <%= @matches[i-1].teams[1].id %>
+      <% end %>
+    </text>
+
+    <% if i > 1 %>
+    <line x1="<%= rx+rw %>%" y1="<%= ry+rh/2 %>%" x2="<%= lastrx %>%" y2="<%= lastry+lastrh/2 %>%" stroke="black" stroke-width="2" >
+    <% end %>
+    <% lastrx = rx
+       lastry = ry 
+       lastrh = rh
+       lastrw = rw %>
   </g>
-  <% if i > 1 %>
-  <line 
-  stroke="black"
-  x1="<%= @width - (i-2)*50 -  250*(Math.log2(i-1).floor+1) %>"
-  y1="<%= (@height/(Math.log2(i-1).floor+2)) - 60 + 250*((i-1) - 2**(Math.log2(i-1).floor)) + 60 %>"
-  x2="<%= @width - (i-1)*50 -  250*(Math.log2(i).floor+1) + 213 %>"
-  y2="<%= (@height/(Math.log2(i).floor+2)) - 60 + 250*(i - 2**(Math.log2(i).floor)) + 60 %>"
-  />
-  <% end %>
+
   <% end %>
 </SVG>
 </div>
