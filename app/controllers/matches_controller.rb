@@ -15,6 +15,12 @@ class MatchesController < ApplicationController
 		@height = 200 * 2**Math.log2(@matches.count).floor + 100;
 	end
 
+	# For compatability with the router assumptions made by ApplicationController#check_permission
+	def matches_url
+		set_tournament
+		tournament_matches_path(@tournament)
+	end
+
 	def get_riot_info
 		if signed_in?
 
