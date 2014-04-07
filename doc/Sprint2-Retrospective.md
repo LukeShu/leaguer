@@ -51,45 +51,66 @@ to take less than an hour.  A '3' is expected to take 3-6 hours.  A
 several days.
 
 +---------------------------------------------------------+------+------------+----+
-| Task Description                                        | Size | Person\*   | US |
+| Tasks Implemented and Working                           | Size | Person\*   | US |
 +=========================================================+======+============+====+
-| [Define Specific Unit Tests for Security](#security-test)               |    3 | All        |  1 |
+| [Define Specific Unit Tests for Security]               |    3 | All        |  1 |
+| (#security-test)                                        |      |            |    |
 +---------------------------------------------------------+------+------------+----+
-| [Implement Anti-spam measures](#anti-spam)          |    2 | Davis      |  2 |
+| [Implement Anti-spam measures](#anti-spam)              |    2 | Davis      |  2 |
 +---------------------------------------------------------+------+------------+----+
-| [Email Verification Option](#email-varify)              |    5 | Luke       |  2 |
+| [Implement Teammate Rating System (peer review view)]   |    5 | Guntas     |  3 |
+|  (#peer-review)                                         |      |            |    |
 +---------------------------------------------------------+------+------------+----+
-| [Implement Teammate Rating System (peer review view)](#peer-review)     |    5 | Guntas     |  3 |
-+---------------------------------------------------------+------+------------+----+
-| [Design/Code Scoring/Pairing Algorithms and Procedures](#pair-alg)   |    5 | D+F+A      |  3 |
+| [Design/Code Scoring/Pairing Algorithms and Procedures] |    5 | D+F+A      |  3 |
+| (#pair-alg)                                             |      |            |    |
 +---------------------------------------------------------+------+------------+----+
 | Implement game-type specific and tournament             |    8 | L+A+G      |  4 |
 | specific settings and preferences                       |      |            |    |
 +---------------------------------------------------------+------+------------+----+
 | [Retrieve data from Riot Games (TM) API ](#riot-api)    |    3 | Foy        |  5 |
 +---------------------------------------------------------+------+------------+----+
-| [Parse Riot data and attach to scoring subsystem](#parse-riot)         |    5 | Davis      |  5 |
+| [Parse Riot data and attach to scoring subsystem]       |    5 | Davis      |  5 |
+| (#parse-riot)                                           |      |            |    |
 +---------------------------------------------------------+------+------------+----+
 | [Teach Andrew and Tomer AJAX ](#teach-ajax)             |    2 | Luke       |  6 |
 +---------------------------------------------------------+------+------------+----+
 | [Make pages auto-update with AJAX](#ajax)               |    5 | T+A        |  6 |
 +---------------------------------------------------------+------+------------+----+
-| [Setting up a Tournament View for matches and tree](#match-gui) |    5 | Tomer      |  7 |
+| [Setting up a Tournament View for matches and tree]     |    5 | Tomer      |  7 |
+| (#match-gui)                                            |      |            |    |
 +---------------------------------------------------------+------+------------+----+
 | [Increase Usability](#usability)                        |    3 | All-L      |  8 |
 +---------------------------------------------------------+------+------------+----+
-| [Project Leaguer Logo](#logo)                           | spike| D+G        |  8 |
-+---------------------------------------------------------+------+------------+----+
-| [Develop comprehensive data storage for s&p&other](#data-storage)     |    5 | L+A        |  9 |
+| [Develop comprehensive data storage for s&p&other]      |    5 | L+A        |  9 |
+| (#data-storage)                                         |      |            |    |
 +---------------------------------------------------------+------+------------+----+
 | [Create Player Profile Pages](#profile)                 |    2 | Tomer      | 10 |
 +---------------------------------------------------------+------+------------+----+
 | [Gravitar Integration](#gravitar)                       |    2 | Foy        | 10 |
 +---------------------------------------------------------+------+------------+----+
-| [Test it](#test)                                        |    1 | All-L      | all|
+
+
+
+
 +---------------------------------------------------------+------+------------+----+
-| [Peer review](#peer)                                    |    1 | All        | all|
+| Tasks Implemented and Not Working Well                  | Size | Person\*   | US |
++=========================================================+======+============+====+
+| [Not Applicable](#all-or-nothing)                       |    0 | ---        | 0  |
 +---------------------------------------------------------+------+------------+----+
+
+
+
+
++---------------------------------------------------------+------+------------+----+
+| Tasks Not Implemented                                   | Size | Person\*   | US |
++=========================================================+======+============+====+
+| [Email Verification Option](#email-varify)              |    5 | Luke       |  2 |
++---------------------------------------------------------+------+------------+----+
+| [Project Leaguer Logo](#logo)                           | spike| D+G        |  8 |
++---------------------------------------------------------+------+------------+----+
+
+
+
 
 # Implemented and working
 
@@ -104,7 +125,6 @@ several days.
 ## Make pages auto-update with AJAX  {#ajax}
 ## Setting up a Tournament View for matches and tree {#match-gui}
 ## Increase Usability  {#usability}
-## Project Leaguer Logo {#logo}   
 ## Develop comprehensive data storage for s&p&other{#data-storage}
 ## Create Player Profile Pages {#profile}    
 ## Gravitar Integration {#gravitar}    
@@ -114,11 +134,18 @@ several days.
 
 # Implemented but not working well
 
+## Not Applicable (#all-or-nothing)
+
+Everything we implemented was implemented well, or else we didn't implement it.
+
 
 # Not implemented
 
+## Email Verification Option (#email-verify)
+## Project Leaguer Logo {#logo} 
 
 
 # How to improve
 
-Our biggest fault this time around was the lack of motivation before spring break. Our commits slowed to a halt the week before spring break.
+Our biggest fault this time around was the lack of motivation before spring break.
+Our commits slowed to a halt the week before spring break.
