@@ -61,7 +61,6 @@ class Tournament < ActiveRecord::Base
 			end
 		end
 
-
                 def keys
                         @tournament.preferences_raw.all.collect { |x| x.name }
                 end

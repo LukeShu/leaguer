@@ -111,7 +111,7 @@ class User < ActiveRecord::Base
 
 	# VALID_USER_NAME checks to make sure a user's user_name
 	# is in the proper format.
-	VALID_USER_NAME_REG = /\A[a-zA-Z0-9\-]+\z/
+	VALID_USER_NAME_REG = /\A[a-zA-Z0-9 _\-]+\z/
 
 	# The following lines put a user account through a series of
 	# validations in order to make sure all of their information
