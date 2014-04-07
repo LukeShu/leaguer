@@ -8,6 +8,11 @@
   <%= yield :head %>
 </head>
 <body>
+<script>
+		window.onload = function() {
+			BetterDragSort.makeListSortable(document.getElementById("boxes"));
+		};
+</script>
 <header><nav>
 	<div class="navbar-brand"><%= link_to('Leaguer', root_path) %></div>
 	<div>
