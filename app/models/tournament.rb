@@ -109,7 +109,7 @@ class Tournament < ActiveRecord::Base
 		num_teams = (self.players.count/self.min_players_per_team).floor
 		num_matches = num_teams - 1
 		for i in 1..num_matches
-			self.matches.create(name: "Match #{i}", status: 0)
+			self.matches.create(name: "Match #{i}", status: 0, submitted_peer_evaluations: 0)
 		end
 		match_num = num_matches-1
 		team_num = 0
