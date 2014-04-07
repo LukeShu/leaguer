@@ -50,17 +50,17 @@
     </radialGradient>
   </defs>
    <script type="text/ecmascript"><![CDATA[
-    function redirect(i){
-      window.location.replace("<%= request.original_url %>"+"/"+i);
-    }
+      function redirect(i){
+        window.location.replace("<%= request.original_url %>"+"/"+i);
+      }
     ]]>
   </script>
   <% (1..@matches.count).each do |i| %>
   <g id="svg-match-<%= i %>" onclick="redirect(<%= @matches[i-1].id %>)" cursor="pointer">
     <rect height="<%= rh = 100/(2**(@depth-1)+1) - 5 %>%" 
       width="<%= rw = 100/(@depth+1) - 5 %>%" 
-      x="<%= rx = 50/(@depth+1) + 100/(@depth+1)*(@depth-(Math.log2(i).ceil+1)) %>%"
-      y="<%= ry = ( 100/(2**(Math.log2(i).floor+1))) %>%"
+      x="<%= rx = 50/(@depth+1) + 100/(@depth+1)*(@depth-(Math.log2(i).floor+1)) %>%"
+      y="<%= ry = ( 100/(2**(Math.log2(i).floor)+1) + rh * 1.1 * (2**Math.log2(i).ceil-i)) %>%"
       fill="url(#gradMatch)"
       rx="5px"
       stroke-width="2"
@@ -80,28 +80,29 @@
       stroke="grey"
       <% end %>
     />
-    <rect width="<%= rw-5 %>%" height="<%= rh/4 %>%" x="<%= rx + 2.5 %>%" y="<%= ry + 4 %>%" fill="white" stroke="black" />
-    <text x="<%= rx + rw/4 %>%" y="<%= ry + 10 %>%" font-size="<%= rh %>">
+    <rect width="<%= rw-5 %>%" height="<%= rh/4 %>%" x="<%= rx + 2.5 %>%" y="<%= ry + rh/6 %>%" fill="<%= @matches[i-1].teams.first and @matches[i-1].teams.first.users.include?(current_user) ? "#BCED91" : "white" %>" stroke="black" />
+    <text x="<%= rx + rw/4 %>%" y="<%= ry + rh/3 %>%" font-size="<%= rh %>">
       <% if @matches[i-1].teams.first %>
       Team <%= @matches[i-1].teams.first.id %>
       <% end %>
     </text>
-    <text x="<%= rx + rw/2 - 2 %>%" y="<%= ry + 16 %>%" font-size="<%= rh %>"> VS </text>
+    <text x="<%= rx + 1.3*rw/3  %>%" y="<%= ry + 5.2*rh/9 %>%" font-size="<%= rh %>"> VS </text>
     
-     <rect width="<%= rw-5 %>%" height="<%= rh/4 %>%" x="<%= rx + 2.5 %>%" y="<%= ry + 17 %>%" fill="white" stroke="black" />
-    <text x="<%= rx + rw/4 %>%" y="<%= ry + 23 %>%" font-size="<%= rh %>">
+     <rect width="<%= rw-5 %>%" height="<%= rh/4 %>%" x="<%= rx + 2.5 %>%" y="<%= ry + 3*rh/5 %>%" fill="<%= @matches[i-1].teams[1] and @matches[i-1].teams[1].users.include?(current_user) ? "#BCED91" : "white" %>" stroke="black" />
+    <text x="<%= rx + rw/4 %>%" y="<%= ry + 4*rh/5 %>%" font-size="<%= rh %>">
       <% if @matches[i-1].teams[1] %>
          Team <%= @matches[i-1].teams[1].id %>
       <% end %>
     </text>
-
     <% if i > 1 %>
     <line x1="<%= rx+rw %>%" y1="<%= ry+rh/2 %>%" x2="<%= lastrx %>%" y2="<%= lastry+lastrh/2 %>%" stroke="black" stroke-width="2" >
     <% end %>
-    <% lastrx = rx
-       lastry = ry 
-       lastrh = rh
-       lastrw = rw %>
+    <% if Math.log2(i+1) == Math.log2(i+1).ceil %>
+      <% lastrx = rx
+         lastry = ry 
+        lastrh = rh
+        lastrw = rw %>
+    <% end %>
   </g>
 
   <% end %>
