@@ -144,11 +144,12 @@ class MatchesController < ApplicationController
 	handle_asynchronously :is_match_over
 
 	def show
-		file_blue = "blue.yaml"
-		file_purple = "purple.yaml"
-		@blue2 = YAML.load_file(file_blue)
-		@purp2 = YAML.load_file(file_purple)
-
+		if Tournament.find_by_id(@match.tournament_id).game_id == 1
+			file_blue = "blue.yaml"
+			file_purple = "purple.yaml"
+			@blue2 = YAML.load_file(file_blue)
+			@purp2 = YAML.load_file(file_purple)
+		end
 	end
 
 	def update
@@ -200,7 +201,24 @@ class MatchesController < ApplicationController
 				end
 			end		
 		when "peer"
-			@match.status = 3;
+			order = params[:review_action]
+			base_score = 2
+			next_score = 3
+			order.split(",").reverse.each do |elem|
+				player_score = base_score
+				if @match.winner.user.include?(@current_user)
+					player_score += 10
+				else
+					player_score += 7
+				end
+				Score.create(user: elem, match: @match, value: player_score )
+				base_score = next_score
+				next_score += base_score  
+			end
+			@match.submitted_peer_reviews += 1
+			if (@match.submitted_peer_reviews == @match.players.count) 
+				@match.status = 3
+			end
 			respond_to do |format|
 				if @match.save
 					format.html { redirect_to tournament_match_path(@tournament, @match), notice: 'Scores Submitted' }

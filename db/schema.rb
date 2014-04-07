@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(version: 20140407000143) do
   create_table "matches", force: true do |t|
     t.integer  "status"
     t.integer  "tournament_id"
+    t.integer  "submitted_peer_evaluations"
     t.string   "name"
     t.integer  "winner_id"
     t.string   "remote_id"
