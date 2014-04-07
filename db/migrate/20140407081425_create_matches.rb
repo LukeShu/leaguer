@@ -6,6 +6,7 @@ class CreateMatches < ActiveRecord::Migration
       t.string :name
       t.references :winner, index: true
       t.string :remote_id
+      t.integer :submitted_peer_evaluations
 
       t.timestamps
     end
