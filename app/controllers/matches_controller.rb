@@ -147,11 +147,12 @@ class MatchesController < ApplicationController
 		if (@match.status == 1)
 			@scores = @match.scores
 		end
-		file_blue = "blue.yaml"
-		file_purple = "purple.yaml"
-		@blue2 = YAML.load_file(file_blue)
-		@purp2 = YAML.load_file(file_purple)
-
+		if Tournament.find_by_id(@match.tournament_id).game_id == 1
+			file_blue = "blue.yaml"
+			file_purple = "purple.yaml"
+			@blue2 = YAML.load_file(file_blue)
+			@purp2 = YAML.load_file(file_purple)
+		end
 	end
 
 	def update
