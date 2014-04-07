@@ -1,12 +1,12 @@
 class MatchesController < ApplicationController
 	before_action :set_tournament, only: [:index, :update]
 
-	# GET /matches
-	# GET /matches.json
 	require 'httparty'
 	require 'json'
 	require 'delayed_job'
 
+	# GET /tournaments/1/matches
+	# GET /tournaments/1/matches.json
 	def index
 		@matches = @tournament.matches
 		# depth of SVG tree
@@ -121,9 +121,6 @@ class MatchesController < ApplicationController
 		end #end if
 	end #end def
 
-	# GET /matches/1
-	# GET /matches/1.json
-
 	def is_match_over
 		response = HTTParty.get("https://prod.api.pvp.net/api/lol/na/v1.3/summoner/by-name/#{@first}?api_key=ad539f86-22fd-474d-9279-79a7a296ac38")
 		riot_id = response["#{@first}"]['id']
@@ -144,6 +141,8 @@ class MatchesController < ApplicationController
 	end
 	handle_asynchronously :is_match_over
 
+	# GET /tournaments/1/matches/1
+	# GET /tournaments/1/matches/1.json
 	def show
 		if Tournament.find_by_id(@match.tournament_id).game_id == 1
 			file_blue = "blue.yaml"
@@ -153,6 +152,8 @@ class MatchesController < ApplicationController
 		end
 	end
 
+	# PATCH/PUT /tournaments/1/matches/1
+	# PATCH/PUT /tournaments/1/matches/1.json
 	def update
 		case params[:update_action]
 		when "start"
