@@ -51,9 +51,9 @@
     </radialGradient>
   </defs>
    <script type="text/ecmascript"><![CDATA[
-    function redirect(i){
-      window.location.replace("<%= request.original_url %>"+"/"+i);
-    }
+      function redirect(i){
+        window.location.replace("<%= request.original_url %>"+"/"+i);
+      }
     ]]>
   </script>
   <% (1..@matches.count).each do |i| %>
@@ -81,7 +81,7 @@
       stroke="grey"
       <% end %>
     />
-    <rect width="<%= rw-5 %>%" height="<%= rh/4 %>%" x="<%= rx + 2.5 %>%" y="<%= ry + 4 %>%" fill="white" stroke="black" />
+    <rect width="<%= rw-5 %>%" height="<%= rh/4 %>%" x="<%= rx + 2.5 %>%" y="<%= ry + 4 %>%" fill="<%=  @matches[i-1].teams.first and @matches[i-1].teams.first.users.include?(current_user) ? "#BCED91" : "white" %>" stroke="black" />
     <text x="<%= rx + rw/4 %>%" y="<%= ry + 10 %>%" font-size="<%= rh %>">
       <% if @matches[i-1].teams.first %>
       Team <%= @matches[i-1].teams.first.id %>
@@ -89,13 +89,12 @@
     </text>
     <text x="<%= rx + rw/2 - 2 %>%" y="<%= ry + 16 %>%" font-size="<%= rh %>"> VS </text>
     
-     <rect width="<%= rw-5 %>%" height="<%= rh/4 %>%" x="<%= rx + 2.5 %>%" y="<%= ry + 17 %>%" fill="white" stroke="black" />
+     <rect width="<%= rw-5 %>%" height="<%= rh/4 %>%" x="<%= rx + 2.5 %>%" y="<%= ry + 17 %>%" fill="<%= @matches[i-1].teams[1] and @matches[i-1].teams[1].users.include?(current_user) ? "#BCED91" : "white" %>" stroke="black" />
     <text x="<%= rx + rw/4 %>%" y="<%= ry + 23 %>%" font-size="<%= rh %>">
       <% if @matches[i-1].teams[1] %>
          Team <%= @matches[i-1].teams[1].id %>
       <% end %>
     </text>
-
     <% if i > 1 %>
     <line x1="<%= rx+rw %>%" y1="<%= ry+rh/2 %>%" x2="<%= lastrx %>%" y2="<%= lastry+lastrh/2 %>%" stroke="black" stroke-width="2" >
     <% end %>
