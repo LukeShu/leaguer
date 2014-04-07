@@ -2,7 +2,6 @@
   <strong>Status:</strong>
   <%= @match.status %>
 </p>
-
 <p>
   <strong>Tournament:</strong>
   <%= @match.tournament.id %>
@@ -27,49 +26,38 @@
 	Note:- The change of status from 1 to 2 is coming from League Data Pull (RIOT API)
 
 -->
-<!--
-	This is what the HOST will see when the Match Status is NOT 3
--->
-<% if (@tournament.hosts.include?(current_user) and @match.winner.nil?) %>
-	<%= form_for([@tournament, @match], method: "put") do |f| %>
-		<ul>
-			<% @match.teams.each do |team| %>
-				<li><label><%= f.radio_button(:winner, team.id) %>
-					<%= team.users.collect{|u| u.user_name}.join(", ") %></label></li>
-		  <% end %>
-		</ul>
-		<%= f.submit("Select Winner") %>
-	<% end %>
-<% end %>
 
 <!--
 	This is what the Players and the Hosts of the tournament will view when the Match Status is 0
 -->
-<% if (@match.status==0) %>
+<% if (@match.status==1) %>
 	<% if (@tournament.players.include?(current_user) || @tournament.hosts.include?(current_user)) %>
 			<% @match.teams.each do |team| %>
-				<ul>
+				<ol>
 					<% team.users.collect{|u| u.user_name}.each do |k| %>
-						<li><label><%= k %></label></li>
+						<li><%= k %></li>
 					<% end %>
-				</ul>
+				</ol>
 		  	<% end %>
 	<% end %>
 <% end %>
 
 <!--
+	When Match Status is 2
 	Players see the Peer Review Page
 	Host see the Game Status
 -->
-if (@match.status==0) %>
-	<% if @tournament.players.include?(current_user) %>
+<% if (@match.status==0) %>
+	<% if (@tournament.players.include?(current_user)) %>
 		<% @match.teams.each do |team| %>
-			<ul>
+			<ol id="boxes" class="sortable">
 				<% team.users.collect{|u| u.user_name}.each do |k| %>
-					<li><label><%= k %></label></li>
+					<li><%= k %></li>
 				<% end %>
-			</ul>
-		 <% end %>	
+			</ol>
+	  	<% end %>	
+	<% elsif (@tournament.hosts.include?(current_user)) %>
+		<label>Game Status Page Goes here! Because you are a Host that is not a player!</label>
 	<% end %>
 <% end %>
 
