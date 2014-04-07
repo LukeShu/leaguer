@@ -144,9 +144,6 @@ class MatchesController < ApplicationController
 	handle_asynchronously :is_match_over
 
 	def show
-		if (@match.status == 1)
-			@scores = @match.scores
-		end
 		file_blue = "blue.yaml"
 		file_purple = "purple.yaml"
 		@blue2 = YAML.load_file(file_blue)
@@ -167,12 +164,16 @@ class MatchesController < ApplicationController
 					format.json { render json: "Permission denied", status: :forbidden }
 				end
 			end
-		when "score"
+		when "finish"
+			@match.status = 2
+
+			# Individual scores
 			scores = params["scores"]
 			scores.each do |user_name, score|
 				Score.create(user: User.find_by_user_name(user_name), match: @match, value: score.to_i)
 			end
 
+			# Team scores
 			team_scores = {}
 			@match.teams.each do |team|
 				team_scores[team] = 0
@@ -180,9 +181,14 @@ class MatchesController < ApplicationController
 					team_scores[team] += scores[user.user_name].to_i
 				end
 			end
-
 			teams = team_scores.invert
 			@match.winner = teams[teams.keys.sort.last]
+
+			# Schedule next match
+			cur_match_num = @tournament.matches_ordered.invert[@match]
+			unless cur_match_num == 1
+				@match.winner.matches.push(@tournament.matches_ordered[cur_match_num/2])
+			end
 
 			respond_to do |format|
 				if @match.save
@@ -194,21 +200,10 @@ class MatchesController < ApplicationController
 				end
 			end		
 		when "peer"
-			@match.status = 2;
+			@match.status = 3;
 			respond_to do |format|
 				if @match.save
 					format.html { redirect_to tournament_match_path(@tournament, @match), notice: 'Scores Submitted' }
-					format.json { head :no_content }
-				else
-					format.html { redirect_to @tournament, notice: "You don't have permission to start this match." }
-					format.json { render json: "Permission denied", status: :forbidden }
-				end
-			end
-		when "finish"
-			@match.status = 3
-			respond_to do |format|
-				if @match.save
-					format.html { redirect_to tournament_match_path(@tournament, @match), notice: 'Peer Review Submitted' }
 					format.json { head :no_content }
 				else
 					format.html { redirect_to @tournament, notice: "You don't have permission to start this match." }
@@ -226,7 +221,6 @@ class MatchesController < ApplicationController
 					format.json { render json: "Permission denied", status: :forbidden }
 				end
 			end
-
 		else
 			respond_to do |format|
 				format.html { redirect_to @tournament, notice: "Invalid action", status: :unprocessable_entity }
@@ -241,7 +235,6 @@ class MatchesController < ApplicationController
 	def set_match
 		set_tournament
 		@match = @tournament.matches.find(params[:id])
-		@first = @match.teams.first.users.first.user_name.downcase
 	end
 	def set_tournament
 		@tournament = Tournament.find(params[:tournament_id])
