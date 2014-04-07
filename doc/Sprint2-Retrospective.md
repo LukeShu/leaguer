@@ -101,7 +101,7 @@ several days.
 # Implemented and working
 
 ## Define Specific Unit Tests for Security   {#security-test}
-## Implement Anti-spam measures {#email-varify}   
+## Implement Anti-spam measures {#anti-spam}   
 ## Implement Teammate Rating System (peer review view) {#peer-review}
 ## Design/Code Scoring/Pairing Algorithms and Procedures {#pair-alg}
 ## Implement game-type specific and tournament specific settings and preferences
