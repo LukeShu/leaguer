@@ -126,15 +126,21 @@ several days.
 ## Setting up a Tournament View for matches and tree {#match-gui}
 ## Increase Usability  {#usability}
 ## Develop comprehensive data storage for s&p&other{#data-storage}
+
 ## Create Player Profile Pages {#profile}
+
+Player Profile Pages successfully list important and useful user information.
+Player username, e-mail, relationship status, and recent tournament information
+are all listed on a user's profile page. Gravatar images are also shown here.
+Users can also edit their pages.
 
 ## Gravatar Integration {#gravatar}
 
 Gravatar images are fetched from the gravatar website. A user's e-mail is used to
 generate a hash key and that key is used to grab their gravatar image from a url.
-If their e-mail is not recognized by Gravatar we have a wide number of optionable
-default images to use. We currently use a mystery man default. It's also possible
-to utilize a number of other image options, such as sizing.
+If their e-mail is not recognized by Gravatar, then we have a wide number of 
+optionable default images to use. We currently use a mystery man default. It's
+also possible to utilize a number of other image options, such as sizing.
 
 
 
