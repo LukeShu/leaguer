@@ -64,8 +64,8 @@ several days.
 | [Design/Code Scoring/Pairing Algorithms and Procedures] |    5 | D+F+A      |  3 |
 | (#pair-alg)                                             |      |            |    |
 +---------------------------------------------------------+------+------------+----+
-| Implement game-type specific and tournament             |    8 | L+A+G      |  4 |
-| specific settings and preferences                       |      |            |    |
+| [Implement game-type specific and tournament            |    8 | L+A+G      |  4 |
+| specific settings and preferences] (#setting-and-pref)  |      |            |    |
 +---------------------------------------------------------+------+------------+----+
 | [Retrieve data from Riot Games (TM) API ](#riot-api)    |    3 | Foy        |  5 |
 +---------------------------------------------------------+------+------------+----+
@@ -118,13 +118,21 @@ several days.
 ## Implement Anti-spam measures {#email-varify}   
 ## Implement Teammate Rating System (peer review view) {#peer-review}
 ## Design/Code Scoring/Pairing Algorithms and Procedures {#pair-alg}
-## Implement game-type specific and tournament specific settings and preferences {}
+## Implement game-type specific and tournament specific settings and preferences
+   {(#setting-and-pref)}
 ## Retrieve data from Riot Games (TM) API {#riot-api}
 ## Parse Riot data and attach to scoring subsystem {#parse-riot}
 ## Teach Andrew and Tomer AJAX {#teach-ajax}
 ## Make pages auto-update with AJAX  {#ajax}
 ## Setting up a Tournament View for matches and tree {#match-gui}
+
 ## Increase Usability  {#usability}
+
+Project Leaguer has many new features that have increased usability. AJAX
+integration, tournament visuals (ready bar, match trees), Gravatar images, 
+and Riot API integration all contribute towards an easier and more automatic
+web interface available for our users to utilize.
+
 ## Develop comprehensive data storage for s&p&other{#data-storage}
 
 ## Create Player Profile Pages {#profile}
