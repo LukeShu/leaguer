@@ -196,9 +196,10 @@ extra feature.
 
 ## Define Specific Unit Tests for Security   {#security-test}
 
-
-
-
+Because of heavy "dog-food" style testing during the development process and
+fairly heavy rapid redesign, specific unit tests were not given a high priority
+for this sprint. The interdependency of components for tournament logic provided
+near-instant feedback when something was wrong.
 
 # How to improve
 
