@@ -177,6 +177,7 @@ also possible to utilize a number of other image options, such as sizing.
 Everything we implemented was implemented well, or else we didn't implement it.
 
 
+
 # Not implemented
 
 ## Email Verification Option (#email-verify)
@@ -192,6 +193,8 @@ The Project Leaguer Logo was discussed before the sprint started. We decided we
 would follow up on any opportunities to explore creating a Leauger Logo, but this
 simply did not happen. We greatly want one, but it's still just a low priority
 extra feature.
+
+
 
 # How to improve
 
