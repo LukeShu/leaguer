@@ -101,7 +101,7 @@ A single-elimination pairing algorithm was chosen for similar reasons (as well
 as for simplicity in SVG generation).
 
 ## Implement game-type specific and tournament specific settings and preferences
-   {(#setting-and-pref)}
+   {#setting-and-pref}
 
 The input for settings and preferences for creating tournaments are displayed 
 dynamically in both the substance of the content and form in which it is displayed.
@@ -172,7 +172,7 @@ also possible to utilize a number of other image options, such as sizing.
 
 # Implemented but not working well
 
-## Not Applicable (#all-or-nothing)
+## Not Applicable {#all-or-nothing}
 
 Everything we implemented was implemented well, or else we didn't implement it.
 
@@ -180,7 +180,7 @@ Everything we implemented was implemented well, or else we didn't implement it.
 
 # Not implemented
 
-## Email Verification Option (#email-verify)
+## Email Verification Option {#email-verify}
 
 This was not implemented for lack of time. Luke probably would have been able to
 implement it with his time constraints if he wasn't busy frequently assisting

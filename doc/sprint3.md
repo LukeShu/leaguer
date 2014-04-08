@@ -10,37 +10,30 @@ author: [ Nathaniel Foy, Guntas Grewal, Tomer Kimia, Andrew Murrell, Luke Shumak
 2) As an admin, I would like to have an email verification system for a more secure
   and spam free enviroment.
 
-3) As an admin, I would like to send alerts to users.
+3) As a user, I would like intelligent error handling (e.g. 404 and 403 redirection).
 
-4) As a user, I would like to be able to send private messages.
+4) As an admin, I would like to send alerts to users.
 
-5) As a user, I would like a working search utility
+5) As a user, I would like to be able to send private messages.
 
-6) As a host or player, I would like a larger set of peer evaluation settings.
+6) As a user, I would like a working search utility.
 
-7) As a host, I would like to have multiple tournament structures and types for 
+7) As a host or player, I would like customizable settings for peer evaluation and 
+  scoring.
+
+8) As a host, I would like to have multiple tournament structures and types for 
   pairing and running tournaments. (e.g. Round Robin team pairings).
 
-8) As a user, I would like to view and create brackets.
+9) As a host, I would like to have an interface for adding tournament-specific 
+  preferences (e.g. Capture the Teemo).
 
-9) As a user, I would like the Riot API to be asynchronously polled in the 
+10) As a user, I would like to view and create brackets.
+
+11) As a user, I would like the Riot API to be asynchronously polled in the 
   background so League of Legends tournaments proceed automatically.
 
-10) As a player, I would like a way to enter my usernames for several different
+12) As a player, I would like a way to enter my usernames for several different
   remote games.
-
-
-
-
-# User Stories  -- Andrew's remaining ones.
-
-1) As a user, I would like intelligent error handling and 404 redirection.  -- goes with #1
-
-5) As a host, I would like to have multiple options for scoring.  -- goes with #7 ?
-
-7) As a host, I would like to have an interface for adding tournament-specific preferences.  --?
-
-8) As a host, I would like to allow a wider variety of kinds of settings to be set.  -?
 
 
 #Tasks
@@ -53,7 +46,7 @@ several days.
 +---------------------------------------------------------+------+------------+----+
 | Task Description                                        | Size | Person     | US |
 +=========================================================+======+============+====+
-| Intelligent Error Handling (404 redirection)            |   3  | Andrew     | 2  |
+| Intelligent Error Handling (404 redirection)            |   3  | Andrew     | 1  |
 +---------------------------------------------------------+------+------------+----+
 | Search                                                  |      |            |    |
 +---------------------------------------------------------+------+------------+----+
