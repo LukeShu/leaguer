@@ -13,9 +13,6 @@ several days.
 +---------------------------------------------------------+------+------------+----+
 | Tasks Implemented and Working                           | Size | Person\*   | US |
 +=========================================================+======+============+====+
-| [Define Specific Unit Tests for Security]               |    3 | All        |  1 |
-| (#security-test)                                        |      |            |    |
-+---------------------------------------------------------+------+------------+----+
 | [Implement Anti-spam measures](#anti-spam)              |    2 | Davis      |  2 |
 +---------------------------------------------------------+------+------------+----+
 | [Implement Teammate Rating System (peer review view)]   |    5 | Guntas     |  3 |
@@ -68,15 +65,14 @@ several days.
 +---------------------------------------------------------+------+------------+----+
 | [Project Leaguer Logo](#logo)                           | spike| D+G        |  8 |
 +---------------------------------------------------------+------+------------+----+
+| [Define Specific Unit Tests for Security]               |    3 | All        |  1 |
+| (#security-test)                                        |      |            |    |
++---------------------------------------------------------+------+------------+----+
 
 
 
 
 # Implemented and working
-
-## Define Specific Unit Tests for Security   {#security-test}
-
-
 
 ## Implement Anti-spam measures {#anti-spam}
 
@@ -197,6 +193,10 @@ The Project Leaguer Logo was discussed before the sprint started. We decided we
 would follow up on any opportunities to explore creating a Leauger Logo, but this
 simply did not happen. We greatly want one, but it's still just a low priority
 extra feature.
+
+## Define Specific Unit Tests for Security   {#security-test}
+
+
 
 
 
