@@ -133,12 +133,12 @@ and manage input options for tournament flow but still needs to be implemented
 across the website in other areas.
 
 ## Setting up a Tournament View for matches and tree {#match-gui}
+
 A new system was set-up so that matches are created from the trunk (final match) to
 the most out matches, and teams are inserted into matches starting at the leaves and
 and filling up the trunk. Any number of teams is now supported. A lot of log-based
 math was used to write the rails-generated SVG, and a lot of arithmetic was done to
 calculate the relative proportions.
-
 
 ## Increase Usability  {#usability}
 
