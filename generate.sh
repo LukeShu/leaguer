@@ -32,6 +32,7 @@ bundle exec rails generate scaffold game \
 	set_rounds:integer randomized_teams:boolean
 bundle exec rails generate scaffold user name:string email:string:uniq user_name:string:uniq
 bundle exec rails generate scaffold session user:references token:string:uniq
+bundle exec rails generate scaffold bracket user:references tournament:references name:string
 
 # Just models
 bundle exec rails generate model server_setting
@@ -39,7 +40,7 @@ bundle exec rails generate model game_setting game:references stype:integer name
 bundle exec rails generate model tournament_preference tournament:references vartype:integer name:string value:text
 bundle exec rails generate model score user:references match:references value:integer
 bundle exec rails generate model remote_username game:references user:references json_value:text
-
+bundle exec rails generate model bracket_match bracket:references match:references predicted_winner:references
 # Join tables
 bundle exec rails generate migration CreateTournamentPlayersJoinTable	players	tournaments
 bundle exec rails generate migration CreateTournamentHostsJoinTable	hosts	tournaments
