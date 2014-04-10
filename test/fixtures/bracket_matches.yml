@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  bracket_id: 
+  match_id: 
+  predicted_winner_id: 
+
+two:
+  bracket_id: 
+  match_id: 
+  predicted_winner_id: 

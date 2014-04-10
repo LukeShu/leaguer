@@ -1,4 +1,7 @@
 Leaguer::Application.routes.draw do
+
+  resources :brackets
+
   resources :sessions, only: [:new, :create, :destroy]
 
   resources :users

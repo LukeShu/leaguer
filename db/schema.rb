@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140407081524) do
+ActiveRecord::Schema.define(version: 20140410214006) do
 
   create_table "alerts", force: true do |t|
     t.integer  "author_id"
@@ -21,6 +21,29 @@ ActiveRecord::Schema.define(version: 20140407081524) do
   end
 
   add_index "alerts", ["author_id"], name: "index_alerts_on_author_id"
+
+  create_table "bracket_matches", force: true do |t|
+    t.integer  "bracket_id"
+    t.integer  "match_id"
+    t.integer  "predicted_winner_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "bracket_matches", ["bracket_id"], name: "index_bracket_matches_on_bracket_id"
+  add_index "bracket_matches", ["match_id"], name: "index_bracket_matches_on_match_id"
+  add_index "bracket_matches", ["predicted_winner_id"], name: "index_bracket_matches_on_predicted_winner_id"
+
+  create_table "brackets", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "tournament_id"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "brackets", ["tournament_id"], name: "index_brackets_on_tournament_id"
+  add_index "brackets", ["user_id"], name: "index_brackets_on_user_id"
 
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0, null: false
