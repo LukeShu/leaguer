@@ -17,7 +17,7 @@ bundle exec rails generate delayed_job:active_record
 
 # The whole shebang, models, views, and controllers
 bundle exec rails generate scaffold server default_user_permissions:integer
-bundle exec rails generate scaffold match status:integer tournament:references name:string winner:references remote_id:string
+bundle exec rails generate scaffold match status:integer tournament:references name:string winner:references remote_id:string submitted_peer_evaluations:integer
 bundle exec rails generate scaffold team match:references
 bundle exec rails generate scaffold alert author:references message:text
 bundle exec rails generate scaffold pm author:references recipient:references message:text
