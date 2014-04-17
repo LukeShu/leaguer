@@ -38,11 +38,14 @@
 
 <% if notice %><div id="notice"><p><%= notice %></p></div><% end %>
 
-<div class="container"><%= yield %></div>
+<div class="wrapper">
+		<%= yield %>
+</div>
 
 <footer>
 	<p>Leaguer &copy; 2014, Tomer Kimia, Andrew Murrell, Luke Shumaker, Nathaniel Foy, Davis Webb, and Guntas Grewal</p>
+	<%= debug(params) if Rails.env.development? %>
 </footer>
-<%= debug(params) if Rails.env.development? %>
+
 </body>
 </html>

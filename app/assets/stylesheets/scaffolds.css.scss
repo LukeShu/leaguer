@@ -1,15 +1,56 @@
 @import "bootstrap";
 
+$page-color: #444;
+$toolbar-color: black;
+
+html{
+  height: 100%;
+}
+
 body {
-  background-color: #fff;
-  color: #333;
+  background-color: $page-color;
+  color: $page-color;
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
   line-height: 18px;
+  height: 100%;
+}
+
+.wrapper {
+  padding-left: 5%;
+  padding-right: 5%;
+  margin: 0 auto;
+  background-color: #fff;
+  padding-top: 10px;
+  height: 90%;
+  box-shadow: 1px 1px 7px orange;
+  border-radius: 0px 0px 5px 5px;
+}
+
+footer {
+  clear: both;
+  margin: 0 auto;
+  margin-top: 10px;
+  color: white;
+
+}
+
+@media screen and (min-width: 480px) {
+  .wrapper, footer {
+    width: 80%;
+    min-width: 480px;
+    max-width: 1024px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .wrapper, footer {
+    width: 100%;
+  }
 }
 
 h1, h2, h3, h4, h5{
-  color: #0f0f0f;
+  color: #030303;
 }
 
 p, ol, ul, td {
@@ -75,6 +116,9 @@ div {
   }
 }
 
+
+/* NAVBAR */
+
 .navbar-brand {
   @extend .no-dec;
   a{
@@ -87,11 +131,12 @@ div {
   }
 }
 
-footer {
-  text-align: center;
-  border-top: solid 1px #999999;
-  padding-top: 18px;
-  margin-top: 18px;
+.navbar-inverse, header > nav {
+    background-color: $toolbar-color;
+    border-color: #0F4070;
+    border-radius: 0px 0px 5px 5px;
+    margin-bottom: 0px;
+
 }
 
 button, input[type="submit"] {
