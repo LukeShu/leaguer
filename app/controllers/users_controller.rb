@@ -33,7 +33,6 @@ class UsersController < ApplicationController
 			return
 		end
 
-		@user.permissions = Server.first.default_user_permissions
 		respond_to do |format|
 			if @user.save
 				sign_in @user

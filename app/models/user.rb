@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+	before_save :default_values
+
 	has_and_belongs_to_many :tournaments_played, class_name: "Tournament", foreign_key: "player_id", join_table: "players_tournaments"
 	has_and_belongs_to_many :tournaments_hosted, class_name: "Tournament", foreign_key: "host_id", join_table: "hosts_tournaments"
 	has_and_belongs_to_many :teams
@@ -9,6 +11,10 @@ class User < ActiveRecord::Base
 
 	before_save { self.email = email.downcase }
 	before_save { self.user_name = user_name }
+
+	def default_values
+		self.permissions ||= Server.first.default_user_permissions
+	end
 
 	def self.permission_bits
 		return {
