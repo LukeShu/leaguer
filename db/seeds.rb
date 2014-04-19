@@ -20,8 +20,8 @@ Game.find_by_name("Chess").settings.create(name: "Time Control", description: "E
 
 Game.find_by_name("Hearthstone").settings.create(name: "Deck Name", description: "Enter a name for your deck, be descriptive.", stype: 1, display_order: 1)
 
-if ENV["RAILS_ENV"] and ENV["RAILS_ENV"] != "development"
-	User.create(name: "Administrator", user_name: "admin", email: "root@localhost", password: "password", password_confirmation: "password", permissions: 0xFFFFFFFF)
+unless ENV["RAILS_ENV"] and ENV["RAILS_ENV"] != "development"
+	User.create(name: "Administrator", user_name: "admin", email: "root@localhost.lan", password: "password", password_confirmation: "password", permissions: 0xFFFFFFFF)
 
 	User.create(name: "John 0", password: "password", email: "john0@gmail.com", user_name: "johndoe0", password_confirmation: "password")
 	User.create(name: "John 1", password: "password", email: "john1@gmail.com", user_name: "johndoe1", password_confirmation: "password")
