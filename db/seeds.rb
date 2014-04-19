@@ -16,9 +16,9 @@ Game.create(name: "Hearthstone", min_players_per_team: 1, max_players_per_team: 
 Game.find_by_name("League of Legends").settings.create(name: "Map", default: "Summoners Rift", type_opt: "Summoners Rift,Twisted Treeline,Crystal Scar,Haunted Abyss", description: "Select a map to play on.", stype: 5, display_order: 1)
 Game.find_by_name("League of Legends").settings.create(name: "Pick Type", type_opt: "Blind Pick,Draft", description: "Select a pick type.", stype: 5, display_order: 2)
 
-Game.find_by_name("Chess").settings.create(name: "Time Control", description: "Enter a value for Time Control (ie. 5-5, 30, 6hr, or None)", stype: 1, display_order: 1)
+Game.find_by_name("Chess").settings.create(name: "Time Control", description: "Enter a value for Time Control (ie. 5-5, 30, 6hr, or None)", stype: 0, display_order: 1)
 
-Game.find_by_name("Hearthstone").settings.create(name: "Deck Name", description: "Enter a name for your deck, be descriptive.", stype: 2, display_order: 1)
+Game.find_by_name("Hearthstone").settings.create(name: "Deck Name", description: "Enter a name for your deck, be descriptive.", stype: 1, display_order: 1)
 
 if ENV["RAILS_ENV"] and ENV["RAILS_ENV"] != "development"
 	User.create(name: "Administrator", user_name: "admin", email: "root@localhost", password: "password", password_confirmation: "password", permissions: 0xFFFFFFFF)
