@@ -17,6 +17,15 @@ class User < ActiveRecord::Base
 		self.permissions ||= Server.first.default_user_permissions
 	end
 
+	def find_remote_username(game)
+		obj = remote_username.where(:game => game)
+		if obj.nil? and not game.parent.nil?
+			return find_remote_username(game.parent)
+		else
+			return obj.value
+		end
+	end
+
 	def self.permission_bits
 		return {
 			:create_tournament	=> (2**1),
