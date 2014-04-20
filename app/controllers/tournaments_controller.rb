@@ -127,12 +127,11 @@ class TournamentsController < ApplicationController
 	private
 	# Use callbacks to share common setup or constraints between actions.
 	def set_tournament
-		if @tournament.nil?
-			respond_to do |format|
-					format.html { redirect_to @tournament, notice: 'That tournament no longer exists.' }
-			end
+		begin
+			@tournament = Tournament.find(params[:id])
+		rescue
+			redirect_to tournaments_url, notice: 'That tournament no longer exists.'
 		end
-		@tournament = Tournament.find(params[:id])
 	end
 
 	# Never trust parameters from the scary internet, only allow the white list through.
@@ -148,4 +147,5 @@ class TournamentsController < ApplicationController
 	def check_edit
 		set_tournament
 	end
+
 end
