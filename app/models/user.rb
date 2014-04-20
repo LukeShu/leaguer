@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 	has_and_belongs_to_many :teams
 	has_many :sessions
 	has_many :scores
+	has_many :remote_usernames
 
 	apply_simple_captcha
 
