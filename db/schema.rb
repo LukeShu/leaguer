@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140421135803) do
+ActiveRecord::Schema.define(version: 20140421143251) do
 
   create_table "alerts", force: true do |t|
     t.integer  "author_id"
@@ -69,12 +69,12 @@ ActiveRecord::Schema.define(version: 20140421135803) do
 
   create_table "game_settings", force: true do |t|
     t.integer  "game_id"
-    t.integer  "stype"
     t.string   "name"
-    t.text     "default"
-    t.text     "description"
+    t.integer  "vartype"
     t.text     "type_opt"
+    t.text     "description"
     t.integer  "display_order"
+    t.text     "default"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -155,11 +155,6 @@ ActiveRecord::Schema.define(version: 20140421135803) do
   add_index "scores", ["match_id"], name: "index_scores_on_match_id"
   add_index "scores", ["user_id"], name: "index_scores_on_user_id"
 
-  create_table "server_settings", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "servers", force: true do |t|
     t.integer  "default_user_permissions"
     t.datetime "created_at"
@@ -200,8 +195,11 @@ ActiveRecord::Schema.define(version: 20140421135803) do
 
   create_table "tournament_settings", force: true do |t|
     t.integer  "tournament_id"
-    t.integer  "vartype"
     t.string   "name"
+    t.integer  "vartype"
+    t.text     "type_opt"
+    t.text     "description"
+    t.integer  "display_order"
     t.text     "value"
     t.datetime "created_at"
     t.datetime "updated_at"
