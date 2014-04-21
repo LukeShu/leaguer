@@ -12,8 +12,6 @@ gem 'httparty'
 
 gem 'simple_captcha2', require: 'simple_captcha'
 
-#gem 'rmagick'
-
 group :development, :test do
 	# Use sqlite3 as the database for Active Record
 	gem 'sqlite3'
@@ -48,6 +46,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 
 # Asynchronously handle longer or delayed tasks
+gem 'daemons'
 gem 'delayed_job_active_record'
 
 group :doc do
@@ -67,3 +66,4 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+# gem 'byebug', group: [:development, :test]
