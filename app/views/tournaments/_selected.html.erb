@@ -17,7 +17,7 @@
     </p>
   <% end %>
 
-  <%= fields_for "tournament[preferences]", @tournament.preferences do |setting_fields|  %>
+  <%= fields_for "tournament[settings]", @tournament.settings do |setting_fields|  %>
     <% @game.settings.each do |setting| %>
       <p>
       <%= setting_fields.label setting.name %>

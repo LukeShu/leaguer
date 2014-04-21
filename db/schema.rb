@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140410214006) do
+ActiveRecord::Schema.define(version: 20140421135803) do
 
   create_table "alerts", force: true do |t|
     t.integer  "author_id"
@@ -21,6 +21,12 @@ ActiveRecord::Schema.define(version: 20140410214006) do
   end
 
   add_index "alerts", ["author_id"], name: "index_alerts_on_author_id"
+
+  create_table "api_requests", force: true do |t|
+    t.string   "api_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "bracket_matches", force: true do |t|
     t.integer  "bracket_id"
@@ -192,7 +198,7 @@ ActiveRecord::Schema.define(version: 20140410214006) do
     t.integer "user_id", null: false
   end
 
-  create_table "tournament_preferences", force: true do |t|
+  create_table "tournament_settings", force: true do |t|
     t.integer  "tournament_id"
     t.integer  "vartype"
     t.string   "name"
@@ -201,7 +207,7 @@ ActiveRecord::Schema.define(version: 20140410214006) do
     t.datetime "updated_at"
   end
 
-  add_index "tournament_preferences", ["tournament_id"], name: "index_tournament_preferences_on_tournament_id"
+  add_index "tournament_settings", ["tournament_id"], name: "index_tournament_settings_on_tournament_id"
 
   create_table "tournaments", force: true do |t|
     t.string   "name"

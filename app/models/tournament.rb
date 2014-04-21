@@ -1,7 +1,7 @@
 class Tournament < ActiveRecord::Base
 	belongs_to :game
 	has_many :matches
-	has_many :preferences_raw, class_name: "TournamentPreference"
+	has_many :settings_raw, class_name: "TournamentSetting"
 	has_and_belongs_to_many :players, class_name: "User", association_foreign_key: "player_id", join_table: "players_tournaments"
 	has_and_belongs_to_many :hosts,   class_name: "User", association_foreign_key: "host_id",   join_table: "hosts_tournaments"
 
@@ -15,17 +15,17 @@ class Tournament < ActiveRecord::Base
 		return h
 	end
 
-	def preferences
-		@preferences ||= Preferences.new(self)
+	def settings
+		@settings ||= Settings.new(self)
 	end
-	def preferences=(pref)
-		pref.each do |key, value|
-			value = false if valuedd == "0"
-			preferences[key] = value
+	def settings=(setting)
+		setting.each do |key, value|
+			value = false if value == "0"
+			settings[key] = value
 		end
 	end
 
-	class Preferences
+	class Settings
 		@vartypes = {
 			:true_false => 0,
 			:integer => 1,
@@ -38,8 +38,8 @@ class Tournament < ActiveRecord::Base
 			@tournament = tournament
 		end
 
-		def [](preference)
-			p = @tournament.preferences_raw.find_by_name(preference)
+		def [](setting)
+			p = @tournament.settings_raw.find_by_name(setting)
 			if p.nil?
 				return nil
 			else
@@ -47,10 +47,10 @@ class Tournament < ActiveRecord::Base
 			end
 		end
 
-		def []=(preference, val)
-			p = @tournament.preferences_raw.find_by_name(preference)
+		def []=(setting, val)
+			p = @tournament.settings_raw.find_by_name(setting)
 			if p.nil?
-				TournamentPreference.create( tournament_id: @tournament.id, vartype: get_type(val), name: preference, value: val )
+				TournamentSetting.create( tournament_id: @tournament.id, vartype: get_type(val), name: setting, value: val )
 			else
 				p.value = val
 			end
@@ -72,7 +72,7 @@ class Tournament < ActiveRecord::Base
 		end
 
 		def keys
-			@tournament.preferences_raw.all.collect { |x| x.name }
+			@tournament.settings_raw.all.collect { |x| x.name }
 		end
 
 		def method_missing(name, *args)
