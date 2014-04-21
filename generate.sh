@@ -9,8 +9,12 @@ set -xe
 srcdir=$(dirname "$(readlink -f "$0")")
 cd "$srcdir"
 
+export RAILS_ENV=development
+
 git rm -rf -- app test config/routes.rb db/migrate || true
 git checkout clean-start -- app test config/routes.rb
+
+bundle install
 
 bundle exec rails generate simple_captcha
 bundle exec rails generate delayed_job:active_record
@@ -60,10 +64,10 @@ bundle exec rails generate migration AddHiddenAttrsToUser password_digest:string
 #for the tournament controller to generate options
 #bundle exec rails generate scaffold
 
-bundle exec rake db:drop RAILS_ENV=development
-bundle exec rake db:migrate RAILS_ENV=development
+bundle exec rake db:drop
+bundle exec rake db:migrate
 bundle exec rake db:seed
 
 find app -type f -name '*.rb' -exec bin/autoindent {} \;
 
-git add app test config/routes.rb db/migrate db/schema.rb
+git add app test config/routes.rb db/migrate db/schema.rb Gemfile.lock
