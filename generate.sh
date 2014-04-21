@@ -45,6 +45,8 @@ bundle exec rails generate model tournament_setting tournament:references vartyp
 bundle exec rails generate model score user:references match:references value:integer
 bundle exec rails generate model remote_username game:references user:references json_value:text
 bundle exec rails generate model bracket_match bracket:references match:references predicted_winner:references
+bundle exec rails generate model api_requests api_name:string
+
 # Join tables
 bundle exec rails generate migration CreateTournamentPlayersJoinTable	players	tournaments
 bundle exec rails generate migration CreateTournamentHostsJoinTable	hosts	tournaments
