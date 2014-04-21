@@ -2,12 +2,18 @@
 
 one:
   tournament_id: 
-  vartype: 1
   name: MyString
+  vartype: 1
+  type_opt: MyText
+  description: MyText
+  display_order: 1
   value: MyText
 
 two:
   tournament_id: 
-  vartype: 1
   name: MyString
+  vartype: 1
+  type_opt: MyText
+  description: MyText
+  display_order: 1
   value: MyText
