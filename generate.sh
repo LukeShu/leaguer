@@ -39,7 +39,6 @@ bundle exec rails generate scaffold session user:references token:string:uniq
 bundle exec rails generate scaffold bracket user:references tournament:references name:string
 
 # Just models
-bundle exec rails generate model server_setting
 bundle exec rails generate model       game_setting       game:references name:string vartype:integer type_opt:text description:text display_order:integer default:text
 bundle exec rails generate model tournament_setting tournament:references name:string vartype:integer type_opt:text description:text display_order:integer   value:text
 
