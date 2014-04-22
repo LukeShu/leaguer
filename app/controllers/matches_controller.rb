@@ -1,6 +1,4 @@
 class MatchesController < ApplicationController
-	before_action :set_tournament, only: [:index, :update]
-
 	require 'httparty'
 	require 'json'
 	require 'delayed_job'
@@ -118,7 +116,7 @@ class MatchesController < ApplicationController
 	# GET /tournaments/1/matches/1
 	# GET /tournaments/1/matches/1.json
 	def show
-		if Tournament.find_by_id(@match.tournament_id).game_id == 1
+		if @match.tournament_stage.tournament.game_id == 1
 			file_blue = "blue.yaml"
 			file_purple = "purple.yaml"
 			@blue2 = YAML.load_file(file_blue)
@@ -235,11 +233,8 @@ class MatchesController < ApplicationController
 	private
 	# Use callbacks to share common setup or constraints between actions.
 	def set_match
-		set_tournament
-		@match = @tournament.matches.find(params[:id])
-	end
-	def set_tournament
-		@tournament = Tournament.find(params[:tournament_id])
+		@match = Match.find(params[:id])
+		@tournament = @match.tournament_stage.tournament
 	end
 
 	# Never trust parameters from the scary internet, only allow the white list through.
