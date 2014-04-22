@@ -19,7 +19,7 @@ body {
   height: 100%;
 }
 
-h1, h2, h3, h4, h5, p{
+h1, h2, h3, h4, h5, p, li{
   color: $orange;
 }
 
@@ -96,20 +96,21 @@ div {
 
 .wrapper {
 	width: 80%;
-	margin: 0 auto;
 	margin-top: 10px;
+  min-height: 80%;
+  height: auto !important;
+  height: 99%;
+  margin: 0 auto;
 }
 
 button, input[type="submit"] {
     @extend .btn;
 }
 
-
-
 footer {
   clear: both;
   border-top: solid 1px $orange;
-  padding-top: 10px;
   text-align: center;
-  bottom: 0;
+  margin: 0 auto;
+  width: 90%;
 }
