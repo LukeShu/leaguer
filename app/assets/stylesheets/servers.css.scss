@@ -1,3 +1,26 @@
 // Place all the styles related to the servers controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+$page-color: #444;
+$toolbar-color: black;
+$orange: #DD9125;
+$darker-orange: #9D4102;
+$link-yellow: #FFC50D;
+
+.edit_server {
+
+	legend {
+		color: #EEE;
+	}
+	color: #FFF;
+
+	input[type="submit"] {
+		color: $page-color;
+	}
+
+	li {
+		list-style: none;
+	}
+
+}
