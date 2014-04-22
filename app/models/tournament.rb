@@ -38,36 +38,26 @@ class Tournament < ActiveRecord::Base
 			@tournament = tournament
 		end
 
-		def [](setting)
-			p = @tournament.settings_raw.find_by_name(setting)
-			if p.nil?
+		def [](setting_name)
+			tournament_setting = @tournament.settings_raw.find_by_name(setting_name)
+			if tournament_setting.nil?
 				return nil
 			else
-				return p.value
+				return tournament_setting.value
 			end
 		end
 
-		def []=(setting, val)
-			p = @tournament.settings_raw.find_by_name(setting)
-			if p.nil?
-				TournamentSetting.create( tournament_id: @tournament.id, vartype: get_type(val), name: setting, value: val )
+		def []=(setting_name, val)
+			tournament_setting = @tournament.settings_raw.find_by_name(setting_name)
+			if tournament_setting.nil?
+				game_setting = @tournament.game.settings.find_by_name(setting_name)
+				@tournament.settings_raw.create(name: setting, value: val,
+					vartype: game_setting.vartype,
+					type_opt: game_setting.type_opt,
+					description: game_setting.description,
+					display_order: game_setting.display_order)
 			else
-				p.value = val
-			end
-		end
-
-		def get_type(val)
-			case val
-				when "true", "false"
-					vartypes[:true_false]
-				when /\d+-\d/ =~ val
-					vartypes[:range]
-				when /\d+/ =~ val
-					vartypes[:integer]
-				when /,/ =~ val
-					vartypes[:select]
-				else
-					vartypes[:string]
+				tournament_setting.value = val
 			end
 		end
 
