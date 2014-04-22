@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140421143251) do
+ActiveRecord::Schema.define(version: 20140422061739) do
 
   create_table "alerts", force: true do |t|
     t.integer  "author_id"
@@ -82,16 +82,19 @@ ActiveRecord::Schema.define(version: 20140421143251) do
   add_index "game_settings", ["game_id"], name: "index_game_settings_on_game_id"
 
   create_table "games", force: true do |t|
-    t.text     "name"
+    t.string   "name"
     t.integer  "min_players_per_team"
     t.integer  "max_players_per_team"
     t.integer  "min_teams_per_match"
     t.integer  "max_teams_per_match"
     t.integer  "set_rounds"
     t.boolean  "randomized_teams"
+    t.string   "sampling_method"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "games", ["name"], name: "index_games_on_name", unique: true
 
   create_table "hosts_tournaments", id: false, force: true do |t|
     t.integer "host_id",       null: false
@@ -100,7 +103,7 @@ ActiveRecord::Schema.define(version: 20140421143251) do
 
   create_table "matches", force: true do |t|
     t.integer  "status"
-    t.integer  "tournament_id"
+    t.integer  "tournament_stage_id"
     t.string   "name"
     t.integer  "winner_id"
     t.string   "remote_id"
@@ -109,7 +112,7 @@ ActiveRecord::Schema.define(version: 20140421143251) do
     t.datetime "updated_at"
   end
 
-  add_index "matches", ["tournament_id"], name: "index_matches_on_tournament_id"
+  add_index "matches", ["tournament_stage_id"], name: "index_matches_on_tournament_stage_id"
   add_index "matches", ["winner_id"], name: "index_matches_on_winner_id"
 
   create_table "matches_teams", id: false, force: true do |t|
@@ -144,17 +147,6 @@ ActiveRecord::Schema.define(version: 20140421143251) do
   add_index "remote_usernames", ["game_id"], name: "index_remote_usernames_on_game_id"
   add_index "remote_usernames", ["user_id"], name: "index_remote_usernames_on_user_id"
 
-  create_table "scores", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "match_id"
-    t.integer  "value"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "scores", ["match_id"], name: "index_scores_on_match_id"
-  add_index "scores", ["user_id"], name: "index_scores_on_user_id"
-
   create_table "servers", force: true do |t|
     t.integer  "default_user_permissions"
     t.datetime "created_at"
@@ -179,6 +171,18 @@ ActiveRecord::Schema.define(version: 20140421143251) do
   end
 
   add_index "simple_captcha_data", ["key"], name: "idx_key"
+
+  create_table "statistics", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "match_id"
+    t.string   "name"
+    t.integer  "value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "statistics", ["match_id"], name: "index_statistics_on_match_id"
+  add_index "statistics", ["user_id"], name: "index_statistics_on_user_id"
 
   create_table "teams", force: true do |t|
     t.integer  "match_id"
@@ -207,21 +211,33 @@ ActiveRecord::Schema.define(version: 20140421143251) do
 
   add_index "tournament_settings", ["tournament_id"], name: "index_tournament_settings_on_tournament_id"
 
+  create_table "tournament_stages", force: true do |t|
+    t.integer  "tournament_id"
+    t.string   "scheduling"
+    t.text     "structure"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tournament_stages", ["tournament_id"], name: "index_tournament_stages_on_tournament_id"
+
   create_table "tournaments", force: true do |t|
-    t.string   "name"
     t.integer  "game_id"
     t.integer  "status"
+    t.string   "name"
     t.integer  "min_players_per_team"
     t.integer  "max_players_per_team"
     t.integer  "min_teams_per_match"
     t.integer  "max_teams_per_match"
     t.integer  "set_rounds"
     t.boolean  "randomized_teams"
+    t.string   "sampling_method"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "tournaments", ["game_id"], name: "index_tournaments_on_game_id"
+  add_index "tournaments", ["name"], name: "index_tournaments_on_name", unique: true
 
   create_table "users", force: true do |t|
     t.string   "name"

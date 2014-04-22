@@ -1,5 +1,5 @@
 class Match < ActiveRecord::Base
-	belongs_to :tournament
+	belongs_to :tournament_stage
 	has_many :scores
 	has_and_belongs_to_many :teams
 
