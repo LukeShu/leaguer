@@ -16,6 +16,7 @@ git checkout clean-start -- app test config/routes.rb
 
 bundle install
 
+bundle exec rails generate mailboxer:install
 bundle exec rails generate simple_captcha
 bundle exec rails generate delayed_job:active_record
 
