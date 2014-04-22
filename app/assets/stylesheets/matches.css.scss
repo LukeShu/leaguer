@@ -40,3 +40,15 @@
 #current-id {
     display: none;
 }
+
+
+
+/**** INDEX PAGE - TABLE AND GRAPH ****/
+#matches-table {
+    @extend .table;
+    color: #FFF;
+
+    form {
+        color: #333;
+    }
+}

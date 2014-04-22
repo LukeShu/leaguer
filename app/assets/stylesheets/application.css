@@ -13,15 +13,13 @@
  */
 
 #query{
-	background-color: white;
+	background-color: #303030;
 	border: 2px solid #ED9C28;
 	border-radius: 5px;
 	color: #FFF;
 	font-weight: bold;
 	height: 30px;
-}
-.navbar{
-	background-color: white;
+	padding: 0px 5px;
 }
 
 footer {
