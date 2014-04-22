@@ -1,0 +1,6 @@
+<h3> Showing results for: <span><%= @query %></span></h3>
+
+
+<% if @tounaments.empty? and @players.empty %>
+	<p> No results found for "<%= @query %>" </p>
+<% else %>
