@@ -5,8 +5,8 @@
 		<%# Each tournament has a div for its listing %>
 		<% @tournaments.each do |t| %>
 			<div class="row tournament-listing">
-				<div class="col-md-2 "><%= image_tag 'http://www.gravatar.com/avatar/' + Digest::MD5.hexdigest(t.hosts.first.email) + '?s=100&d=mm' %></div>
-				<div class="col-md-8">
+				<div class="col-md-2 col-sm-3 col-xs-6"><%= image_tag 'http://www.gravatar.com/avatar/' + Digest::MD5.hexdigest(t.hosts.first.email) + '?s=100&d=mm' %></div>
+				<div class="col-md-8 col-sm-7 col-xs-6">
 					<%# "header" %>
 					<%= link_to(t) do %><h3><%= t.name %></h3><% end %>
 					<div class="row" style="margin-left:2%;">
@@ -23,7 +23,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-2">
+				<div class="col-md-2 col-sm-2 col-xs-2">
 					<% if signed_in? %>
 						<% if !t.players.include?(current_user) %>
 							<%= form_tag(tournament_path(t), method: "put") do %>
