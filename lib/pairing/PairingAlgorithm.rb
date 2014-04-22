@@ -1,6 +1,6 @@
 module Leaguer
 	class PairingAlgorithm
-		def pair(matches, players)
+		def self.pair(matches, players)
 		end
 	end
 end
