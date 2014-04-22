@@ -10,7 +10,7 @@ html{
 }
 
 body {
-  background-color: $page-color;
+  background: asset-url("bg.png", image) repeat scroll 0 0 $page-color;
   color: $page-color;
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
@@ -70,6 +70,9 @@ div {
 
 #notice {
   color: green;
+  background-color: rgba(0,0,0,0.5);
+  border-radius: 7px;
+  padding: 10px;
 }
 
 .field_with_errors {
@@ -84,32 +87,6 @@ div {
 	margin: 0 auto;
 	margin-top: 10px;
 }
-
-#error_explanation {
-  width: 450px;
-  border: 2px solid red;
-  padding: 7px;
-  padding-bottom: 0;
-  margin-bottom: 20px;
-  background-color: #f0f0f0;
-  h2 {
-    text-align: left;
-    font-weight: bold;
-    padding: 5px 5px 5px 15px;
-    font-size: 12px;
-    margin: -7px;
-    margin-bottom: 0px;
-    background-color: #c00;
-    color: #fff;
-  }
-  ul li {
-    font-size: 12px;
-    list-style: square;
-  }
-}
-
-
-
 
 button, input[type="submit"] {
     @extend .btn;
