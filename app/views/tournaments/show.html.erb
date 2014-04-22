@@ -1,11 +1,6 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
-  <%= @tournament.name %>
-</p>
-
-<p>
   <strong>Game:</strong>
   <%= @tournament.game %>
 </p>
@@ -13,6 +8,11 @@
 <p>
   <strong>Status:</strong>
   <%= @tournament.status %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @tournament.name %>
 </p>
 
 <p>
@@ -43,6 +43,11 @@
 <p>
   <strong>Randomized teams:</strong>
   <%= @tournament.randomized_teams %>
+</p>
+
+<p>
+  <strong>Sampling method:</strong>
+  <%= @tournament.sampling_method %>
 </p>
 
 <%= link_to 'Edit', edit_tournament_path(@tournament) %> |

@@ -10,6 +10,7 @@
       <th>Max teams per match</th>
       <th>Set rounds</th>
       <th>Randomized teams</th>
+      <th>Sampling method</th>
       <th></th>
       <th></th>
       <th></th>
@@ -26,6 +27,7 @@
         <td><%= game.max_teams_per_match %></td>
         <td><%= game.set_rounds %></td>
         <td><%= game.randomized_teams %></td>
+        <td><%= game.sampling_method %></td>
         <td><%= link_to 'Show', game %></td>
         <td><%= link_to 'Edit', edit_game_path(game) %></td>
         <td><%= link_to 'Destroy', game, method: :delete, data: { confirm: 'Are you sure?' } %></td>
