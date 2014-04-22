@@ -12,26 +12,30 @@
   </thead>
 
 	<tbody class="table-hover">
-		<% @tournament.matches.order(:id).reverse.each do |match| %><tr>
-			<td><%= "Match #{match.id}" %></td>
-			<td><%= match.status %></td>
-			<td><%= (match.winner.nil? ? "-" : "Team #{match.winner.id}") %></td>
-			<td><%= link_to "Show", tournament_match_path(@tournament, match) %>
-			<td> <%# If user is the host, let them start the tournment %>
-				<% if @tournament.hosts.include?(current_user) %>
-					<%= form_tag(tournament_match_path(@tournament, match), method: "put") do %>
-						<input type="hidden" name="update_action" value="start">
-						<% @startable = (match.status == 0) and (match.teams.count >= @tournament.min_teams_per_match) %>
-						<%= submit_tag("Start Match", :disabled => ! @startable) %>
+		<% @tournament.stages_ordered.keys.sort.each do |stage_key| %>
+			<% stage = @tournament.stages_ordered[stage_key] %>
+			<% stage.matches_ordered.keys.sort.reverse.each do |match_key| %><tr>
+				<% match = stage.matches_ordered[match_key] %>
+				<td><%= "Match #{match.id}" %></td>
+				<td><%= match.status %></td>
+				<td><%= (match.winner.nil? ? "-" : "Team #{match.winner.id}") %></td>
+				<td><%= link_to "Show", tournament_match_path(@tournament, match) %>
+				<td> <%# If user is the host, let them start the tournment %>
+					<% if @tournament.hosts.include?(current_user) %>
+						<%= form_tag(tournament_match_path(@tournament, match), method: "put") do %>
+							<input type="hidden" name="update_action" value="start">
+							<% @startable = (match.status == 0) and (match.teams.count >= @tournament.min_teams_per_match) %>
+							<%= submit_tag("Start Match", :disabled => ! @startable) %>
+						<% end %>
 					<% end %>
-				<% end %>
-			</td>
-		</tr><% end %>
+				</td>
+			</tr><% end %>
+		<% end %>
 	</tbody>
 </table>
 
 <br>
 
-<% @tournament.stages_ordered.each do |stage| %>
-	<div class="graph"><%= stage.to_svg %></div>
+<% @tournament.stages_ordered.keys.sort.each do |stage_key| %>
+	<div class="graph"><%= raw @tournament.stages_ordered[stage_key].to_svg %></div>
 <% end %>

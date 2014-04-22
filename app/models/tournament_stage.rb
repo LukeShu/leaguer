@@ -19,11 +19,15 @@ class TournamentStage < ActiveRecord::Base
 
 	def to_svg
 		set_scheduling
-		return @scheduling.graph(self)
+		return @scheduling.graph
 	end
 
 	private
 	def set_scheduling
-		@scheduling ||= "Scheduling::#{self.scheduling}".constantize.new(self)
+		if @scheduling.nil?
+			require "scheduling/#{self.scheduling}"
+			@scheduling = "Scheduling::#{self.scheduling.capitalize}".constantize.new(self)
+		end
+		return @scheduling
 	end
 end
