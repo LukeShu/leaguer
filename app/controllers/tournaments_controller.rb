@@ -96,10 +96,13 @@ class TournamentsController < ApplicationController
 		when "start"
 			check_permission(:edit, @tournament)
 			@tournament.status = 1
-			@tournament.save
+			ok =
+				@tournament.save &&
+				@tournament.tournament_stages.create(scheduling: "elimination") &&
+				@tournament.tournament_stages.first.create_matches
 			respond_to do |format|
-				if @tournament.setup
-					format.html { redirect_to @tournament, notice: 'You have joined this tournament.' }
+				if ok
+					format.html { redirect_to @tournament, notice: 'You have started this tournament.' }
 					format.json { head :no_content }
 				else
 					format.html { redirect_to @tournament, notice: "You don't have permission to start this tournament." }

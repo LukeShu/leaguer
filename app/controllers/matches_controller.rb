@@ -8,12 +8,6 @@ class MatchesController < ApplicationController
 	# GET /tournaments/1/matches
 	# GET /tournaments/1/matches.json
 	def index
-		@matches = @tournament.matches
-		# depth of SVG tree
-		@depth = Math.log2(@matches.count).floor+1;
-		# height of SVG
-		@height = 200 * 2**Math.log2(@matches.count).floor + 100;
-		@h_sector = 2**(@depth-1)+1
 	end
 
 	# For compatability with the router assumptions made by ApplicationController#check_permission

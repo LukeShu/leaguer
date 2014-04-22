@@ -25,7 +25,17 @@ Leaguer::Application.routes.draw do
 
   root to: 'static#homepage'
   get '/testsvg', to: 'static#test'
+end
+Leaguer::Application.routes.named_routes.module.module_eval do
+  def match_path(match, options={})
+    tournament_match_path(match.tournament_stage.tournament, match, options)
+    end
+  def match_url(match, options={})
+    tournament_match_url(match.tournament_stage.tournament, match, options)
+  end
+end
 
+if false
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
