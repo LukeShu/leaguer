@@ -26,14 +26,6 @@ class Tournament < ActiveRecord::Base
 	end
 
 	class Settings
-		@vartypes = {
-			:true_false => 0,
-			:integer => 1,
-			:string => 2,
-			:select => 3,
-			:range => 4
-		}
-
 		def initialize(tournament)
 			@tournament = tournament
 		end

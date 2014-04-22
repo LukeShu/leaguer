@@ -1,3 +1,4 @@
+# -*- Mode: Ruby; Ruby-indent-level: 2; Indent-tabs-mode: nil -*-
 Leaguer::Application.routes.draw do
 
   resources :brackets
@@ -17,6 +18,7 @@ Leaguer::Application.routes.draw do
   #match 'simple_captcha/:id', :to => 'simple_captcha#show', :as => :simple_captcha
 
   resources :teams
+
   resources :tournaments do
     resources :matches, only: [:index, :show, :update]
   end
