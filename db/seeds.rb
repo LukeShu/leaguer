@@ -25,7 +25,7 @@ Game.find_by_name("Rock, Paper, Scissors").settings.create(name: "Favorite Objec
 Game.find_by_name("Rock, Paper, Scissors").settings.create(name: "Lizard, Spock allowed?", description: "Will you allow Lizard and Spock?", stype: 4, display_order: 1)
 Game.find_by_name("Rock, Paper, Scissors").settings.create(name: "Why are those up there even called radio buttons?", description: "Check boxes make sense at least", type_opt: "I do not know.,There is now spoon.,Wow.,Because electricity.,Wat?", stype: 2, display_order: 3)
 
-unless ENV["RAILS_ENV"] and ENV["RAILS_ENV"] != "development"
+if Rails.env.development?
 	User.create(name: "Administrator", user_name: "admin", email: "root@localhost.lan", password: "password", password_confirmation: "password", permissions: 0xFFFFFFFF)
 
 	User.create(name: "John 0", password: "password", email: "john0@gmail.com", user_name: "johndoe0", password_confirmation: "password")

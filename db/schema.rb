@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140410214006) do
+ActiveRecord::Schema.define(version: 20140421143251) do
 
   create_table "alerts", force: true do |t|
     t.integer  "author_id"
@@ -21,6 +21,12 @@ ActiveRecord::Schema.define(version: 20140410214006) do
   end
 
   add_index "alerts", ["author_id"], name: "index_alerts_on_author_id"
+
+  create_table "api_requests", force: true do |t|
+    t.string   "api_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "bracket_matches", force: true do |t|
     t.integer  "bracket_id"
@@ -63,12 +69,12 @@ ActiveRecord::Schema.define(version: 20140410214006) do
 
   create_table "game_settings", force: true do |t|
     t.integer  "game_id"
-    t.integer  "stype"
     t.string   "name"
-    t.text     "default"
-    t.text     "description"
+    t.integer  "vartype"
     t.text     "type_opt"
+    t.text     "description"
     t.integer  "display_order"
+    t.text     "default"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -149,11 +155,6 @@ ActiveRecord::Schema.define(version: 20140410214006) do
   add_index "scores", ["match_id"], name: "index_scores_on_match_id"
   add_index "scores", ["user_id"], name: "index_scores_on_user_id"
 
-  create_table "server_settings", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "servers", force: true do |t|
     t.integer  "default_user_permissions"
     t.datetime "created_at"
@@ -192,16 +193,19 @@ ActiveRecord::Schema.define(version: 20140410214006) do
     t.integer "user_id", null: false
   end
 
-  create_table "tournament_preferences", force: true do |t|
+  create_table "tournament_settings", force: true do |t|
     t.integer  "tournament_id"
-    t.integer  "vartype"
     t.string   "name"
+    t.integer  "vartype"
+    t.text     "type_opt"
+    t.text     "description"
+    t.integer  "display_order"
     t.text     "value"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "tournament_preferences", ["tournament_id"], name: "index_tournament_preferences_on_tournament_id"
+  add_index "tournament_settings", ["tournament_id"], name: "index_tournament_settings_on_tournament_id"
 
   create_table "tournaments", force: true do |t|
     t.string   "name"

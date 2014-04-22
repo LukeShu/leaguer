@@ -2,18 +2,18 @@
 
 one:
   game_id: 
-  stype: 1
   name: MyString
-  default: MyText
-  description: MyText
+  vartype: 1
   type_opt: MyText
+  description: MyText
   display_order: 1
+  default: MyText
 
 two:
   game_id: 
-  stype: 1
   name: MyString
-  default: MyText
-  description: MyText
+  vartype: 1
   type_opt: MyText
+  description: MyText
   display_order: 1
+  default: MyText
