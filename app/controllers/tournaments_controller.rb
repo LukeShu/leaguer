@@ -95,17 +95,24 @@ class TournamentsController < ApplicationController
 			end
 		when "start"
 			check_permission(:edit, @tournament)
-			@tournament.status = 1
-			ok =
-				@tournament.save &&
-				@tournament.tournament_stages.create(scheduling: "elimination") &&
-				@tournament.tournament_stages.first.create_matches
 			respond_to do |format|
-				if ok
-					format.html { redirect_to @tournament, notice: 'You have started this tournament.' }
-					format.json { head :no_content }
+				if @tournament.status == 0
+					@tournament.status = 1
+					success = true
+					ActiveRecord::Base.transaction do
+						success &= @tournament.save &&
+						success &= @tournament.tournament_stages.create(scheduling: "elimination")
+						success &= @tournament.tournament_stages.first.create_matches
+					end
+					if success
+						format.html { redirect_to @tournament, notice: 'You have started this tournament.' }
+						format.json { head :no_content }
+					else
+						format.html { redirect_to @tournament, notice: "You don't have permission to start this tournament." }
+						format.json { render json: "Permission denied", status: :forbidden }
+					end
 				else
-					format.html { redirect_to @tournament, notice: "You don't have permission to start this tournament." }
+					format.html { redirect_to @tournament, notice: "This tournament is not in a state that it can be started." }
 					format.json { render json: "Permission denied", status: :forbidden }
 				end
 			end
