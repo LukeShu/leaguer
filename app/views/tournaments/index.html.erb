@@ -2,16 +2,20 @@
 
 <div id="tournament-list">
 	<% if @tournaments.length > 0 %>
+
 		<%# Each tournament has a div for its listing %>
 		<% @tournaments.each do |t| %>
 			<%= render "common/show_tournament", :target => t %>
 		<% end %>
+
 	<% else %>
+
 		<p class="no-entries"> No tournaments going on right now...
 			<% if current_user.can?(:create_tournament) %>
 				Why not start your own?
 			<% end %>
 		</p>
+		
 	<% end %>
 </div>
 

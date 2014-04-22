@@ -1,6 +1,23 @@
-<h3> Showing results for: <span><%= @query %></span></h3>
 
+<%# Show search results if a query was not nill %>
+<% if !@query.empty? %>
+	<h3> Showing results for: <span><%= @query %></span></h3>
+	<% if @tournaments.empty? and @players.empty? %>
+		<p> No results found for "<%= @query %>" </p>
+	<% else %>
+		<% if @tournaments.length > 0 %>
+			<h4> Tournaments </h4>
+		<% end %>
+		<% @tournaments.each do |t| %>
+			<%= render "common/show_tournament", :target => t %>
+		<% end %>
 
-<% if @tounaments.empty? and @players.empty %>
-	<p> No results found for "<%= @query %>" </p>
-<% else %>
+		<% if @players.length > 0 %>
+			<h4> Players </h4>
+		<% end %>
+		<% @players.each do |p| %>
+			<%= render "common/show_player", :target => p %>
+		<% end %>
+
+	<% end %>
+<% end %>
