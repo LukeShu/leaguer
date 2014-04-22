@@ -13,15 +13,20 @@
 			BetterDragSort.makeListSortable(document.getElementById("boxes"));
 		};
 </script>
-<header><nav>
+<header>
+	<nav>
+	<%# This is the logo %>
 	<div class="navbar-brand"><%= link_to('Leaguer', root_path) %></div>
+
+	<%# This is the search bar  #%>
 	<div>
 		<%= form_tag("/search", method: "get", :class => "search") do %>
 			<%= text_field_tag(:query, nil, :placeholder => "Search") %>
-			<%= submit_tag("Go") %>
+			<%= submit_tag("Go", :name=>nil) %>
 		<% end %>
 	</div>
 
+	<%# these are the log in buttons #%>
 	<div id="log-buttons">
 		<% if signed_in? %>
 			<%= link_to current_user.user_name, current_user, :class => "user" %>
@@ -34,7 +39,8 @@
 			<%= link_to "Sign up", new_user_path, :class => "signup" %>
 		<% end %>
 	</div>
-</nav></header>
+	</nav>
+</header>
 
 <% if notice %><div id="notice"><p><%= notice %></p></div><% end %>
 

@@ -24,8 +24,14 @@ Leaguer::Application.routes.draw do
   end
 
   root to: 'static#homepage'
+
   get '/testsvg', to: 'static#test'
+
+  get '/search', to: 'search#go'
+
 end
+
+
 Leaguer::Application.routes.named_routes.module.module_eval do
   def match_path(match, options={})
     tournament_match_path(match.tournament_stage.tournament, match, options)
