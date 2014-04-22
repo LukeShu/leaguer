@@ -22,6 +22,22 @@ class TournamentStage < ActiveRecord::Base
 		return @scheduling.graph
 	end
 
+	def pair
+		set_pairing
+		return @pairing.pair(matches, players)
+	end
+
+	def score
+		set_scoring
+		#populating the user scores in the database form what you get from @scoring.score(match, interface)
+	end
+
+	#populate the statistics interface (with populating method)
+	def populate
+		set_populating
+		#?
+	end
+
 	private
 	def set_scheduling
 		if @scheduling.nil?
@@ -29,5 +45,27 @@ class TournamentStage < ActiveRecord::Base
 			@scheduling = "Scheduling::#{self.scheduling.capitalize}".constantize.new(self)
 		end
 		return @scheduling
+	end
+
+	private
+	def set_pairing
+		if @pairing.nil?
+			if(@tournament.randomized_teams)
+				require "pairing/#{self.pairing}"
+				@pairing = "Pairing::RandomPairing"
+				return @pairing
+			#elsif(setTeams)
+				#@pairing = Pre built
+				#return @pairing
+			end
+		end
+	end
+
+	private
+	def set_scoring
+	end
+
+	private
+	def set_populating
 	end
 end

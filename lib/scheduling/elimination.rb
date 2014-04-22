@@ -8,6 +8,7 @@ module Scheduling
 		def tournament_stage
 			@tournament_stage
 		end
+
 		def tournament
 			self.tournament_stage.tournament
 		end
@@ -18,10 +19,14 @@ module Scheduling
 			for i in 1..num_matches
 				self.tournament_stage.matches.create(status: 0, submitted_peer_evaluations: 0)
 			end
+
 			match_num = num_matches-1
 			team_num = 0
+
+			self.tournament.players.shuffle
+
 			# for each grouping of min_players_per_team
-			self.tournament.players.each_slice(min_players_per_team) do |team_members|
+			self.tournament.players.each_slice(self.tournament.min_players_per_team) do |team_members|
 				# if the match is full, move to the next match, otherwise move to the next team
 				if (team_num == min_teams_per_match)
 					match_num -= 1
