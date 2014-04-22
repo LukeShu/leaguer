@@ -17,7 +17,7 @@ span.default-explanation {
 }
 
 #tournament-side-params {
-    background: none repeat scroll 0 0 #ADD8E6;
+    background: none repeat scroll 0 0 rgba(0,0,0,0.5);
     border-radius: 5px;
     float: right;
     font-size: 7px;
@@ -33,23 +33,24 @@ span.default-explanation {
 #tournament-users{
 	
 	li {
-		color: green;
+		color: #10A010;
 	}
 
 	.black {
-		color: black;
+		color: white;
 	}
 }
 
 
 /* Style of a tournament listing div */
 div.tournament-listing {
-	margin-top: 10px;
+	margin: 10px 0px;
 	border-radius: 5px;
-	box-shadow: 2px 2px 4px #B8B8B8;
-	border: 2px solid #AAAAAA;
+	box-shadow: 0px 0px 3px #B8B8B8;
+	background-color: rgba(0, 0, 0, 0.6);
+	border: 1px solid #AAAAAA;
 	min-height: 100px;
-	padding: 4px;
+	padding: 8px 4px;
 
 	/* AKA the listing title */
 	h3 {
@@ -65,6 +66,7 @@ div.tournament-listing {
 	/* host of the tournament */
 	.host {
 		font-weight: bold;
+		color: #FFF;
 	}
 
 	.col-md-8 {

@@ -2,13 +2,16 @@
 
 $page-color: #444;
 $toolbar-color: black;
+$orange: #DD9125;
+$darker-orange: #9D4102;
+$link-yellow: #FFC50D;
 
 html{
   height: 100%;
 }
 
 body {
-  background-color: $page-color;
+  background: asset-url("bg.png", image) repeat scroll 0 0 $page-color;
   color: $page-color;
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
@@ -16,41 +19,12 @@ body {
   height: 100%;
 }
 
-.wrapper {
-  padding-left: 5%;
-  padding-right: 5%;
-  margin: 0 auto;
-  background-color: #fff;
-  padding-top: 10px;
-  height: 90%;
-  box-shadow: 1px 1px 7px orange;
-  border-radius: 0px 0px 5px 5px;
+h1, h2, h3, h4, h5, p{
+  color: $orange;
 }
 
-footer {
-  clear: both;
-  margin: 0 auto;
-  margin-top: 10px;
-  color: white;
-
-}
-
-@media screen and (min-width: 480px) {
-  .wrapper, footer {
-    width: 80%;
-    min-width: 480px;
-    max-width: 1024px;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .wrapper, footer {
-    width: 100%;
-  }
-}
-
-h1, h2, h3, h4, h5{
-  color: #030303;
+h1, h2, h3, h4, h5 {
+  text-shadow: 0px 0px 2px $darker-orange;
 }
 
 p, ol, ul, td {
@@ -58,64 +32,6 @@ p, ol, ul, td {
   font-size: 13px;
   line-height: 18px;
 }
-
-pre {
-  background-color: #eee;
-  padding: 10px;
-  font-size: 11px;
-}
-
-a {
-  color: #000;
-  &:visited {
-    color: #000;
-  }
-  &:hover {
-      color: green;
-      text-decoration: none;
-  }
-}
-
-div {
-  &.field, &.actions {
-    margin-bottom: 10px;
-  }
-}
-
-#notice {
-  color: green;
-}
-
-.field_with_errors {
-  padding: 1px;
-  background-color: #FF4C4C;
-  box-shadow: 0px 0px 5px red;
-  display: table;
-}
-
-#error_explanation {
-  width: 450px;
-  border: 2px solid red;
-  padding: 7px;
-  padding-bottom: 0;
-  margin-bottom: 20px;
-  background-color: #f0f0f0;
-  h2 {
-    text-align: left;
-    font-weight: bold;
-    padding: 5px 5px 5px 15px;
-    font-size: 12px;
-    margin: -7px;
-    margin-bottom: 0px;
-    background-color: #c00;
-    color: #fff;
-  }
-  ul li {
-    font-size: 12px;
-    list-style: square;
-  }
-}
-
 
 /* NAVBAR */
 
@@ -133,12 +49,70 @@ div {
 
 .navbar-inverse, header > nav {
     background-color: $toolbar-color;
-    border-color: #0F4070;
     border-radius: 0px 0px 5px 5px;
-    margin-bottom: 0px;
+    box-shadow: 0px 0px 5px black;
+}
 
+pre {
+  background-color: #eee;
+  padding: 10px;
+  font-size: 11px;
+}
+
+a {
+	color: $link-yellow;
+  	&:hover {
+      color: #FFEF00;
+      text-decoration: none;
+  }
+}
+
+div {
+  &.field, &.actions {
+    margin-bottom: 10px;
+  }
+}
+
+#notice {
+  background-color: rgba(0,0,0,0.5);
+  border-radius: 7px;
+  padding: 10px;
+  width: 80%;
+  margin: 0px auto;
+  text-align: center;
+
+  p{
+    color: lightgreen !important;
+    font-weight: bold;
+  }
+}
+
+.field_with_errors {
+  padding: 1px;
+  background-color: #FF4C4C;
+  box-shadow: 0px 0px 5px red;
+  display: table;
+}
+
+.wrapper {
+	width: 80%;
+	margin: 0 auto;
+	margin-top: 10px;
 }
 
 button, input[type="submit"] {
     @extend .btn;
+}
+
+
+
+footer {
+  clear: both;
+  margin: 0 auto;
+  border-top: solid 1px $orange;
+  padding-top: 10px;
+  text-align: center;
+  position:absolute;
+  bottom: 0;
+  width: 100%;
 }

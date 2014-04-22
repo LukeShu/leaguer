@@ -37,4 +37,9 @@ class Match < ActiveRecord::Base
 		end #while
 	end
 	#handle_asynchronously :is_match_over
+
+	def win?(player)
+		winner.players.include? player
+	end
+
 end
