@@ -13,7 +13,7 @@
 
 	<tbody class="table-hover">
 		<% @tournament.matches.order(:id).reverse.each do |match| %><tr>
-			<td><%= match.name %></td>
+			<td><%= "Match #{match.id}" %></td>
 			<td><%= match.status %></td>
 			<td><%= (match.winner.nil? ? "-" : "Team #{match.winner.id}") %></td>
 			<td><%= link_to "Show", tournament_match_path(@tournament, match) %>
