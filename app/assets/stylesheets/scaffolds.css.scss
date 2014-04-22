@@ -69,10 +69,17 @@ div {
 }
 
 #notice {
-  color: green;
   background-color: rgba(0,0,0,0.5);
   border-radius: 7px;
   padding: 10px;
+  width: 80%;
+  margin: 0px auto;
+  text-align: center;
+
+  p{
+    color: lightgreen !important;
+    font-weight: bold;
+  }
 }
 
 .field_with_errors {

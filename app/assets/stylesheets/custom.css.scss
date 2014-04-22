@@ -26,7 +26,7 @@ a, input[type="submit"] {
 	&.signin { @extend .btn-warning; }
 	&.signout { @extend .btn-danger; }
 	&.server { @extend .btn-danger; }
-	font-weight: bold;
+	font-weight: bold !important;
 }
 
 
@@ -74,10 +74,4 @@ p.errors {
     font-size: 12px;
     list-style: square;
   }
-}
-
-
-#notice {
-	text-align: center;
-	font-weight: bold;
 }
