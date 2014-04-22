@@ -92,7 +92,7 @@ STRING
 				end
 				str += "/>\n"
 
-				color = matches[i].teams.first and matches[i].teams.first.users.include?(current_user) ? "#BCED91" : "white"
+				color = (matches[i].teams[0] and matches[i].teams[0].users.include?(current_user)) ? "#BCED91" : "white"
 				str += "\t\t<rect width=\"#{rw-5}%\" height=\"#{rh/4}%\" x=\"#{rx + 2.5}%\" y=\"#{ry + rh/6}%\" fill=\"#{color}\" />\n"
 				if matches[i].teams.first
 					str += "\t\t<text x=\"#{rx + rw/4}%\" y=\"#{ry + rh/3}%\" font-size=\"#{rh}\">Team #{matches[i].teams.first.id}</text>\n"
@@ -100,7 +100,7 @@ STRING
 
 				str += "\t\t<text x=\"#{rx + 1.3*rw/3}%\" y=\"#{ry + 5.2*rh/9}%\" font-size=\"#{rh}\"> VS </text>\n"
 
-				color = matches[i].teams[1] and matches[i].teams[1].users.include?(current_user) ? "#BCED91" : "white"
+				color = (matches[i].teams[1] and matches[i].teams[1].users.include?(current_user)) ? "#BCED91" : "white"
 				str += "\t\t<rect width=\"#{rw-5}%\" height=\"#{rh/4}%\" x=\"#{rx + 2.5}%\" y=\"#{ry + 3*rh/5}%\" fill=\"#{color}\" />\n"
 				if matches[i].teams[1]
 					str += "\t\t<text x=\"#{rx + rw/4}%\" y=\"#{ry + 4*rh/5}%\" font-size=\"#{rh}\">Team #{matches[i].teams[1].id}</text>\n"
