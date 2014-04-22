@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140422061739) do
+ActiveRecord::Schema.define(version: 20140422195211) do
 
   create_table "alerts", force: true do |t|
     t.integer  "author_id"
@@ -104,9 +104,8 @@ ActiveRecord::Schema.define(version: 20140422061739) do
   create_table "matches", force: true do |t|
     t.integer  "status"
     t.integer  "tournament_stage_id"
-    t.string   "name"
     t.integer  "winner_id"
-    t.string   "remote_id"
+    t.text     "remote_id"
     t.integer  "submitted_peer_evaluations"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -185,12 +184,9 @@ ActiveRecord::Schema.define(version: 20140422061739) do
   add_index "statistics", ["user_id"], name: "index_statistics_on_user_id"
 
   create_table "teams", force: true do |t|
-    t.integer  "match_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "teams", ["match_id"], name: "index_teams_on_match_id"
 
   create_table "teams_users", id: false, force: true do |t|
     t.integer "team_id", null: false

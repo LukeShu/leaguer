@@ -3,7 +3,6 @@
 <table>
   <thead>
     <tr>
-      <th>Match</th>
       <th></th>
       <th></th>
       <th></th>
@@ -13,7 +12,6 @@
   <tbody>
     <% @teams.each do |team| %>
       <tr>
-        <td><%= team.match %></td>
         <td><%= link_to 'Show', team %></td>
         <td><%= link_to 'Edit', edit_team_path(team) %></td>
         <td><%= link_to 'Destroy', team, method: :delete, data: { confirm: 'Are you sure?' } %></td>
