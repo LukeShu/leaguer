@@ -1,5 +1,5 @@
 class Match < ActiveRecord::Base
-	belongs_to :tournament
+	belongs_to :tournament_stage
 	has_many :scores
 	has_and_belongs_to_many :teams
 
@@ -37,5 +37,4 @@ class Match < ActiveRecord::Base
 		end #while
 	end
 	#handle_asynchronously :is_match_over
-
 end

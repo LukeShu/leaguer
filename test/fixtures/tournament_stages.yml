@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  tournament_id: 
+  scheduling: MyString
+  structure: MyText
+
+two:
+  tournament_id: 
+  scheduling: MyString
+  structure: MyText

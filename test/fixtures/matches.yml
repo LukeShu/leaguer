@@ -2,7 +2,7 @@
 
 one:
   status: 1
-  tournament_id: 
+  tournament_stage_id: 
   name: MyString
   winner_id: 
   remote_id: MyString
@@ -10,7 +10,7 @@ one:
 
 two:
   status: 1
-  tournament_id: 
+  tournament_stage_id: 
   name: MyString
   winner_id: 
   remote_id: MyString

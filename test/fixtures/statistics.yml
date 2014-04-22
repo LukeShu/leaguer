@@ -3,9 +3,11 @@
 one:
   user_id: 
   match_id: 
+  name: MyString
   value: 1
 
 two:
   user_id: 
   match_id: 
+  name: MyString
   value: 1
