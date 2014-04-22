@@ -17,9 +17,9 @@ class TournamentStage < ActiveRecord::Base
 		@scheduling.create_matches
 	end
 
-	def to_svg
+	def to_svg(current_user)
 		set_scheduling
-		return @scheduling.graph
+		return @scheduling.graph(current_user)
 	end
 
 	def pair

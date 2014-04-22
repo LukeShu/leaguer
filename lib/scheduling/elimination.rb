@@ -1,5 +1,7 @@
+
 module Scheduling
 	class Elimination
+		include Rails.application.routes.url_helpers
 
 		def initialize(tournament_stage)
 			@tournament_stage = tournament_stage
@@ -28,7 +30,7 @@ module Scheduling
 			# for each grouping of min_players_per_team
 			self.tournament.players.each_slice(self.tournament.min_players_per_team) do |team_members|
 				# if the match is full, move to the next match, otherwise move to the next team
-				if (team_num == min_teams_per_match)
+				if (team_num == self.tournament.min_teams_per_match)
 					match_num -= 1
 					team_num = 0
 				else
@@ -47,7 +49,7 @@ module Scheduling
 			end
 		end
 
-		def graph
+		def graph(current_user)
 			matches = @tournament_stage.matches_ordered
 			# depth of SVG tree
 			depth = Math.log2(matches.count).floor+1;
@@ -76,7 +78,7 @@ STRING
 				rx = 50/(depth+1) + 100/(depth+1)*(depth-(Math.log2(i).floor+1))
 				ry = ( 100/(2**(Math.log2(i).floor)+1) + rh * 1.1 * (2**Math.log2(i).ceil-i))
 
-				str += "\t<a id=\"svg-match-#{i}\" xlink:href=\"# {match_path(matches[i])}\">\n"
+				str += "\t<a id=\"svg-match-#{i}\" xlink:href=\"#{match_path(matches[i])}\"><g>\n"
 				str += "\t\t<rect height=\"#{rh}%\" width=\"#{rw}%\" x=\"#{rx}%\" y=\"#{ry}%\" fill=\"url(#gradMatch)\" rx=\"5px\" stroke-width=\"2\""
 				case matches[i].status
 				when 0
@@ -95,15 +97,15 @@ STRING
 				end
 				str += "/>\n"
 
-				color = matches[i].teams.first and matches[i].teams.first.users.include?(current_user) ? "#BCED91" : "white"
+				color = (matches[i].teams[0] and matches[i].teams[0].users.include?(current_user)) ? "#BCED91" : "white"
 				str += "\t\t<rect width=\"#{rw-5}%\" height=\"#{rh/4}%\" x=\"#{rx + 2.5}%\" y=\"#{ry + rh/6}%\" fill=\"#{color}\" />\n"
 				if matches[i].teams.first
-					str += '\t\t<text x="#{rx + rw/4}%" y="#{ry + rh/3}%" font-size="#{rh}">Team #{matches[i].teams.first.id}</text>\n'
+					str += "\t\t<text x=\"#{rx + rw/4}%\" y=\"#{ry + rh/3}%\" font-size=\"#{rh}\">Team #{matches[i].teams.first.id}</text>\n"
 				end
 
 				str += "\t\t<text x=\"#{rx + 1.3*rw/3}%\" y=\"#{ry + 5.2*rh/9}%\" font-size=\"#{rh}\"> VS </text>\n"
 
-				color = matches[i].teams[1] and matches[i].teams[1].users.include?(current_user) ? "#BCED91" : "white"
+				color = (matches[i].teams[1] and matches[i].teams[1].users.include?(current_user)) ? "#BCED91" : "white"
 				str += "\t\t<rect width=\"#{rw-5}%\" height=\"#{rh/4}%\" x=\"#{rx + 2.5}%\" y=\"#{ry + 3*rh/5}%\" fill=\"#{color}\" />\n"
 				if matches[i].teams[1]
 					str += "\t\t<text x=\"#{rx + rw/4}%\" y=\"#{ry + 4*rh/5}%\" font-size=\"#{rh}\">Team #{matches[i].teams[1].id}</text>\n"
@@ -118,7 +120,7 @@ STRING
 					lastrh = rh
 					lastrw = rw
 				end
-				str += "</a>\n"
+				str += "</g></a>\n"
 			end
 			str += '</svg>'
 

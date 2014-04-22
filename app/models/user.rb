@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
 
 	apply_simple_captcha
 
+	acts_as_messageable
+
 	before_save { self.email = email.downcase }
 	before_save { self.user_name = user_name }
 

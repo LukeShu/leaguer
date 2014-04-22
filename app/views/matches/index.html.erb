@@ -37,5 +37,5 @@
 <br>
 
 <% @tournament.stages_ordered.keys.sort.each do |stage_key| %>
-	<div class="graph"><%= raw @tournament.stages_ordered[stage_key].to_svg %></div>
+	<div class="graph"><%= raw @tournament.stages_ordered[stage_key].to_svg(current_user) %></div>
 <% end %>
