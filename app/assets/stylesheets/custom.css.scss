@@ -22,9 +22,26 @@ a, input[type="submit"] {
 	@extend .btn;
 	&.user { @extend .btn-info; }
 	&.signup { @extend .btn-success; }
-	&.signin { @extend .btn-info; }
+	&.signin { @extend .btn-warning; }
 	&.signout { @extend .btn-danger; }
 	&.server { @extend .btn-danger; }
+}
+
+
+input[type="text"],  input[type="password"]{
+	border: 3px inset #A5A5A5;
+    -webkit-box-shadow: 
+      inset 0 0 8px  rgba(0,0,0,0.1),
+            0 0 16px rgba(0,0,0,0.1); 
+    -moz-box-shadow: 
+      inset 0 0 8px  rgba(0,0,0,0.1),
+            0 0 16px rgba(0,0,0,0.1); 
+    box-shadow: 
+      inset 0 0 8px  rgba(0,0,0,0.1),
+            0 0 16px rgba(0,0,0,0.1); 
+    padding: 10px;
+    background: rgba(0,0,0,0.5);
+    margin: 0 0 5px 0;
 }
 
 p.errors {

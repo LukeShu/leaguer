@@ -2,6 +2,8 @@
 
 $page-color: #444;
 $toolbar-color: black;
+$orange: #DD9125;
+$link-yellow: #FFC50D;
 
 html{
   height: 100%;
@@ -16,47 +18,34 @@ body {
   height: 100%;
 }
 
-.wrapper {
-  padding-left: 5%;
-  padding-right: 5%;
-  margin: 0 auto;
-  background-color: #fff;
-  padding-top: 10px;
-  height: 90%;
-  box-shadow: 1px 1px 7px orange;
-  border-radius: 0px 0px 5px 5px;
-}
-
-footer {
-  clear: both;
-  margin: 0 auto;
-  margin-top: 10px;
-  color: white;
-
-}
-
-@media screen and (min-width: 480px) {
-  .wrapper, footer {
-    width: 80%;
-    min-width: 480px;
-    max-width: 1024px;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .wrapper, footer {
-    width: 100%;
-  }
-}
-
-h1, h2, h3, h4, h5{
-  color: #030303;
+h1, h2, h3, h4, h5, p{
+  color: $orange;
 }
 
 p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
   line-height: 18px;
+}
+
+/* NAVBAR */
+
+.navbar-brand {
+  @extend .no-dec;
+  a{
+    color: white;
+    &:hover, &:active, &:focus {
+      color: white;
+      font-weight: normal;
+      text-decoration: none;
+    }
+  }
+}
+
+.navbar-inverse, header > nav {
+    background-color: $toolbar-color;
+    border-radius: 0px 0px 5px 5px;
+    box-shadow: 0px 0px 5px black;
 }
 
 pre {
@@ -66,12 +55,9 @@ pre {
 }
 
 a {
-  color: #000;
-  &:visited {
-    color: #000;
-  }
-  &:hover {
-      color: green;
+	color: $link-yellow;
+  	&:hover {
+      color: #FFEF00;
       text-decoration: none;
   }
 }
@@ -91,6 +77,12 @@ div {
   background-color: #FF4C4C;
   box-shadow: 0px 0px 5px red;
   display: table;
+}
+
+.wrapper {
+	width: 80%;
+	margin: 0 auto;
+	margin-top: 10px;
 }
 
 #error_explanation {
@@ -117,28 +109,20 @@ div {
 }
 
 
-/* NAVBAR */
 
-.navbar-brand {
-  @extend .no-dec;
-  a{
-    color: white;
-    &:hover, &:active, &:focus {
-      color: white;
-      font-weight: normal;
-      text-decoration: none;
-    }
-  }
-}
-
-.navbar-inverse, header > nav {
-    background-color: $toolbar-color;
-    border-color: #0F4070;
-    border-radius: 0px 0px 5px 5px;
-    margin-bottom: 0px;
-
-}
 
 button, input[type="submit"] {
     @extend .btn;
+}
+
+
+
+footer {
+  clear: both;
+  margin: 0 auto;
+  margin-top: 10px;
+  border-top: solid 1px $orange;
+  padding-top: 10px;
+  color: white;
+  text-align: center;
 }
