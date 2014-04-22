@@ -49,6 +49,9 @@ gem 'jbuilder', '~> 1.2'
 gem 'daemons'
 gem 'delayed_job_active_record'
 
+# Mailboxer supports a messaging and alerting system.
+gem 'mailboxer'
+
 group :doc do
 	# bundle exec rake doc:rails generates the API under doc/api.
 	gem 'sdoc', require: false
