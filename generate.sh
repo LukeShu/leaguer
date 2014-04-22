@@ -16,6 +16,7 @@ git checkout clean-start -- app test config/routes.rb
 
 bundle install
 
+bundle exec rails generate mailboxer:install
 bundle exec rails generate simple_captcha
 bundle exec rails generate delayed_job:active_record
 
@@ -66,4 +67,4 @@ bundle exec rake db:seed
 
 find app -type f -name '*.rb' -exec bin/autoindent {} \;
 
-git add app test config/routes.rb db/migrate db/schema.rb Gemfile.lock
+git add app test config/routes.rb config/initializers db/migrate db/schema.rb Gemfile.lock
