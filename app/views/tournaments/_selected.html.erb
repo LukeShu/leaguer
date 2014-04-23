@@ -9,8 +9,12 @@
     <% end %>
     <p>
       <%= f.label name %><br>
-      <% if !@game.attributes[name].nil? %>
+      <% unless @game.attributes[name].nil? %>
+        <% if name == "sampling_method" %>
+          <%= f.select( name, @game.sampling_method.split(',') ) %>
+        <% else %>
         <%= f.text_field(name, :value => @game.attributes[name] ) %>
+        <% end %>
       <% else %>
         <%= f.text_field name %>
       <% end  %>
