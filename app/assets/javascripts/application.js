@@ -13,7 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require_tree .
 //= require 'drag.js'
 //= require 'dragsort.js'
 //= require 'coordinates.js'
+//
+//= require_tree ./common

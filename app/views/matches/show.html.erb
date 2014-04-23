@@ -1,3 +1,17 @@
+<script type="text/javascript">
+function score_peers() {
+	//get each player in order and assign score here!
+	var $lisp = $('ol#boxes');
+	var comma = ","
+	for(var i=0; i < $lisp.length; i++) {
+		if ( i == lisp.length-1) {
+			comma = "";
+		}
+		$('review_action').value +=  $('ol#boxes:eq(' + i + ')').text() + comma;
+	}
+}
+</script>
+
 <p>
 	<strong>Status:</strong>
 	<%= @match.status %>
@@ -113,17 +127,3 @@
 		<% end # case %>
 	<% end # form %>
 </div>
-
-<script type="text/javascript">
-function score_peers() {
-	//get each player in order and assign score here!
-	var $lisp = $('ol#boxes');
-	var comma = ","
-	for(var i=0; i < $lisp.length; i++) {
-		if ( i == lisp.length-1) {
-			comma = "";
-		} 
-		$('review_action').value +=  $('ol#boxes:eq(' + i + ')').text() + comma;
-	}
-}
-</script>
