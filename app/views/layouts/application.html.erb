@@ -18,8 +18,8 @@
 	<%# This is the search bar  #%>
 	<div>
 		<%= form_tag("/search", method: "get", :class => "search") do %>
-			<%= text_field_tag(:query, nil, :placeholder => "Search") %>
-			<%= submit_tag("Go", :name=>nil) %>
+			<%= text_field_tag(:query, params[:query]) %>
+			<%= submit_tag("Search", :name=>nil) %>
 		<% end %>
 	</div>
 
