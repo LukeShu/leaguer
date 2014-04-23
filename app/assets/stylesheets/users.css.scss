@@ -8,3 +8,34 @@
 	background-color: rgba(255, 255, 255, 0.7);
 	margin: 10px 0px;
 }
+
+
+div.user-listing {
+	margin: 10px 0px;
+	border-radius: 5px;
+	box-shadow: 0px 0px 3px #B8B8B8;
+	background-color: rgba(0, 0, 0, 0.6);
+	border: 1px solid #AAAAAA;
+	min-height: 100px;
+	padding: 8px 4px;
+	display: inline-table;
+
+	/* AKA the listing title */
+	h3 {
+		margin-top: 0px;
+		color: #F0AD4E;
+		font-weight: bold;
+	}
+
+	h3:hover {
+		color: #D09D3E;
+	}
+
+	.things {
+		padding: 0px 10px;
+	}
+
+	p {
+		margin: 0;
+	}
+}

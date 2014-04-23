@@ -1,0 +1,24 @@
+<div class="row user-listing">
+	<div class="col-md-3 col-sm-3 col-xs-6"><%= image_tag ('http://www.gravatar.com/avatar/' + Digest::MD5.hexdigest(target.email) + '?s=100&d=mm') %></div>
+	
+
+	<div class="col-md-9 col-sm-9 col-xs-6">
+		<%# "header" %>
+		<%= link_to(target) do %><h3><%= target.user_name %></h3><% end %>
+		
+		<div class="row" style="margin-left:2%;">
+			<div class="col-md-6 things">
+				<p> Preferred Name: </p>
+				<p> <%= target.name %></p>
+			</div>
+			<div class="col-md-6 things">
+				<p>Latest Tournament:
+				<% if !target.tournaments_played.first.nil? %>
+					<%= target.tournaments_played.first.name %>
+				<% end %>
+				</p>
+			</div>
+		</div>
+
+	</div>
+</div>
