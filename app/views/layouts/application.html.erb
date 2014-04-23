@@ -4,15 +4,12 @@
   <title>Leaguer</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "#{params[:controller]}", "data-turbolinks-track" => true %>%>
+  <%= javascript_include_tag "#{params[:controller]}_#{params[:action]}", "data-turbolinks-track" => true %>%>
   <%= csrf_meta_tags %>
   <%= yield :head %>
 </head>
 <body>
-<script>
-		window.onload = function() {
-			BetterDragSort.makeListSortable(document.getElementById("boxes"));
-		};
-</script>
 <header>
 	<nav>
 	<%# This is the logo %>

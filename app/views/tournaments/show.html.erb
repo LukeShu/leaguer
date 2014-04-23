@@ -106,34 +106,3 @@
 
 <%end %>
 </div>
-
-<script>
-function donehandle( tournament ) {
-  if ( console && console.log ) {
-    var here = tournament["players"].length;
-    var needed = (tournament["min_teams_per_match"] * tournament["min_players_per_team"]);
-    var pct_complete =  here / needed;
-    $("#prog-bar").width( (pct_complete * 100) +"%");
-    $("#players-needed").text(here + " " + (here==1?"player has":"players have") + " signed up. " + needed + " players needed. ");
-    players = "";
-
-    //creates the present user list
-    for (var i = 0; i < tournament["players"].length; i++) {
-      players = players+"<li><span class=\"black\">"+tournament["players"][i]["user_name"]+"</span></li>"
-    }
-
-    //updates the user list
-    $("#tournament-users").html(players);
-
-    //if there are enough players to start, enable the button, else disable it.
-    $("input[value=\"Start Tournament\"]").prop('disabled', (pct_complete >= 1)? false : true);
-
-    if (tournament["status"] == 1)
-      window.location.reload(true);
-  }
-  setTimeout(function(){$.ajax({url: "<%= url_for @tournament %>.json"}).done(donehandle)}, 2000);
-}
-
-$.ajax({url: "<%= url_for @tournament %>.json"})
-  .done(donehandle);
-</script>

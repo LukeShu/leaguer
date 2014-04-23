@@ -75,3 +75,13 @@ p.errors {
     list-style: square;
   }
 }
+
+// Limitation: Only one box can be expanded at a time
+.collapsible {
+	.collapsed { display: block; }
+	.expanded { display: none; }
+	&:target {
+		.collapsed { display: none; }
+		.expanded { display: block; }
+	}
+}

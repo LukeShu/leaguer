@@ -1,6 +1,11 @@
-<h5 id="search-down">&#x25B2;  Advanced Search &#x25B2;</h5>
-<div id="advanced-search">
-	<p> This is where the search will go </p>
+<div id="advanced_search" class="collapsible">
+	<div class="collapsed">
+		<h5><a href="#advanced_search">Advanced Search [show]</a></h5>
+	</div>
+	<div class="expanded">
+		<h5><a href="#collapse">Advanced Search [hide]</a></h5>
+		<p>This is where the advancedsearch will go.</p>
+	</div>
 </div>
 
 <%# Show search results if a query was not nill %>
@@ -26,15 +31,3 @@
 
 	<% end %>
 <% end %>
-
-<script type="text/javascript" language="javascript">
-
-	$(document).ready(function() {
-
-      $("#search-down").click(function(){
-      	$("#search-down").text("▼ Advanced Search ▼").html();
-        $("#advanced-search").slideDown( 'slow');
-      });
-
-    });
-</script>
