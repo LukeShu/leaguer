@@ -3,6 +3,8 @@ class MatchesController < ApplicationController
 	require 'json'
 	require 'delayed_job'
 
+	before_action :set_tournament, only: [:index]
+
 	# GET /tournaments/1/matches
 	# GET /tournaments/1/matches.json
 	def index
@@ -235,6 +237,9 @@ class MatchesController < ApplicationController
 	def set_match
 		@match = Match.find(params[:id])
 		@tournament = @match.tournament_stage.tournament
+	end
+	def set_tournament
+		@tournament = Tournament.find(params[:tournament_id])
 	end
 
 	# Never trust parameters from the scary internet, only allow the white list through.
