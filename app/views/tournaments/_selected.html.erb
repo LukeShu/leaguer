@@ -37,7 +37,7 @@
            <% end %>
         <% when 3 %>
            <% setting.type_opt.split(',').each do |option|%>
-             <%= setting_fields.check_box( setting.name, option ) %> <%= option %> <br>
+              <%= check_box_tag(setting.name, value = option, checked = false, options = {}) %> <%= option %> <br>
            <% end %>
         <% when 4 %>
 	   <%# setting_fields.label "true" %>

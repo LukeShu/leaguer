@@ -57,6 +57,13 @@
   <%= @tournament.sampling_method %>
 </p>
 
+<% @tournament.settings.each do |setting| %>
+<p>
+  <strong><%= setting.name %></strong>
+  <%= setting.value %>
+</p>
+<% end %>
+
 </span>
 
 <div >

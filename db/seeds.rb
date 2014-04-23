@@ -23,7 +23,7 @@ Game.find_by_name("Hearthstone").settings.create(name: "Deck Name", description:
 
 Game.find_by_name("Rock, Paper, Scissors").settings.create(name: "Favorite Object", description: "What is your favorite object in RPS?", type_opt: "Rock,Paper,Scissors", vartype: 2, display_order: 2)
 Game.find_by_name("Rock, Paper, Scissors").settings.create(name: "Lizard, Spock allowed?", description: "Will you allow Lizard and Spock?", vartype: 4, display_order: 1)
-Game.find_by_name("Rock, Paper, Scissors").settings.create(name: "Why are those up there even called radio buttons?", description: "Check boxes make sense at least", type_opt: "I do not know.,There is now spoon.,Wow.,Because electricity.,Wat?", vartype: 2, display_order: 3)
+Game.find_by_name("Rock, Paper, Scissors").settings.create(name: "Why are those up there even called radio buttons?", description: "Check boxes make sense at least", type_opt: "I do not know.,There is now spoon.,Wow.,Because electricity.,Wat?", vartype: 3, display_order: 3)
 
 if Rails.env.development?
 	User.create(name: "Administrator", user_name: "admin", email: "root@localhost.lan", password: "password", password_confirmation: "password", permissions: 0xFFFFFFFF)
