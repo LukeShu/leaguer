@@ -36,6 +36,8 @@ bundle exec rails generate scaffold bracket user:references tournament:reference
 bundle exec rails generate model       game_setting       game:references name:string vartype:integer type_opt:text description:text display_order:integer default:text
 bundle exec rails generate model tournament_setting tournament:references name:string vartype:integer type_opt:text description:text display_order:integer   value:text
 
+bundle exec rails generate model score user:references match:references value:integer
+
 bundle exec rails generate model tournament_stage tournament:references scheduling:string structure:text
 bundle exec rails generate model statistic user:references match:references name:string value:integer
 
