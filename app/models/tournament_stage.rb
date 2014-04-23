@@ -41,7 +41,6 @@ class TournamentStage < ActiveRecord::Base
 	private
 	def set_scheduling
 		if @scheduling.nil?
-			require "scheduling/#{self.scheduling}"
 			@scheduling = "Scheduling::#{self.scheduling.capitalize}".constantize.new(self)
 		end
 		return @scheduling
@@ -51,14 +50,13 @@ class TournamentStage < ActiveRecord::Base
 	def set_pairing
 		if @pairing.nil?
 			if(@tournament.randomized_teams)
-				require "pairing/#{self.pairing}"
 				@pairing = "Pairing::RandomPairing"
-				return @pairing
 			#elsif(setTeams)
 				#@pairing = Pre built
 				#return @pairing
 			end
 		end
+		return @pairing
 	end
 
 	private
