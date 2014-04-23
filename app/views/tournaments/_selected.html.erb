@@ -32,14 +32,18 @@
         <% when 1 %>
            <%= setting_fields.text_area( setting.name ) %>
         <% when 2 %>
-           <%= setting_fields.collection_radio_buttons( setting.name, setting.type_opt.split(','), "first", "last", { item_wrapper_tag: false } ) %>
+           <% setting.type_opt.split(',').each do |option|%>
+             <%= setting_fields.radio_button( setting.name, option ) %> <%= option %> <br>
+           <% end %>
         <% when 3 %>
-           <%= setting_fields.collection_check_boxes( setting.name, setting.type_opt.split(','), "first", "last", { item_wrapper_tag: false } ) %>
+           <% setting.type_opt.split(',').each do |option|%>
+             <%= setting_fields.check_box( setting.name, option ) %> <%= option %> <br>
+           <% end %>
         <% when 4 %>
-	   <%= setting_fields.label "true" %>
-           <%= setting_fields.radio_button( setting.name, "true" ) %>
-	   <%= setting_fields.label "false" %>
-           <%= setting_fields.radio_button( setting.name, "false" ) %>
+	   <%# setting_fields.label "true" %>
+           <%= setting_fields.radio_button( setting.name, "true" ) %> True
+	   <%# setting_fields.label "false" %>
+           <%= setting_fields.radio_button( setting.name, "false" ) %> False
         <% when 5 %>
            <%= setting_fields.select( setting.name, setting.type_opt.split(',') ) %>
         <% end %>
