@@ -13,7 +13,13 @@
   </thead>
 
   <tbody>
-    <% @pms.each do |pm| %>
+
+    <tr>
+      <td><h2>Inbox<h2></td>
+    </tr>
+
+    <% message = @pms.where(recipient: current_user) %>
+    <% unless message.empty? then message.each do |pm| %>
       <tr>
         <td><%= pm.author.user_name %></td>
         <td><%= pm.recipient.user_name %></td>
@@ -22,6 +28,28 @@
         <td><%= link_to 'Edit', edit_pm_path(pm) %></td>
         <td><%= link_to 'Destroy', pm, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
+      <% end %>
+    <% else %>
+      <td><h3>No New Messages</h3></td>
+    <% end %>
+
+    <tr>
+      <td><h2>Outbox<h2></td>
+    </tr>
+
+    <% message = @pms.where(author: current_user) %>
+    <% unless message.empty? then message.each do |pm| %>
+      <tr>
+        <td><%= pm.author.user_name %></td>
+        <td><%= pm.recipient.user_name %></td>
+        <td><%= pm.message %></td>
+        <td><%= link_to 'Show', pm %></td>
+        <td><%= link_to 'Edit', edit_pm_path(pm) %></td>
+        <td><%= link_to 'Destroy', pm, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+      <% end %>
+    <% else %>
+      <td><h3>No New Messages</h3></td>
     <% end %>
   </tbody>
 </table>
