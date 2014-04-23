@@ -1,5 +1,4 @@
 Leaguer::Application.routes.draw do
-
 	resources :brackets
 
 	resources :sessions, only: [:new, :create, :destroy]
@@ -12,15 +11,13 @@ Leaguer::Application.routes.draw do
 
 	resources :alerts
 
-	resource :server, only: [:show, :edit, :update]
-
-	#match 'simple_captcha/:id', :to => 'simple_captcha#show', :as => :simple_captcha
-
 	resources :teams
 
 	resources :tournaments do
 		resources :matches, only: [:index, :show, :update]
 	end
+
+	resource :server, only: [:show, :edit, :update]
 
 	root to: 'static#homepage'
 
@@ -34,7 +31,7 @@ end
 Leaguer::Application.routes.named_routes.module.module_eval do
 	def match_path(match, options={})
 		tournament_match_path(match.tournament_stage.tournament, match, options)
-    end
+	end
 	def match_url(match, options={})
 		tournament_match_url(match.tournament_stage.tournament, match, options)
 	end
