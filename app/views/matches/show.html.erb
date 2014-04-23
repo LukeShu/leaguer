@@ -9,17 +9,18 @@
 
 <!--
 	Match Status 0 =>	Created, waiting to start
-	Match Status 1 =>	Match is running, waiting to finish
-	Match Status 2 =>	Match finished, waiting for peer reviews
-	Match Status 3 =>	Totally done.
+	Match Status 1 =>	Match ready
+	Match Status 2 =>	Match is running, waiting to finish
+	Match Status 3 =>	Match finished, waiting for statistics to populate
+	Match Status 4 =>	Match Totally done. Archived.
 
 	Four views:- (status is Match status)
-	A. Pairings, when status is 0 for either Host or Player Or when status is 1 for player 
-	B. A page the host will see if status is 1 OR 2
-	C. The Peer review page that the players will see if status is 2.
-	D. The page everyone will see when status is 3.
+	A. Pairings, when status is 1 for either Host or Player Or when status is 2 for player 
+	B. A page the host will see if status is 2 OR 3
+	C. The Peer review page that the players will see if status is 3.
+	D. The page everyone will see when status is 4.
 
-	Note:- The change of status from 1 to 2 is coming from League Data Pull (RIOT API)
+	Note:- The change of status from 2 to 3 for League of Legends is coming from League Data Pull (RIOT API)
 
 -->
 
