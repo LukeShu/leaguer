@@ -23,6 +23,10 @@ class PmsController < ApplicationController
 	# POST /pms.json
 	def create
 		@pm = Pm.new(pm_params)
+		@pm.author = current_user
+		require 'pp'
+		pp pm_params['recipient_id']
+		@pm.recipient = User.find_by_user_name(pm_params['recipient_id'])
 
 		respond_to do |format|
 			if @pm.save

@@ -15,8 +15,8 @@
   <tbody>
     <% @pms.each do |pm| %>
       <tr>
-        <td><%= pm.author %></td>
-        <td><%= pm.recipient %></td>
+        <td><%= pm.author.user_name %></td>
+        <td><%= pm.recipient.user_name %></td>
         <td><%= pm.message %></td>
         <td><%= link_to 'Show', pm %></td>
         <td><%= link_to 'Edit', edit_pm_path(pm) %></td>

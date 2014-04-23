@@ -12,6 +12,14 @@ class User < ActiveRecord::Base
 
 	acts_as_messageable
 
+	def name
+		return current_user.user_name
+	end
+
+	def mailboxer_email(object)
+		return nil
+	end
+
 	before_save { self.email = email.downcase }
 	before_save { self.user_name = user_name }
 
