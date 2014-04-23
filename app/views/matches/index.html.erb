@@ -2,16 +2,16 @@
 
 
 <table id="matches-table" class="table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Status</th>
-      <th>Winner</th>
-      <th></th>
-    </tr>
-  </thead>
-
-	<tbody class="table-hover">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Status</th>
+			<th>Winner</th>
+			<th><!-- link to --></th>
+			<th><!-- start button --></th>
+		</tr>
+	</thead>
+	<tbody>
 		<% @tournament.stages_ordered.keys.sort.each do |stage_key| %>
 			<% stage = @tournament.stages_ordered[stage_key] %>
 			<% stage.matches_ordered.keys.sort.reverse.each do |match_key| %><tr>
