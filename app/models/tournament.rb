@@ -5,16 +5,6 @@ class Tournament < ActiveRecord::Base
 	has_and_belongs_to_many :players, class_name: "User", association_foreign_key: "player_id", join_table: "players_tournaments"
 	has_and_belongs_to_many :hosts,   class_name: "User", association_foreign_key: "host_id",   join_table: "hosts_tournaments"
 
-	def stages_ordered
-		h = {}
-		i = 1
-		self.tournament_stages.order(:id).each do |s|
-			h[i] = s
-			i += 1
-		end
-		return h
-	end
-
 	def settings
 		@settings ||= Settings.new(self)
 	end
