@@ -62,13 +62,21 @@ class UsersController < ApplicationController
 		else
 			params[:user][:remote_usernames].each do |game_name,user_name|
 				game = Game.find_by_name(game_name)
-				remote_username = HTTParty.get("https://prod.api.pvp.net/api/lol/na/v1.3/summoner/by-name/#{user_name}?api_key=ad539f86-22fd-474d-9279-79a7a296ac38")
+				remote_username = HTTParty.get("https://prod.api.pvp.net/api/lol/na/v1.3/summoner/by-name/#{user_name.downcase}?api_key=ad539f86-22fd-474d-9279-79a7a296ac38")
+
+				puts "#{user_name}"
+
+				id = "#{remote_username["#{user_name.downcase}"]["id"]}".to_i
+
+				username = "#{remote_username["#{user_name.downcase}"]["name"]}"
+
+				hash = {:username => username, :id => id}
 
 				remote = @user.remote_usernames.where(:game => game).first
 				if remote.nil?
-					ok &= @user.remote_usernames.create(game: game, value: remote_username)
+					ok &= @user.remote_usernames.create(game: game, value: hash)
 				else
-					remote.value = remote_username
+					remote.value = hash
 					ok &= remote.save
 				end
 			end
