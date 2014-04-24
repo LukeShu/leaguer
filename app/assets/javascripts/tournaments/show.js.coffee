@@ -29,4 +29,4 @@ update = (tournament) ->
 
 # Now kick off the whole process
 window.onload = ->
-  $.ajax(url: json_url).done update
+	$.ajax(url: json_url).done update

@@ -142,6 +142,11 @@ class MatchesController < ApplicationController
 				end
 			end
 		when "finish"
+
+			#make this use the statistics interface for scoring and ScoringAlgorithms
+
+
+
 			# Individual scores
 			scores = params["scores"]
 			scores.each do |user_name, score|

@@ -82,7 +82,7 @@ function score_peers() {
 						<% team.users.collect{|u| u.user_name}.each do |k| %><label>
 							Score for <%= k %><br>
 							<% @player_score = 0 %>
-							<% current_user.scores.find_by_match(@match).each{ |s| @player_score+=s.value } %>
+							<% current_user.statistics.where(:match => @match, :user => current_user).each{ |s| @player_score+=s.value } %>
 							<%= text_field_tag("scores[#{k}]", @player_score, size: 3) %>
 						</label><% end %>
 					</fieldset>

@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
 	has_and_belongs_to_many :tournaments_hosted, class_name: "Tournament", foreign_key: "host_id", join_table: "hosts_tournaments"
 	has_and_belongs_to_many :teams
 	has_many :sessions
-	has_many :scores
+	has_many :statistics
 	has_many :remote_usernames
 
 	apply_simple_captcha
@@ -21,6 +21,10 @@ class User < ActiveRecord::Base
 
 	def default_values
 		self.permissions ||= Server.first.default_user_permissions
+	end
+
+	def scores
+		self.statistics.find_by_name(:score)
 	end
 
 	def find_remote_username(game)
