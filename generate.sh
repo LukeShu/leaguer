@@ -84,4 +84,4 @@ bundle exec rake db:seed
 
 find app config -type f -name '*.rb' -exec bin/autoindent {} \;
 
-git add app test config/routes.rb config/initializers db/migrate db/schema.rb Gemfile.lock
+git add app test config db/migrate db/schema.rb Gemfile.lock
