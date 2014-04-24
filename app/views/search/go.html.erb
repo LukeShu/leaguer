@@ -4,12 +4,24 @@
 	</div>
 	<div class="expanded">
 		<h5><a href="#collapse">Advanced Search [hide]</a></h5>
-		<p>This is where the advancedsearch will go.</p>
+		<%= form_tag("/search", method: "get") do %>
+			<div class="form-group">
+			<%= label_tag :query, 'Find:' %>
+			<%= text_field_tag(:query, params[:query]) %>
+			</div>
+			<div class="form-group">
+			<%= label_tag :game_type, 'Game Type:' %>
+			<%= select_tag(:game_type, options_from_collection_for_select(@games, 'id', 'name'), :prompt => 'All Games') %>
+			</div>
+			<div>
+			<%= submit_tag("Search", :name=>nil) %>
+			</div>
+		<% end %>
 	</div>
 </div>
 
 <%# Show search results if a query was not nill %>
-<% if !@query.empty? %>
+<% if !@query.nil? and !@query.empty? %>
 
 	<% if @tournaments.empty? and @players.empty? %>
 		<h3> No results found for "<%= @query %>" </h3>

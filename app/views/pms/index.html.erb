@@ -25,8 +25,8 @@
         <td><%= pm.recipient.user_name %></td>
         <td><%= pm.message %></td>
         <td><%= link_to 'Show', pm %></td>
-        <td><%= link_to 'Edit', edit_pm_path(pm) %></td>
-        <td><%= link_to 'Destroy', pm, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%# link_to 'Edit', edit_pm_path(pm) %></td>
+        <td><%= link_to 'Delete', pm, method: :delete, data: { confirm: 'Are you sure (also deletes the author\'s copy)?' } %></td>
       </tr>
       <% end %>
     <% else %>
@@ -44,13 +44,56 @@
         <td><%= pm.recipient.user_name %></td>
         <td><%= pm.message %></td>
         <td><%= link_to 'Show', pm %></td>
-        <td><%= link_to 'Edit', edit_pm_path(pm) %></td>
-        <td><%= link_to 'Destroy', pm, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%# link_to 'Edit', edit_pm_path(pm) %></td>
+        <td><%= link_to 'Delete', pm, method: :delete, data: { confirm: 'Are you sure (also deletes the recipient\'s copy)?'} %></td>
       </tr>
       <% end %>
     <% else %>
       <td><h3>No New Messages</h3></td>
     <% end %>
+
+    <tr>
+      <td><h2>Conversations<h2></td>
+    </tr>
+    <tr>
+      <td><h3>Inbox<h3></td>
+    </tr>
+    <tr>
+      <% conversation1 = current_user.mailbox.inbox.first %>
+      <% if !conversation1.nil? %>
+        <% receipts1 = conversation1.receipts_for current_user %>
+        <% receipts1.each do |receipt1| %>
+          <% message1 = receipt1.message %>
+          <td><%= message1.subject %></td>
+          <td><%= message1.body %></td>
+        <% end %>    
+      <% else %>
+          <td><p> No Messages </p></td>
+      <% end %>
+     </tr>
+
+     <tr>
+      <td><h3>Outbox<h3></td>
+    </tr>
+    <tr>
+      <% conversation1 = current_user.mailbox.sentbox.first %>
+      <% if !conversation1.nil? %>
+        <tr>
+          <td><b>From</b></td>
+          <td><b>Subject</b></td>
+          <td><b>Body</b></td>
+        </tr>
+        <% receipts1 = conversation1.receipts_for current_user %>
+        <% receipts1.each do |receipt1| %>
+          <% message1 = receipt1.message %>
+          <td><%= message1.subject %></td>
+          <td><%= message1.body %></td>
+        <% end %>    
+      <% else %>
+          <td><p> No Messages </p></td>
+      <% end %>
+     </tr>
+
   </tbody>
 </table>
 
