@@ -68,24 +68,25 @@ if Rails.env.development?
 	players_for_league.push(User.create(name: "Kaceytron", password: "password", email: "Kaceytron@gmail.com", user_name: "Kaceytron", password_confirmation: "password"))
 
 	#semi-real users
-	User.create(name: "Davis Webb", password: "password", email: "davislwebb@gmail.com", user_name: "TeslasMind", password_confirmation: "password")
-	User.create(name: "Nathaniel Foy", password: "password", email: "nfoy@notreal.com", user_name: "Nalfeinx", password_confirmation: "password")
-	User.create(name: "Guntas Grewal", password: "password", email: "guntasgrewal@gmail.com", user_name: "guntasgrewal", password_confirmation: "password")
-	User.create(name: "Luke Shumaker", password: "password", email: "lukeshu@emacs4lyfe.com", user_name: "lukeshu", password_confirmation: "password")
-	User.create(name: "Tomer Kimia", password: "password", email: "tomer@2majors4lyfe.com", user_name: "tkimia", password_confirmation: "password")
-	User.create(name: "Andrew Murrell", password: "password", email: "murrel@murrel.gov", user_name: "ImFromNasa", password_confirmation: "password")
-	User.create(name: "Joseph Adams", password: "password", email: "alpha142@fluttershyop.com", user_name: "alpha142", password_confirmation: "password")
-	User.create(name: "Josh Huser", password: "password", email: "jhuser@iownabusiness.net", user_name: "WinterWorks", password_confirmation: "password")
-	User.create(name: "Professor Dunsmore", password: "password", email: "bxd@purdue.edu", user_name: "Dumbledore", password_confirmation: "password")
-	User.create(name: "Marco Polo", password: "password", email: "marco@ta4lyfe.com", user_name: "iCoordinate", password_confirmation: "password")
-	User.create(name: "Geoffrey Webb", password: "password", email: "imnotjoffreybarathian@gameofthrones.com", user_name: "GTBPhoenix", password_confirmation: "password")
-	User.create(name: "Obama", password: "password", email: "obama@whitehouse.gov", user_name: "Obama", password_confirmation: "password")
+	davis = User.create(name: "Davis Webb", password: "password", email: "davislwebb@gmail.com", user_name: "TeslasMind", password_confirmation: "password")
+	foy = User.create(name: "Nathaniel Foy", password: "password", email: "nfoy@notreal.com", user_name: "Nalfeinx", password_confirmation: "password")
+	guntas = User.create(name: "Guntas Grewal", password: "password", email: "guntasgrewal@gmail.com", user_name: "guntasgrewal", password_confirmation: "password")
+	luke = User.create(name: "Luke Shumaker", password: "password", email: "lukeshu@emacs4lyfe.com", user_name: "lukeshu", password_confirmation: "password")
+	tomer = User.create(name: "Tomer Kimia", password: "password", email: "tomer@2majors4lyfe.com", user_name: "tkimia", password_confirmation: "password")
+	andrew = User.create(name: "Andrew Murrell", password: "password", email: "murrel@murrel.gov", user_name: "ImFromNasa", password_confirmation: "password")
+	joey = User.create(name: "Joseph Adams", password: "password", email: "alpha142@fluttershyop.com", user_name: "alpha142", password_confirmation: "password")
+	josh = User.create(name: "Josh Huser", password: "password", email: "jhuser@iownabusiness.net", user_name: "WinterWorks", password_confirmation: "password")
+	dunsmore = User.create(name: "Professor Dunsmore", password: "password", email: "bxd@purdue.edu", user_name: "Dumbledore", password_confirmation: "password")
+	marco = User.create(name: "Marco Polo", password: "password", email: "marco@ta4lyfe.com", user_name: "iCoordinate", password_confirmation: "password")
+	jordan = User.create(name: "Geoffrey Webb", password: "password", email: "imnotjoffreybarathian@gameofthrones.com", user_name: "GTBPhoenix", password_confirmation: "password")
+	obama = User.create(name: "Obama", password: "password", email: "obama@whitehouse.gov", user_name: "Obama", password_confirmation: "password")
 
 
 	#league of legends tournament
 	league_tourn = Tournament.create(game_id: 1, status: 0, name: "League of Legends Seed", min_players_per_team: 5, max_players_per_team: 5, min_teams_per_match: 2, 
 		max_teams_per_match: 2, set_rounds: 1, randomized_teams: true, sampling_method: nil)
 
+	#adds players to the seeded league tournament
 	for i in 0..9
 		if i == 0
 			league_tourn.hosts.push(players_for_league[i])
@@ -95,10 +96,31 @@ if Rails.env.development?
 	league_tourn.join(players_for_league[9])
 
 	#chess
-	Tournament.create(game_id: 2, status: 0, name: "Chess Seed", min_players_per_team: 1, max_players_per_team: 1, min_teams_per_match: 2, 
+	chess_tourn = Tournament.create(game_id: 2, status: 0, name: "Chess Seed", min_players_per_team: 1, max_players_per_team: 1, min_teams_per_match: 2, 
 		max_teams_per_match: 2, set_rounds: 1, randomized_teams: true, sampling_method: nil)
 
+	chess_tourn.hosts.push(davis)
+	chess_tourn.join(davis)
+	chess_tourn.join(foy)
+
 	#Rock Paper Scissors
-	Tournament.create(game_id: 4, status: 0, name: "Rock, Paper, Scissors Seed", min_players_per_team: 1, max_players_per_team: 3, min_teams_per_match: 2, 
+	rps = Tournament.create(game_id: 4, status: 0, name: "Rock, Paper, Scissors Seed", min_players_per_team: 1, max_players_per_team: 3, min_teams_per_match: 2, 
 		max_teams_per_match: 2, set_rounds: 1, randomized_teams: true, sampling_method: nil)
+
+	rps.hosts.push(davis)
+	rps.join(davis)
+	rps.join(foy)
+	rps.join(guntas)
+
+	tourn5 = Tournament.create(game_id: 1, status: 0, name: "5 Teams, 2 Teams Per Match", min_players_per_team: 1, max_players_per_team: 1, min_teams_per_match: 2, 
+		max_teams_per_match: 2, set_rounds: 1, randomized_teams: true, sampling_method: nil)
+
+	for i in 0..9
+		if i == 0
+			tourn5.hosts.push(players_for_league[i])
+		end
+		tourn5.join(players_for_league[i])
+	end
+	tourn5.join(players_for_league[9])
+
 end

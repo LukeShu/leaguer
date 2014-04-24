@@ -1,66 +1,15 @@
-<h1>Listing pms</h1>
+<h1>Conversations</h1>
 
 <table>
-  <thead>
-    <tr>
-      <th>Author</th>
-      <th>Recipient</th>
-      <th>Message</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
   <tbody>
-
-    <tr>
-      <td><h2>Inbox<h2></td>
-    </tr>
-
-    <% message = @pms.where(recipient: current_user) %>
-    <% unless message.empty? then message.each do |pm| %>
-      <tr>
-        <td><%= pm.author.user_name %></td>
-        <td><%= pm.recipient.user_name %></td>
-        <td><%= pm.message %></td>
-        <td><%= link_to 'Show', pm %></td>
-        <td><%# link_to 'Edit', edit_pm_path(pm) %></td>
-        <td><%= link_to 'Delete', pm, method: :delete, data: { confirm: 'Are you sure (also deletes the author\'s copy)?' } %></td>
-      </tr>
-      <% end %>
-    <% else %>
-      <td><h3>No New Messages</h3></td>
-    <% end %>
-
-    <tr>
-      <td><h2>Outbox<h2></td>
-    </tr>
-
-    <% message = @pms.where(author: current_user) %>
-    <% unless message.empty? then message.each do |pm| %>
-      <tr>
-        <td><%= pm.author.user_name %></td>
-        <td><%= pm.recipient.user_name %></td>
-        <td><%= pm.message %></td>
-        <td><%= link_to 'Show', pm %></td>
-        <td><%# link_to 'Edit', edit_pm_path(pm) %></td>
-        <td><%= link_to 'Delete', pm, method: :delete, data: { confirm: 'Are you sure (also deletes the recipient\'s copy)?'} %></td>
-      </tr>
-      <% end %>
-    <% else %>
-      <td><h3>No New Messages</h3></td>
-    <% end %>
-
-    <tr>
-      <td><h2>Conversations<h2></td>
-    </tr>
     <tr>
       <td><h3>Inbox<h3></td>
     </tr>
     <tr>
       <% conversations = current_user.mailbox.inbox %>
-      <% if !conversations.nil? %>
+      <% if !conversations.empty? %>
+      <%# require 'pp' %>
+      <%= conversations.class %>
         <tr>
           <td><b>From</b></td>
           <td><b>Subject</b></td>
@@ -74,7 +23,7 @@
             <td><%= conversation.last_sender.user_name %></td>
             <td><%= message.subject %></td>
             <td><%= message.body %></td>
-            <td><%# link_to 'Show', pm %></td>
+            <td><%# link_to 'Show', @pms.where(conversation: conversation) %></td>
             </tr>
           <% end %>
         <% end %>
@@ -89,7 +38,77 @@
     </tr>
     <tr>
       <% conversations = current_user.mailbox.sentbox %>
-      <% if !conversations.nil? %>
+      <% if !conversations.empty? %>
+        <tr>
+          <td><b>To</b></td>
+          <td><b>Subject</b></td>
+          <td><b>Body</b></td>
+        </tr>
+        <% conversations.each do |conversation| %>
+          <% receipts = conversation.receipts_for current_user %>
+          <% receipts.each do |receipt| %>
+            <% message = receipt.message %>
+            <tr>
+            <td>Doesn't work</td>
+            <td><%= message.subject %></td>
+            <td><%= message.body %></td>
+            <td><%# link_to 'Show', @pms.where(conversation: conversation) %></td>
+            </tr>
+          <% end %>
+        <% end %>
+            
+      <% else %>
+          <td><p> No Messages </p></td>
+      <% end %>
+     </tr>
+
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Pm', new_pm_path %>
+<h1>Conversations</h1>
+
+<table>
+  <tbody>
+    <tr>
+      <td><h3>Inbox<h3></td>
+    </tr>
+    <tr>
+      <% conversations = current_user.mailbox.inbox %>
+      <% if !conversations.empty? %>
+      <%# require 'pp' %>
+      <%= conversations.class %>
+        <tr>
+          <td><b>From</b></td>
+          <td><b>Subject</b></td>
+          <td><b>Body</b></td>
+        </tr>
+        <% conversations.each do |conversation| %>
+          <% receipts = conversation.receipts_for current_user %>
+          <% receipts.each do |receipt| %>
+            <% message = receipt.message %>
+            <tr>
+            <td><%= conversation.last_sender.user_name %></td>
+            <td><%= message.subject %></td>
+            <td><%= message.body %></td>
+            <td><%# link_to 'Show', @pm.where(conversation: conversation) %></td>
+            </tr>
+          <% end %>
+        <% end %>
+
+      <% else %>
+          <td><p> No Messages </p></td>
+      <% end %>
+     </tr>
+
+     <tr>
+      <td><h3>Outbox<h3></td>
+    </tr>
+    <tr>
+      <% conversations = current_user.mailbox.sentbox %>
+      <% if !conversations.empty? %>
         <tr>
           <td><b>To</b></td>
           <td><b>Subject</b></td>
