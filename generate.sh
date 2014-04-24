@@ -29,6 +29,7 @@ cd "$srcdir"
 export RAILS_ENV=development
 
 git rm -rf -- app test config/routes.rb db/migrate || true
+git rm -f -- config/initializers/mailboxer.rb || true
 git checkout clean-start -- app test config/routes.rb
 
 bundle install
