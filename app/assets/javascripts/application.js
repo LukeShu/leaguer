@@ -17,4 +17,4 @@
 //= require 'dragsort.js'
 //= require 'coordinates.js'
 //
-//= require_tree ./common
+//= require_tree ./application
