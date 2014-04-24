@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140422212727) do
+ActiveRecord::Schema.define(version: 20140424014459) do
 
   create_table "alerts", force: true do |t|
     t.integer  "author_id"
@@ -88,6 +88,7 @@ ActiveRecord::Schema.define(version: 20140422212727) do
   add_index "game_settings", ["game_id"], name: "index_game_settings_on_game_id"
 
   create_table "games", force: true do |t|
+    t.integer  "parent_id"
     t.string   "name"
     t.integer  "min_players_per_team"
     t.integer  "max_players_per_team"
@@ -101,6 +102,7 @@ ActiveRecord::Schema.define(version: 20140422212727) do
   end
 
   add_index "games", ["name"], name: "index_games_on_name", unique: true
+  add_index "games", ["parent_id"], name: "index_games_on_parent_id"
 
   create_table "hosts_tournaments", id: false, force: true do |t|
     t.integer "host_id",       null: false

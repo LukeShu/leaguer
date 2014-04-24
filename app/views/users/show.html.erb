@@ -21,11 +21,12 @@
 </p>
 
 <p>
-	<%= label :username %><br>
-	<%= text_field  %>
-
-	<br><input type="submit" value="Submit"><br>
-
+	<%= form_for @user do |f| %>
+		<label>Have a League of Legends Account?
+			<input type=text name="user[remote_usernames][League of Legends]">
+		</label>
+		<%= f.submit "Add Username", :class => 'signup' %>
+	<% end %>
 </p>
 
 <div class="row">
