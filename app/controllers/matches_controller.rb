@@ -150,10 +150,10 @@ class MatchesController < ApplicationController
 			# Individual scores
 			scores = params["scores"]
 			scores.each do |user_name, score|
-				Score.create(user: User.find_by_user_name(user_name), match: @match, value: score.to_i)
+				Statistic.create(user: User.find_by_user_name(user_name), match: @match, name: "score", value: score.to_i)
 			end
 
-			# Team scores
+			# Team scores (processing for manual)
 			team_scores = {}
 			@match.teams.each do |team|
 				team_scores[team] = 0
@@ -165,10 +165,10 @@ class MatchesController < ApplicationController
 			@match.winner = teams[teams.keys.sort.last]
 
 			# Schedule next match
-			cur_match_num = @tournament.matches_ordered.invert[@match]
-			unless cur_match_num == 1
-				@match.winner.matches.push(@tournament.matches_ordered[cur_match_num/2])
-			end
+			#cur_match_num = @tournament.matches_ordered.invert[@match]
+			#unless cur_match_num == 1
+			#	@match.winner.matches.push(@tournament.matches_ordered[cur_match_num/2])
+			#end
 
 			# Skip peer evaluation if there aren't enough players per team
 			peer = false
@@ -249,7 +249,7 @@ class MatchesController < ApplicationController
 
 	# Never trust parameters from the scary internet, only allow the white list through.
 	def match_params
-		params.require(:match).permit(:status, :tournament_stage_id, :winner_id, :remote_id, :submitted_peer_evaluations)
+		params.require(:match).permit(:status, :tournament_stage_id, :winner_id, :remote_id, :submitted_peer_evaluations, :update_action)
 	end
 
 		# Turn of check_edit, since our #update is flexible

@@ -47,7 +47,7 @@ function score_peers() {
 				<% if @match.status <= 1 %>
 					<li><%= user.user_name %></li>
 				<% else %>
-					<li><%= user.user_name %> - SCORE: <%= @match.scores.select{|s| s.user == user}.first.value %></li>
+					<li><%= user.user_name %> - SCORE: <%= Statistic.where(:name => "score", :user => user, :match => @match).first.value %></li>
 				<% end %>
 			<% end %>
 		</ul></li>
@@ -75,6 +75,7 @@ function score_peers() {
 			<% end %>
 		<% when 1 %>
 			<!-- Started, waiting to finish -->
+			<!-- This will depend on the Sampling Method Eventually instead of always being Manual -->
 			<% if @tournament.hosts.include? current_user %>
 				<input type="hidden" name="update_action" value="finish">
 				<% @match.teams.each do |team| %>
