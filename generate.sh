@@ -51,7 +51,7 @@ bundle exec rails generate scaffold session user:references token:string:uniq
 bundle exec rails generate scaffold bracket user:references tournament:references name:string
 
 # Just models
-bundle exec rails generate model       game_setting       game:references name:string vartype:integer type_opt:text description:text display_order:integer default:text
+bundle exec rails generate model       game_setting       game:references name:string vartype:integer type_opt:text description:text display_order:integer default:text parent:references
 bundle exec rails generate model tournament_setting tournament:references name:string vartype:integer type_opt:text description:text display_order:integer   value:text
 
 bundle exec rails generate model score user:references match:references value:integer
@@ -86,4 +86,4 @@ bundle exec rake db:seed
 
 find app config -type f -name '*.rb' -exec bin/autoindent {} \;
 
-git add app test config/routes.rb config/initializers db/migrate db/schema.rb Gemfile.lock
+git add app test config db/migrate db/schema.rb Gemfile.lock
