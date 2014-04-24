@@ -1,6 +1,7 @@
 class CreateGames < ActiveRecord::Migration
   def change
     create_table :games do |t|
+      t.references :parent, index: true
       t.string :name
       t.integer :min_players_per_team
       t.integer :max_players_per_team

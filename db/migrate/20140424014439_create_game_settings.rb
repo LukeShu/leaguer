@@ -8,7 +8,6 @@ class CreateGameSettings < ActiveRecord::Migration
       t.text :description
       t.integer :display_order
       t.text :default
-      t.references :parent, index: true
 
       t.timestamps
     end

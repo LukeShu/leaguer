@@ -8,7 +8,6 @@ one:
   description: MyText
   display_order: 1
   default: MyText
-  parent_id: 
 
 two:
   game_id: 
@@ -18,4 +17,3 @@ two:
   description: MyText
   display_order: 1
   default: MyText
-  parent_id: 
