@@ -17,6 +17,45 @@ class MatchesController < ApplicationController
 	end
 
 	def get_riot
+		
+		players_id = Array.new		
+		players = Array.new
+
+		@match.teams.each do |team|
+			team.users.each do |user|
+				players_id.push(user.remote_usernames[0]["json_value"]["id"])
+				players.push(user.remote_usernames[0]["json_value"]["id"])
+			end
+		end
+
+		recent = HTTParty.get("https://prod.api.pvp.net/api/lol/na/v1.3/game/by-summoner/#{players_id[0]}/recent?api_key=ad539f86-22fd-474d-9279-79a7a296ac38")
+
+		blue = Hash.new
+		purple = Hash.new
+
+		for i in 0..8
+			current_player = players_id[i]
+			place = players[i]
+			info = HTTParty.get("https://prod.api.pvp.net/api/lol/na/v1.3/game/by-summoner/#{current_player}/recent?api_key=ad539f86-22fd-474d-9279-79a7a296ac38")
+
+			if 100 == info["games"][0]["stats"]["team"]
+				blue.merge!("#{place}" => info["games"][0]["stats"])
+			else
+				purple.merge!("#{place}" => info["games"][0]["stats"])
+			end
+			sleep(1)
+		end
+
+		#look into this glitch
+		if 100 == recent["games"][0]["stats"]["team"]
+			blue.merge!("#{players[9]}" => recent["games"][0]["stats"])
+		else
+			purple.merge!("#{players[9]}" => recent["games"][0]["stats"])
+		end
+
+		@purp = purple
+		@blue = blue
+
 	end
 
 	def get_riot_info_fake
