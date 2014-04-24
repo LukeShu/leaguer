@@ -108,7 +108,7 @@ STRING
 
 				t = 1
 				while t <= numTeams
-					color = (matches[i].teams[t-1] and matches[i].teams[t-1].users.include?(current_user)) ? "#BCED91" : "white"
+					color = (matches[i].teams[t-1] and matches[i].teams[t-1].users.include?(current_user)) ? "#5BC0DE" : "white"
 					str += "\t\t<rect width=\"#{rw-5}%\" height=\"#{rh*Float(30)/(matchHeight)}%\" x=\"#{rx + 2.5}%\" y=\"#{ry + (Float(t-1)/numTeams)*rh + 2 }%\" fill=\"#{color}\" />\n"
 					if matches[i].teams[t-1]
 						str += "\t\t<text x=\"#{rx + rw/4}%\" y=\"#{ry + (Float(t-1)/numTeams + Float(30)/(matchHeight))*rh}%\" font-size=\"#{rh}\">Team #{matches[i].teams[t-1].id}</text>\n"
