@@ -1,6 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  parent_id: 
   name: MyString
   min_players_per_team: 1
   max_players_per_team: 1
@@ -11,6 +12,7 @@ one:
   sampling_method: MyString
 
 two:
+  parent_id: 
   name: MyString
   min_players_per_team: 1
   max_players_per_team: 1

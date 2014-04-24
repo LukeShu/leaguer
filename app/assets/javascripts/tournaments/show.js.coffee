@@ -1,4 +1,6 @@
-Update = (tournament) ->
+json_url = window.location.href.replace(/\.[^/]*$/,'')+".json"
+
+update = (tournament) ->
 	here = tournament["players"].length
 	needed = (tournament["min_teams_per_match"] * tournament["min_players_per_team"])
 	pct_complete = here / needed
@@ -21,10 +23,10 @@ Update = (tournament) ->
 
 	# Do it all again
 	setTimeout (->
-		$.ajax(url: window.location.href.replace(/\..*/,'')+".json").done Update
+		$.ajax(url: json_url).done update
 		return
 	), 2000
 
 # Now kick off the whole process
 window.onload = ->
-  $.ajax(url: window.location.href.replace(/\..*/,'')+".json").done Update
+  $.ajax(url: json_url).done update

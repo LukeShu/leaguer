@@ -56,8 +56,25 @@ class UsersController < ApplicationController
 	# PATCH/PUT /users/1
 	# PATCH/PUT /users/1.json
 	def update
+		ok = true
+		if params[:user][:remote_usernames].nil?
+			ok &= @user.update(user_params)
+		else
+			params[:user][:remote_usernames].each do |game_name,user_name|
+				game = Game.find_by_name(game_name)
+				remote_username = HTTParty.get("https://prod.api.pvp.net/api/lol/na/v1.3/summoner/by-name/#{user_name}?api_key=ad539f86-22fd-474d-9279-79a7a296ac38")
+
+				remote = @user.remote_usernames.where(:game => game).first
+				if remote.nil?
+					ok &= @user.remote_usernames.create(game: game, value: remote_username)
+				else
+					remote.value = remote_username
+					ok &= remote.save
+				end
+			end
+		end
 		respond_to do |format|
-			if @user.update(user_params)
+			if ok
 				format.html { redirect_to @user, notice: 'User was successfully updated.' }
 				format.json { head :no_content }
 			else
@@ -77,19 +94,6 @@ class UsersController < ApplicationController
 		end
 	end
 
-	def set_remote
-		game = Game.find_by_name("League of Legends")
-
-		remote_username = HTTParty.get("https://prod.api.pvp.net/api/lol/na/v1.3/summoner/by-name/#{@name.downcase}?api_key=ad539f86-22fd-474d-9279-79a7a296ac38")
-
-		remote = @user.find_remote_username(game)
-		if remote.nil?
-			@user.remote_username.create(game: game, value: remote_username)
-		else
-			remote.value = remote_username
-			remote.save
-		end
-	end
 
 	private
 	# Use callbacks to share common setup or constraints between actions.

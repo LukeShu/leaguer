@@ -24,9 +24,13 @@ class User < ActiveRecord::Base
 	end
 
 	def find_remote_username(game)
-		obj = remote_username.where(:game => game)
-		if obj.nil? and not game.parent.nil?
-			return find_remote_username(game.parent)
+		obj = self.remote_usernames.where(:game => game).first
+		if obj.nil?
+			if game.parent.nil?
+				return nil
+			else
+				return find_remote_username(game.parent)
+			end
 		else
 			return obj.value
 		end

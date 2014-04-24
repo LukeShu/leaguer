@@ -33,7 +33,7 @@ class TournamentsController < ApplicationController
 	def new
 		@games = Game.all
 		if params[:tournament]
-			@tournament = Tournament.new(game: Game.find(params[:tournament][:game_id]))
+			@tournament = Tournament.new(tournament_params)
 		else
 			@tournament = Tournament.new()
 		end
