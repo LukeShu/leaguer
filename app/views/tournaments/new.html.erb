@@ -1,7 +1,7 @@
 <h1>New Tournament</h1>
 
 <%= form_tag(new_tournament_path, method: "get") do %>
-	<%= select_tag('game',
+	<%= select_tag('tournament[game_id]',
 	                options_from_collection_for_select(@games, 'id', 'name', @tournament.game.nil? || @tournament.game.id),
 	                :prompt => "Select a Game Type") %>
 	<%= submit_tag("Select", :class => "btn") %>

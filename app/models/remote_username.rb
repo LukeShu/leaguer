@@ -9,4 +9,4 @@ class RemoteUsername < ActiveRecord::Base
 	def value=(v)
 		self.json_value = v.to_json
 	end
-end
+end      
