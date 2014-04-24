@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ApiRequestsTest < ActiveSupport::TestCase
+class ApiRequestTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
