@@ -71,7 +71,6 @@ bundle exec rails generate migration CreateMatchTeamJoinTable	matches teams
 # Just controllers
 bundle exec rails generate controller search
 bundle exec rails generate controller main
-bundle exec rails generate controller static
 
 # Migrations
 # By having these separate from the original 'generate', it makes it
