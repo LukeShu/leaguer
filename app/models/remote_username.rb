@@ -3,7 +3,11 @@ class RemoteUsername < ActiveRecord::Base
 	belongs_to :user
 
 	def value
-		JSON.parse(self.json_value)
+		begin
+			return JSON.parse(self.json_value)
+		rescue
+			return {}
+		end
 	end
 
 	def value=(v)
