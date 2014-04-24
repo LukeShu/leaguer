@@ -4,8 +4,12 @@ one:
   author_id: 
   recipient_id: 
   message: MyText
+  subject: MyText
+  conversation_id: 
 
 two:
   author_id: 
   recipient_id: 
   message: MyText
+  subject: MyText
+  conversation_id: 

@@ -77,6 +77,6 @@ class PmsController < ApplicationController
 
 	# Never trust parameters from the scary internet, only allow the white list through.
 	def pm_params
-		params.require(:pm).permit(:author_id, :recipient_id, :message)
+		params.require(:pm).permit(:author_id, :recipient_id, :message, :subject, :conversation_id)
 	end
 end
