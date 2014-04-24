@@ -61,7 +61,7 @@ bundle exec rails generate model remote_username game:references user:references
 
 bundle exec rails generate model bracket_match bracket:references match:references predicted_winner:references
 
-bundle exec rails generate model api_requests api_name:string
+bundle exec rails generate model api_request api_name:string
 
 # Join tables
 bundle exec rails generate migration CreateTournamentPlayersJoinTable	players	tournaments
