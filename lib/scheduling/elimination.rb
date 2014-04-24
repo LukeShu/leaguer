@@ -17,7 +17,7 @@ module Scheduling
 
 		def create_matches
 			num_teams = (self.tournament.players.count/self.tournament.min_players_per_team).floor
-			num_matches = num_teams - 1
+			num_matches = (Float(num_teams -  tournament.min_teams_per_match)/(tournament.min_teams_per_match - 1)).ceil + 1
 			for i in 1..num_matches
 				self.tournament_stage.matches.create(status: 0, submitted_peer_evaluations: 0)
 			end
@@ -108,7 +108,7 @@ STRING
 
 				t = 1
 				while t <= numTeams
-					color = (matches[i].teams[t-1] and matches[i].teams[t-1].users.include?(current_user)) ? "#BCED91" : "white"
+					color = (matches[i].teams[t-1] and matches[i].teams[t-1].users.include?(current_user)) ? "#5BC0DE" : "white"
 					str += "\t\t<rect width=\"#{rw-5}%\" height=\"#{rh*Float(30)/(matchHeight)}%\" x=\"#{rx + 2.5}%\" y=\"#{ry + (Float(t-1)/numTeams)*rh + 2 }%\" fill=\"#{color}\" />\n"
 					if matches[i].teams[t-1]
 						str += "\t\t<text x=\"#{rx + rw/4}%\" y=\"#{ry + (Float(t-1)/numTeams + Float(30)/(matchHeight))*rh}%\" font-size=\"#{rh}\">Team #{matches[i].teams[t-1].id}</text>\n"
