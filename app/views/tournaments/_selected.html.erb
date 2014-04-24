@@ -2,18 +2,17 @@
   <%= render "common/error_messages", :target => @tournament %>
   <%= f.hidden_field(:game_id) %>
 
-  <% @game = Game.find(params[:game]) %>
   <% @tournament.attributes.each do |name, value| %>
     <% if (name == "id") or (name =~ /.*_at$/) or (name == "game_id") or (name == "status") or (name == "set_rounds") %>
       <% next %>
     <% end %>
     <p>
       <%= f.label name %><br>
-      <% unless @game.attributes[name].nil? %>
+      <% unless @tournament.game.attributes[name].nil? %>
         <% if name == "sampling_method" %>
-          <%= f.select( name, @game.sampling_method.split(',') ) %>
+          <%= f.select( name, @tournament.game.sampling_method.split(',') ) %>
         <% else %>
-        <%= f.text_field(name, :value => @game.attributes[name] ) %>
+        <%= f.text_field(name, :value => @tournament.game.attributes[name] ) %>
         <% end %>
       <% else %>
         <%= f.text_field name %>
@@ -22,7 +21,7 @@
   <% end %>
 
   <%= fields_for "tournament[settings]", @tournament.settings do |setting_fields|  %>
-    <% @game.settings.each do |setting| %>
+    <% @tournament.game.settings.each do |setting| %>
       <p>
       <%= setting_fields.label setting.name %>
       <br>

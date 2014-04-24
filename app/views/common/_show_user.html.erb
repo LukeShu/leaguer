@@ -1,8 +1,8 @@
 <div class="row user-listing">
-	<div class="col-md-3 col-sm-3 col-xs-6"><%= image_tag ('http://www.gravatar.com/avatar/' + Digest::MD5.hexdigest(target.email) + '?s=100&d=mm') %></div>
+	<div class="col-md-3 col-sm-4 col-xs-4"><%= image_tag ('http://www.gravatar.com/avatar/' + Digest::MD5.hexdigest(target.email) + '?s=100&d=mm') %></div>
 	
 
-	<div class="col-md-9 col-sm-9 col-xs-6">
+	<div class="col-md-9 col-sm-8 col-xs-8">
 		<%# "header" %>
 		<%= link_to(target) do %><h3><%= target.user_name %></h3><% end %>
 		

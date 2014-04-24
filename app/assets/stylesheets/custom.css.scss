@@ -1,5 +1,11 @@
 @import "bootstrap";
 
+$page-color: #444;
+$toolbar-color: black;
+$orange: #DD9125;
+$darker-orange: #9D4102;
+$link-yellow: #FFC50D;
+
 header > nav {
 	@extend .navbar; 
 	@extend .navbar-inverse;
@@ -39,6 +45,13 @@ input[type="text"],  input[type="password"]{
 	padding: 8px;
 	background: rgba(0,0,0,0.5);
 	margin: 0 0 5px 0;
+}
+
+select {
+	background-color: #333;
+	padding: 5px;
+	border: none;
+	color: #DD9125 !important;
 }
 
 p.errors {
