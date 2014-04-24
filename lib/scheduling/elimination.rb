@@ -32,7 +32,7 @@ module Scheduling
 				# if the match is full, move to the next match, otherwise move to the next team
 				if (team_num == self.tournament.min_teams_per_match)
 					match_num -= 1
-					team_num = 0
+					team_num = 1
 				else
 					team_num += 1
 				end
