@@ -59,14 +59,26 @@
       <td><h3>Inbox<h3></td>
     </tr>
     <tr>
-      <% conversation1 = current_user.mailbox.inbox.first %>
-      <% if !conversation1.nil? %>
-        <% receipts1 = conversation1.receipts_for current_user %>
-        <% receipts1.each do |receipt1| %>
-          <% message1 = receipt1.message %>
-          <td><%= message1.subject %></td>
-          <td><%= message1.body %></td>
-        <% end %>    
+      <% conversations = current_user.mailbox.inbox %>
+      <% if !conversations.nil? %>
+        <tr>
+          <td><b>From</b></td>
+          <td><b>Subject</b></td>
+          <td><b>Body</b></td>
+        </tr>
+        <% conversations.each do |conversation| %>
+          <% receipts = conversation.receipts_for current_user %>
+          <% receipts.each do |receipt| %>
+            <% message = receipt.message %>
+            <tr>
+            <td><%= conversation.last_sender.user_name %></td>
+            <td><%= message.subject %></td>
+            <td><%= message.body %></td>
+            <td><%# link_to 'Show', pm %></td>
+            </tr>
+          <% end %>
+        <% end %>
+
       <% else %>
           <td><p> No Messages </p></td>
       <% end %>
@@ -76,19 +88,26 @@
       <td><h3>Outbox<h3></td>
     </tr>
     <tr>
-      <% conversation1 = current_user.mailbox.sentbox.first %>
-      <% if !conversation1.nil? %>
+      <% conversations = current_user.mailbox.sentbox %>
+      <% if !conversations.nil? %>
         <tr>
-          <td><b>From</b></td>
+          <td><b>To</b></td>
           <td><b>Subject</b></td>
           <td><b>Body</b></td>
         </tr>
-        <% receipts1 = conversation1.receipts_for current_user %>
-        <% receipts1.each do |receipt1| %>
-          <% message1 = receipt1.message %>
-          <td><%= message1.subject %></td>
-          <td><%= message1.body %></td>
-        <% end %>    
+        <% conversations.each do |conversation| %>
+          <% receipts = conversation.receipts_for current_user %>
+          <% receipts.each do |receipt| %>
+            <% message = receipt.message %>
+            <tr>
+            <td>Doesn't work</td>
+            <td><%= message.subject %></td>
+            <td><%= message.body %></td>
+            <td><%# link_to 'Show', conversation %></td>
+            </tr>
+          <% end %>
+        <% end %>
+            
       <% else %>
           <td><p> No Messages </p></td>
       <% end %>
