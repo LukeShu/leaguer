@@ -20,14 +20,18 @@
   too single
 </p>
 
+
 <p>
+<% if @user.remote_usernames[0].nil? %>
 	<%= form_for @user do |f| %>
 		<label>Have a League of Legends Account?
 			<input type=text name="user[remote_usernames][League of Legends]">
 		</label>
 		<%= f.submit "Add Username", :class => 'signup' %>
 	<% end %>
+<% end %>
 </p>
+
 
 <div class="row">
 	<div class="col-md-6">

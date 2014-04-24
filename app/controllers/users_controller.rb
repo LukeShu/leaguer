@@ -64,10 +64,7 @@ class UsersController < ApplicationController
 				game = Game.find_by_name(game_name)
 				remote_username = HTTParty.get("https://prod.api.pvp.net/api/lol/na/v1.3/summoner/by-name/#{user_name.downcase}?api_key=ad539f86-22fd-474d-9279-79a7a296ac38")
 
-				puts "#{user_name}"
-
 				id = "#{remote_username["#{user_name.downcase}"]["id"]}".to_i
-
 				username = "#{remote_username["#{user_name.downcase}"]["name"]}"
 
 				hash = {:username => username, :id => id}
