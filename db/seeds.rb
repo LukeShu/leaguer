@@ -123,4 +123,21 @@ if Rails.env.development?
 	end
 	tourn5.join(players_for_league[9])
 
+	tourn6 = Tournament.create(game_id: 1, status: 0, name: "3 teams per match", min_players_per_team: 1, max_players_per_team: 1, min_teams_per_match: 3, 
+		max_teams_per_match: 3, set_rounds: 1, randomized_teams: true, sampling_method: nil)
+
+	for i in 0..9
+		if i == 0
+			tourn6.hosts.push(players_for_league[i])
+		end
+		tourn6.join(players_for_league[i])
+	end
+	tourn6.join(players_for_league[9])
+	tourn6.join(davis)
+	tourn6.join(foy)
+	tourn6.join(guntas)
+	tourn6.join(luke)
+	tourn6.join(marco)
+
+
 end
