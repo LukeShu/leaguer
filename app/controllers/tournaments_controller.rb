@@ -32,11 +32,7 @@ class TournamentsController < ApplicationController
 	# GET /tournaments/new
 	def new
 		@games = Game.all
-		if params[:tournament]
-			@tournament = Tournament.new(tournament_params)
-		else
-			@tournament = Tournament.new()
-		end
+		@tournament = Tournament.new(tournament_attribute_params)
 	end
 
 	# GET /tournaments/1/edit
@@ -47,11 +43,21 @@ class TournamentsController < ApplicationController
 	# POST /tournaments
 	# POST /tournaments.json
 	def create
-		@tournament = Tournament.new(tournament_params)
+		require 'pp'
+		puts "----attributes:"
+		pp tournament_attribute_params
+		@tournament = Tournament.new(tournament_attribute_params)
 		@tournament.status = 0
+		ok = true
+		ActiveRecord::Base.transaction do
+			ok &= @tournament.save
+			puts "----settings:"
+			pp tournament_setting_params
+			ok &= @tournament.update(tournament_setting_params)
+			ok &= @tournament.hosts.push(current_user)
+		end
 		respond_to do |format|
-			if @tournament.save
-				@tournament.hosts.push(current_user)
+			if ok
 				format.html { redirect_to @tournament, notice: 'Tournament was successfully created.' }
 				format.json { render action: 'show', status: :created, location: @tournament }
 			else
@@ -67,8 +73,13 @@ class TournamentsController < ApplicationController
 		case params[:update_action]
 		when nil
 			check_permission(:edit, @tournament)
+			ok = true
+			ActiveRecord::Base.transaction do
+				ok &= @tournament.update(tournament_attribute_params)
+				ok &= @tournament.update(tournament_setting_params)
+			end
 			respond_to do |format|
-				if @tournament.update(tournament_params)
+				if ok
 					format.html { redirect_to @tournament, notice: 'Tournament was successfully updated.' }
 					format.json { head :no_content }
 				else
@@ -149,13 +160,21 @@ class TournamentsController < ApplicationController
 	end
 
 	# Never trust parameters from the scary internet, only allow the white list through.
-	def tournament_params
-		permitted = [:game_id, :status, :name, :min_players_per_team, :max_players_per_team, :min_teams_per_match, :max_teams_per_match, :set_rounds, :randomized_teams, :sampling_method]
-		if params[:tournament][:game_id]
-			game = Game.find(params[:tournament][:game_id])
-			permitted.push(:settings => game.settings.collect{|s| s.name})
+	def tournament_attribute_params
+		if params[:tournament]
+			params.require(:tournament).permit(:game_id, :status, :name, :min_players_per_team, :max_players_per_team, :min_teams_per_match, :max_teams_per_match, :set_rounds, :randomized_teams, :sampling_method)
+		else
+			return {}
 		end
-		params.require(:tournament).permit(permitted)
+	end
+
+	def tournament_setting_params
+		if tournament_attribute_params[:game_id]
+			game = Game.find(params[:tournament][:game_id])
+			params.require(:tournament).permit({:settings => game.settings.collect{|s| s.name}})
+		else
+			return {}
+		end
 	end
 
 	def is_owner?(object)

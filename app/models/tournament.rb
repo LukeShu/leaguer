@@ -40,7 +40,6 @@ class Tournament < ActiveRecord::Base
 		end
 
 		def []=(setting_name, val)
-			@tournament.save
 			tournament_setting = @tournament.settings_raw.find_by_name(setting_name)
 			if tournament_setting.nil?
 				game_setting = @tournament.game.settings.find_by_name(setting_name)
