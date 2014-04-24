@@ -3,6 +3,23 @@
 # The generate.sh bash file is used to generate all of the necessary
 # .rb files to run the website
 
+# To modify it and update the app do the following:
+#  1. Take care of uncommitted files
+#  2. Run `git checkout clean2`
+#  3. Run `git pull`
+#  4. Make any changes to `generate.sh`, and commit them.
+#     If you have committed the desired changes to 'master', you can do
+#     this simply with:
+#         git checkout master generate.sh
+#         git commit -m 'Get changes to generate.sh from master
+#  5. Run `./generate.sh`
+#  6. Run `git commit -m 'run ./generate.sh'`
+#  7. Run `git checkout master`
+#  8. Run `git merge clean2`
+#  9. Resolve any merge conflicts.
+# 10. Run `git push origin clean2`
+# 11. Run `git push origin master`
+
 set -xe
 
 # figure out where we are running from
@@ -12,6 +29,7 @@ cd "$srcdir"
 export RAILS_ENV=development
 
 git rm -rf -- app test config/routes.rb db/migrate || true
+git rm -f -- config/initializers/mailboxer.rb || true
 git checkout clean-start -- app test config/routes.rb
 
 bundle install
@@ -54,7 +72,6 @@ bundle exec rails generate migration CreateMatchTeamJoinTable	matches teams
 # Just controllers
 bundle exec rails generate controller search
 bundle exec rails generate controller main
-bundle exec rails generate controller static
 
 # Migrations
 # By having these separate from the original 'generate', it makes it
