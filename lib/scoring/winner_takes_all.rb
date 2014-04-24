@@ -1,16 +1,20 @@
-require 'ScoringAlgorithm'
-
-class WinnerTakesAll < ScoringAlgorithm
-
-	def self.score(match, interface)
-		match.players.each do |player|
-			scores[player.user_name] = scoreUser(match.win?(player))
+module Scoring
+	module WinnerTakesAll
+		def stats_needed
+			return []
 		end
-		scores
-	end
 
+		def score(match, interface)
+			scores = {}
+			match.players.each do |player|
+				scores[player.user_name] = score_user(match.win?(player))
+			end
+			scores
+		end
 
-	def self.score(win)
-		win.nil? ? 0.5 : win ? 1 : 0
+		private
+		def score_user(win)
+			win.nil? ? 0.5 : win ? 1 : 0
+		end
 	end
 end
