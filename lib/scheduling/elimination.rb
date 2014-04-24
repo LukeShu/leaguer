@@ -61,11 +61,6 @@ module Scheduling
 			matchHeight = 50*logBase;
 			height = [(matchHeight+50) * logBase**(depth-1) + 100, 500].max;
 
-			lastrx = 0
-			lastry = 0
-			lastrh = 0
-			lastrw = 0
-
 			str = <<-STRING
 <svg version="1.1" baseProfile="full"
      xmlns="http://www.w3.org/2000/svg"
@@ -80,11 +75,20 @@ module Scheduling
 STRING
 			(1..matches.count).each do |i|
 				matchDepth = Math.log(i*(logBase-1), logBase).floor+1
+				puts matchDepth
 				base = (logBase**(matchDepth-1)/(logBase-1)).ceil
+				if base == 0
+					base = 1
+				end
+				puts base
 				rh = 100 / (logBase**(depth-1)+1) - 100/height;
+				puts rh
 				rw = 100/(depth+1) - 5
+				puts rw
 				rx = 50/(depth+1) + 100/(depth+1)*(depth-matchDepth)
+				puts rx
 				ry = 100/(logBase**(matchDepth-1)+1) * (i-base+1) - rh/2
+				puts ry
 
 				str += "\t<a id=\"svg-match-#{i}\" xlink:href=\"#{match_path(matches[i])}\"><g>\n"
 				str += "\t\t<rect height=\"#{rh}%\" width=\"#{rw}%\" x=\"#{rx}%\" y=\"#{ry}%\" fill=\"url(#gradMatch)\" rx=\"5px\" stroke-width=\"2\""
@@ -111,10 +115,10 @@ STRING
 					color = (matches[i].teams[t-1] and matches[i].teams[t-1].users.include?(current_user)) ? "#5BC0DE" : "white"
 					str += "\t\t<rect width=\"#{rw-5}%\" height=\"#{rh*Float(30)/(matchHeight)}%\" x=\"#{rx + 2.5}%\" y=\"#{ry + (Float(t-1)/numTeams)*rh + 2 }%\" fill=\"#{color}\" />\n"
 					if matches[i].teams[t-1]
-						str += "\t\t<text x=\"#{rx + rw/4}%\" y=\"#{ry + (Float(t-1)/numTeams + Float(30)/(matchHeight))*rh}%\" font-size=\"#{rh}\">Team #{matches[i].teams[t-1].id}</text>\n"
+						str += "\t\t<text x=\"#{rx + rw/4}%\" y=\"#{ry + (Float(t-1)/numTeams + Float(30)/(matchHeight))*rh}%\" font-size=\"200%\">Team #{matches[i].teams[t-1].id}</text>\n"
 					end
 					if (t < numTeams)
-						str += "\t\t<text x=\"#{rx + 1.3*rw/3}%\" y=\"#{ry + (Float(20+35*(t))/matchHeight)*rh}%\" font-size=\"#{rh}\"> VS </text>\n"
+						str += "\t\t<text x=\"#{rx + 1.3*rw/3}%\" y=\"#{ry + (Float(t)/numTeams)*rh + 1}%\" font-size=\"200%\"> VS </text>\n"
 					end
 					t = t + 1
 				end

@@ -56,14 +56,3 @@
 svg {
     min-width: 600px;
 }
-
-@media (max-width: 900px) {
-  svg text {
-    font-size: 200%;
-  }
-}
-@media (max-width: 700px) {
-  svg text {
-    font-size: 150%;
-  }
-}

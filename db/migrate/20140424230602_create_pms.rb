@@ -4,6 +4,8 @@ class CreatePms < ActiveRecord::Migration
       t.references :author, index: true
       t.references :recipient, index: true
       t.text :message
+      t.text :subject
+      t.references :conversation, index: true
 
       t.timestamps
     end

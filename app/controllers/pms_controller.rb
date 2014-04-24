@@ -24,11 +24,11 @@ class PmsController < ApplicationController
 	def create
 		@pm = Pm.new(pm_params)
 		@pm.author = current_user
-		require 'pp'
-		pp @pm.message
+		#require 'pp'
+		#pp @pm.message
 		@pm.recipient = User.find_by_user_name(pm_params['recipient_id'])
 
-		@pm.author.send_message(@pm.recipient, @pm.message, 'Default')
+		@pm.conversation = @pm.author.send_message(@pm.recipient, @pm.message, @pm.subject).conversation
 
 		respond_to do |format|
 			if @pm.save
@@ -40,6 +40,10 @@ class PmsController < ApplicationController
 			end
 		end
 	end
+
+	#def reply
+	#	current_user.reply_to_conversation(conversation, message)
+	#end
 
 	# PATCH/PUT /pms/1
 	# PATCH/PUT /pms/1.json
@@ -73,6 +77,6 @@ class PmsController < ApplicationController
 
 	# Never trust parameters from the scary internet, only allow the white list through.
 	def pm_params
-		params.require(:pm).permit(:author_id, :recipient_id, :message)
+		params.require(:pm).permit(:author_id, :recipient_id, :message, :subject, :conversation_id)
 	end
 end
