@@ -23,7 +23,7 @@ class AlertsController < ApplicationController
 	# POST /alerts.json
 	def create
 		@alert = Alert.new(alert_params)
-
+		@alert.author = current_user
 		respond_to do |format|
 			if @alert.save
 				format.html { redirect_to @alert, notice: 'Alert was successfully created.' }
