@@ -23,8 +23,8 @@ class MatchesController < ApplicationController
 
 		@match.teams.each do |team|
 			team.users.each do |user|
-				players_id.push(user.remote_usernames[0]["json_value"]["id"])
-				players.push(user.remote_usernames[0]["json_value"]["id"])
+				players_id.push(user.remote_usernames[0].value["id"])
+				players.push(user.remote_usernames[0].value["name"])
 			end
 		end
 
