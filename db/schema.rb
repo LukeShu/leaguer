@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140424005552) do
+ActiveRecord::Schema.define(version: 20140424013300) do
 
   create_table "alerts", force: true do |t|
     t.integer  "author_id"
@@ -81,11 +81,13 @@ ActiveRecord::Schema.define(version: 20140424005552) do
     t.text     "description"
     t.integer  "display_order"
     t.text     "default"
+    t.integer  "parent_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "game_settings", ["game_id"], name: "index_game_settings_on_game_id"
+  add_index "game_settings", ["parent_id"], name: "index_game_settings_on_parent_id"
 
   create_table "games", force: true do |t|
     t.string   "name"
