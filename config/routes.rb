@@ -19,7 +19,7 @@ Leaguer::Application.routes.draw do
 
 	resource :server, only: [:show, :edit, :update]
 
-	root to: 'static#homepage'
+	root to: 'main#homepage'
 
 	get '/search', to: 'search#go'
 

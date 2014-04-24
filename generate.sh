@@ -29,6 +29,7 @@ cd "$srcdir"
 export RAILS_ENV=development
 
 git rm -rf -- app test config/routes.rb db/migrate || true
+git rm -f -- config/initializers/mailboxer.rb || true
 git checkout clean-start -- app test config/routes.rb
 
 bundle install
@@ -73,7 +74,6 @@ bundle exec rails generate migration CreateMatchTeamJoinTable	matches teams
 # Just controllers
 bundle exec rails generate controller search
 bundle exec rails generate controller main
-bundle exec rails generate controller static
 
 # Migrations
 # By having these separate from the original 'generate', it makes it
