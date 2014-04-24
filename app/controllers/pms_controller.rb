@@ -24,8 +24,8 @@ class PmsController < ApplicationController
 	def create
 		@pm = Pm.new(pm_params)
 		@pm.author = current_user
-		#require 'pp'
-		#pp pm_params['recipient_id']
+		require 'pp'
+		pp @pm.message
 		@pm.recipient = User.find_by_user_name(pm_params['recipient_id'])
 
 		@pm.author.send_message(@pm.recipient, @pm.message, 'Default')

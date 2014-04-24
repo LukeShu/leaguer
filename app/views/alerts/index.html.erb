@@ -12,14 +12,18 @@
   </thead>
 
   <tbody>
-    <% @alerts.each do |alert| %>
-      <tr>
-        <td><%= alert.author %></td>
-        <td><%= alert.message %></td>
-        <td><%= link_to 'Show', alert %></td>
-        <td><%= link_to 'Edit', edit_alert_path(alert) %></td>
-        <td><%= link_to 'Destroy', alert, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <% if !@alerts.nil? %>
+      <% @alerts.each do |alert| %>
+        <tr>
+          <td><%= alert.author %></td>
+          <td><%= alert.message %></td>
+          <td><%= link_to 'Show', alert %></td>
+          <td><%= link_to 'Edit', edit_alert_path(alert) %></td>
+          <td><%= link_to 'Destroy', alert, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %> 
+    <% else %>
+      <td><p>There are no alerts!</p></td>
     <% end %>
   </tbody>
 </table>
