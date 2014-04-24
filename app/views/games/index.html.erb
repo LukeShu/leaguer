@@ -3,6 +3,7 @@
 <table class="table table-hover">
   <thead>
     <tr>
+      <th>Parent</th>
       <th>Name</th>
       <th>Min players per team</th>
       <th>Max players per team</th>
@@ -20,6 +21,7 @@
   <tbody>
     <% @games.each do |game| %>
       <tr>
+        <td><%= game.parent %></td>
         <td><%= game.name %></td>
         <td><%= game.min_players_per_team %></td>
         <td><%= game.max_players_per_team %></td>
