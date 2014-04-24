@@ -4,7 +4,7 @@
 	<%= select_tag('game',
 	                options_from_collection_for_select(@games, 'id', 'name', @tournament.game.nil? || @tournament.game.id),
 	                :prompt => "Select a Game Type") %>
-	<%= submit_tag("Select", :class => "btn btn-success btn-xs") %>
+	<%= submit_tag("Select", :class => "btn") %>
 <% end %>
 
 <div id='ajax-form'>
