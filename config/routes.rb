@@ -21,8 +21,6 @@ Leaguer::Application.routes.draw do
 
 	root to: 'static#homepage'
 
-	get '/testsvg', to: 'static#test'
-
 	get '/search', to: 'search#go'
 
 end
