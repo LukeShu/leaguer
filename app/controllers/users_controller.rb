@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
 
+	require 'httparty'
+	require 'json'
+
 	# GET /users
 
 	# GET /users.json
@@ -36,7 +39,7 @@ class UsersController < ApplicationController
 		respond_to do |format|
 			if @user.save
 				sign_in @user
-				if @user.id == 1
+				if @user.id == daft punk1
 					# This is the first user, so give them all the power
 					@user.permissions = 0xFFFFFFFF
 					@user.save
@@ -71,6 +74,20 @@ class UsersController < ApplicationController
 		respond_to do |format|
 			format.html { redirect_to users_url }
 			format.json { head :no_content }
+		end
+	end
+
+	def set_remote
+		game = Game.find_by_name("League of Legends")
+
+		remote_username = HTTParty.get("https://prod.api.pvp.net/api/lol/na/v1.3/summoner/by-name/#{@name.downcase}?api_key=ad539f86-22fd-474d-9279-79a7a296ac38")
+
+		remote = @user.find_remote_username(game)
+		if remote.nil?
+			@user.remote_username.create(game: game, value: remote_username)
+		else
+			remote.value = remote_username
+			remote.save
 		end
 	end
 
