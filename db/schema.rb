@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140424202717) do
+ActiveRecord::Schema.define(version: 20140424230712) do
 
   create_table "alerts", force: true do |t|
     t.integer  "author_id"
@@ -156,11 +156,14 @@ ActiveRecord::Schema.define(version: 20140424202717) do
     t.integer  "author_id"
     t.integer  "recipient_id"
     t.text     "message"
+    t.text     "subject"
+    t.integer  "conversation_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "pms", ["author_id"], name: "index_pms_on_author_id"
+  add_index "pms", ["conversation_id"], name: "index_pms_on_conversation_id"
   add_index "pms", ["recipient_id"], name: "index_pms_on_recipient_id"
 
   create_table "receipts", force: true do |t|

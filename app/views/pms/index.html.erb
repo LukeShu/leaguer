@@ -6,6 +6,8 @@
       <th>Author</th>
       <th>Recipient</th>
       <th>Message</th>
+      <th>Subject</th>
+      <th>Conversation</th>
       <th></th>
       <th></th>
       <th></th>
@@ -18,6 +20,8 @@
         <td><%= pm.author %></td>
         <td><%= pm.recipient %></td>
         <td><%= pm.message %></td>
+        <td><%= pm.subject %></td>
+        <td><%= pm.conversation %></td>
         <td><%= link_to 'Show', pm %></td>
         <td><%= link_to 'Edit', edit_pm_path(pm) %></td>
         <td><%= link_to 'Destroy', pm, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -15,5 +15,15 @@
   <%= @pm.message %>
 </p>
 
+<p>
+  <strong>Subject:</strong>
+  <%= @pm.subject %>
+</p>
+
+<p>
+  <strong>Conversation:</strong>
+  <%= @pm.conversation %>
+</p>
+
 <%= link_to 'Edit', edit_pm_path(@pm) %> |
 <%= link_to 'Back', pms_path %>
