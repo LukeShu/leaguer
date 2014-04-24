@@ -39,7 +39,7 @@ class UsersController < ApplicationController
 		respond_to do |format|
 			if @user.save
 				sign_in @user
-				if @user.id == daft punk1
+				if @user.id == 1
 					# This is the first user, so give them all the power
 					@user.permissions = 0xFFFFFFFF
 					@user.save
