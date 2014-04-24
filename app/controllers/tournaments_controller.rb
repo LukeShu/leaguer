@@ -116,8 +116,8 @@ class TournamentsController < ApplicationController
 					success = true
 					ActiveRecord::Base.transaction do
 						success &= @tournament.save &&
-						success &= @tournament.tournament_stages.create(scheduling: "elimination")
-						success &= @tournament.tournament_stages.first.create_matches
+						success &= @tournament.stages.create(scheduling: "elimination")
+						success &= @tournament.stages.first.create_matches
 					end
 					if success
 						format.html { redirect_to @tournament, notice: 'You have started this tournament.' }

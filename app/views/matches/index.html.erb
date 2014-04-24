@@ -12,7 +12,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		<% @tournament.tournament_stages.ordered(:id)each do |stage| %>
+		<% @tournament.stages.ordered(:id)each do |stage| %>
 			<% stage.matches_ordered.keys.sort.reverse.each do |match_key| %><tr>
 				<% match = stage.matches_ordered[match_key] %>
 				<td><%= "Match #{match.id}" %></td>
@@ -35,6 +35,6 @@
 
 <br>
 
-<% @tournament.tournament_stages.ordered(:id).each do |stage| %>
+<% @tournament.stages.ordered(:id).each do |stage| %>
 	<div class="graph"><%= raw stage.to_svg(current_user) %></div>
 <% end %>
