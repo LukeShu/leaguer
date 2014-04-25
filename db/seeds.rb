@@ -123,4 +123,40 @@ if Rails.env.development?
 	end
 	tourn5.join(players_for_league[9])
 
+	tourn6 = Tournament.create(game_id: 1, status: 0, name: "3 teams per match", min_players_per_team: 1, max_players_per_team: 1, min_teams_per_match: 3, 
+		max_teams_per_match: 3, set_rounds: 1, randomized_teams: true, sampling_method: nil)
+
+	for i in 0..9
+		if i == 0
+			tourn6.hosts.push(players_for_league[i])
+		end
+		tourn6.join(players_for_league[i])
+	end
+	tourn6.join(players_for_league[9])
+	tourn6.join(davis)
+	tourn6.join(foy)
+	tourn6.join(guntas)
+	tourn6.join(luke)
+	tourn6.join(marco)
+=begin
+	hash1 = {:username => "TeslasMind", :id => id}
+	hash2 = {:username => "Alpha142", :id => id}
+	hash3 = {:username => "ImFromNasa", :id => id}
+	hash4 = {:username => "NalfeinX", :id => id}
+	hash5 = {:username => "GTBPhoenix", :id => id}
+	hash6 = {:username => , :id => id}
+	hash7 = {:username => username, :id => id}
+	hash8 = {:username => username, :id => id}
+	hash9 = {:username => username, :id => id}
+	hash10 = {:username => username, :id => id}
+
+
+
+FOR ROUNG ROBIN
+
+http://stackoverflow.com/questions/6648512/scheduling-algorithm-for-a-round-robin-tournament
+
+
+=end
+
 end
