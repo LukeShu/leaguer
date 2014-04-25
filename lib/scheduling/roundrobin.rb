@@ -1,4 +1,3 @@
-
 module Scheduling
 	class RoundRobin
 		include Rails.application.routes.url_helpers
@@ -13,6 +12,9 @@ module Scheduling
 
 			#round robin should look like this
 			@team_pairs = Array.new(num_matches)
+			for i in 0..@match.teams.size
+				@team_pairs.push(@match.teams[i]
+			end
 			#team_pairs needs populated with the team objects and im not sure how to do that
 		end
 
