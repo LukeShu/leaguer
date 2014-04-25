@@ -23,13 +23,23 @@ class User < ActiveRecord::Base
 		self.permissions ||= Server.first.default_user_permissions
 	end
 
-	def find_remote_username(game)
+	def set_remote_username(game, data)
+		remote = self.remote_usernames.where(:game => game).first
+		if remote.nil?
+			self.remote_usernames.create(game: game, value: data)
+		else
+			remote.value = data
+			remote.save
+		end
+	end
+
+	def get_remote_username(game)
 		obj = self.remote_usernames.where(:game => game).first
 		if obj.nil?
 			if game.parent.nil?
 				return nil
 			else
-				return find_remote_username(game.parent)
+				return get_remote_username(game.parent)
 			end
 		else
 			return obj.value
