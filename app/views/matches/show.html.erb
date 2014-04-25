@@ -47,7 +47,7 @@ function score_peers() {
 				<% if @match.status <= 1 %>
 					<li><%= user.user_name %></li>
 				<% else %>
-					<li><%= user.user_name %> - SCORE: <%= Statistic.where(:name => "score", :user => user, :match => @match).first.value %></li>
+					<li><%= user.user_name %> - SCORE: <%= user.statistics.where(:name => "score", :match => @match).first.value %></li>
 				<% end %>
 			<% end %>
 		</ul></li>

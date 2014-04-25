@@ -23,10 +23,6 @@ class User < ActiveRecord::Base
 		self.permissions ||= Server.first.default_user_permissions
 	end
 
-	def scores
-		self.statistics.find_by_name(:score)
-	end
-
 	def find_remote_username(game)
 		obj = self.remote_usernames.where(:game => game).first
 		if obj.nil?
