@@ -20,16 +20,14 @@ module Scheduling
 
 		#this is called when a round has completed
 		def rotate
-						
-			for i in 0..@team_pairs-2
-				hold = @team_pairs.shift
-				@team_pairs.rotate!
-				@team_pairs.unshift(hold)
+			hold = @team_pairs.shift
+			@team_pairs.rotate!
+			@team_pairs.unshift(hold)
 			#	for j in 0..4
 			#		puts "#{array[j]}, #{array[j+(array.size/2)-1]}"
 			#	end
 			#	puts "\n\n"
-			end
+
 		end
 
 		def match_finished(match)
