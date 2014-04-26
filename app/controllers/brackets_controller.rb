@@ -1,10 +1,11 @@
 class BracketsController < ApplicationController
-	before_action :set_bracket, only: [:show, :edit, :update, :destroy]
+	before_action :set_tournament, only: [:index, :create]
 
 	# GET /brackets
 	# GET /brackets.json
 	def index
-		@brackets = Bracket.all
+		@tournament = Tournament.find(params[:tournament_id])
+		@brackets = @tournament.brackets
 	end
 
 	# GET /brackets/1
@@ -19,7 +20,7 @@ class BracketsController < ApplicationController
 	# POST /brackets
 	# POST /brackets.json
 	def create
-		@bracket = Bracket.new(bracket_params)
+		@bracket = @tournament.brackets.create(user: current_user)
 
 		respond_to do |format|
 			if @bracket.save
@@ -63,8 +64,16 @@ class BracketsController < ApplicationController
 		@bracket = Bracket.find(params[:id])
 	end
 
+	def set_tournament
+		@tournament = Tournament.find(params[:tournament_id])
+	end
+
 	# Never trust parameters from the scary internet, only allow the white list through.
 	def bracket_params
-		params.fetch(:bracket, {}).permit(:user_id, :tournament_id, :name)
+		params.require(:bracket).permit(:user_id, :tournament_id, :name)
+	end
+
+	def is_owner?(bracket)
+		bracket.user == current_user
 	end
 end

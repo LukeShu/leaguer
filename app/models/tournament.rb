@@ -1,6 +1,7 @@
 class Tournament < ActiveRecord::Base
 	belongs_to :game
 	has_many :stages, class_name: "TournamentStage"
+	has_many :brackets
 	has_many :settings_raw, class_name: "TournamentSetting"
 	has_and_belongs_to_many :players, class_name: "User", association_foreign_key: "player_id", join_table: "players_tournaments"
 	has_and_belongs_to_many :hosts,   class_name: "User", association_foreign_key: "host_id",   join_table: "hosts_tournaments"
