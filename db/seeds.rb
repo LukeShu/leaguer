@@ -138,6 +138,25 @@ if Rails.env.development?
 	tourn6.join(guntas)
 	tourn6.join(luke)
 	tourn6.join(marco)
+=begin
+	hash1 = {:username => "TeslasMind", :id => id}
+	hash2 = {:username => "Alpha142", :id => id}
+	hash3 = {:username => "ImFromNasa", :id => id}
+	hash4 = {:username => "NalfeinX", :id => id}
+	hash5 = {:username => "GTBPhoenix", :id => id}
+	hash6 = {:username => , :id => id}
+	hash7 = {:username => username, :id => id}
+	hash8 = {:username => username, :id => id}
+	hash9 = {:username => username, :id => id}
+	hash10 = {:username => username, :id => id}
 
+
+
+FOR ROUNG ROBIN
+
+http://stackoverflow.com/questions/6648512/scheduling-algorithm-for-a-round-robin-tournament
+
+
+=end
 
 end

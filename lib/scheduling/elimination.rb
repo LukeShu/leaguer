@@ -7,14 +7,6 @@ module Scheduling
 			@tournament_stage = tournament_stage
 		end
 
-		def tournament_stage
-			@tournament_stage
-		end
-
-		def tournament
-			self.tournament_stage.tournament
-		end
-
 		def create_matches
 			num_teams = (self.tournament.players.count/self.tournament.min_players_per_team).floor
 			num_matches = (Float(num_teams -  tournament.min_teams_per_match)/(tournament.min_teams_per_match - 1)).ceil + 1
@@ -138,5 +130,14 @@ STRING
 			return str
 		end
 
+		private
+
+		def tournament_stage
+			@tournament_stage
+		end
+
+		def tournament
+			self.tournament_stage.tournament
+		end
 	end
 end

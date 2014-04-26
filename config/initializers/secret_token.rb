@@ -9,4 +9,8 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Leaguer::Application.config.secret_key_base = 'cc884af613d0dd093f1d6c9153abac1200c5a0db923613245b80c5c3f5e9c9f9ba51712b702f2d494a22ddea8ab40601b38a41eb39eec97b50a7a2e37748b1bc'
+Leaguer::Application.config.secret_key_base = if Rails.env.development? or Rails.env.test?
+  ('x' * 30) # meets minimum requirement of 30 chars long
+else
+  ENV['SECRET_TOKEN']
+end

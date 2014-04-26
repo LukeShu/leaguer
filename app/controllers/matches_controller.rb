@@ -55,7 +55,6 @@ class MatchesController < ApplicationController
 
 		@purp = purple
 		@blue = blue
-
 	end
 
 	def get_riot_info_fake
@@ -151,8 +150,7 @@ class MatchesController < ApplicationController
 
 		@purp = purple
 		@blue = blue
-
-	end #end def
+	end
 
 	# GET /tournaments/1/matches/1
 	# GET /tournaments/1/matches/1.json
@@ -184,13 +182,18 @@ class MatchesController < ApplicationController
 
 			#make this use the statistics interface for scoring and ScoringAlgorithms
 
+			@match.winner = @match.teams.find_by_id(params['winner'])
+			@match.blowout = false
 
+			@match.statistics['Score'] = @tournament.settings['ScoringMethod'].constantize.score(@match, @match.statistics)
+
+=begin
 
 			# Individual scores
-			scores = params["scores"]
-			scores.each do |user_name, score|
-				Statistic.create(user: User.find_by_user_name(user_name), match: @match, name: "score", value: score.to_i)
-			end
+			#scores = params["scores"]
+			#scores.each do |user_name, score|
+			#	Statistic.create(user: User.find_by_user_name(user_name), match: @match, name: "score", value: score.to_i)
+			#end
 
 			# Team scores (processing for manual)
 			team_scores = {}
@@ -208,6 +211,7 @@ class MatchesController < ApplicationController
 			#unless cur_match_num == 1
 			#	@match.winner.matches.push(@tournament.matches_ordered[cur_match_num/2])
 			#end
+=end
 
 			# Skip peer evaluation if there aren't enough players per team
 			peer = false
@@ -218,12 +222,13 @@ class MatchesController < ApplicationController
 			end
 			@match.status = peer ? 2 : 3
 
+
 			respond_to do |format|
 				if @match.save
 					format.html { redirect_to tournament_match_path(@tournament, @match), notice: 'Peer evaluation started.' }
 					format.json { head :no_content }
 				else
-					format.html { redirect_to @tournament, notice: "You don't have permission to start this match." }
+					format.html { redirect_to @tournament, notice: "Permission denied" }
 					format.json { render json: "Permission denied", status: :forbidden }
 				end
 			end		
@@ -273,7 +278,6 @@ class MatchesController < ApplicationController
 				format.json { render json: @tournament.errors, status: :unprocessable_entity }
 			end
 		end
-
 	end
 
 	private
@@ -282,6 +286,7 @@ class MatchesController < ApplicationController
 		@match = Match.find(params[:id])
 		@tournament = @match.tournament_stage.tournament
 	end
+
 	def set_tournament
 		@tournament = Tournament.find(params[:tournament_id])
 	end

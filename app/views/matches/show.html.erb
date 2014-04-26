@@ -47,7 +47,8 @@ function score_peers() {
 				<% if @match.status <= 1 %>
 					<li><%= user.user_name %></li>
 				<% else %>
-					<li><%= user.user_name %> - SCORE: <%= Statistic.where(:name => "score", :user => user, :match => @match).first.value %></li>
+					<% score = user.statistics.where(:name => "score", :match => @match).first %>
+					<li><%= user.user_name %> - SCORE: <%= score ? score.value : 0 %></li>
 				<% end %>
 			<% end %>
 		</ul></li>
@@ -76,21 +77,24 @@ function score_peers() {
 		<% when 1 %>
 			<!-- Started, waiting to finish -->
 			<!-- This will depend on the Sampling Method Eventually instead of always being Manual -->
-			<% if @tournament.hosts.include? current_user %>
-				<input type="hidden" name="update_action" value="finish">
-				<% @match.teams.each do |team| %>
-					<fieldset><legend>Team <%= team.id.to_s %></legend>
-						<% team.users.collect{|u| u.user_name}.each do |k| %><label>
-							Score for <%= k %><br>
-							<% @player_score = 0 %>
-							<% current_user.statistics.where(:match => @match, :user => current_user).each{ |s| @player_score+=s.value } %>
-							<%= text_field_tag("scores[#{k}]", @player_score, size: 3) %>
-						</label><% end %>
-					</fieldset>
+
+			<% case @tournament.sampling_method %>
+			<% when "Manual" %>
+				<% if @tournament.hosts.include? current_user %>
+					<input type="hidden" name="update_action" value="finish">
+					<% @match.teams.each do |team| %>
+						<%= tag :input, {"type" => "radio", "name" => "winner", "value" => "#{team.id}" } %>
+						<%= "Team #{team.id} Won" %>
+					<% end %>
+					<%= submit_tag("Finish match") %>
+					<%= @tournament.settings['ScoringMethod'] %>
+				<% else %>
+					<p>The match is running; the host has yet to post the scores of the match.</p>
 				<% end %>
-				<%= submit_tag("Finish match") %>
-			<% else %>
-				<p>The match is running; the host has yet to post the scores of the match.</p>
+			<% when "Double Blind" %>
+				<p>Double Blind isn't implemented yet.</p>
+			<% when "RiotAPI" %>
+				<p>Riot API is being called for Statistics. Results will appear shortly.</p>
 			<% end %>
 		<% when 2 %>
 			<!-- Finished, waiting for peer reviews -->
