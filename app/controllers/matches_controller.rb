@@ -168,6 +168,10 @@ class MatchesController < ApplicationController
 	def update
 		case params[:update_action]
 		when "start"
+			#
+			# Redirect to the current match page for this tournament with the correct sampling view rendered
+			#
+
 			@match.status = 1
 			respond_to do |format|
 				if @match.save
@@ -180,15 +184,30 @@ class MatchesController < ApplicationController
 			end
 		when "finish"
 
+			#
+			# Get the winner and blowout status from the params given by the correct sampling view
+			#
+
+
+			#in general 
+				#provide contribution
+				#if all contributions are in, update statistics
+
+
 			#make this use the statistics interface for scoring and ScoringAlgorithms
 
 			@match.winner = @match.teams.find_by_id(params['winner'])
-			@match.blowout = false
+			@match.statistics.create(name: "blowout", user: nil, value: 0)
 
-			@match.statistics['Score'] = @tournament.settings['ScoringMethod'].constantize.score(@match, @match.statistics)
+
+			#How to access the blowout statistic of a match:
+			@match.statistics.where(:name => "blowout").first.value
+			
+
+
+			#@match.statistics.create(name: 'score', value: @tournament.settings.where(:name => 'Scoring Method').value.constantize.score(@match, @match.statistics)
 
 =begin
-
 			# Individual scores
 			#scores = params["scores"]
 			#scores.each do |user_name, score|
@@ -233,6 +252,10 @@ class MatchesController < ApplicationController
 				end
 			end		
 		when "peer"
+			#
+			# Update user scores via scoring method
+			#
+
 			order = params[:review_action]
 			base_score = 2
 			next_score = 3
@@ -262,10 +285,14 @@ class MatchesController < ApplicationController
 				end
 			end
 		when "reset"
-			@match.status = 0
+			#
+			# Reset Match Status to 1 in case something needs to be replayed.
+			#
+
+			@match.status = 1
 			respond_to do |format|
 				if @match.save
-					format.html { redirect_to tournament_match_path(@tournament, @match), notice: 'Match Status Reset to 0' }
+					format.html { redirect_to tournament_match_path(@tournament, @match), notice: 'Match Status Reset to 1' }
 					format.json { head :no_content }
 				else
 					format.html { redirect_to @tournament, notice: "You don't have permission to start this match." }
