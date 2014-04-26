@@ -138,6 +138,11 @@ if Rails.env.development?
 	tourn6.join(guntas)
 	tourn6.join(luke)
 	tourn6.join(marco)
+	tourn6.join(jordan)
+	tourn6.join(obama)
+	tourn6.join(joey)
+
+
 =begin
 	hash1 = {:username => "TeslasMind", :id => id}
 	hash2 = {:username => "Alpha142", :id => id}
