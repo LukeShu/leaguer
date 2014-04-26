@@ -7,7 +7,7 @@ module Scheduling
 		end
 
 		def create_matches
-			num_teams = (self.tournament.players.count/self.tournament.min_players_per_team).floor
+			num_teams = (tournament.players.count/tournament.min_players_per_team).floor
 			num_matches = Float(num_teams/2)*(num_teams-1)
 		end
 
