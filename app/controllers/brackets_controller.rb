@@ -12,11 +12,6 @@ class BracketsController < ApplicationController
 	def show
 	end
 
-	# GET /brackets/new
-	def new
-		@bracket = Bracket.new
-	end
-
 	# GET /brackets/1/edit
 	def edit
 	end
@@ -29,7 +24,7 @@ class BracketsController < ApplicationController
 		respond_to do |format|
 			if @bracket.save
 				format.html { redirect_to @bracket, notice: 'Bracket was successfully created.' }
-				format.json { render action: 'show', status: :created, location: @bracket }
+				format.json { render action: 'edit', status: :created, location: @bracket }
 			else
 				format.html { render action: 'new' }
 				format.json { render json: @bracket.errors, status: :unprocessable_entity }
@@ -64,11 +59,12 @@ class BracketsController < ApplicationController
 	private
 	# Use callbacks to share common setup or constraints between actions.
 	def set_bracket
+		@tournament = Tournament.find(params[:tournament_id])
 		@bracket = Bracket.find(params[:id])
 	end
 
 	# Never trust parameters from the scary internet, only allow the white list through.
 	def bracket_params
-		params.require(:bracket).permit(:user_id, :tournament_id, :name)
+		params.fetch(:bracket, {}).permit(:user_id, :tournament_id, :name)
 	end
 end

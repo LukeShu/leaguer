@@ -29,6 +29,13 @@
 			<% else %>
 			<p style="margin-top:10px;"> You've signed up for this tournament! 	</p>
 			<% end %>
+			<%= form_tag(tournament_brackets_path(target), method: "post") do %>
+				<%= label :user_id, nil, style: "display: none;" %>
+				<%= text_field_tag :user_id, current_user.id, style: "display: none;" %>
+				<%= label :tournament_id, nil, style: "display: none;" %>
+				<%= text_field_tag :tournament_id, target.id, style: "display: none;" %>
+				<%= submit_tag("Make Bracket") %>
+			<% end %>
 		<% end %>
 	</div>
 </div>
