@@ -34,6 +34,7 @@ module Scheduling
 		end
 
 		def match_finished(match)
+			#what in the goddamn fuck does this mean
 			matches = match.tournament_stage.matches_ordered
 			cur_match_num = matches.invert[match]
 			unless cur_match_num == 1
