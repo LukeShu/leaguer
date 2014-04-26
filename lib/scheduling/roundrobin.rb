@@ -8,12 +8,12 @@ module Scheduling
 
 		def create_matches
 			num_teams = (self.tournament.players.count/self.tournament.min_players_per_team).floor
-			num_matches = Float(num_teams/2)*(num_teams-1)
+			num_matches = (num_teams* Float(num_teams-1)/2).ceil
 
 			#round robin should look like this
 			@team_pairs = Array.new(num_matches)
 			for i in 0..@match.teams.size
-				@team_pairs.push(@match.teams[i]
+				@team_pairs.push(@match.teams[i])
 			end
 			#team_pairs needs populated with the team objects and im not sure how to do that
 		end
@@ -35,7 +35,7 @@ module Scheduling
 		end
 
 		def graph(current_user)
-			
+		
 		end
 	end
 end
