@@ -171,6 +171,7 @@ class TournamentsController < ApplicationController
 
 	# Never trust parameters from the scary internet, only allow the white list through.
 	def tournament_attribute_params
+		params[:num_stages] ||= 1
 		if params[:tournament]
 			p = params.require(:tournament).permit(:game_id, :status, :name, :min_players_per_team, :max_players_per_team, :min_teams_per_match, :max_teams_per_match, :set_rounds, :randomized_teams, :sampling_method, :scoring_method)
 			if p[:game_id]
