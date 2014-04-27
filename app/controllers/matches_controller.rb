@@ -230,11 +230,14 @@ class MatchesController < ApplicationController
 				base_score = next_score
 				next_score += base_score  
 			end
+
 			@match.submitted_peer_evaluations += 1
 			players = []; @match.teams.each{|t| players.concat(t.users.all)}
 			if (@match.submitted_peer_evaluations == players.count) 
 				@match.status = 3
 			end
+
+
 			respond_to do |format|
 				if @match.save
 					format.html { redirect_to tournament_match_path(@tournament, @match), notice: 'Scores Submitted' }
