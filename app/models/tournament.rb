@@ -6,6 +6,8 @@ class Tournament < ActiveRecord::Base
 	has_and_belongs_to_many :players, class_name: "User", association_foreign_key: "player_id", join_table: "players_tournaments"
 	has_and_belongs_to_many :hosts,   class_name: "User", association_foreign_key: "host_id",   join_table: "hosts_tournaments"
 
+	# Settings #################################################################
+
 	def settings
 		@settings ||= Settings.new(self)
 	end
@@ -57,9 +59,13 @@ class Tournament < ActiveRecord::Base
 		end
 	end
 
+	# Misc. ####################################################################
+
 	def open?
 		return true
 	end
+
+	# Joining/Leaving ##########################################################
 
 	def joinable_by?(user)
 		return (open? and user.can?(:join_tournament) and !players.include?(user))
@@ -76,5 +82,15 @@ class Tournament < ActiveRecord::Base
 		if players.include?(user) && status == 0
 			players.delete(user)
 		end
+	end
+
+	# Configured methods #######################################################
+
+	def scoring
+		@scoring ||= "Scoring::#{self.scoring_method.camelcase}".constantize
+	end
+
+	def sampling
+		@sampling ||= "Sampling::#{self.sampling_method.camelcase}".constantize
 	end
 end
