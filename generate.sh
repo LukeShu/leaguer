@@ -44,8 +44,8 @@ bundle exec rails generate scaffold match status:integer tournament_stage:refere
 bundle exec rails generate scaffold team
 bundle exec rails generate scaffold alert author:references message:text
 bundle exec rails generate scaffold pm author:references recipient:references message:text subject:text conversation:references
-bundle exec rails generate scaffold tournament game:references status:integer name:string:uniq min_players_per_team:integer max_players_per_team:integer min_teams_per_match:integer max_teams_per_match:integer set_rounds:integer randomized_teams:boolean sampling_method:string
-bundle exec rails generate scaffold game       parent:references              name:string:uniq min_players_per_team:integer max_players_per_team:integer min_teams_per_match:integer max_teams_per_match:integer set_rounds:integer randomized_teams:boolean sampling_method:string
+bundle exec rails generate scaffold tournament game:references status:integer name:string:uniq min_players_per_team:integer max_players_per_team:integer min_teams_per_match:integer max_teams_per_match:integer set_rounds:integer randomized_teams:boolean sampling_method:string scoring_method:string
+bundle exec rails generate scaffold game       parent:references              name:string:uniq min_players_per_team:integer max_players_per_team:integer min_teams_per_match:integer max_teams_per_match:integer set_rounds:integer randomized_teams:boolean sampling_method:string scoring_method:string
 bundle exec rails generate scaffold user name:string email:string:uniq user_name:string:uniq
 bundle exec rails generate scaffold session user:references token:string:uniq
 bundle exec rails generate scaffold bracket user:references tournament:references name:string
@@ -54,7 +54,7 @@ bundle exec rails generate scaffold bracket user:references tournament:reference
 bundle exec rails generate model       game_setting       game:references name:string vartype:integer type_opt:text description:text display_order:integer default:text
 bundle exec rails generate model tournament_setting tournament:references name:string vartype:integer type_opt:text description:text display_order:integer   value:text
 
-bundle exec rails generate model tournament_stage tournament:references scheduling:string structure:text
+bundle exec rails generate model tournament_stage tournament:references structure:text scheduling_method:string seeding_method:string
 bundle exec rails generate model statistic user:references match:references name:string value:integer
 
 bundle exec rails generate model remote_username game:references user:references json_value:text
