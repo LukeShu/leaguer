@@ -198,7 +198,7 @@ class TournamentsController < ApplicationController
 	end
 
 	def tournament_stage_params(i)
-		params.require(:tournament).require(i.to_sym).permit(:scheduling_method, :seeding_method)
+		params.require(:tournament).require(:stages).require(i.to_s).permit(:scheduling_method, :seeding_method)
 	end
 
 	def is_owner?(object)
