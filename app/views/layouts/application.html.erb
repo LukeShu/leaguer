@@ -18,7 +18,7 @@
 	<%# This is the search bar  #%>
 	<div>
 		<%= form_tag("/search", method: "get", :class => "search") do %>
-			<%= text_field_tag(:query, params[:query]) %>
+			<%= text_field_tag(:query, params[:query], type: "search") %>
 			<%= submit_tag("Search", :name=>nil) %>
 		<% end %>
 	</div>
