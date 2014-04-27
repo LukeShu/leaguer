@@ -83,9 +83,9 @@
 
 	<fieldset><legend>Stages</legend>
 		<label for="num_stages">Number of tournament stages</label>
-		<input type="number" name="num_stages" min="1">
+		<input type="number" name="num_stages" min="1" value="<%= params[:num_stages] ? params[:num_stages].to_i : 1 %>">
 		<% for i in 1..(params[:num_stages].to_i) do %>
-			<%= fields_for "tournament[stages][#{i}]", @tournament.stages do |stage_fields| %>
+			<%= fields_for "tournament[stages][#{i}]", @tournament.stages[i] do |stage_fields| %>
 			<fieldset><legend>Stage <%= i %></legend>
 				<%= stage_fields.label :scheduling_method %>
 				<%= stage_fields.select(:scheduling_method, @tournament.scheduling_methods.map{|method| [method.humanize, method]}) %>

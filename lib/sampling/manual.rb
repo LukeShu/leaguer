@@ -1,5 +1,5 @@
 module Sampling
-	module HostEntry
+	module Manual
 		def self.works_with?(game)
 			return true
 		end
@@ -25,11 +25,12 @@ module Sampling
 		end
 
 		def self.render_user_interaction(match, user)
-			
+			# TODO
 		end
 
 		def self.handle_user_interaction(match, user, sampling_params)
-			match.statistics.create(user: nil, name: "blowout", 
+			# TODO
+			#match.statistics.create(user: nil, name: "blowout",
 		end
 	end
 end

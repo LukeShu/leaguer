@@ -107,7 +107,7 @@ class Tournament < ActiveRecord::Base
 	end
 
 	def sampling_methods
-		make_methods("sampling").collect do |name|
+		make_methods("sampling").select do |name|
 			"Sampling::#{name.camelcase}".constantize.works_with?(self.game)
 		end
 	end
@@ -120,6 +120,7 @@ class Tournament < ActiveRecord::Base
 		make_methods "seeding"
 	end
 
+	private
 	def make_methods(dir)
 		@@methods ||= {}
 		if @@methods[dir].nil? or Rails.env.development?
