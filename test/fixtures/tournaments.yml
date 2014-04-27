@@ -11,6 +11,7 @@ one:
   set_rounds: 1
   randomized_teams: false
   sampling_method: MyString
+  scoring_method: MyString
 
 two:
   game_id: 
@@ -23,3 +24,4 @@ two:
   set_rounds: 1
   randomized_teams: false
   sampling_method: MyString
+  scoring_method: MyString

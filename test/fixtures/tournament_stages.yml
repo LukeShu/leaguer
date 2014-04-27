@@ -2,10 +2,12 @@
 
 one:
   tournament_id: 
-  scheduling: MyString
   structure: MyText
+  scheduling_method: MyString
+  seeding_method: MyString
 
 two:
   tournament_id: 
-  scheduling: MyString
   structure: MyText
+  scheduling_method: MyString
+  seeding_method: MyString
