@@ -130,9 +130,9 @@ class TournamentsController < ApplicationController
 			respond_to do |format|
 				if @tournament.status == 0
 					@tournament.status = 1
+					@tournament.save
 					success = true
 					ActiveRecord::Base.transaction do
-					#	success &= @tournament.save &&
 					#	sched = tournament_attribute_params[:type_opt]
 					#	success &= @tournament.stages.create(scheduling_method: sched)
 						success &= @tournament.stages.first.create_matches
