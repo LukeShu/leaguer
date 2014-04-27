@@ -1,4 +1,5 @@
 Files in this directory should implement the following interface:
 
-- seed_matches(tournament)
-	take the matches of a tournament and the players in a tournament, assign players to teams, and teams to matches (all must exist)
+- `seed(tournament_stage)`
+	take a tournament stage, assign players to teams and teams to
+	matches (matches must exist)

@@ -286,7 +286,7 @@ class MatchesController < ApplicationController
 		params.require(:match).permit(:status, :tournament_stage_id, :winner_id, :remote_id, :submitted_peer_evaluations, :update_action)
 	end
 
-		# Turn of check_edit, since our #update is flexible
+	# Turn of check_edit, since our #update is flexible
 	def check_edit
 		set_match
 	end
