@@ -14,6 +14,17 @@ module Scheduling
 			end
 		end
 
+		def finish_match(match)
+			#declare winner of match, and store that somehow
+			rotate
+			return "totes worked\n"
+		end
+
+		def graph(current_user)
+		end
+
+		private
+
 		def create_round_array
 			#round robin should look like this.
 			#NOTE: I DO NOT KNOW IF THIS IS HOW TO PROPERLY POPULATE THE ROUND ROBIN ARRAY WITH TEAMS
@@ -28,15 +39,23 @@ module Scheduling
 			end
 		end
 
-		#this is called when a round has completed
+		def tournament_stage
+			@tournament_stage
+		end
+
+		def tournament
+			tournament_stage.tournament
+		end
+
 		def rotate
+			#this is called when a round has completed
+
 			#remove first team
 			hold = @team_pairs.shift
 			#rotate by 1 element
 			@team_pairs.rotate!
 			#place first team the front of the array
 			@team_pairs.unshift(hold)
-			
 		end
 
 		def mother_fuckin_winner
@@ -50,14 +69,6 @@ module Scheduling
 			scores[weiner]
 		end
 
-		def match_finished(match)
-			#declare winner of match, and store that somehow
-			rotate
-			return "totes worked\n"
-		end
 
-		def graph(current_user)
-			
-		end
 	end
 end

@@ -25,9 +25,12 @@ class AlertsController < ApplicationController
 		@alert = Alert.new(alert_params)
 		@alert.author = current_user
 		users = {}
-		users = Users.all
+		users = User.all
 
-		#current_user.send_message(users, @alert.message, "Pay Attention!")		
+
+		for i in 0..users.length
+			current_user.send_message(users[i], @alert.message, "Pay Attention!")		
+		end 
 
 		respond_to do |format|
 			if @alert.save

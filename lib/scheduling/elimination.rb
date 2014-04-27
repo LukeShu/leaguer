@@ -33,8 +33,7 @@ module Scheduling
 			end
 		end
 
-		def match_finished(match)
-			#what in the goddamn fuck does this mean
+		def finish_match(match)
 			matches = match.tournament_stage.matches_ordered
 			cur_match_num = matches.invert[match]
 			unless cur_match_num == 1
@@ -55,17 +54,17 @@ module Scheduling
 			height = [(matchHeight+50) * logBase**(depth-1) + 100, 500].max;
 
 			str = <<-STRING
-<svg version="1.1" baseProfile="full"
-     xmlns="http://www.w3.org/2000/svg"
-     xmlns:xlink="http://www.w3.org/1999/xlink"
-     width="100%" height="#{height}">
-	<defs>
-		<radialGradient id="gradMatch" cx="50%" cy="50%" r="80%" fx="50%" fy="50%">
-			<stop offset="0%" style="stop-color:#fff; stop-opacity:1" />
-			<stop offset="100%" style="stop-color:#ccc;stop-opacity:0" />
-		</radialGradient>
-	</defs>
-STRING
+			<svg version="1.1" baseProfile="full"
+			     xmlns="http://www.w3.org/2000/svg"
+			     xmlns:xlink="http://www.w3.org/1999/xlink"
+			     width="100%" height="#{height}">
+				<defs>
+					<radialGradient id="gradMatch" cx="50%" cy="50%" r="80%" fx="50%" fy="50%">
+						<stop offset="0%" style="stop-color:#fff; stop-opacity:1" />
+						<stop offset="100%" style="stop-color:#ccc;stop-opacity:0" />
+					</radialGradient>
+				</defs>
+			STRING
 			base = 1
 			pBase = 1
 			(1..matches.count).each do |i|

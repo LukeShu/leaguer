@@ -3,51 +3,21 @@
   <%= f.hidden_field(:game_id) %>
 
   <% @tournament.attributes.each do |name, value| %>
-    <% if (name == "id") or (name =~ /.*_at$/) or (name == "game_id") or (name == "status") or (name == "set_rounds") %>
+    <% if (name == "randomized_teams") or(name == "max_teams_per_match") or (name == "max_players_per_team") or (name == "id") or (name =~ /.*_at$/) or (name == "game_id") or (name == "status") or (name == "set_rounds") %>
       <% next %>
     <% end %>
     <p>
       <%= f.label name %><br>
       <% unless @tournament.game.attributes[name].nil? %>
         <% if name == "sampling_method" %>
-          <%= f.select( name, @tournament.game.sampling_method.split(',') ) %>
+          <%= f.select( name, Tournament.sampling_methods) %>
         <% else %>
-        <%= f.text_field(name, :value => @tournament.game.attributes[name] ) %>
+         <%= f.text_field(name, :value => @tournament.game.attributes[name] ) %>
         <% end %>
       <% else %>
-        <%= f.text_field name %>
+          <%= f.select( name, Tournament.scoring_methods) %>
       <% end  %>
     </p>
   <% end %>
-
-  <%= fields_for "tournament[settings]", @tournament.settings do |setting_fields|  %>
-    <% @tournament.game.settings.each do |setting| %>
-      <p>
-      <%= setting_fields.label setting.name %>
-      <br>
-      <% case setting.vartype %>
-        <% when 0 %>
-           <%= setting_fields.text_field( setting.name ) %>
-        <% when 1 %>
-           <%= setting_fields.text_area( setting.name ) %>
-        <% when 2 %>
-           <% setting.type_opt.split(',').each do |option|%>
-             <%= setting_fields.radio_button( setting.name, option ) %> <%= option %> <br>
-           <% end %>
-        <% when 3 %>
-           <% setting.type_opt.split(',').each do |option|%>
-              <%= check_box_tag(setting.name, value = option, checked = false, options = {}) %> <%= option %> <br>
-           <% end %>
-        <% when 4 %>
-	   <%# setting_fields.label "true" %>
-           <%= setting_fields.radio_button( setting.name, "true" ) %> True
-	   <%# setting_fields.label "false" %>
-           <%= setting_fields.radio_button( setting.name, "false" ) %> False
-        <% when 5 %>
-           <%= setting_fields.select( setting.name, setting.type_opt.split(',') ) %>
-        <% end %>
-      <% end %>
-      </p>
-    <% end %>
   <%= f.submit %>
 <% end %>

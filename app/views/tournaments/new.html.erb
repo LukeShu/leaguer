@@ -13,4 +13,10 @@
 	<% end %>
 </div>
 
+<div id='ajax-form'>
+	<% if not @tournament.game.nil? %>
+		<%= render 'stages' %>
+	<% end %>
+</div>
+
 <%= link_to 'Back', tournaments_path %>
