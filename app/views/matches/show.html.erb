@@ -78,24 +78,8 @@ function score_peers() {
 			<!-- Started, waiting to finish -->
 			<!-- This will depend on the Sampling Method Eventually instead of always being Manual -->
 
-			<% case @tournament.sampling_method %>
-			<% when "Manual" %>
-				<% if @tournament.hosts.include? current_user %>
-					<input type="hidden" name="update_action" value="finish">
-					<% @match.teams.each do |team| %>
-						<%= tag :input, {"type" => "radio", "name" => "winner", "value" => "#{team.id}" } %>
-						<%= "Team #{team.id} Won" %>
-					<% end %>
-					<%= submit_tag("Finish match") %>
-					<%= @tournament.settings['ScoringMethod'] %>
-				<% else %>
-					<p>The match is running; the host has yet to post the scores of the match.</p>
-				<% end %>
-			<% when "Double Blind" %>
-				<p>Double Blind isn't implemented yet.</p>
-			<% when "RiotAPI" %>
-				<p>Riot API is being called for Statistics. Results will appear shortly.</p>
-			<% end %>
+			<%= raw @match.tournament_stage.tournament.sampling_method.camelcase.constantize.render_user_interaction(@match, current_user) %>
+
 		<% when 2 %>
 			<!-- Finished, waiting for peer reviews -->
 			<input type="hidden" name="update_action" value="peer">
