@@ -24,6 +24,11 @@ class AlertsController < ApplicationController
 	def create
 		@alert = Alert.new(alert_params)
 		@alert.author = current_user
+		users = {}
+		users = Users.all
+
+		#current_user.send_message(users, @alert.message, "Pay Attention!")		
+
 		respond_to do |format|
 			if @alert.save
 				format.html { redirect_to @alert, notice: 'Alert was successfully created.' }
