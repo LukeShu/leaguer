@@ -21,6 +21,8 @@ class BracketsController < ApplicationController
 	# POST /brackets.json
 	def create
 		@bracket = @tournament.brackets.create(user: current_user)
+		@bracket.name =  current_user.user_name + "'s Prediction for " + @tournament.name
+		@bracket.create_matches
 
 		respond_to do |format|
 			if @bracket.save
