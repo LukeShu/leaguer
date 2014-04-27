@@ -96,8 +96,9 @@ class Tournament < ActiveRecord::Base
 
 	# YISSSSSS
 	def self.make_methods(dir)
-		if @methods.nil? or @methods[dir].nil? or Rails.env.development?
-			@methods[dir] = Dir.glob("#{Rails.root}/lib/#{dir}/*.rb").map{|filename| File.basename(filename) }
+		@methods ||= {}
+		if @methods[dir].nil? or Rails.env.development?
+			@methods[dir] = Dir.glob("#{Rails.root}/lib/#{dir}/*.rb").map{|filename| File.basename(filename, ".rb").humanize }
 		end
 		return @methods[dir]
 	end
