@@ -183,54 +183,13 @@ class MatchesController < ApplicationController
 				end
 			end
 		when "finish"
-
 			#
 			# Get the winner and blowout status from the params given by the correct sampling view
 			#
 
-
-			#in general 
-				#provide contribution
-				#if all contributions are in, update statistics
-
-
-			#make this use the statistics interface for scoring and ScoringAlgorithms
-
-			@match.winner = @match.teams.find_by_id(params['winner'])
-			@match.statistics.create(name: "blowout", user: nil, value: 0)
-
-
-			#How to access the blowout statistic of a match:
-			@match.statistics.where(:name => "blowout").first.value
-			
-
-
-			#@match.statistics.create(name: 'score', value: @tournament.settings.where(:name => 'Scoring Method').value.constantize.score(@match, @match.statistics)
-
-=begin
-			# Individual scores
-			#scores = params["scores"]
-			#scores.each do |user_name, score|
-			#	Statistic.create(user: User.find_by_user_name(user_name), match: @match, name: "score", value: score.to_i)
-			#end
-
-			# Team scores (processing for manual)
-			team_scores = {}
-			@match.teams.each do |team|
-				team_scores[team] = 0
-				team.users.each do |user|
-					team_scores[team] += scores[user.user_name].to_i
-				end
+			unless @match.tournament_stage.tournament.sampling.sampling_done?
+				@match.tournament_stage.tournament.sampling.handle_user_interaction(@match, current_user, params)
 			end
-			teams = team_scores.invert
-			@match.winner = teams[teams.keys.sort.last]
-
-			# Schedule next match
-			#cur_match_num = @tournament.matches_ordered.invert[@match]
-			#unless cur_match_num == 1
-			#	@match.winner.matches.push(@tournament.matches_ordered[cur_match_num/2])
-			#end
-=end
 
 			# Skip peer evaluation if there aren't enough players per team
 			peer = false
@@ -240,7 +199,6 @@ class MatchesController < ApplicationController
 				end
 			end
 			@match.status = peer ? 2 : 3
-
 
 			respond_to do |format|
 				if @match.save
@@ -255,6 +213,8 @@ class MatchesController < ApplicationController
 			#
 			# Update user scores via scoring method
 			#
+
+			#update this to use scoring interface
 
 			order = params[:review_action]
 			base_score = 2
