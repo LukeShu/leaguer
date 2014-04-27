@@ -15,8 +15,7 @@ class TournamentsController < ApplicationController
 				when 0
 					render action: 'show'
 				when 1
-					#redirect_to tournament_matches_page(@tournament)
-					redirect_to "/tournaments/" + @tournament.id.to_s + "/matches"
+					redirect_to tournament_matches_path(@tournament)
 				when 2
 					redirect_to tournaments_page
 				end
@@ -51,11 +50,20 @@ class TournamentsController < ApplicationController
 				ok &= @tournament.update(tournament_setting_params)
 				ok &= @tournament.hosts.push(current_user)
 				for i in 1..(params[:num_stages].to_i) do
-					ok &= @tournament.stages.create(tournament_stage_params(i))
+					begin
+						ok &= @tournament.stages.create(tournament_stage_params(i))
+					rescue ActionController::ParameterMissing => e
+						ok = false
+						@tournament.errors.add("stages[#{i}]", "Stage #{i} not set")
+					end
 				end
 			end
-		rescue
+		rescue ActiveRecord::RecordNotUnique => e
 			ok = false
+			@tournament.errors.add(:name, "must be unique")
+		rescue => e
+			ok = false
+			@tournament.errors.add(:exception, "Unknown error: ``#{e.class.name}'' -- #{e.inspect} -- #{e.methods - Object.new.methods}")
 		end
 		respond_to do |format|
 			if ok
@@ -171,8 +179,9 @@ class TournamentsController < ApplicationController
 
 	# Never trust parameters from the scary internet, only allow the white list through.
 	def tournament_attribute_params
+		params[:num_stages] ||= 1
 		if params[:tournament]
-			p = params.require(:tournament).permit(:game_id, :status, :name, :min_players_per_team, :max_players_per_team, :min_teams_per_match, :max_teams_per_match, :set_rounds, :randomized_teams, :sampling_method, :scoring_method)
+			p = params.require(:tournament).permit(:game_id, :status, :name, :min_players_per_team, :max_players_per_team, :min_teams_per_match, :max_teams_per_match, :sampling_method, :scoring_method)
 			if p[:game_id]
 				game = Game.find(p[:game_id])
 				p[:min_players_per_team] ||= game.min_players_per_team
@@ -198,7 +207,7 @@ class TournamentsController < ApplicationController
 	end
 
 	def tournament_stage_params(i)
-		params.require(:tournament).require(i.to_sym).permit(:scheduling_method, :seeding_method)
+		params.require(:tournament).require(:stages).require(i.to_s).permit(:scheduling_method, :seeding_method)
 	end
 
 	def is_owner?(object)

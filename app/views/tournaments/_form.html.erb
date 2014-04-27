@@ -49,7 +49,7 @@
 	</fieldset>
 
 	<fieldset><legend>Settings</legend>
-	<%= fields_for "tournament[settings]", @tournament.settings do |setting_fields| %>
+	<%= f.fields_for :settings do |setting_fields| %>
 		<% (@tournament.settings.empty? ? @tournament.game.settings : @tournament.settings).each do |setting| %><p>
 			<% name = setting.name.parameterize.underscore %>
 			<%= setting_fields.label name %>
@@ -81,22 +81,20 @@
 	<% end %>
 	</fieldset>
 
-	<fieldset><legend>Stages</legend>
+	<%= f.fields_for :stages do |stages_fields| %><fieldset><legend>Stages</legend>
 		<label for="num_stages">Number of tournament stages</label>
 		<input type="number" name="num_stages" min="1" value="<%= params[:num_stages] ? params[:num_stages].to_i : 1 %>">
 		<%= submit_tag("Set Stages", :class => "btn") %>
-
 		<% for i in 1..(params[:num_stages].to_i) do %>
-			<%= fields_for "tournament[stages][#{i}]", @tournament.stages[i] do |stage_fields| %>
-			<fieldset><legend>Stage <%= i %></legend>
+			<%= stages_fields.fields_for i.to_s do |stage_fields| %><fieldset><legend>Stage <%= i %></legend>
 				<%= stage_fields.label :scheduling_method %>
 				<%= stage_fields.select(:scheduling_method, @tournament.scheduling_methods.map{|method| [method.humanize, method]}) %>
 				<%= stage_fields.label :seeding_method %>
 				<%= stage_fields.select(:seeding_method, @tournament.seeding_methods.map{|method| [method.humanize, method]}) %>
-			</fieldset>
-			<% end %>
+			</fieldset><% end %>
 		<% end %>
-	</fieldset>
+	</fieldset><% end %>
+
 	<%= f.submit %>
 
 	<%# render 'stages' %>
