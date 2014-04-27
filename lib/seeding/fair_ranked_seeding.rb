@@ -26,13 +26,7 @@ module Seeding
 		def better(player1, player2, tournament)
 			ps1 = previousScore(player1, tournament)
 			ps2 = previousScore(player2, tournament)
-			if ps1 > ps2
-				return 1
-			elsif ps2 > ps1
-				return -1
-			else
-				return 0
-			end
+			ps1 <=> ps2
 		end
 
 		def previousScore(player, tournament)
