@@ -4,10 +4,10 @@
   <% receps.each do |recep| %>
     <% #unless recep == @pm.conversation.last_sender %>
       <%= recep.user_name %>
-      <%= "and" %>
+      <%= "," %>
     <% #end %>
   <% end %>
-  <%= "the NSA" %>
+  <%= "and the NSA" %>
 </p>
 
 <p>
@@ -22,7 +22,7 @@
   <p> ________________________________________________ </p>
 
   <p>
-    <%= message.sender.user_name %>
+    <b><%= message.sender.user_name %></b>
     <%= ":" %>
     <%= message.body %>
   </p>
@@ -43,5 +43,5 @@
  <% end %>
 </p>
 
-
+<% @pm.conversation.mark_as_read(current_user) %>
 <%= link_to 'Back', pms_path %>
