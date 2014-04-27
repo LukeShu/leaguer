@@ -14,7 +14,7 @@ Leaguer::Application.routes.draw do
 
 	resources :tournaments do
 		resources :matches, only: [:index, :show, :update]
-		resources :brackets
+		resources :brackets, only: [:create, :index, :show, :edit, :update, :destroy]
 	end
 
 	resource :server, only: [:show, :edit, :update]
@@ -24,7 +24,6 @@ Leaguer::Application.routes.draw do
 	get '/search', to: 'search#go'
 
 end
-
 
 Leaguer::Application.routes.named_routes.module.module_eval do
 	def match_path(match, options={})
