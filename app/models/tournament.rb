@@ -93,4 +93,29 @@ class Tournament < ActiveRecord::Base
 	def sampling
 		@sampling ||= "Sampling::#{self.sampling_method.camelcase}".constantize
 	end
+
+	# YISSSSSS
+	def self.make_methods(dir)
+		if @methods[dir].nil? or Rails.env.development?
+			@methods[dir] = Dir.glob("#{Rails.root}/lib/#{dir}/*.rb").map{|filename| filename.split('/').last.sub(/\.rb$/, '')}
+		end
+		return @methods[dir]
+	end
+
+	def self.scoring_methods
+		make_methods "scoring"
+	end
+
+	def self.sampling_methods
+		make_methods "sampling"
+	end
+
+	def self.scheduling_methods
+		make_methods "scheduling"
+	end
+
+	def self.seeding_methods
+		make_methods "seeding"
+	end
+
 end

@@ -25,29 +25,6 @@ class TournamentStage < ActiveRecord::Base
 		return seeding.seed.pair(matches, players)
 	end
 
-	def make_methods(dir)
-		if @methods[dir].nil? or Rails.env.development?
-			@methods[dir] = Dir.glob("#{Rails.root}/lib/#{dir}/*.rb").map{|filename| filename.sub(/.*\/(.*)\.rb/, /\1/)}
-		end
-		return @methods[dir]
-	end
-
-	def scoring_methods
-		make_methods "scoring"
-	end
-
-	def sampling_methods
-		make_methods "sampling"
-	end
-
-	def scheduling_methods
-		make_methods "scheduling"
-	end
-
-	def seeding_methods
-		make_methods "seeding"
-	end
-
 	# Accessors to the configured methods
 
 	def scoring
