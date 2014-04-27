@@ -11,6 +11,7 @@ class Tournament < ActiveRecord::Base
 	def settings
 		@settings ||= Settings.new(self)
 	end
+
 	def settings=(setting)
 		setting.each do |key, value|
 			value = false if value == "0"
