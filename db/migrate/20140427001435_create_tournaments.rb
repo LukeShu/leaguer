@@ -1,7 +1,8 @@
-class CreateGames < ActiveRecord::Migration
+class CreateTournaments < ActiveRecord::Migration
   def change
-    create_table :games do |t|
-      t.references :parent, index: true
+    create_table :tournaments do |t|
+      t.references :game, index: true
+      t.integer :status
       t.string :name
       t.integer :min_players_per_team
       t.integer :max_players_per_team
@@ -10,9 +11,10 @@ class CreateGames < ActiveRecord::Migration
       t.integer :set_rounds
       t.boolean :randomized_teams
       t.string :sampling_method
+      t.string :scoring_method
 
       t.timestamps
     end
-    add_index :games, :name, unique: true
+    add_index :tournaments, :name, unique: true
   end
 end

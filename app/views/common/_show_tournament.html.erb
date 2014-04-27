@@ -29,6 +29,9 @@
 			<% else %>
 			<p style="margin-top:10px;"> You've signed up for this tournament! 	</p>
 			<% end %>
+			<%= form_tag(tournament_brackets_path(target), method: "post") do %>
+				<%= submit_tag("Make Bracket") %>
+			<% end %>
 		<% end %>
 	</div>
 </div>

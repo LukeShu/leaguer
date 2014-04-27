@@ -116,7 +116,8 @@ class TournamentsController < ApplicationController
 					success = true
 					ActiveRecord::Base.transaction do
 						success &= @tournament.save &&
-						success &= @tournament.stages.create(scheduling: "elimination")
+						sched = tournament_attribute_params[:type_opt]
+						success &= @tournament.stages.create(scheduling: sched)
 						success &= @tournament.stages.first.create_matches
 					end
 					if success
@@ -162,7 +163,7 @@ class TournamentsController < ApplicationController
 	# Never trust parameters from the scary internet, only allow the white list through.
 	def tournament_attribute_params
 		if params[:tournament]
-			params.require(:tournament).permit(:game_id, :status, :name, :min_players_per_team, :max_players_per_team, :min_teams_per_match, :max_teams_per_match, :set_rounds, :randomized_teams, :sampling_method)
+			params.require(:tournament).permit(:game_id, :status, :name, :min_players_per_team, :max_players_per_team, :min_teams_per_match, :max_teams_per_match, :set_rounds, :randomized_teams, :sampling_method, :scoring_method)
 		else
 			return {}
 		end

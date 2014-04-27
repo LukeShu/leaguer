@@ -10,6 +10,7 @@ one:
   set_rounds: 1
   randomized_teams: false
   sampling_method: MyString
+  scoring_method: MyString
 
 two:
   parent_id: 
@@ -21,3 +22,4 @@ two:
   set_rounds: 1
   randomized_teams: false
   sampling_method: MyString
+  scoring_method: MyString

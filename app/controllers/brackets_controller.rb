@@ -1,20 +1,16 @@
 class BracketsController < ApplicationController
-	before_action :set_bracket, only: [:show, :edit, :update, :destroy]
+	before_action :set_tournament, only: [:index, :create]
 
 	# GET /brackets
 	# GET /brackets.json
 	def index
-		@brackets = Bracket.all
+		@tournament = Tournament.find(params[:tournament_id])
+		@brackets = @tournament.brackets
 	end
 
 	# GET /brackets/1
 	# GET /brackets/1.json
 	def show
-	end
-
-	# GET /brackets/new
-	def new
-		@bracket = Bracket.new
 	end
 
 	# GET /brackets/1/edit
@@ -24,12 +20,14 @@ class BracketsController < ApplicationController
 	# POST /brackets
 	# POST /brackets.json
 	def create
-		@bracket = Bracket.new(bracket_params)
+		@bracket = @tournament.brackets.create(user: current_user)
+		@bracket.name =  current_user.user_name + "'s Prediction for " + @tournament.name
+		@bracket.create_matches
 
 		respond_to do |format|
 			if @bracket.save
 				format.html { redirect_to @bracket, notice: 'Bracket was successfully created.' }
-				format.json { render action: 'show', status: :created, location: @bracket }
+				format.json { render action: 'edit', status: :created, location: @bracket }
 			else
 				format.html { render action: 'new' }
 				format.json { render json: @bracket.errors, status: :unprocessable_entity }
@@ -64,11 +62,20 @@ class BracketsController < ApplicationController
 	private
 	# Use callbacks to share common setup or constraints between actions.
 	def set_bracket
+		@tournament = Tournament.find(params[:tournament_id])
 		@bracket = Bracket.find(params[:id])
+	end
+
+	def set_tournament
+		@tournament = Tournament.find(params[:tournament_id])
 	end
 
 	# Never trust parameters from the scary internet, only allow the white list through.
 	def bracket_params
 		params.require(:bracket).permit(:user_id, :tournament_id, :name)
+	end
+
+	def is_owner?(bracket)
+		bracket.user == current_user
 	end
 end
