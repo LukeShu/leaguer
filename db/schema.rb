@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140424230712) do
+ActiveRecord::Schema.define(version: 20140427001542) do
 
   create_table "alerts", force: true do |t|
     t.integer  "author_id"
@@ -97,6 +97,7 @@ ActiveRecord::Schema.define(version: 20140424230712) do
     t.integer  "set_rounds"
     t.boolean  "randomized_teams"
     t.string   "sampling_method"
+    t.string   "scoring_method"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -254,8 +255,9 @@ ActiveRecord::Schema.define(version: 20140424230712) do
 
   create_table "tournament_stages", force: true do |t|
     t.integer  "tournament_id"
-    t.string   "scheduling"
     t.text     "structure"
+    t.string   "scheduling_method"
+    t.string   "seeding_method"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -273,6 +275,7 @@ ActiveRecord::Schema.define(version: 20140424230712) do
     t.integer  "set_rounds"
     t.boolean  "randomized_teams"
     t.string   "sampling_method"
+    t.string   "scoring_method"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

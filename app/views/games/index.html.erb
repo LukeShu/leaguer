@@ -12,6 +12,7 @@
       <th>Set rounds</th>
       <th>Randomized teams</th>
       <th>Sampling method</th>
+      <th>Scoring method</th>
       <th></th>
       <th></th>
       <th></th>
@@ -30,6 +31,7 @@
         <td><%= game.set_rounds %></td>
         <td><%= game.randomized_teams %></td>
         <td><%= game.sampling_method %></td>
+        <td><%= game.scoring_method %></td>
         <td><%= link_to 'Show', game %></td>
         <td><%= link_to 'Edit', edit_game_path(game) %></td>
         <td><%= link_to 'Destroy', game, method: :delete, data: { confirm: 'Are you sure?' } %></td>

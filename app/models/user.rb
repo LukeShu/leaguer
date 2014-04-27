@@ -74,6 +74,10 @@ class User < ActiveRecord::Base
 
 			:edit_permissions	=> (2**19),
 			:edit_server    	=> (2**20),
+
+			:create_bracket => (2**21),
+			:edit_bracket => (2**22),
+			:delete_bracket => (2**23)
 		}
 	end
 
