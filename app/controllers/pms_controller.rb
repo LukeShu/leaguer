@@ -57,6 +57,7 @@ class PmsController < ApplicationController
 				format.json { render json: @pm.errors, status: :unprocessable_entity }
 			end
 		end
+		current_user.reply_to_conversation(@pm.conversation, @pm.message)
 	end
 
 	# DELETE /pms/1
