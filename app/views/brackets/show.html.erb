@@ -1,13 +1,11 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>User:</strong>
-  <%= @bracket.user %>
+  <%= @bracket.user.user_name %>
 </p>
 
 <p>
   <strong>Tournament:</strong>
-  <%= @bracket.tournament %>
+  <%= @bracket.tournament.name %>
 </p>
 
 <p>
@@ -15,5 +13,9 @@
   <%= @bracket.name %>
 </p>
 
-<%= link_to 'Edit', edit_bracket_path(@bracket) %> |
-<%= link_to 'Back', brackets_path %>
+<% @bracket.bracket_matches.each do |m| %>
+	<p><b><%= m.match.id %></b></p>
+<% end %>
+
+
+<%= link_to 'Back', tournaments_path %>

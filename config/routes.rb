@@ -1,5 +1,4 @@
 Leaguer::Application.routes.draw do
-	resources :brackets
 
 	resources :sessions, only: [:new, :create, :destroy]
 
@@ -15,6 +14,7 @@ Leaguer::Application.routes.draw do
 
 	resources :tournaments do
 		resources :matches, only: [:index, :show, :update]
+		resources :brackets
 	end
 
 	resource :server, only: [:show, :edit, :update]
@@ -32,6 +32,12 @@ Leaguer::Application.routes.named_routes.module.module_eval do
 	end
 	def match_url(match, options={})
 		tournament_match_url(match.tournament_stage.tournament, match, options)
+	end
+	def bracket_path(bracket, options={})
+		tournament_bracket_path(bracket.tournament, bracket, options)
+	end
+	def bracket_url(bracket, options={})
+		tournament_bracket_url(bracket.tournament, bracket, options)
 	end
 end
 
