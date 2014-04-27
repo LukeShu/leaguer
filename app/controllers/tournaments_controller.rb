@@ -116,7 +116,8 @@ class TournamentsController < ApplicationController
 					success = true
 					ActiveRecord::Base.transaction do
 						success &= @tournament.save &&
-						success &= @tournament.stages.create(scheduling: "elimination")
+						sched = tournament_attribute_params[:type_opt]
+						success &= @tournament.stages.create(scheduling: sched)
 						success &= @tournament.stages.first.create_matches
 					end
 					if success
