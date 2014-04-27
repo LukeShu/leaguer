@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 #
 p = User.permission_bits
-Server.create(default_user_permissions: p[:join_tournament] | p[:create_pm] | p[:create_bracket] | p[:edit_bracket])
+Server.create(default_user_permissions: p[:join_tournament] | p[:create_pm] | p[:edit_pm] | p[:create_bracket])
 
 Game.create(name: "League of Legends",min_players_per_team: 5,  max_players_per_team: 5, min_teams_per_match: 2, max_teams_per_match: 2, set_rounds: nil, randomized_teams: true, sampling_method: "Manual,Double Blind,RiotAPI")
 Game.create(name: "Chess", min_players_per_team: 1,  max_players_per_team: 1, min_teams_per_match: 2, max_teams_per_match: 2, set_rounds: nil, randomized_teams: true, sampling_method: "Manual,Double Blind")
