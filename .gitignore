@@ -15,7 +15,13 @@
 /log/*.log
 /tmp
 
-# The above is from Rails.  The following is from Luke.
+# The above is from Rails.
+
+# The next lines are from `rails generate figaro:install`
+# Ignore application configuration
+/config/application.yml
+
+# The rest is from Luke.
 /vendor/bundle
 nohup.out
 # As noted above, you probably want to add the following to your global git config.
@@ -24,3 +30,4 @@ nohup.out
 *#
 .#*
 .nfs*
+.*.swp
