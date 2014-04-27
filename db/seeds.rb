@@ -9,33 +9,20 @@
 p = User.permission_bits
 Server.create(default_user_permissions: p[:join_tournament] | p[:create_pm] | p[:edit_pm] | p[:create_bracket])
 
-Game.create(name: "League of Legends",min_players_per_team: 5,  max_players_per_team: 5, min_teams_per_match: 2, max_teams_per_match: 2, sampling_method: "Manual,Double Blind,RiotAPI")
-Game.create(name: "Chess", min_players_per_team: 1,  max_players_per_team: 1, min_teams_per_match: 2, max_teams_per_match: 2, sampling_method: "Manual,Double Blind")
-Game.create(name: "Hearthstone", min_players_per_team: 1, max_players_per_team: 1, min_teams_per_match: 2, max_teams_per_match: 2, sampling_method: "Manual,Double Blind")
-Game.create(name: "Rock, Paper, Scissors", min_players_per_team: 1, max_players_per_team: 3, min_teams_per_match: 2, max_teams_per_match: 2, sampling_method: "Manual,Double Blind")
+league = Game.create(name: "League of Legends", min_players_per_team: 5,  max_players_per_team: 5, min_teams_per_match: 2, max_teams_per_match: 2, sampling_method: "riot_api")
+league.settings.create(display_order: 1, name: "Map"      , description: "Select a map to play on.", vartype: GameSetting::types[:pick_one_dropdown], type_opt: "Summoners Rift,Twisted Treeline,Crystal Scar,Haunted Abyss", default: "Summoners Rift")
+league.settings.create(display_order: 2, name: "Pick type", description: "Select a pick type."     , vartype: GameSetting::types[:pick_one_dropdown], type_opt: "Blind pick,Draft"                                          , default: "Draft")
 
-Game.find_by_name("League of Legends").settings.create(name: "Map", default: "Summoners Rift", type_opt: "Summoners Rift,Twisted Treeline,Crystal Scar,Haunted Abyss", description: "Select a map to play on.", vartype: 5, display_order: 1)
-Game.find_by_name("League of Legends").settings.create(name: "Pick Type", type_opt: "Blind Pick,Draft", description: "Select a pick type.", vartype: 5, display_order: 2)
-#Game.find_by_name("League of Legends").settings.create(name: "Scoring Method", type_opt: "FibonacciPeerWithBlowout,MarginalPeer,WinnerTakesAll", description: "Select Scoring Method", vartype: 5, display_order: 3)
-#Game.find_by_name("League of Legends").settings.create(name: "Seeding Method", type_opt: "Manual,Random,MultiStage", description: "Select Seeding Method", vartype: 5, display_order: 4)
-#Game.find_by_name("League of Legends").settings.create(name: "Scheduling Method", type_opt: "Elimination,RoundRobin", description: "Select Scheduling Method", vartype: 5, display_order: 5)
+chess = Game.create(name: "Chess", min_players_per_team: 1,  max_players_per_team: 1, min_teams_per_match: 2, max_teams_per_match: 2, sampling_method: "Manual,Double Blind")
+chess.settings.create(display_order: 1, name: "Time Control", description: "Enter a value for Time Control (ie. 5-5, 30, 6hr, or None)", vartype: GameSetting::types[:text_short], default: "")
 
-Game.find_by_name("Chess").settings.create(name: "Time Control", description: "Enter a value for Time Control (ie. 5-5, 30, 6hr, or None)", vartype: 0, display_order: 1)
-#Game.find_by_name("Chess").settings.create(name: "Scoring Method", type_opt: "WinnerTakesAll", description: "Select Scoring Method", vartype: 5, display_order: 2)
-#Game.find_by_name("Chess").settings.create(name: "Seeding Method", type_opt: "Manual,Random,MultiStage", description: "Select Seeding Method", vartype: 5, display_order: 3)
-#Game.find_by_name("Chess").settings.create(name: "Scheduling Method", type_opt: "Elimination,RoundRobin", description: "Select Scheduling Method", vartype: 5, display_order: 4)
+hearthstone = Game.create(name: "Hearthstone", min_players_per_team: 1, max_players_per_team: 1, min_teams_per_match: 2, max_teams_per_match: 2, sampling_method: "Manual,Double Blind")
+hearthstone.settings.create(display_order: 1, name: "Deck name", description: "Enter a name for your deck, be descriptive.", vartype: GameSetting::types[:text_long], default: "")
 
-Game.find_by_name("Hearthstone").settings.create(name: "Deck Name", description: "Enter a name for your deck, be descriptive.", vartype: 1, display_order: 1)
-#Game.find_by_name("Hearthstone").settings.create(name: "Scoring Method", type_opt: "WinnerTakesAll", description: "Select Scoring Method", vartype: 5, display_order: 2)
-#Game.find_by_name("Hearthstone").settings.create(name: "Seeding Method", type_opt: "Manual,Random,MultiStage", description: "Select Seeding Method", vartype: 5, display_order: 3)
-#Game.find_by_name("Hearthstone").settings.create(name: "Scheduling Method", type_opt: "Elimination,RoundRobin", description: "Select Scheduling Method", vartype: 5, display_order: 4)
-
-Game.find_by_name("Rock, Paper, Scissors").settings.create(name: "Favorite Object", description: "What is your favorite object in RPS?", type_opt: "Rock,Paper,Scissors", vartype: 2, display_order: 5)
-Game.find_by_name("Rock, Paper, Scissors").settings.create(name: "Lizard, Spock allowed?", description: "Will you allow Lizard and Spock?", vartype: 4, display_order: 4)
-Game.find_by_name("Rock, Paper, Scissors").settings.create(name: "Why are those up there even called radio buttons?", description: "Check boxes make sense at least", type_opt: "I do not know.,There is now spoon.,Wow.,Because electricity.,Wat?", vartype: 3, display_order: 6)
-#Game.find_by_name("Rock, Paper, Scissors").settings.create(name: "Scoring Method", type_opt: "WinnerTakesAll", description: "Select Scoring Method", vartype: 5, display_order: 1)
-#Game.find_by_name("Rock, Paper, Scissors").settings.create(name: "Seeding Method", type_opt: "Manual,Random,MultiStage", description: "Select Seeding Method", vartype: 5, display_order: 2)
-#Game.find_by_name("Rock, Paper, Scissors").settings.create(name: "Scheduling Method", type_opt: "Elimination,RoundRobin", description: "Select Scheduling Method", vartype: 5, display_order: 3)
+rockpaperscissors = Game.create(name: "Rock, Paper, Scissors", min_players_per_team: 1, max_players_per_team: 3, min_teams_per_match: 2, max_teams_per_match: 2, sampling_method: "Manual,Double Blind")
+rockpaperscissors.settings.create(display_order: 4, name: "Lizard/Spock allowed?", description: "Will you allow Lizard and Spock?"    , vartype: GameSetting::types[:true_false]    , default: false)
+rockpaperscissors.settings.create(display_order: 5, name: "Favorite object"      , description: "What is your favorite object in RPS?", vartype: GameSetting::types[:pick_one_radio], type_opt: "Rock,Paper,Scissors", default: "Rock")
+rockpaperscissors.settings.create(display_order: 6, name: "Check boxes"          , description: "Example boxes"                       , vartype: GameSetting::types[:pick_several]  , type_opt: "I do not know,There is now spoon,Wow,Because electricity,Wat?", default: "Wow,Wat?")
 
 if Rails.env.development?
 	#user 1, the ADMIN
