@@ -84,7 +84,7 @@
 	<%= f.fields_for :stages do |stages_fields| %><fieldset><legend>Stages</legend>
 		<label for="num_stages">Number of tournament stages</label>
 		<input type="number" name="num_stages" min="1" value="<%= params[:num_stages] ? params[:num_stages].to_i : 1 %>">
-		<%= submit_tag("Set Stages", :class => "btn") %>
+		<%# submit_tag("Set Stages", :class => "btn") %>
 		<% for i in 1..(params[:num_stages].to_i) do %>
 			<%= stages_fields.fields_for i.to_s do |stage_fields| %><fieldset><legend>Stage <%= i %></legend>
 				<%= stage_fields.label :scheduling_method %>

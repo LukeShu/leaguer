@@ -9,10 +9,10 @@
 p = User.permission_bits
 Server.create(default_user_permissions: p[:join_tournament] | p[:create_pm] | p[:edit_pm] | p[:create_bracket])
 
-Game.create(name: "League of Legends",min_players_per_team: 5,  max_players_per_team: 5, min_teams_per_match: 2, max_teams_per_match: 2, set_rounds: nil, randomized_teams: true, sampling_method: "Manual,Double Blind,RiotAPI")
-Game.create(name: "Chess", min_players_per_team: 1,  max_players_per_team: 1, min_teams_per_match: 2, max_teams_per_match: 2, set_rounds: nil, randomized_teams: true, sampling_method: "Manual,Double Blind")
-Game.create(name: "Hearthstone", min_players_per_team: 1, max_players_per_team: 1, min_teams_per_match: 2, max_teams_per_match: 2, set_rounds: 1, randomized_teams: false, sampling_method: "Manual,Double Blind")
-Game.create(name: "Rock, Paper, Scissors", min_players_per_team: 1, max_players_per_team: 3, min_teams_per_match: 2, max_teams_per_match: 2, set_rounds: nil, randomized_teams: false, sampling_method: "Manual,Double Blind")
+Game.create(name: "League of Legends",min_players_per_team: 5,  max_players_per_team: 5, min_teams_per_match: 2, max_teams_per_match: 2, sampling_method: "Manual,Double Blind,RiotAPI")
+Game.create(name: "Chess", min_players_per_team: 1,  max_players_per_team: 1, min_teams_per_match: 2, max_teams_per_match: 2, sampling_method: "Manual,Double Blind")
+Game.create(name: "Hearthstone", min_players_per_team: 1, max_players_per_team: 1, min_teams_per_match: 2, max_teams_per_match: 2, sampling_method: "Manual,Double Blind")
+Game.create(name: "Rock, Paper, Scissors", min_players_per_team: 1, max_players_per_team: 3, min_teams_per_match: 2, max_teams_per_match: 2, sampling_method: "Manual,Double Blind")
 
 Game.find_by_name("League of Legends").settings.create(name: "Map", default: "Summoners Rift", type_opt: "Summoners Rift,Twisted Treeline,Crystal Scar,Haunted Abyss", description: "Select a map to play on.", vartype: 5, display_order: 1)
 Game.find_by_name("League of Legends").settings.create(name: "Pick Type", type_opt: "Blind Pick,Draft", description: "Select a pick type.", vartype: 5, display_order: 2)
@@ -84,7 +84,7 @@ if Rails.env.development?
 
 	#league of legends tournament
 	league_tourn = Tournament.create(game_id: 1, status: 0, name: "League of Legends Seed", min_players_per_team: 5, max_players_per_team: 5, min_teams_per_match: 2, 
-		max_teams_per_match: 2, set_rounds: 1, randomized_teams: true, sampling_method: nil)
+		max_teams_per_match: 2, sampling_method: nil)
 
 	#adds players to the seeded league tournament
 	for i in 0..9
@@ -97,7 +97,7 @@ if Rails.env.development?
 
 	#chess
 	chess_tourn = Tournament.create(game_id: 2, status: 0, name: "Chess Seed", min_players_per_team: 1, max_players_per_team: 1, min_teams_per_match: 2, 
-		max_teams_per_match: 2, set_rounds: 1, randomized_teams: true, sampling_method: nil)
+		max_teams_per_match: 2, sampling_method: nil)
 
 	chess_tourn.hosts.push(davis)
 	chess_tourn.join(davis)
@@ -105,7 +105,7 @@ if Rails.env.development?
 
 	#Rock Paper Scissors
 	rps = Tournament.create(game_id: 4, status: 0, name: "Rock, Paper, Scissors Seed", min_players_per_team: 1, max_players_per_team: 3, min_teams_per_match: 2, 
-		max_teams_per_match: 2, set_rounds: 1, randomized_teams: true, sampling_method: nil)
+		max_teams_per_match: 2, sampling_method: nil)
 
 	rps.hosts.push(davis)
 	rps.join(davis)
@@ -113,7 +113,7 @@ if Rails.env.development?
 	rps.join(guntas)
 
 	tourn5 = Tournament.create(game_id: 1, status: 0, name: "5 Teams, 2 Teams Per Match", min_players_per_team: 1, max_players_per_team: 1, min_teams_per_match: 2, 
-		max_teams_per_match: 2, set_rounds: 1, randomized_teams: true, sampling_method: nil)
+		max_teams_per_match: 2, sampling_method: nil)
 
 	for i in 0..9
 		if i == 0
@@ -124,7 +124,7 @@ if Rails.env.development?
 	tourn5.join(players_for_league[9])
 
 	tourn6 = Tournament.create(game_id: 1, status: 0, name: "3 teams per match", min_players_per_team: 1, max_players_per_team: 1, min_teams_per_match: 3, 
-		max_teams_per_match: 3, set_rounds: 1, randomized_teams: true, sampling_method: nil)
+		max_teams_per_match: 3, sampling_method: nil)
 
 	for i in 0..9
 		if i == 0
