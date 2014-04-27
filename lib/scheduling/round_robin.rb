@@ -7,11 +7,15 @@ module Scheduling
 		end
 
 		def create_matches
+			#number of teams*number of teams per match = number of matches per round
 			num_teams = (tournament.players.count/tournament.min_players_per_team).floor
-			num_matches = Float(num_teams/2)*(num_teams-1)
-			for i in 1..num_matches
+			@matches_per_round = num_teams * tournament.min_teams_per_match
+
+			@matches_per_round.each do |match|
 				tournament_stage.matches.create(status: 0, submitted_peer_evaluations: 0)
 			end
+
+			tournament_stage.seeding.seed_matches(tournament_stage)
 		end
 
 		def finish_match(match)
