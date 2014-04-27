@@ -7,10 +7,10 @@
 	<p>
 		<%= f.label :game_id, "Select a game type" %>
 		<%= f.select(:game_id, Game.all.map{|game| [game.name, game.id]}) %>
+		<%= submit_tag("Select", :class => "btn") %>
 	</p>
 
 	<% if @tournament.game.nil? %>
-		<%= submit_tag("Select", :class => "btn") %>
 		</fieldset>
 	<% else %>
 
@@ -84,6 +84,8 @@
 	<fieldset><legend>Stages</legend>
 		<label for="num_stages">Number of tournament stages</label>
 		<input type="number" name="num_stages" min="1" value="<%= params[:num_stages] ? params[:num_stages].to_i : 1 %>">
+		<%= submit_tag("Set Stages", :class => "btn") %>
+
 		<% for i in 1..(params[:num_stages].to_i) do %>
 			<%= fields_for "tournament[stages][#{i}]", @tournament.stages[i] do |stage_fields| %>
 			<fieldset><legend>Stage <%= i %></legend>
