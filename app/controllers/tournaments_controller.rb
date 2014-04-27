@@ -15,8 +15,7 @@ class TournamentsController < ApplicationController
 				when 0
 					render action: 'show'
 				when 1
-					#redirect_to tournament_matches_page(@tournament)
-					redirect_to "/tournaments/" + @tournament.id.to_s + "/matches"
+					redirect_to tournament_matches_path(@tournament)
 				when 2
 					redirect_to tournaments_page
 				end
