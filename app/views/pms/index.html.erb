@@ -11,32 +11,36 @@
   <col width="250">
   <col width="300">
   <tbody>
-    <tr>
+    <% if conversations.reject { |c| c.is_unread?(current_user) && (c.receipts_for current_user).last.message.sender != current_user }.empty? %>
       <tr>
-        <td><b>With</b></td>
-        <td><b>Subject</b></td>
-        <td><b>Body</b></td>
-      </tr>
-      <% conversations.each do |conversation| %>
-        <% receipts = conversation.receipts_for current_user %>
-        <% if conversation.is_unread?(current_user) && receipts.last.message.sender != current_user %>
-          <% message = receipts.last.message %>
-          <tr>
-          <td>
-            <% people = conversation.participants %>
-            <% people.each do |person| %>
-              <% unless person == current_user %>
-                <%= truncate(person.user_name, length: 20) %>
+        <tr>
+          <td><b>With</b></td>
+          <td><b>Subject</b></td>
+          <td><b>Body</b></td>
+        </tr>
+        <% conversations.each do |conversation| %>
+          <% receipts = conversation.receipts_for current_user %>
+          <% if conversation.is_unread?(current_user) && receipts.last.message.sender != current_user %>
+            <% message = receipts.last.message %>
+            <tr>
+            <td>
+              <% people = conversation.participants %>
+              <% people.each do |person| %>
+                <% unless person == current_user %>
+                  <%= truncate(person.user_name, length: 20) %>
+                <% end %>
               <% end %>
-            <% end %>
-          </td>
-          <td><%= truncate(conversation.subject, length: 30) %></td>
-          <td><%= truncate(message.body, length: 42) %></td>
-          <td><%= link_to 'View', @pms.find_by(conversation: conversation) %></td>
-          </tr>
+            </td>
+            <td><%= truncate(conversation.subject, length: 30) %></td>
+            <td><%= truncate(message.body, length: 42) %></td>
+            <td><%= link_to 'View', @pms.find_by(conversation: conversation) %></td>
+            </tr>
+          <% end %>
         <% end %>
-      <% end %>
-    </tr>
+      </tr>
+    <% else %>
+      <h4> No unread conversations </h4>
+    <% end %>
   </tbody>
 </table>
 
@@ -49,31 +53,35 @@
   <col width="250">
   <col width="300">
   <tbody>
-    <tr>
+    <% if conversations.reject { |c| c.is_read?(current_user) || (c.receipts_for current_user).last.message.sender == current_user }.empty? %>
       <tr>
-        <td><b>With</b></td>
-        <td><b>Subject</b></td>
-        <td><b>Body</b></td>
-      </tr>
-      <% conversations.each do |conversation| %>
-        <% receipts = conversation.receipts_for current_user %>
-        <% if conversation.is_read?(current_user) || receipts.last.message.sender == current_user  %>
-          <% message = receipts.last.message %>
-          <tr>
-          <td>
-            <% people = conversation.participants %>
-            <% people.each do |person| %>
-              <% unless person == current_user %>
-                <%= truncate(person.user_name, length: 20) %>
+        <tr>
+          <td><b>With</b></td>
+          <td><b>Subject</b></td>
+          <td><b>Body</b></td>
+        </tr>
+        <% conversations.each do |conversation| %>
+          <% receipts = conversation.receipts_for current_user %>
+          <% if conversation.is_read?(current_user) || receipts.last.message.sender == current_user  %>
+            <% message = receipts.last.message %>
+            <tr>
+            <td>
+              <% people = conversation.participants %>
+              <% people.each do |person| %>
+                <% unless person == current_user %>
+                  <%= truncate(person.user_name, length: 20) %>
+                <% end %>
               <% end %>
-            <% end %>
-          </td>
-          <td><%= truncate(conversation.subject, length: 30) %></td>
-          <td><%= truncate(message.body, length: 42) %></td>
-          <td><%= link_to 'View', @pms.find_by(conversation: conversation) %></td>
-          </tr>
+            </td>
+            <td><%= truncate(conversation.subject, length: 30) %></td>
+            <td><%= truncate(message.body, length: 42) %></td>
+            <td><%= link_to 'View', @pms.find_by(conversation: conversation) %></td>
+            </tr>
+          <% end %>
         <% end %>
-      <% end %>
-    </tr>
+      </tr>
+    <% else %>
+      <h4> No unread conversations </h4>
+    <% end %>
   </tbody>
 </table>
