@@ -50,11 +50,20 @@ class TournamentsController < ApplicationController
 				ok &= @tournament.update(tournament_setting_params)
 				ok &= @tournament.hosts.push(current_user)
 				for i in 1..(params[:num_stages].to_i) do
-					ok &= @tournament.stages.create(tournament_stage_params(i))
+					begin
+						ok &= @tournament.stages.create(tournament_stage_params(i))
+					rescue ActionController::ParameterMissing => e
+						ok = false
+						@tournament.errors.add("stages[#{i}]", "Stage #{i} not set")
+					end
 				end
 			end
-		rescue
+		rescue ActiveRecord::RecordNotUnique => e
 			ok = false
+			@tournament.errors.add(:name, "must be unique")
+		rescue => e
+			ok = false
+			@tournament.errors.add(:exception, "Unknown error: ``#{e.class.name}'' -- #{e.inspect} -- #{e.methods - Object.new.methods}")
 		end
 		respond_to do |format|
 			if ok
