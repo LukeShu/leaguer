@@ -16,26 +16,26 @@ Game.create(name: "Rock, Paper, Scissors", min_players_per_team: 1, max_players_
 
 Game.find_by_name("League of Legends").settings.create(name: "Map", default: "Summoners Rift", type_opt: "Summoners Rift,Twisted Treeline,Crystal Scar,Haunted Abyss", description: "Select a map to play on.", vartype: 5, display_order: 1)
 Game.find_by_name("League of Legends").settings.create(name: "Pick Type", type_opt: "Blind Pick,Draft", description: "Select a pick type.", vartype: 5, display_order: 2)
-Game.find_by_name("League of Legends").settings.create(name: "Scoring Method", type_opt: "FibonacciPeerWithBlowout,MarginalPeer,WinnerTakesAll", description: "Select Scoring Method", vartype: 5, display_order: 3)
-Game.find_by_name("League of Legends").settings.create(name: "Seeding Method", type_opt: "Manual,Random,MultiStage", description: "Select Seeding Method", vartype: 5, display_order: 4)
-Game.find_by_name("League of Legends").settings.create(name: "Scheduling Method", type_opt: "Elimination,RoundRobin", description: "Select Scheduling Method", vartype: 5, display_order: 5)
+#Game.find_by_name("League of Legends").settings.create(name: "Scoring Method", type_opt: "FibonacciPeerWithBlowout,MarginalPeer,WinnerTakesAll", description: "Select Scoring Method", vartype: 5, display_order: 3)
+#Game.find_by_name("League of Legends").settings.create(name: "Seeding Method", type_opt: "Manual,Random,MultiStage", description: "Select Seeding Method", vartype: 5, display_order: 4)
+#Game.find_by_name("League of Legends").settings.create(name: "Scheduling Method", type_opt: "Elimination,RoundRobin", description: "Select Scheduling Method", vartype: 5, display_order: 5)
 
 Game.find_by_name("Chess").settings.create(name: "Time Control", description: "Enter a value for Time Control (ie. 5-5, 30, 6hr, or None)", vartype: 0, display_order: 1)
-Game.find_by_name("Chess").settings.create(name: "Scoring Method", type_opt: "WinnerTakesAll", description: "Select Scoring Method", vartype: 5, display_order: 2)
-Game.find_by_name("Chess").settings.create(name: "Seeding Method", type_opt: "Manual,Random,MultiStage", description: "Select Seeding Method", vartype: 5, display_order: 3)
-Game.find_by_name("Chess").settings.create(name: "Scheduling Method", type_opt: "Elimination,RoundRobin", description: "Select Scheduling Method", vartype: 5, display_order: 4)
+#Game.find_by_name("Chess").settings.create(name: "Scoring Method", type_opt: "WinnerTakesAll", description: "Select Scoring Method", vartype: 5, display_order: 2)
+#Game.find_by_name("Chess").settings.create(name: "Seeding Method", type_opt: "Manual,Random,MultiStage", description: "Select Seeding Method", vartype: 5, display_order: 3)
+#Game.find_by_name("Chess").settings.create(name: "Scheduling Method", type_opt: "Elimination,RoundRobin", description: "Select Scheduling Method", vartype: 5, display_order: 4)
 
 Game.find_by_name("Hearthstone").settings.create(name: "Deck Name", description: "Enter a name for your deck, be descriptive.", vartype: 1, display_order: 1)
-Game.find_by_name("Hearthstone").settings.create(name: "Scoring Method", type_opt: "WinnerTakesAll", description: "Select Scoring Method", vartype: 5, display_order: 2)
-Game.find_by_name("Hearthstone").settings.create(name: "Seeding Method", type_opt: "Manual,Random,MultiStage", description: "Select Seeding Method", vartype: 5, display_order: 3)
-Game.find_by_name("Hearthstone").settings.create(name: "Scheduling Method", type_opt: "Elimination,RoundRobin", description: "Select Scheduling Method", vartype: 5, display_order: 4)
+#Game.find_by_name("Hearthstone").settings.create(name: "Scoring Method", type_opt: "WinnerTakesAll", description: "Select Scoring Method", vartype: 5, display_order: 2)
+#Game.find_by_name("Hearthstone").settings.create(name: "Seeding Method", type_opt: "Manual,Random,MultiStage", description: "Select Seeding Method", vartype: 5, display_order: 3)
+#Game.find_by_name("Hearthstone").settings.create(name: "Scheduling Method", type_opt: "Elimination,RoundRobin", description: "Select Scheduling Method", vartype: 5, display_order: 4)
 
 Game.find_by_name("Rock, Paper, Scissors").settings.create(name: "Favorite Object", description: "What is your favorite object in RPS?", type_opt: "Rock,Paper,Scissors", vartype: 2, display_order: 5)
 Game.find_by_name("Rock, Paper, Scissors").settings.create(name: "Lizard, Spock allowed?", description: "Will you allow Lizard and Spock?", vartype: 4, display_order: 4)
 Game.find_by_name("Rock, Paper, Scissors").settings.create(name: "Why are those up there even called radio buttons?", description: "Check boxes make sense at least", type_opt: "I do not know.,There is now spoon.,Wow.,Because electricity.,Wat?", vartype: 3, display_order: 6)
-Game.find_by_name("Rock, Paper, Scissors").settings.create(name: "Scoring Method", type_opt: "WinnerTakesAll", description: "Select Scoring Method", vartype: 5, display_order: 1)
-Game.find_by_name("Rock, Paper, Scissors").settings.create(name: "Seeding Method", type_opt: "Manual,Random,MultiStage", description: "Select Seeding Method", vartype: 5, display_order: 2)
-Game.find_by_name("Rock, Paper, Scissors").settings.create(name: "Scheduling Method", type_opt: "Elimination,RoundRobin", description: "Select Scheduling Method", vartype: 5, display_order: 3)
+#Game.find_by_name("Rock, Paper, Scissors").settings.create(name: "Scoring Method", type_opt: "WinnerTakesAll", description: "Select Scoring Method", vartype: 5, display_order: 1)
+#Game.find_by_name("Rock, Paper, Scissors").settings.create(name: "Seeding Method", type_opt: "Manual,Random,MultiStage", description: "Select Seeding Method", vartype: 5, display_order: 2)
+#Game.find_by_name("Rock, Paper, Scissors").settings.create(name: "Scheduling Method", type_opt: "Elimination,RoundRobin", description: "Select Scheduling Method", vartype: 5, display_order: 3)
 
 if Rails.env.development?
 	#user 1, the ADMIN
