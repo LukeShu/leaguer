@@ -31,7 +31,6 @@ class TournamentsController < ApplicationController
 
 	# GET /tournaments/new
 	def new
-		@games = Game.all
 		@tournament = Tournament.new(tournament_attribute_params)
 	end
 
@@ -43,18 +42,20 @@ class TournamentsController < ApplicationController
 	# POST /tournaments
 	# POST /tournaments.json
 	def create
-		require 'pp'
-		puts "----attributes:"
-		pp tournament_attribute_params
 		@tournament = Tournament.new(tournament_attribute_params)
 		@tournament.status = 0
 		ok = true
-		ActiveRecord::Base.transaction do
-			ok &= @tournament.save
-			puts "----settings:"
-			pp tournament_setting_params
-			ok &= @tournament.update(tournament_setting_params)
-			ok &= @tournament.hosts.push(current_user)
+		begin
+			ActiveRecord::Base.transaction do
+				ok &= @tournament.save
+				ok &= @tournament.update(tournament_setting_params)
+				ok &= @tournament.hosts.push(current_user)
+				for i in 1..(params[:num_stages].to_i) do
+					ok &= @tournament.stages.create(tournament_stage_params(i))
+				end
+			end
+		rescue
+			ok = false
 		end
 		respond_to do |format|
 			if ok
@@ -171,7 +172,17 @@ class TournamentsController < ApplicationController
 	# Never trust parameters from the scary internet, only allow the white list through.
 	def tournament_attribute_params
 		if params[:tournament]
-			params.require(:tournament).permit(:game_id, :status, :name, :min_players_per_team, :max_players_per_team, :min_teams_per_match, :max_teams_per_match, :set_rounds, :randomized_teams, :sampling_method, :scoring_method)
+			p = params.require(:tournament).permit(:game_id, :status, :name, :min_players_per_team, :max_players_per_team, :min_teams_per_match, :max_teams_per_match, :set_rounds, :randomized_teams, :sampling_method, :scoring_method)
+			if p[:game_id]
+				game = Game.find(p[:game_id])
+				p[:min_players_per_team] ||= game.min_players_per_team
+				p[:max_players_per_team] ||= game.max_players_per_team
+				p[:min_teams_per_match]  ||= game.min_teams_per_match
+				p[:max_teams_per_match]  ||= game.max_teams_per_match
+				p[:sampling_method]      ||= game.sampling_method
+				p[:scoring_method]       ||= game.scoring_method
+			end
+			return p
 		else
 			return {}
 		end
@@ -184,6 +195,10 @@ class TournamentsController < ApplicationController
 		else
 			return {}
 		end
+	end
+
+	def tournament_stage_params(i)
+		params.require(:tournament).require(i.to_sym).permit(:scheduling_method, :seeding_method)
 	end
 
 	def is_owner?(object)

@@ -50,6 +50,11 @@ class Tournament < ActiveRecord::Base
 			@tournament.settings_raw.all.collect { |x| x.name }
 		end
 
+		def empty?() keys.empty? end
+		def count() keys.count end
+		def length() count end
+		def size() count end
+
 		def method_missing(name, *args)
 			if name.to_s.ends_with?('=')
 				self[name.to_s.sub(/=$/, '').to_sym] = args.first
@@ -95,27 +100,30 @@ class Tournament < ActiveRecord::Base
 	end
 
 	# YISSSSSS
-	def self.make_methods(dir)
-		@methods ||= {}
-		if @methods[dir].nil? or Rails.env.development?
-			@methods[dir] = Dir.glob("#{Rails.root}/lib/#{dir}/*.rb").map{|filename| File.basename(filename, ".rb").humanize }
-		end
-		return @methods[dir]
-	end
 
-	def self.scoring_methods
+	def scoring_methods
 		make_methods "scoring"
 	end
 
-	def self.sampling_methods
-		make_methods "sampling"
+	def sampling_methods
+		make_methods("sampling").collect do |name|
+			"Sampling::#{name.camelcase}".constantize.works_with?(self.game)
+		end
 	end
 
-	def self.scheduling_methods
+	def scheduling_methods
 		make_methods "scheduling"
 	end
 
-	def self.seeding_methods
+	def seeding_methods
 		make_methods "seeding"
+	end
+
+	def make_methods(dir)
+		@@methods ||= {}
+		if @@methods[dir].nil? or Rails.env.development?
+			@@methods[dir] = Dir.glob("#{Rails.root}/lib/#{dir}/*.rb").map{|filename| File.basename(filename, ".rb") }
+		end
+		return @@methods[dir]
 	end
 end
