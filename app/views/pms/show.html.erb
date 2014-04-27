@@ -1,26 +1,47 @@
 <p>
-  <strong>Author:</strong>
-  <%# @conversation.last_sender.user_name %>
-</p>
-
-<p>
-  <strong>Recipient:</strong>
-  <%#@pm.recipient.user_name %>
-</p>
-
-<p>
-  <strong>Message:</strong>
-  <%# @pm.message %>
+  <strong>Participants:</strong>
+  <% receps = @pm.conversation.participants %>
+  <% receps.each do |recep| %>
+    <% #unless recep == @pm.conversation.last_sender %>
+      <%= recep.user_name %>
+      <%= "and" %>
+    <% #end %>
+  <% end %>
+  <%= "the NSA" %>
 </p>
 
 <p>
   <strong>Subject:</strong>
-  <%= @pm.subject %>
+  <%= @pm.conversation.subject %>
 </p>
 
-<p>
-  <strong>Conversation:</strong>
-  <%= @pm.conversation %>
+<% receipts = @pm.conversation.receipts_for current_user %>
+<% receipts.each do |receipt| %>
+  <% message = receipt.message %>
+
+  <p> ________________________________________________ </p>
+
+  <p>
+    <%= message.sender.user_name %>
+    <%= ":" %>
+    <%= message.body %>
+  </p>
+
+<% end %>
+
+<p> ________________________________________________ </p>
+<p> 
+  <%= form_for(@pm) do |f| %>
+    <div class="field">
+    <%= f.text_area :message %>
+    </div>
+
+    <div class="actions">
+    <%= submit_tag("Reply", :class => "signup") %>
+    </div>
+
+ <% end %>
 </p>
+
 
 <%= link_to 'Back', pms_path %>
