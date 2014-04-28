@@ -10,7 +10,7 @@ module Scheduling
 		def create_matches
 			# => find the number of matches and teams to create
 			@num_teams = (tournament.players.count/tournament.min_players_per_team).floor
-			@matches_per_round = @num_teams * tournament.min_teams_per_match
+			@matches_per_round = (@num_teams / tournament.min_teams_per_match).floor
 
 			# => initialize data and status members
 			@team_pairs ||= Array.new
@@ -45,6 +45,10 @@ module Scheduling
 				end
 
 			end
+
+			# => Set the match statuses to ready (1)
+			tournament_stage.matches.each {|match| match.update(status: 1)}
+
 		end
 
 		def finish_match(match)
