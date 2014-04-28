@@ -1,7 +1,7 @@
 <div class="row tournament-listing">
 	<div class="col-md-2 col-sm-3 col-xs-6">
-		<%= image_tag(target.game.name.downcase.tr(" ", "_").tr(",", "") + ".png", class: "t-image") %>
-		<p class="t-game"> <%= Game.find(target.game_id).name %></p>
+		<%= image_tag(target.game.name.parameterize.underscore + ".png", class: "t-image") %>
+		<p class="t-game"><%= Game.find(target.game_id).name %></p>
 	</div>
 	<div class="col-md-8 col-sm-7 col-xs-6">
 		<%# "header" %>
