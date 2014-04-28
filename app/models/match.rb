@@ -57,11 +57,9 @@ class Match < ActiveRecord::Base
 			methods_names = self.tournament_stage.tournament.sampling_methods
 			methods_names.each do |method_name|
 				method_class = "Sampling::#{sampling_name.camelcase}".constantize
-				if method_class.works_with(self.tournament_stage.tournament.game)
-					needed.each do |stat|
-						data[stat] ||= {}
-						data[stat][method] = method.can_get?(user, stat)
-					end
+				needed.each do |stat|
+					data[stat] ||= {}
+					data[stat][method] = method_class.can_get?(user, stat)
 				end
 			end
 
