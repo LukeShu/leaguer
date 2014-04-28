@@ -17,6 +17,7 @@
 </fieldset>
 <% else %>
 	<%= form_for(@tournament, url: tournaments_path, method: "post") do |f| %>
+		<%= f.hidden_field(:game_id) %>
 		<p>
 			<%= f.label :name %>
 			<%= f.text_field :name %>

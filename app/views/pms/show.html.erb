@@ -31,6 +31,7 @@
 
 <p> ________________________________________________ </p>
 <p> 
+  <% @pm.message = "" %>
   <%= form_for(@pm) do |f| %>
     <div class="field">
     <%= f.text_area :message %>
