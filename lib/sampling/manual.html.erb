@@ -1,12 +1,11 @@
-<% if @tournament.hosts.include? current_user %>
-	<input type="hidden" name="update_action" value="finish">
+<% if @tournament.hosts.include? @current_user %>
+	<input type="hidden" name="update_action" value="finish" >
 	<% @match.teams.each do |team| %>
-		<%= tag :input, {"type" => "radio", "name" => "winner", "value" => "#{team.id}" } %>
+		<input type="radio", name="winner", value="<%= team.id %>" >
 		<%= "Team #{team.id} Won" %>
 	<% end %>
-
-	<%= submit_tag("Finish match") %>
-	<%= @tournament.settings['ScoringMethod'] %>
+	<br>
+	<input type="submit", value="Finish match" >
 <% else %>
 	<p>The match is running; the host has yet to post the scores of the match.</p>
 <% end %>
