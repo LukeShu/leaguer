@@ -56,7 +56,7 @@ class Match < ActiveRecord::Base
 			needed = self.tournament_stage.scoring.stats_needed
 			methods_names = self.tournament_stage.tournament.sampling_methods
 			methods_names.each do |method_name|
-				method_class = "Sampling::#{sampling_name.camelcase}".constantize
+				method_class = "Sampling::#{method_name.camelcase}".constantize
 				needed.each do |stat|
 					data[stat] ||= {}
 					data[stat][method] = method_class.can_get?(user, stat)

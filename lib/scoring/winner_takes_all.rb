@@ -1,10 +1,10 @@
 module Scoring
 	module WinnerTakesAll
-		def stats_needed
+		def self.stats_needed
 			return []
 		end
 
-		def score(match, interface)
+		def self.score(match, interface)
 			scores = {}
 			match.players.each do |player|
 				scores[player.user_name] = score_user(match.win?(player))
@@ -13,7 +13,7 @@ module Scoring
 		end
 
 		private
-		def score_user(win)
+		def self.score_user(win)
 			win.nil? ? 0.5 : win ? 1 : 0
 		end
 	end
