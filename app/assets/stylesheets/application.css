@@ -6,7 +6,7 @@
  * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
  *
  *= require_self
- *= require_tree .
+ *= require_tree ./application
  */
 
 /* If you put any styles in this file directly, I will knife you. */

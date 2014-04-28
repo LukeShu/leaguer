@@ -4,24 +4,6 @@
 
 @import "colors";
 
-.new_tournament, .edit_tournament {
-	td, th {
-		padding: 5px;
-	}
-	legend {
-		color: $orange
-	}
-}
-
-p.default-field {
-	display: inline;
-}
-
-span.default-explanation {
-	color: gray;
-	font-style: italic;
-}
-
 #players-needed {
 	text-align: center;
 	font-style: italic;
@@ -41,15 +23,20 @@ span.default-explanation {
 
 }
 
-
-#tournament-users{
-
-	li {
-		color: #10A010;
-	}
-
-	.black {
-		color: white;
+#tournament-users {
+	ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		li {
+			padding-left: 1em;
+			text-indent: -.7em;
+			&:before {
+				content: "• ";
+				color: #10A010;
+			}
+			color: white;
+		}
 	}
 }
 

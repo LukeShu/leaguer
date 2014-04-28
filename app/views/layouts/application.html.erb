@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Leaguer</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "#{params[:controller]}", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "#{params[:controller]}/#{params[:action]}", "data-turbolinks-track" => true %>
-  <%= csrf_meta_tags %>
-  <%= yield :head %>
+	<title>Leaguer</title>
+
+	<%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+	<%= stylesheet_link_tag "#{params[:controller]}", media: "all", "data-turbolinks-track" => true %>
+
+	<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+	<%= javascript_include_tag "#{params[:controller]}", "data-turbolinks-track" => true %>
+	<%= javascript_include_tag "#{params[:controller]}/#{params[:action]}", "data-turbolinks-track" => true %>
+
+	<%= csrf_meta_tags %>
+	<%= yield :head %>
 </head>
 <body>
 <header>
@@ -48,7 +52,7 @@
 <% if notice %><div id="notice"><p><%= notice %></p></div><% end %>
 
 <div class="wrapper">
-		<%= yield %>
+	<%= yield %>
 </div>
 
 <footer>

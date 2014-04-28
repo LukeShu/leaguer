@@ -1,20 +1,4 @@
-// Place all the styles related to the matches controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
-
-#boxes li {
-    cursor: move;
-    position: relative;
-    float: left;
-    margin: 5px;
-    width: 180px;
-    height: 240px;
-    border: 1px solid rgb(0, 0, 0);
-    text-align: center;
-    padding-top: 10px;
-    background-color: rgb(238, 238, 255);
-}
-#numeric li {
+#peer_review_boxes li {
     cursor: move;
     position: relative;
     float: left;
@@ -27,22 +11,19 @@
     background-color: rgb(238, 238, 255);
 }
 
-#match-stats {
-    padding-bottom: 10px;
-    border-bottom: thick dashed #F0AD4E;
-}
-
-#match-winner {
-    margin: 0 auto;
+// Nothing uses this one right now
+#peer_review_numeric li {
+    cursor: move;
+    position: relative;
+    float: left;
+    margin: 5px;
+    width: 180px;
+    height: 240px;
+    border: 1px solid rgb(0, 0, 0);
     text-align: center;
-    font-size: 2em;
+    padding-top: 10px;
+    background-color: rgb(238, 238, 255);
 }
-
-#current-id {
-    display: none;
-}
-
-
 
 /**** INDEX PAGE - TABLE AND GRAPH ****/
 #matches-table {
@@ -52,8 +33,4 @@
     form {
         color: #333;
     }
-}
-
-svg {
-    min-width: 600px;
 }

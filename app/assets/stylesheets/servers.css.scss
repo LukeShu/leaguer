@@ -2,26 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-@import "colors";
-
 .edit_server {
-
-	color: #FFF;
-
-	fieldset {
-		color: $orange;
-		legend {
-			color: $orange;
-			border-color: $orange;
-		}
-	}
-
-	input[type="submit"] {
-		color: $page-color;
-	}
-
 	li {
 		list-style: none;
 	}
-
 }
