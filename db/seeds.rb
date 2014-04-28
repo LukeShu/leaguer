@@ -55,7 +55,7 @@ if Rails.env.development?
 
 	# Semi-real users
 	davis    = User.create(name: "Davis Webb"        , password: "password", email: "davislwebb@gmail.com"                   , user_name: "TeslasMind"  , password_confirmation: "password")
-	foy      = User.create(name: "Nathaniel Foy"     , password: "password", email: "nfoy@notreal.com"                       , user_name: "Nalfeinx"    , password_confirmation: "password")
+	foy      = User.create(name: "Nathaniel Foy"     , password: "password", email: "nfoy@notreal.com"                       , user_name: "NalfeinX"    , password_confirmation: "password")
 	guntas   = User.create(name: "Guntas Grewal"     , password: "password", email: "guntasgrewal@gmail.com"                 , user_name: "guntasgrewal", password_confirmation: "password")
 	luke     = User.create(name: "Luke Shumaker"     , password: "password", email: "lukeshu@emacs4lyfe.com"                 , user_name: "lukeshu"     , password_confirmation: "password")
 	tomer    = User.create(name: "Tomer Kimia"       , password: "password", email: "tomer@2majors4lyfe.com"                 , user_name: "tkimia"      , password_confirmation: "password")
@@ -71,8 +71,10 @@ if Rails.env.development?
 	league_tourn = Tournament.create(game: league, name: "League of Legends Seed",
 		min_players_per_team: 5, max_players_per_team: 5,
 		min_teams_per_match: 2, max_teams_per_match: 2,
-		scoring_method: "TODO")
-	# TODO: create stages
+		scoring_method: "winner_takes_all")
+
+	league_tourn.stages.create(scheduling_method: "round_robin" , seeding_method: "random_seeding")
+
 	league_tourn.hosts.push(User.find(1))
 	players_for_league.each do |player|
 		league_tourn.join(player)
@@ -82,8 +84,10 @@ if Rails.env.development?
 	chess_tourn = Tournament.create(game: chess, name: "Chess Seed",
 		min_players_per_team: 1, max_players_per_team: 1,
 		min_teams_per_match: 2, max_teams_per_match: 2,
-		scoring_method: "TODO")
-	# TODO: create stages
+		scoring_method: "winner_takes_all")
+
+	chess_tourn.stages.create(scheduling_method: "round_robin" , seeding_method: "random_seeding")
+
 	chess_tourn.hosts.push(davis)
 	chess_tourn.join(davis)
 	chess_tourn.join(foy)
@@ -92,8 +96,8 @@ if Rails.env.development?
 	rps = Tournament.create(game: rockpaperscissors, name: "Rock, Paper, Scissors Seed",
 		min_players_per_team: 1, max_players_per_team: 3,
 		min_teams_per_match: 2, max_teams_per_match: 2,
-		scoring_method: "TODO")
-	rps.stages.create(scheduling_method: "elimination" , seeding_method: "random_seeding")
+		scoring_method: "winner_takes_all")
+	rps.stages.create(scheduling_method: "round_robin" , seeding_method: "random_seeding")
 	rps.hosts.push(davis)
 	rps.join(davis)
 	rps.join(foy)
@@ -103,20 +107,21 @@ if Rails.env.development?
 	tourn5 = Tournament.create(game: league, name: "5 Teams, 2 Teams Per Match",
 		min_players_per_team: 1, max_players_per_team: 1,
 		min_teams_per_match: 2, max_teams_per_match: 2,
-		scoring_method: "TODO")
+		scoring_method: "winner_takes_all")
 	tourn5.hosts.push(User.find(1))
 	players_for_league.each do |player|
 		tourn5.join(player)
 	end
-	tourn5.stages.create(scheduling_method: "elimination" , seeding_method: "random_seeding")
+	tourn5.stages.create(scheduling_method: "round_robin" , seeding_method: "random_seeding")
 
 	# Yet another League tournament
 	tourn6 = Tournament.create(game_id: 1, name: "3 teams per match",
 		min_players_per_team: 1, max_players_per_team: 1,
 		min_teams_per_match: 3, max_teams_per_match: 3,
-		scoring_method: "TODO")
+		scoring_method: "winner_takes_all")
+
 	tourn6.hosts.push(User.find(1))
-	tourn6.stages.create(scheduling_method: "elimination" , seeding_method: "random_seeding")
+	tourn6.stages.create(scheduling_method: "round_robin" , seeding_method: "random_seeding")
 	players_for_league.each do |player|
 		tourn6.join(player)
 	end
@@ -128,4 +133,14 @@ if Rails.env.development?
 	tourn6.join(jordan)
 	tourn6.join(obama)
 	tourn6.join(joey)
+
+	hearth = Tournament.create(game: hearthstone, name: "Hearthstone Seed", min_teams_per_match: 1, min_players_per_team: 1, 
+	                           max_teams_per_match: 2, max_players_per_team: 1, scoring_method: "winner_takes_all")
+
+	hearth.join(davis)
+	hearth.join(foy)
+
+	hearth.stages.create(scheduling_method: "round_robin" , seeding_method: "random_seeding")
+
 end
+
