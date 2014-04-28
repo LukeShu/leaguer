@@ -12,11 +12,22 @@ class Match < ActiveRecord::Base
 		ok = true
 		tournament_stage.scoring_method.stats_needed.each do |stat|
 			ok &= statistics.where(match: self, name: stat).nil?
+		end
 		ok
 	end
 
 	def win?(player)
 		winner.players.include? player
+	end
+
+	def users
+		ret = []
+		self.teams.each{|t| ret.concat(t.users)}
+		return ret
+	end
+
+	def stats_from(sampling_class)
+		# TODO
 	end
 
 	def handle_sampling(params)

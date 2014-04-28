@@ -1,5 +1,5 @@
 module Sampling
-	module RiotApi
+	class RiotApi
 		protected
 		def self.api_name
 			"prod.api.pvp.net/api/lol"
@@ -87,21 +87,12 @@ module Sampling
 		# Return whether or not the API can get a given statistic for
 		# a given user.
 		public
-		def self.can_get?(user, stat)
-			if user.nil?
+		def self.can_get?(stat)
+			if stats_available.include?(stat)
+				return 2
+			else
 				return 0
 			end
-			summoner = user.get_remote_username(match.tournament_stage.tournament.game)
-			if summoner.nil?
-				return 0
-			end
-			if summoner["id"].nil?
-				return 0
-			end
-			unless stats_available.include?(stat)
-				return 0
-			end
-			return 2
 		end
 
 		##
@@ -149,13 +140,20 @@ module Sampling
 			data["name"]
 		end
 
+		####
+
+		public
+		def initialize(match)
+			@match = match
+		end
+
 		##
 		# Fetch all the statistics for a match.
 		public
-		def self.sampling_start(match, stats)
+		def start
 			@match.teams.each do |team|
 				team.users.each do |user|
-					Delayed::Job.enqueue(MatchJob.new(user, match, stats.map{|stat|stat[:name]}, nil), :queue => api_name)
+					Delayed::Job.enqueue(MatchJob.new(user, @match, @match.stats_from(self.class), nil), :queue => api_name)
 				end
 			end
 		end
@@ -191,12 +189,13 @@ module Sampling
 		end
 
 		public
-		def self.render_user_interaction(match, user)
+		def render_user_interaction(user)
 			return ""
 		end
 
 		public
-		def self.handle_user_interaction(match, user)
+		def handle_user_interaction(user)
+			# do nothing
 		end
 	end
 end
