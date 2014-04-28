@@ -1,0 +1,28 @@
+<% if @feedbacks_missing.include? @user %>
+	<script type="text/javascript">
+		function score_peers() {
+			var list = $('ol#boxes');
+			for(var i=0, var len=list.length; i < len; i++) {
+				if ( i == len-1) {
+					comma = "";
+				}
+				$('peer_review').value +=  $('ol#boxes:eq(' + i + ')').text() + comma;
+			}
+		}
+	</script>
+	<input type="hidden" id="peer_review" name="peer_review" value="" />
+	<ol id="peer_review_boxes" class="sortable">
+		<% @team.users.reject{|u|u==@user}.each do |user| %><li>
+		  	<%= user.user_name %>
+			<br>
+			<%# TODO: display more statistics %>
+		</li><% end %>
+	</ol>
+	<%= submit_tag("Submit peer evaluation", :onsubmit => "score_peers()") %>
+<% else %>
+	<p>Still waiting for peer feedback from the following users:
+		<ul><% @feedbacks_missing.each do |user| %>
+			<li><%= link_to user %></li>
+		<% end %></ul>
+	</p>
+<% end %>
