@@ -115,6 +115,10 @@ fieldset {
 	}
 }
 
+form ul {
+	list-style: none;
+}
+
 a, button, input[type="submit"] {
 	@extend .btn;
 	&.user { @extend .btn-info; }

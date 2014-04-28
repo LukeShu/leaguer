@@ -97,14 +97,12 @@
 
 <table>
   <col width="150">
-  <col width="250">
-  <col width="300">
+  <col width="650">
   <tbody>
     <%# if conversations.reject { |c| c.is_read?(current_user) || (c.receipts_for current_user).last.message.sender == current_user }.empty? %>
       <tr>
         <tr>
           <td><b>With</b></td>
-          <td><b>Subject</b></td>
           <td><b>Body</b></td>
         </tr>
         <% conversations.each do |conversation| %>
@@ -112,7 +110,7 @@
           <% if conversation.is_read?(current_user) || receipts.last.message.sender == current_user  %>
             <% message = receipts.last.message %>
             <tr>
-            <% if conversation.subject == "Pay Attention!" %>
+            <% if conversation.subject == "Pay Attention!" && message.sender != current_user %>
               <td>
                 <% people = conversation.participants %>
                 <% people.each do |person| %>
@@ -121,8 +119,7 @@
                   <% end %>
                 <% end %>
               </td>
-              <td><%= truncate(conversation.subject, length: 30) %></td>
-              <td><%= truncate(message.body, length: 42) %></td>
+              <td><%= truncate(message.body, length: 80) %></td>
               <td><%= link_to 'View', @pms.find_by(conversation: conversation) %></td>
             <% end %>
             </tr>
@@ -134,3 +131,7 @@
     <% #end %>
   </tbody>
 </table>
+
+<br>
+<br>
+<br>
