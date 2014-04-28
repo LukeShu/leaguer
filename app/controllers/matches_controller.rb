@@ -24,108 +24,61 @@ class MatchesController < ApplicationController
 	# PATCH/PUT /tournaments/1/matches/1
 	# PATCH/PUT /tournaments/1/matches/1.json
 	def update
-		case params[:update_action]
-		when "start"
-			#
-			# Redirect to the current match page for this tournament with the correct sampling view rendered
-			#
-
-			@match.status = 1
-			respond_to do |format|
-				if @match.save
-					format.html { redirect_to tournament_match_path(@tournament, @match), notice: 'Match has started.' }
-					format.json { head :no_content }
-				else
-					format.html { redirect_to @tournament, notice: "You don't have permission to start this match." }
-					format.json { render json: "Permission denied", status: :forbidden }
+		case @match.status
+		when 0
+			# Created, waiting to be scheduled
+		when 1
+			# Scheduled, waiting to start
+			if (@tournament.hosts.include? current_user) and (params[:update_action] == "start")
+				@match.status = 2
+				respond_to do |format|
+						if @match.save
+							format.html { redirect_to tournament_match_path(@tournament, @match), notice: 'Match has started.' }
+							format.json { head :no_content }
+						else
+							format.html { render action: 'show' }
+							format.json { render json: @match.errors, status: :unprocessable_entity }
+						end
 				end
+				return
 			end
-		when "finish"
-			#
-			# Get the winner and blowout status from the params given by the correct sampling view
-			#
-
-			unless @match.tournament_stage.tournament.sampling.sampling_done?
-				@match.tournament_stage.tournament.sampling.handle_user_interaction(@match, current_user, params)
-			end
-
-			# Skip peer evaluation if there aren't enough players per team
-			peer = false
-			@match.teams.each do |team|
-				if team.users.count > 2
-					peer = true
-				end
-			end
-			@match.status = peer ? 2 : 3
-
-			respond_to do |format|
-				if @match.save
-					format.html { redirect_to tournament_match_path(@tournament, @match), notice: 'Peer evaluation started.' }
-					format.json { head :no_content }
-				else
-					format.html { redirect_to @tournament, notice: "Permission denied" }
-					format.json { render json: "Permission denied", status: :forbidden }
-				end
-			end		
-		when "peer"
-			#
-			# Update user scores via scoring method
-			#
-
-			#update this to use scoring interface
-
-			order = params[:review_action]
-			base_score = 2
-			next_score = 3
-			order.split(",").reverse.each do |elem|
-				player_score = base_score
-				if @match.winner.user.include?(@current_user)
-					player_score += 10
-				else
-					player_score += 7
-				end
-				Score.create(user: elem, match: @match, value: player_score )
-				base_score = next_score
-				next_score += base_score  
-			end
-
-			@match.submitted_peer_evaluations += 1
-			players = []; @match.teams.each{|t| players.concat(t.users.all)}
-			if (@match.submitted_peer_evaluations == players.count) 
+		when 2
+			# Started, waiting to finish
+			@match.handle_sampling(params)
+			if @match.finished?
 				@match.status = 3
-			end
-
-
-			respond_to do |format|
-				if @match.save
-					format.html { redirect_to tournament_match_path(@tournament, @match), notice: 'Scores Submitted' }
-					format.json { head :no_content }
-				else
-					format.html { redirect_to @tournament, notice: "You don't have permission to start this match." }
-					format.json { render json: "Permission denied", status: :forbidden }
+				respond_to do |format|
+					if @match.save
+						format.html { redirect_to tournament_match_path(@tournament, @match), notice: 'Match has finished.' }
+						format.json { head :no_content }
+					else
+						format.html { render action: 'show' }
+						format.json { render json: @match.errors, status: :unprocessable_entity }
+					end
 				end
+				return
 			end
-		when "reset"
-			#
-			# Reset Match Status to 1 in case something needs to be replayed.
-			#
-
-			@match.status = 1
-			respond_to do |format|
-				if @match.save
-					format.html { redirect_to tournament_match_path(@tournament, @match), notice: 'Match Status Reset to 1' }
-					format.json { head :no_content }
-				else
-					format.html { redirect_to @tournament, notice: "You don't have permission to start this match." }
-					format.json { render json: "Permission denied", status: :forbidden }
+		when 3
+			if (@tournament.hosts.include? current_user) and (params[:update_action] == "start")
+				ok = true
+				ActiveRecord::Base.transaction do
+					ok &= @match.statitistics.destroy_all
+					@match.status = 1
+					ok &= @match.save
 				end
-			end
-		else
-			respond_to do |format|
-				format.html { redirect_to @tournament, notice: "Invalid action", status: :unprocessable_entity }
-				format.json { render json: @tournament.errors, status: :unprocessable_entity }
+				respond_to do |format|
+					if @match.save
+						format.html { redirect_to tournament_match_path(@tournament, @match), notice: 'Match has finished.' }
+						format.json { head :no_content }
+					else
+						format.html { render action: 'show' }
+						format.json { render json: @match.errors, status: :unprocessable_entity }
+					end
+				end
+				return
 			end
 		end
+		redirect_to tournament_match_path(@tournament, @match)
 	end
 
 	private
