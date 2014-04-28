@@ -85,7 +85,7 @@ if Rails.env.development?
 
 	#chess
 	chess_tourn = Tournament.create(game_id: 2, status: 0, name: "Chess Seed", min_players_per_team: 1, max_players_per_team: 1, min_teams_per_match: 2, 
-		max_teams_per_match: 2, sampling_method: nil)
+		max_teams_per_match: 2, sampling_method: "manual")
 
 	chess_tourn.hosts.push(davis)
 	chess_tourn.join(davis)
@@ -93,7 +93,7 @@ if Rails.env.development?
 
 	#Rock Paper Scissors
 	rps = Tournament.create(game_id: 4, status: 0, name: "Rock, Paper, Scissors Seed", min_players_per_team: 1, max_players_per_team: 3, min_teams_per_match: 2, 
-		max_teams_per_match: 2, sampling_method: nil)
+		max_teams_per_match: 2, sampling_method: "manual")
 
 	rps.hosts.push(davis)
 	rps.join(davis)
@@ -101,7 +101,7 @@ if Rails.env.development?
 	rps.join(guntas)
 
 	tourn5 = Tournament.create(game_id: 1, status: 0, name: "5 Teams, 2 Teams Per Match", min_players_per_team: 1, max_players_per_team: 1, min_teams_per_match: 2, 
-		max_teams_per_match: 2, sampling_method: nil)
+		max_teams_per_match: 2, sampling_method: "manual")
 
 	for i in 0..9
 		if i == 0
@@ -112,7 +112,7 @@ if Rails.env.development?
 	tourn5.join(players_for_league[9])
 
 	tourn6 = Tournament.create(game_id: 1, status: 0, name: "3 teams per match", min_players_per_team: 1, max_players_per_team: 1, min_teams_per_match: 3, 
-		max_teams_per_match: 3, sampling_method: nil)
+		max_teams_per_match: 3, sampling_method: "manual")
 
 	for i in 0..9
 		if i == 0

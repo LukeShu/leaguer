@@ -11,7 +11,7 @@ interface:
 
  - `can_get?(User, String setting_name) => Fixnum`
 
-   Returns whether or nat this sampling method can get a specifed
+   Returns whether or not this sampling method can get a specifed
    statistic; 0 means 'false', positive integers mean 'true', where
    higher numbers are higher priority.
 
