@@ -25,9 +25,11 @@
 		<% if signed_in? %>
 			<% if !target.players.include?(current_user) %>
 			<%= form_tag(tournament_path(target), method: "put") do %>
-				<input type="hidden" name="update_action" value="join">
-				<%= submit_tag("Join")%>
-				<% end %>
+				<p>
+					<input type="hidden" name="update_action" value="join">
+					<%= submit_tag("Join")%>
+					<% end %>
+				</p>
 			<% else %>
 			<p style="margin-top:10px;"> You've signed up for this tournament! 	</p>
 			<% end %>
