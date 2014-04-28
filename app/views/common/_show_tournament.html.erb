@@ -6,18 +6,18 @@
 	<div class="col-md-8 col-sm-7 col-xs-6">
 		<%# "header" %>
 		<%= link_to(target) do %><h3><%= target.name %></h3><% end %>
-		<div class="row" style="margin-left:2%;">
+		<div class="row">
 			<div class="col-md-4 host">
 				<%= image_tag('http://www.gravatar.com/avatar/' + Digest::MD5.hexdigest(target.hosts.first.email) + '?s=45&d=identicon') %>
 				<%= target.hosts.first.name %>'s tournament
 			</div>
 			<div class="col-md-4 things">
-				<p> Players per team: <%= target.min_players_per_team %></p>
-				<p> Players signed up: <%= target.players.count %> </p>
+				<p>Players per team: <%= target.min_players_per_team %></p>
+				<p>Players signed up: <%= target.players.count %></p>
 			</div>
 			<div class="col-md-4 things">
-				<p> <%# (target.randomized_teams)? "Teams are Random" : "Teams are Chosen" %></p>
-				<p> Players signed up: <%= target.players.count %> </p>
+				<p><%# (target.randomized_teams)? "Teams are Random" : "Teams are Chosen" %></p>
+				<p>Players signed up: <%= target.players.count %></p>
 			</div>
 		</div>
 	</div>
@@ -31,7 +31,7 @@
 					<% end %>
 				</p>
 			<% elsif target.players.include?(current_user)%>
-			<p style="margin-top:10px;"> You've signed up for this tournament! 	</p>
+				<p class="message">You've signed up for this tournament!</p>
 			<% end %>
 			<% if target.status == 1 && target.stages.first.scheduling_method == "elimination" && target.stages.first.matches.first.status == 0 %>
 				<%= form_tag(tournament_brackets_path(target), method: "post") do %>

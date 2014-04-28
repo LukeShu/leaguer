@@ -1,19 +1,16 @@
 <%= form_for(@server) do |f| %>
-  <%= render "common/error_messages", :target => @server %>
+	<%= render "common/error_messages", :target => @server %>
 
-  <fieldset style="color: rgb(221, 145, 37)">
-    <legend style="color: rgb(221, 145, 37); border-color: rgb(221, 145, 37)">Default permissions for new users</legend>
-    <ul >
-      <%= fields_for "server[default_user_abilities]", @server.default_user_abilities do |a| %>
-      <% @server.default_user_abilities.keys.each do |ability| %>
-      <li ><label><%= a.check_box(ability) %> <%= ability.to_s.humanize %></label></li>
-      <% end %>
-    <% end %>
-    </ul>
-  </fieldset>
-  <p>
-    <div class="actions">
-      <%= f.submit %>
-    </div>
-  </p>
+	<%= fields_for "server[default_user_abilities]", @server.default_user_abilities do |a| %>
+		<fieldset>
+			<legend>Default permissions for new users</legend>
+			<ul>
+				<% @server.default_user_abilities.keys.each do |ability| %>
+					<li><label><%= a.check_box(ability) %> <%= ability.to_s.humanize %></label></li>
+				<% end %>
+			</ul>
+		</fieldset>
+	<% end %>
+
+	<%= f.submit %>
 <% end %>
