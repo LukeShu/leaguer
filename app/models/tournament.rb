@@ -8,6 +8,8 @@ class Tournament < ActiveRecord::Base
 
 	alias_attribute :stages, :tournament_stages
 
+	before_save { self.status ||= 0 }
+
 	# Settings #################################################################
 
 	def settings
