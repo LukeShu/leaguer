@@ -44,7 +44,7 @@ class MatchesController < ApplicationController
 			end
 		when 2
 			# Started, waiting to finish
-			@match.handle_sampling(params)
+			@match.handle_sampling(@current_user, params)
 			# The @match.status will be updated by Statistic's after_save hook
 			respond_to do |format|
 				format.html { redirect_to tournament_match_path(@tournament, @match), notice: 'Match has finished.' }
@@ -69,8 +69,9 @@ class MatchesController < ApplicationController
 				end
 				return
 			end
+		else
+			redirect_to tournament_match_path(@tournament, @match)
 		end
-		redirect_to tournament_match_path(@tournament, @match)
 	end
 
 	private
