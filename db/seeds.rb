@@ -95,6 +95,7 @@ if Rails.env.development?
 	rps = Tournament.create(game_id: 4, status: 0, name: "Rock, Paper, Scissors Seed", min_players_per_team: 1, max_players_per_team: 3, min_teams_per_match: 2, 
 		max_teams_per_match: 2, sampling_method: "manual")
 
+	rps.stages.create(scheduling_method: "elimination" , seeding_method: "random_seeding")
 	rps.hosts.push(davis)
 	rps.join(davis)
 	rps.join(foy)
@@ -109,6 +110,7 @@ if Rails.env.development?
 		end
 		tourn5.join(players_for_league[i])
 	end
+	tourn5.stages.create(scheduling_method: "elimination" , seeding_method: "random_seeding")
 	tourn5.join(players_for_league[9])
 
 	tourn6 = Tournament.create(game_id: 1, status: 0, name: "3 teams per match", min_players_per_team: 1, max_players_per_team: 1, min_teams_per_match: 3, 
@@ -120,6 +122,7 @@ if Rails.env.development?
 		end
 		tourn6.join(players_for_league[i])
 	end
+	tourn6.stages.create(scheduling_method: "elimination" , seeding_method: "random_seeding")
 	tourn6.join(players_for_league[9])
 	tourn6.join(davis)
 	tourn6.join(foy)
@@ -138,7 +141,13 @@ if Rails.env.development?
 	hash4 = {:username => "NalfeinX", :id => id}
 	hash5 = {:username => "GTBPhoenix", :id => id}
 	hash6 = {:username => , :id => id}
-	hash7 = {:username => username, :id => id}
+	hash7 = {:username => username, :id => id}ages.first.create_matchesages.first.create_matches
+end
+if success
+format.html { redirect_to @tournament, 
+end
+if success
+format.html { redirect_to @tournament, 
 	hash8 = {:username => username, :id => id}
 	hash9 = {:username => username, :id => id}
 	hash10 = {:username => username, :id => id}
