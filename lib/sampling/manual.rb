@@ -4,7 +4,7 @@ module Sampling
 			return true
 		end
 
-		def can_get?(setting_name)
+		def self.can_get?(setting_name)
 			return 1
 		end
 
@@ -36,7 +36,7 @@ module Sampling
 			@stats = @match.stats_from(self.class)
 
 			require 'erb'
-			erb_filename = File.join(__FILE__.sub(/\.rb$/, '.svg.erb'))
+			erb_filename = File.join(__FILE__.sub(/\.rb$/, '.html.erb'))
 			erb = ERB.new(File.read(erb_filename))
 			erb.filename = erb_filename
 			return erb.result.html_safe
