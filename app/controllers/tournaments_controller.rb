@@ -184,7 +184,7 @@ class TournamentsController < ApplicationController
 	def tournament_attribute_params
 		params[:num_stages] ||= 1
 		if params[:tournament]
-			p = params.require(:tournament).permit(:game_id, :status, :name, :min_players_per_team, :max_players_per_team, :min_teams_per_match, :max_teams_per_match, :sampling_method, :scoring_method)
+			p = params.require(:tournament).permit(:game_id, :status, :name, :min_players_per_team, :max_players_per_team, :min_teams_per_match, :max_teams_per_match, :scoring_method)
 			if p[:game_id]
 				game = Game.find(p[:game_id])
 				p[:min_players_per_team] ||= game.min_players_per_team

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140427171658) do
+ActiveRecord::Schema.define(version: 20140428133136) do
 
   create_table "alerts", force: true do |t|
     t.integer  "author_id"
@@ -94,7 +94,6 @@ ActiveRecord::Schema.define(version: 20140427171658) do
     t.integer  "max_players_per_team"
     t.integer  "min_teams_per_match"
     t.integer  "max_teams_per_match"
-    t.string   "sampling_method"
     t.string   "scoring_method"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -270,7 +269,6 @@ ActiveRecord::Schema.define(version: 20140427171658) do
     t.integer  "max_players_per_team"
     t.integer  "min_teams_per_match"
     t.integer  "max_teams_per_match"
-    t.string   "sampling_method"
     t.string   "scoring_method"
     t.datetime "created_at"
     t.datetime "updated_at"
