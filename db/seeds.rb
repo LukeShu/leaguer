@@ -100,11 +100,11 @@ if Rails.env.development?
 	rps.join(guntas)
 
 	# Another League tournament
-	tourn5 = Tournament.create(game_id: league, name: "5 Teams, 2 Teams Per Match",
+	tourn5 = Tournament.create(game: league, name: "5 Teams, 2 Teams Per Match",
 		min_players_per_team: 1, max_players_per_team: 1,
 		min_teams_per_match: 2, max_teams_per_match: 2,
 		scoring_method: "TODO")
-	league_tourn.hosts.push(User.find(1))
+	tourn5.hosts.push(User.find(1))
 	players_for_league.each do |player|
 		tourn5.join(player)
 	end
@@ -115,6 +115,7 @@ if Rails.env.development?
 		min_players_per_team: 1, max_players_per_team: 1,
 		min_teams_per_match: 3, max_teams_per_match: 3,
 		scoring_method: "TODO")
+	tourn6.hosts.push(User.find(1))
 	tourn6.stages.create(scheduling_method: "elimination" , seeding_method: "random_seeding")
 	players_for_league.each do |player|
 		tourn6.join(player)
