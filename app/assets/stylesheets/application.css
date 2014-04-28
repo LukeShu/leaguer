@@ -5,20 +5,8 @@
  * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
  * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
  *
- * You're free to add application-wide styles to this file and they'll appear at the top of the
- * compiled file, but it's generally better to create a new file per style scope.
- *
  *= require_self
  *= require_tree .
  */
 
-#query{
-	background-color: #303030;
-	border: 2px solid #ED9C28;
-	border-radius: 5px;
-	color: #FFF;
-	font-weight: bold;
-	height: 30px;
-	padding: 0px 5px;
-}
-
+/* If you put any styles in this file directly, I will knife you. */

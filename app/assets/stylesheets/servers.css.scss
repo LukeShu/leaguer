@@ -2,18 +2,19 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-$page-color: #444;
-$toolbar-color: black;
-$orange: #DD9125;
-$darker-orange: #9D4102;
-$link-yellow: #FFC50D;
+@import "colors";
 
 .edit_server {
 
-	legend {
-		color: #EEE;
-	}
 	color: #FFF;
+
+	fieldset {
+		color: $orange;
+		legend {
+			color: $orange;
+			border-color: $orange;
+		}
+	}
 
 	input[type="submit"] {
 		color: $page-color;

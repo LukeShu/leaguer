@@ -1,116 +1,247 @@
 @import "bootstrap";
+@import "colors";
 
-$page-color: #444;
-$toolbar-color: black;
-$orange: #DD9125;
-$darker-orange: #9D4102;
-$link-yellow: #FFC50D;
+.tournament-listing {
+	div.row {
+		margin-left: 2%;
+	}
+	p.message {
+		margin-top: 10px;
+	}
+}
+
+.user-listing {
+	div.row {
+		margin-left: 2%;
+	}
+}
+
+header > nav {
+	@extend .navbar;
+	@extend .navbar-inverse;
+	color: white;
+
+	#log-buttons {
+		margin-top: 8px;
+		form { display: inline; }
+	}
+	form.search {
+		@extend .navbar-form;
+		@extend .navbar-right;
+		input[type="submit"] {
+			@extend .btn-warning; margin-top: -3px; margin-right: 8px;
+		}
+	}
+}
+
+#alerts-ajax {
+	display: none;
+}
+
+.btn-custom-orange {
+	color: white;
+	background-color: rgb(255, 69, 0);
+	border-color: rgb(255, 69, 0);
+}
+.btn-custom-foxtrot {
+	color: white;
+	background-color: hsl(0, 69%, 22%) !important;
+}
+
+
+
+a, input[type="submit"] {
+	@extend .btn;
+	&.user { @extend .btn-info; }
+	&.signup { @extend .btn-success; }
+	&.signin { @extend .btn-warning; }
+	&.signout { @extend .btn-danger; }
+	&.server { @extend .btn-warning; }
+	&.create-alert {@extend .btn-custom-orange;}
+	&.alerts { @extend .navbar-right; @extend .glyphicon; @extend .glyphicon-exclamation-sign; @extend .btn-custom-foxtrot;}
+	font-weight: bold !important;
+}
+
+
+input[type="text"],  input[type="password"], textarea{
+	-webkit-box-shadow: inset 0 0 8px  rgba(0,0,0,0.1), 0 0 16px rgba(0,0,0,0.1);
+	-moz-box-shadow: inset 0 0 8px  rgba(0,0,0,0.1), 0 0 16px rgba(0,0,0,0.1);
+	box-shadow: inset 0 0 8px  rgba(0,0,0,0.1), 0 0 16px rgba(0,0,0,0.1);
+
+	border: 3px inset #A5A5A5;
+	padding: 8px;
+	color: $orange !important;
+	background: rgba(0,0,0,0.5);
+	margin: 0 0 5px 0;
+}
+
+select {
+	background-color: #333;
+	padding: 5px;
+	border: none;
+	color: #DD9125 !important;
+}
+
+p.errors {
+	background-color: rgba(0,0,0,0.5);;
+	color: red;
+	border-radius: 7px;
+	padding: 10px;
+}
+
+#error_explanation {
+	width: 450px;
+	border: 2px solid red;
+	padding: 7px;
+	padding-bottom: 0;
+	margin-bottom: 20px;
+	background-color: #f0f0f0;
+	h2 {
+		text-align: left;
+		font-weight: bold;
+		padding: 5px 5px 5px 15px;
+		font-size: 12px;
+		margin: -7px;
+		margin-bottom: 0px;
+		background-color: #c00;
+		color: #fff;
+	}
+	ul li {
+		font-size: 12px;
+		list-style: square;
+	}
+}
+
+// Limitation: Only one box can be expanded at a time
+.collapsible {
+	.collapsed { display: block; }
+	.expanded { display: none; }
+	&:target {
+		.collapsed { display: none; }
+		.expanded { display: block; }
+	}
+}
+
+pre {
+	text-align: left;
+}
+
+
+#query{
+	background-color: #303030;
+	border: 2px solid #ED9C28;
+	border-radius: 5px;
+	color: #FFF;
+	font-weight: bold;
+	height: 30px;
+	padding: 0px 5px;
+}
 
 html{
-  height: 100%;
+	height: 100%;
 }
 
 body {
-  background: asset-url("bg.png", image) repeat scroll 0 0 $page-color;
-  color: $page-color;
-  font-family: verdana, arial, helvetica, sans-serif;
-  font-size: 13px;
-  line-height: 18px;
-  height: 100%;
+	background: asset-url("bg.png", image) repeat scroll 0 0 $page-color;
+	color: $page-color;
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-size: 13px;
+	line-height: 18px;
+	height: 100%;
 }
 
 h1, h2, h3, h4, h5, p, li, label{
-  color: $orange;
+	color: $orange;
 }
 
 h1, h2, h3, h4, h5 {
-  text-shadow: 0px 0px 2px $darker-orange;
+	text-shadow: 0px 0px 2px $darker-orange;
 }
 
 p, ol, ul, td {
-  font-family: verdana, arial, helvetica, sans-serif;
-  font-size: 13px;
-  line-height: 18px;
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-size: 13px;
+	line-height: 18px;
 }
 
 /* NAVBAR */
 
 .navbar-brand {
-  @extend .no-dec;
-  a{
-    color: white;
-    &:hover, &:active, &:focus {
-      color: white;
-      font-weight: normal;
-      text-decoration: none;
-    }
-  }
+	@extend .no-dec;
+	a{
+		color: white;
+		&:hover, &:active, &:focus {
+			color: white;
+			font-weight: normal;
+			text-decoration: none;
+		}
+	}
 }
 
 .navbar-inverse, header > nav {
-    background-color: $toolbar-color;
-    border-radius: 0px 0px 5px 5px;
-    box-shadow: 0px 0px 5px black;
+	background-color: $toolbar-color;
+	border-radius: 0px 0px 5px 5px;
+	box-shadow: 0px 0px 5px black;
 }
 
 pre {
-  background-color: #eee;
-  padding: 10px;
-  font-size: 11px;
+	background-color: #eee;
+	padding: 10px;
+	font-size: 11px;
 }
 
 a {
 	color: $link-yellow;
   	&:hover {
-      color: white;
+		color: white;
 
-  }
+	}
 }
 
 div {
-  &.field, &.actions {
-    margin-bottom: 10px;
-  }
+	&.field, &.actions {
+		margin-bottom: 10px;
+	}
 }
 
 #notice {
-  background-color: rgba(0,0,0,0.5);
-  border-radius: 7px;
-  padding: 10px;
-  width: 80%;
-  margin: 0px auto;
-  text-align: center;
+	background-color: rgba(0,0,0,0.5);
+	border-radius: 7px;
+	padding: 10px;
+	width: 80%;
+	margin: 0px auto;
+	text-align: center;
 
-  p{
-    color: lightgreen !important;
-    font-weight: bold;
-  }
+	p {
+		color: lightgreen !important;
+		font-weight: bold;
+	}
 }
 
 .field_with_errors {
-  padding: 1px;
-  background-color: #FF4C4C;
-  box-shadow: 0px 0px 5px red;
-  display: table;
+	padding: 1px;
+	background-color: #FF4C4C;
+	box-shadow: 0px 0px 5px red;
+	display: table;
 }
 
 .wrapper {
 	width: 80%;
 	margin-top: 10px;
-  min-height: 80%;
-  height: auto !important;
-  height: 99%;
-  margin: 0 auto;
+	min-height: 80%;
+	height: auto !important;
+	height: 99%;
+	margin: 0 auto;
 }
 
 button, input[type="submit"] {
-    @extend .btn;
+	@extend .btn;
 }
 
 footer {
-  clear: both;
-  border-top: solid 1px $orange;
-  text-align: center;
-  margin: 0 auto;
-  width: 90%;
+	clear: both;
+	border-top: solid 1px $orange;
+	text-align: center;
+	margin: 0 auto;
+	width: 90%;
 }
