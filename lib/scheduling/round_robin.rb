@@ -9,7 +9,7 @@ module Scheduling
 		def create_matches
 			# => find the number of matches and teams to create
 			@num_teams = (tournament.players.count/tournament.min_players_per_team).floor
-			@matches_per_round = num_teams * tournament.min_teams_per_match
+			@matches_per_round = @num_teams * tournament.min_teams_per_match
 
 			# => initialize data and status members
 			@team_pairs ||= {}
@@ -18,13 +18,13 @@ module Scheduling
 			end
 
 			# => Create new matches
-			@matches_per_round.each do |match|
+			@matches_per_round.times do
 				tournament_stage.matches.create(status: 0, submitted_peer_evaluations: 0)
 			end
 
 			# => seed the first time
 			if @team_pairs.empty?
-				tournament_stage.seeding.seed_matches(tournament_stage)
+				tournament_stage.seeding.seed(tournament_stage)
 				tournament_stage.matches.each {|match| match.teams.each {|team| @team_pairs += team}}
 			else
 				# => Reorder the list of teams

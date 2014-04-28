@@ -40,6 +40,6 @@ class TournamentStage < ActiveRecord::Base
 	end
 
 	def seeding
-		@seeding ||= "Seeding::#{self.seeding_method.camelcase}".constantize.new(self)
+		@seeding ||= "Seeding::#{self.seeding_method.camelcase}".constantize
 	end
 end
