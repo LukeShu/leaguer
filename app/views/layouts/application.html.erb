@@ -35,9 +35,8 @@
 				<%= link_to "Create Alert", new_alert_path, :class => "create-alert" %>
 			<% end %>
 			<%= link_to "Sign out", session_path("current"), method: "delete", :class => "signout" %>
-			<%= link_to "", alerts_path, :class => "alerts"%>
-
-
+			<%# if there is an unread alert then I wanna be able to show the notification icon by saying :style => display:inline. This will be Done by Guntas once he figures out how to get unread alerts. Psuedo if alerts.unread > 0 then display else don't.%>
+			<%= link_to "", alerts_path, :class => "alerts", :id => "alerts-ajax"%>
 		<% else %>
 			<%= link_to "Log in", new_session_path, :class => "signin" %>
 			<%= link_to "Sign up", new_user_path, :class => "signup" %>

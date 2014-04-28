@@ -86,6 +86,6 @@ module Sampling
 			end
 
 			return ret
-		endx
+		end
 	end
 end
