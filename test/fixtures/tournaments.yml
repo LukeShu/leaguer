@@ -8,7 +8,6 @@ one:
   max_players_per_team: 1
   min_teams_per_match: 1
   max_teams_per_match: 1
-  sampling_method: MyString
   scoring_method: MyString
 
 two:
@@ -19,5 +18,4 @@ two:
   max_players_per_team: 1
   min_teams_per_match: 1
   max_teams_per_match: 1
-  sampling_method: MyString
   scoring_method: MyString
