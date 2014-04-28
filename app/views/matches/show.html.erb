@@ -21,7 +21,7 @@ function score_peers() {
 	<%= @match.tournament_stage %>
 </p>
 
-<!--
+<%#
 	Match Status 0 =>	Created, waiting to start
 	Match Status 1 =>	Match ready
 	Match Status 2 =>	Match is running, waiting to finish
@@ -34,9 +34,8 @@ function score_peers() {
 	C. The Peer review page that the players will see if status is 3.
 	D. The page everyone will see when status is 4.
 
-	Note:- The change of status from 2 to 3 for League of Legends is coming from League Data Pull (RIOT API)
-
--->
+	Note: The change of status from 2 to 3 for League of Legends is coming from League Data Pull (RIOT API)
+%>
 
 <div>
 	<h2>Teams/users</h2>
