@@ -1,12 +1,12 @@
 <% if @feedbacks_missing.include? @user %>
 	<script type="text/javascript">
 		function score_peers() {
-			var list = $('ol#boxes');
+			var list = $('ol#peer_review_boxes');
 			for(var i=0, var len=list.length; i < len; i++) {
 				if ( i == len-1) {
 					comma = "";
 				}
-				$('peer_review').value +=  $('ol#boxes:eq(' + i + ')').text() + comma;
+				$('peer_review').value +=  $('ol#peer_review_boxes:eq(' + i + ')').text() + comma;
 			}
 		}
 	</script>

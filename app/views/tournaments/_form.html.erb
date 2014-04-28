@@ -1,7 +1,7 @@
 <%= render "common/error_messages", :target => @tournament %>
 <fieldset>
+	<legend>Game type</legend>
 	<%= form_for(@tournament, url: new_tournament_path, method: "get") do |f| %>
-		<%= render "common/error_messages", :target => @tournament %>
 		<p>
 			<%= f.label :game_id, "Select a game type" %>
 			<%= f.select(:game_id, Game.all.map{|game| [game.name, game.id]}) %>
