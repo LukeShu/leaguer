@@ -5,6 +5,9 @@ module Seeding
 			match = matches.first
 			match_num = 0
 			players_used = 0
+			(tournament.players.count/tournament.min_players_per_team).floor.times do
+				match.teams.push Team.create()
+			end
 			best_first(tournament).each_slice(tournament.min_teams_per_match) do |slice|
 				(0..tournament.min_teams_per_match-1).each do |index|
 					match.teams[index].players += slice[index]
