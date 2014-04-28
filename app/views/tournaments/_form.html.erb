@@ -3,7 +3,7 @@
              method: (@tournament.game.nil? ? "get" : "post")) do |f| %>
 	<%= render "common/error_messages", :target => @tournament %>
 
-	<fieldset><legend>Attributes</legend>
+	<fieldset><legend style="color:rgb(221, 145, 37)">Attributes</legend>
 	<p>
 		<%= f.label :game_id, "Select a game type" %>
 		<%= f.select(:game_id, Game.all.map{|game| [game.name, game.id]}) %>
@@ -18,23 +18,33 @@
 		<%= f.label :name %>
 		<%= f.text_field :name %>
 	</p>
-	
-	<table><tbody>
-		<tr>
-			<td></td>
-			<th>Minimum</th>
-			<th>Maximum</th></tr>
-		<tr>
-			<th>Players per team</th>
-			<td><%= f.text_field(:min_players_per_team, type: :number, min: 1) %></td>
-			<td><%= f.text_field(:max_players_per_team, type: :number, min: 1) %></td>
-		</tr>
-		<tr>
-			<th>Teams per match</th>
-			<td><%= f.text_field(:min_teams_per_match, type: :number, min: 1) %></td>
-			<td><%= f.text_field(:max_teams_per_match, type: :number, min: 1) %></td>
-		</tr>
-	</tbody></table>
+	<div>
+		<p>
+			<table><tbody>
+				<tr> 
+					<td></td>
+					<th style="padding:5px">Minimum</th>
+					<th style="padding:5px">Maximum</th></tr>
+				<tr>
+					<th>Players per team: </th>
+					<td style="padding:5px"><%= f.text_field(:min_players_per_team, type: :number, min: 1) %></td>
+					<td style="padding:5px"><%= f.text_field(:max_players_per_team, type: :number, min: 1) %></td>
+				</tr>
+			</tbody></table>
+		</p>
+	</div>
+
+	<div id="teams-table">
+		<p>
+			<table><tbody>
+				<tr>
+					<th>Teams per match: </th>
+					<td style="padding:5px"><%= f.text_field(:min_teams_per_match, type: :number, min: 1) %></td>
+					<td style="padding:5px"><%= f.text_field(:max_teams_per_match, type: :number, min: 1) %></td>
+				</tr>
+			</tbody></table>
+		</P>
+	</div>
 
 	<p>
 		<%= f.label :scoring_method %>
@@ -48,7 +58,7 @@
 
 	</fieldset>
 
-	<fieldset><legend>Settings</legend>
+	<fieldset><legend style="color:rgb(221, 145, 37)">Settings</legend>
 	<%= f.fields_for :settings do |setting_fields| %>
 		<% @tournament.tournament_settings.each do |setting| %><p>
 			<%= setting_fields.label setting.name %>
@@ -80,17 +90,19 @@
 	<% end %>
 	</fieldset>
 
-	<%= f.fields_for :stages do |stages_fields| %><fieldset><legend>Stages</legend>
+	<%= f.fields_for :stages do |stages_fields| %><fieldset><legend style="color:rgb(221, 145, 37)">Stages</legend>
 		<label for="num_stages">Number of tournament stages</label>
 		<input type="number" name="num_stages" min="1" value="<%= params[:num_stages].to_i %>">
 		<%# stage_fields.submit("Set Stages") %>
 		<% for i in 1..(params[:num_stages].to_i) do %>
-			<%= stages_fields.fields_for i.to_s do |stage_fields| %><fieldset><legend>Stage <%= i %></legend>
-				<%= stage_fields.label :scheduling_method %>
-				<%= stage_fields.select(:scheduling_method, @tournament.scheduling_methods.map{|method| [method.humanize, method]}) %>
-				<%= stage_fields.label :seeding_method %>
-				<%= stage_fields.select(:seeding_method, @tournament.seeding_methods.map{|method| [method.humanize, method]}) %>
-			</fieldset><% end %>
+			<p>
+				<%= stages_fields.fields_for i.to_s do |stage_fields| %><fieldset><legend style="color:rgb(221, 145, 37)">Stage <%= i %></legend>
+					<%= stage_fields.label :scheduling_method %>
+					<%= stage_fields.select(:scheduling_method, @tournament.scheduling_methods.map{|method| [method.humanize, method]}) %>
+					<%= stage_fields.label :seeding_method %>
+					<%= stage_fields.select(:seeding_method, @tournament.seeding_methods.map{|method| [method.humanize, method]}) %>
+				</fieldset><% end %>
+			</p>
 		<% end %>
 	</fieldset><% end %>
 

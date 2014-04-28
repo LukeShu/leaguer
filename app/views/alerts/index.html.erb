@@ -15,7 +15,7 @@
     <% if !@alerts.nil? %>
       <% @alerts.each do |alert| %>
         <tr>
-          <td><%= alert.author %></td>
+          <td><%= alert.author.user_name %></td>
           <td><%= alert.message %></td>
           <td><%= link_to 'Show', alert %></td>
           <td><%= link_to 'Edit', edit_alert_path(alert) %></td>
