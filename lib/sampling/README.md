@@ -9,6 +9,12 @@ interface:
    Returns whether or not this sampling method works with the
    specified game.
 
+ - `can_get?(User, String setting_name) => Fixnum`
+
+   Returns whether or nat this sampling method can get a specifed
+   statistic; 0 means 'false', positive integers mean 'true', where
+   higher numbers are higher priority.
+
  - `uses_remote?() => Boolean`
 
    Return whether or not this sampling method requires remote IDs for
@@ -22,14 +28,9 @@ interface:
    When given an object from `RemoteUsername#value`, give back a
    human-readable/editable name to display.
 
- - `sampling_start(Match)`
+ - `sampling_start(Match, Array[]={:user=>User,:stat=>String})`
 
    Fetch the statistics for a match.
-
- - `sampling_done?(Match) => Boolean`
-
-   Returns whether or not statistics have been completely collected
-   yet.
 
  - `render_user_interaction(Match, User) => String`
 

@@ -20,10 +20,6 @@ module Sampling
 			# do nothing
 		end
 
-		def self.sampling_done?(match)
-			return get_feedbacks_missing(match).empty?
-		end
-
 		def self.render_user_interaction(match, user)
 			@user = user
 			@team = get_team(match)
