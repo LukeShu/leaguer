@@ -84,7 +84,8 @@ module Sampling
 		end
 
 		##
-		# TODO description
+		# Return whether or not the API can get a given statistic for
+		# a given user.
 		public
 		def self.can_get?(user, stat)
 			if user.nil?

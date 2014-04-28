@@ -87,14 +87,6 @@ class TournamentsController < ApplicationController
 		end
 	end
 
-	def create_stage
-
-	#	stage = @tournament.stages.new
-	#	stage.create(TODO:PARAMETERS)
-	#	@tournament.stages.push(stage)
-
-	end
-
 	# PATCH/PUT /tournaments/1
 	# PATCH/PUT /tournaments/1.json
 	def update

@@ -47,8 +47,7 @@
 
 <p>
   <strong>Sampling method:</strong>
-  <!-- TODO -->
-  <%= @tournament.sampling_method %>
+  <%= @tournament.sampling_method.humanize.capitalize %>
 </p>
 
 <% @tournament.settings.each do |setting| %>

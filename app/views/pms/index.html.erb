@@ -11,7 +11,7 @@
   <col width="250">
   <col width="300">
   <tbody>
-    <% if conversations.reject { |c| c.is_unread?(current_user) && (c.receipts_for current_user).last.message.sender != current_user }.empty? %>
+    <%# if conversations.reject { |c| c.is_unread?(current_user) && (c.receipts_for current_user).last.message.sender != current_user }.empty? %>
       <tr>
         <tr>
           <td><b>With</b></td>
@@ -38,9 +38,9 @@
           <% end %>
         <% end %>
       </tr>
-    <% else %>
-      <h4> No unread conversations </h4>
-    <% end %>
+    <%# else %>
+      
+    <%# end %>
   </tbody>
 </table>
 
@@ -53,7 +53,7 @@
   <col width="250">
   <col width="300">
   <tbody>
-    <% if conversations.reject { |c| c.is_read?(current_user) || (c.receipts_for current_user).last.message.sender == current_user }.empty? %>
+    <%# if conversations.reject { |c| c.is_read?(current_user) || (c.receipts_for current_user).last.message.sender == current_user }.empty? %>
       <tr>
         <tr>
           <td><b>With</b></td>
@@ -80,8 +80,8 @@
           <% end %>
         <% end %>
       </tr>
-    <% else %>
-      <h4> No unread conversations </h4>
-    <% end %>
+    <% #else %>
+      
+    <% #end %>
   </tbody>
 </table>
