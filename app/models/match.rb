@@ -49,10 +49,6 @@ class Match < ActiveRecord::Base
 		return html.html_safe
 	end
 
-	def finished?
-		# TODO
-	end
-
 	private
 	def figure_sampling_methods
 		if @sampling_methods.nil?
