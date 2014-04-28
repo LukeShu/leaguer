@@ -24,6 +24,17 @@ header > nav {
 	}
 }
 
+.btn-custom-orange { 
+	color: white;
+	background-color: rgb(255, 69, 0);
+	border-color: rgb(255, 69, 0);
+}
+.btn-custom-foxtrot { 
+	color: white;
+ 	background-color: hsl(0, 69%, 22%) !important;
+}
+
+
 
 a, input[type="submit"] {
 	@extend .btn;
@@ -31,7 +42,9 @@ a, input[type="submit"] {
 	&.signup { @extend .btn-success; }
 	&.signin { @extend .btn-warning; }
 	&.signout { @extend .btn-danger; }
-	&.server { @extend .btn-danger; }
+	&.server { @extend .btn-warning; }
+	&.create-alert {@extend .btn-custom-orange;}
+	&.alerts { @extend .navbar-right; @extend .glyphicon; @extend .glyphicon-exclamation-sign; @extend .btn-custom-foxtrot;}
 	font-weight: bold !important;
 }
 

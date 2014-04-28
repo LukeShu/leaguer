@@ -7,42 +7,53 @@ module Scheduling
 		end
 
 		def create_matches
-			#number of teams*number of teams per match = number of matches per round
-			num_teams = (tournament.players.count/tournament.min_players_per_team).floor
+			# => find the number of matches and teams to create
+			@num_teams = (tournament.players.count/tournament.min_players_per_team).floor
 			@matches_per_round = num_teams * tournament.min_teams_per_match
 
+			# => initialize data and status members
+			@team_pairs ||= {}
+			if @team_pairs.empty?
+				@matches_finished = 0
+			end
+
+			# => Create new matches
 			@matches_per_round.each do |match|
 				tournament_stage.matches.create(status: 0, submitted_peer_evaluations: 0)
 			end
 
-			tournament_stage.seeding.seed_matches(tournament_stage)
+			# => seed the first time
+			if @team_pairs.empty?
+				tournament_stage.seeding.seed_matches(tournament_stage)
+				tournament_stage.matches.each {|match| match.teams.each {|team| @team_pairs += team}}
+			else
+				# => Reorder the list of teams
+				top = @team_pairs.shift
+				@team_pairs.push @team_pairs.shift
+				@team_pairs.unshift top
+
+				# => Add the teams to the matches
+				match = tournament_stage.matches[@matches_finished-1]
+				matches = 1
+				(0..@team_pairs.count-1).each do |i|
+					match.teams += @team_pairs[i]
+					if @team_pairs.count.%(tournament.min_teams_per_match).zero?
+						match = tournament_stage.matches[@matches_finished-1 + matches]
+						matches += 1
+					end
+				end
+
+			end
 		end
 
 		def finish_match(match)
-			#declare winner of match, and store that somehow
-			rotate
-			return "totes worked\n"
+			@matches_finished += 1
 		end
 
 		def graph(current_user)
 		end
 
 		private
-
-		def create_round_array
-			#round robin should look like this.
-			#NOTE: I DO NOT KNOW IF THIS IS HOW TO PROPERLY POPULATE THE ROUND ROBIN ARRAY WITH TEAMS
-			@team_pairs = Array.new(num_matches)
-			for i in 0..@match.teams.size
-				@team_pairs.push(@match.teams[i])
-				#if there is an odd number of teams, add a dummy for byes
-				if @match.teams.size % 2 != 0 && i == @match.teams.size-1
-					dummy = Team.create
-					@team_pairs.push(dummy)
-				end
-			end
-		end
-
 		def tournament_stage
 			@tournament_stage
 		end
@@ -50,29 +61,5 @@ module Scheduling
 		def tournament
 			tournament_stage.tournament
 		end
-
-		def rotate
-			#this is called when a round has completed
-
-			#remove first team
-			hold = @team_pairs.shift
-			#rotate by 1 element
-			@team_pairs.rotate!
-			#place first team the front of the array
-			@team_pairs.unshift(hold)
-		end
-
-		def mother_fuckin_winner
-			scores = {}
-			@teams_pairs.each do |team|
-				scores[team] = team.matches.
-					where(:tournament_stage => tournament_stage).
-					collect{|match|match.winner==team}
-			end
-			weiner = scores.index(scores.max)
-			scores[weiner]
-		end
-
-
 	end
 end
