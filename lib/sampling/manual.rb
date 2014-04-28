@@ -1,10 +1,10 @@
 module Sampling
-	module Manual
+	class Manual
 		def self.works_with?(game)
 			return true
 		end
 
-		def can_get?(user, setting_name)
+		def can_get?(setting_name)
 			return 1
 		end
 
@@ -20,12 +20,20 @@ module Sampling
 			raise "This sampling method doesn't use remote usernames."
 		end
 
-		def self.sampling_start(match, statistics)
+		####
+
+		def initialize(match)
+			@match = match
+		end
+
+		def start
 			# do nothing
 		end
 
-		def self.render_user_interaction(match, user)
-			# TODO
+		def render_user_interaction(user)
+			@current_user = user
+			@users = @match.users
+			@stats = @match.stats_from(self.class)
 
 			require 'erb'
 			erb_filename = File.join(__FILE__.sub(/\.rb$/, '.svg.erb'))
@@ -34,9 +42,8 @@ module Sampling
 			return erb.result.html_safe
 		end
 
-		def self.handle_user_interaction(match, user, sampling_params)
+		def handle_user_interaction(user, sampling_params)
 			# TODO
-			#match.statistics.create(user: nil, name: "blowout",
 		end
 	end
 end
