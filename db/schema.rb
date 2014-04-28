@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140428133136) do
+ActiveRecord::Schema.define(version: 20140428223939) do
 
   create_table "alerts", force: true do |t|
     t.integer  "author_id"
@@ -218,7 +218,7 @@ ActiveRecord::Schema.define(version: 20140428133136) do
     t.integer  "user_id"
     t.integer  "match_id"
     t.string   "name"
-    t.integer  "value"
+    t.text     "json_value"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

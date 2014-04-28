@@ -4,7 +4,7 @@ class CreateStatistics < ActiveRecord::Migration
       t.references :user, index: true
       t.references :match, index: true
       t.string :name
-      t.integer :value
+      t.text :json_value
 
       t.timestamps
     end

@@ -5,9 +5,6 @@ class Match < ActiveRecord::Base
 
 	belongs_to :winner, class_name: "Team"
 
-	def setup()
-	end
-
 	def finished?
 		ok = true
 		tournament_stage.scoring_method.stats_needed.each do |stat|
@@ -59,7 +56,7 @@ class Match < ActiveRecord::Base
 				method_class = "Sampling::#{method_name.camelcase}".constantize
 				needed.each do |stat|
 					data[stat] ||= {}
-					data[stat][method] = method_class.can_get?(user, stat)
+					data[stat][method_class] = method_class.can_get?(stat)
 				end
 			end
 
@@ -83,7 +80,7 @@ class Match < ActiveRecord::Base
 		if @method_classes.nil?
 			data = Set.new
 			figure_sampling_methods.each do |stat,method|
-				data.push(method)
+				data.add(method)
 			end
 			@method_classes = data
 		end

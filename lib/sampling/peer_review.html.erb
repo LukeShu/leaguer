@@ -18,7 +18,7 @@
 			<%# TODO: display more statistics %>
 		</li><% end %>
 	</ol>
-	<%= submit_tag("Submit peer evaluation", :onsubmit => "score_peers()") %>
+	<input type="submit" value="Submit peer evaluation", onsubmit="score_peers()") >
 <% else %>
 	<p>Still waiting for peer feedback from the following users:
 		<ul><% @feedbacks_missing.each do |user| %>
