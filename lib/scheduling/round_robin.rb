@@ -1,3 +1,4 @@
+# http://stackoverflow.com/questions/6648512/scheduling-algorithm-for-a-round-robin-tournament
 module Scheduling
 	class RoundRobin
 		include Rails.application.routes.url_helpers
