@@ -31,6 +31,7 @@ module Sampling
 		end
 
 		def render_user_interaction(user)
+			@tournament = @match.tournament_stage.tournament
 			@current_user = user
 			@users = @match.users
 			@stats = @match.stats_from(self.class)
