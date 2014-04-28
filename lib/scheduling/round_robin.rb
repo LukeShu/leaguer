@@ -12,7 +12,7 @@ module Scheduling
 			@matches_per_round = @num_teams * tournament.min_teams_per_match
 
 			# => initialize data and status members
-			@team_pairs ||= {}
+			@team_pairs ||= Array.new
 			if @team_pairs.empty?
 				@matches_finished = 0
 			end
@@ -25,7 +25,7 @@ module Scheduling
 			# => seed the first time
 			if @team_pairs.empty?
 				tournament_stage.seeding.seed(tournament_stage)
-				tournament_stage.matches.each {|match| match.teams.each {|team| @team_pairs += team}}
+				tournament_stage.matches.each {|match| match.teams.each {|team| @team_pairs.push team}}
 			else
 				# => Reorder the list of teams
 				top = @team_pairs.shift
