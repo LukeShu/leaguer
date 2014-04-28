@@ -27,7 +27,6 @@ class AlertsController < ApplicationController
 		users = {}
 		users = User.all
 
-
 		for i in 0..users.length
 			current_user.send_message(users[i], @alert.message, "Pay Attention!")		
 		end 
