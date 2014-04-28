@@ -1,4 +1,7 @@
-<% playerscores = @tournament.players.collect {|player| player => tournament.statistics.getStatistic(player.matches.last, player, :score) } %>
+<% playerscores = @tournament.players.collect {|player| player => @tournament.statistics.getStatistic(player.matches.last, player, :score) } %>
+<% teams = tournament_stage.matches.collect 
+{ |match| match.teams.collect { |team| team.id => team.players.collect 
+{ |player| player.user_name => @tournament.statistics.getStatistic(player.matches.last, player, :score } } } %>
 
 <table>
 	<tr>
@@ -10,3 +13,16 @@
 		<% end %>
 	</tr>
 </table>
+
+<% teams.each do |team| %>
+	<table>
+		<tr>
+			<td>Standings:</td>
+			<% place = 0 %>
+			<% team.values.sort {|player1, player2| playerscores[player1] <=> playerscores[player2] }.each |player| %>
+				<td><%= place.to_s + ":" %> <%= player.user_name %></td>
+				<% place += 1%>
+			<% end %>
+		</tr>
+	</table>
+<% end %>
