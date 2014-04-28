@@ -100,10 +100,6 @@ class Tournament < ActiveRecord::Base
 		@scoring ||= "Scoring::#{self.scoring_method.camelcase}".constantize
 	end
 
-	def sampling
-		@sampling ||= "Sampling::#{self.sampling_method.camelcase}".constantize
-	end
-
 	# YISSSSSS
 
 	def scoring_methods

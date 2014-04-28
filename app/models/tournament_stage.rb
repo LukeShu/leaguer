@@ -31,10 +31,6 @@ class TournamentStage < ActiveRecord::Base
 		@scoring ||= tournament.scoring
 	end
 
-	def sampling
-		@sampling ||= tournament.sampling
-	end
-
 	def scheduling
 		@scheduling ||= "Scheduling::#{self.scheduling_method.camelcase}".constantize.new(self)
 	end

@@ -191,7 +191,6 @@ class TournamentsController < ApplicationController
 				p[:max_players_per_team] ||= game.max_players_per_team
 				p[:min_teams_per_match]  ||= game.min_teams_per_match
 				p[:max_teams_per_match]  ||= game.max_teams_per_match
-				p[:sampling_method]      ||= game.sampling_method
 				p[:scoring_method]       ||= game.scoring_method
 			end
 			return p
