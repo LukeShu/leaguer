@@ -20,6 +20,16 @@ class Match < ActiveRecord::Base
 		winner.players.include? player
 	end
 
+	def users
+		ret = []
+		self.teams.each{|t| ret.concat(t.users)}
+		return ret
+	end
+
+	def stats_from(sampling_class)
+		# TODO
+	end
+
 	def handle_sampling(params)
 		# TODO
 	end

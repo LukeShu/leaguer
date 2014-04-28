@@ -4,7 +4,7 @@ Scheduling interface
 Files in this directory should be _classes_ implementing the following
 interface:
 
- - `initialize(tournament_stage)`
+ - `initialize(TournamentStage)`
 
    Construct new Scheduling object from tournament_stage.
 
@@ -12,7 +12,7 @@ interface:
 
    Creates all the matches of the current round.
 
- - `finish_match(match)`
+ - `finish_match(Match)`
 
    Progresses the match through the schedule.
 
