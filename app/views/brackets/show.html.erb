@@ -1,21 +1,83 @@
-<p>
-  <strong>User:</strong>
-  <%= @bracket.user.user_name %>
-</p>
+<h2><%= @bracket.name %></h2>
 
-<p>
-  <strong>Tournament:</strong>
-  <%= @bracket.tournament.name %>
-</p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @bracket.name %>
-</p>
+<h4> Make your prediction for the tournament by clicking on the teams you think will win </h4>
 
 <% @bracket.bracket_matches.each do |m| %>
 	<p><b><%= m.match.id %></b></p>
 <% end %>
 
+<svg version="1.1" baseProfile="full"
+	xmlns="http://www.w3.org/2000/svg"
+	xmlns:xlink="http://www.w3.org/1999/xlink"
+	width="100%" height=<%= "#{@height}"%>>
+	<defs>
+	<radialGradient id="gradMatch" cx="50%" cy="50%" r="80%" fx="50%" fy="50%">
+	<stop offset="0%" style="stop-color:#fff; stop-opacity:1" />
+	<stop offset="100%" style="stop-color:#ccc;stop-opacity:0" />
+	</radialGradient>
+	</defs>
+  <script type="text/ecmascript"><![CDATA[
+      function redirect(i){
+        window.location.replace("<%= request.original_url %>"+"/"+i);
+      }
+    ]]>
+  </script>
+ 	
+  <% (1..@matches.count).each do |i| %>
+  	<% matchDepth = Math.log(i*(@logBase-1), @logBase).floor+1 %>
+  	<% if matchDepth > Math.log(@base*(@logBase-1), @logBase).floor+1
+		@pBase = @base
+		@base = i
+	end %>
+  	<g id="svg-match-<%= i %>">
+    <rect height="<%= rh = 100 / (@logBase**(@depth-1)+1) - 100/@height %>%"
+      width="<%= rw = 100/(@depth+1) - 5 %>%"
+      x="<%= rx = 50/(@depth+1) + 100/(@depth+1)*(@depth-matchDepth) %>%"
+      y="<%= ry = 100/(@logBase**(matchDepth-1)+1) * (i-@base+1) - rh/2 %>%"
+      fill="url(#gradMatch)"
+      rx="5px"
+      stroke-width="2"
+      <% case @matches[i].status %>
+      <% when 0 %>
+        <% if @matches[i].teams.count < @tournament.min_teams_per_match %>
+          stroke="red"
+          fill-opacity="0.6"
+        <% else %>
+          stroke="green"
+        <% end %>
+      <% when 1 %>
+      stroke="orange"
+      <% when 2 %>
+      stroke="yellow"
+      <% when 3 %>
+      stroke="grey"
+      <% end %>
+    />
+
+    <% t = 1
+	while t <= @numTeams %>
+	    <rect width="<%= rw-5 %>%" height="<%= rh*Float(30)/(@matchHeight) %>%" x="<%= rx + 2.5 %>%" y="<%= ry + (Float(t-1)/@numTeams)*rh + 1 %>%" fill="<%= @matches[i].teams[t-1] and @matches[i].teams[t-1].include?(current_user) ? "#5BC0DE" : "white" %>" onclick="chooseWinner(<%= @matches[i].id,  %>)" />
+	    <text x="<%= rx + rw/4 %>%" y="<%= ry + (Float(t-1)/@numTeams + Float(33)/(@matchHeight))*rh %>%" font-size="200%">
+	      <% if @matches[i].teams[t-1] %>
+	      Team <%= @matches[i].teams[t-1].id %>
+	      <% end %>
+	    </text>
+	    <% if (t < @numTeams) %>
+			<text x="<%= rx + 1.3*rw/3 %>%" y="<%= ry + (Float(t)/@numTeams)*rh + 1%>%" font-size="200%"> VS </text>
+		<% end %>
+		<% t = t + 1 %>
+    <% end %>
+
+    <% if i > 1 %>
+		<% parent = (i+@logBase-2)/@logBase
+		pDepth = Math.log(parent*(@logBase-1), @logBase).floor+1
+		lastrx = 50/(@depth+1) + 100/(@depth+1)*(@depth-pDepth)
+		lastry = 100/(@logBase**(pDepth-1)+1) * (parent-@pBase+1) - rh/2 %>
+		<line x1="<%= rx+rw %>%" y1="<%= ry+rh/2 %>%" x2="<%= lastrx%>%" y2="<%= lastry+rh/2%>%" stroke="white" stroke-width="2" >
+	<% end %>
+  </g>
+
+  <% end %>
+</SVG>
 
 <%= link_to 'Back', tournaments_path %>

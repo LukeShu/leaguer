@@ -11,6 +11,19 @@ class BracketsController < ApplicationController
 	# GET /brackets/1
 	# GET /brackets/1.json
 	def show
+		@matches = @tournament.stages.first.matches_ordered
+		@numTeams = @tournament.min_teams_per_match
+		@logBase = @numTeams
+			
+		# depth of SVG tree
+		@depth = Math.log(@matches.count*(@logBase-1),@logBase).floor+1;
+			
+		# height of SVG
+		@matchHeight = 50*@logBase;
+		@height = [(@matchHeight+50) * @logBase**(@depth-1) + 100, 500].max;
+
+		@base = 1
+		@pBase = 1
 	end
 
 	# GET /brackets/1/edit
@@ -20,16 +33,17 @@ class BracketsController < ApplicationController
 	# POST /brackets
 	# POST /brackets.json
 	def create
-		@bracket = @tournament.brackets.create(user: current_user)
+		@bracket = @tournament.brackets.build(user: current_user)
 		@bracket.name =  current_user.user_name + "'s Prediction for " + @tournament.name
-		@bracket.create_matches
 
 		respond_to do |format|
-			if @bracket.save
+			if @tournament.status == 1 && @tournament.stages.first.scheduling_method == "elimination" && @tournament.stages.first.matches.first.status == 0
+				@bracket.save
+				@bracket.create_matches
 				format.html { redirect_to @bracket, notice: 'Bracket was successfully created.' }
 				format.json { render action: 'edit', status: :created, location: @bracket }
 			else
-				format.html { render action: 'new' }
+				format.html { redirect_to tournaments_path action: 'You can\'t make a bracket for this tournament' }
 				format.json { render json: @bracket.errors, status: :unprocessable_entity }
 			end
 		end

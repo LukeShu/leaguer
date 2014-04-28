@@ -23,17 +23,17 @@
 	</div>
 	<div class="col-md-2 col-sm-2 col-xs-2">
 		<% if signed_in? %>
-			<% if !target.players.include?(current_user) %>
+			<% if !target.players.include?(current_user) && target.status == 0 %>
 			<%= form_tag(tournament_path(target), method: "put") do %>
 				<p>
 					<input type="hidden" name="update_action" value="join">
 					<%= submit_tag("Join")%>
 					<% end %>
 				</p>
-			<% else %>
+			<% elsif target.players.include?(current_user)%>
 			<p style="margin-top:10px;"> You've signed up for this tournament! 	</p>
 			<% end %>
-			<% if target.status == 1 %>
+			<% if target.status == 1 && target.stages.first.scheduling_method == "elimination" && target.stages.first.matches.first.status == 0 %>
 				<%= form_tag(tournament_brackets_path(target), method: "post") do %>
 					<%= submit_tag("Make Bracket") %>
 				<% end %>

@@ -4,7 +4,7 @@ class Bracket < ActiveRecord::Base
 	has_many :bracket_matches
 
 	def create_matches
-		tournament.stages.first.matches.each do |m|
+		tournament.stages.first.matches_ordered.each do |m|
 			bracket_matches.create(match: m)
 		end
 	end
