@@ -54,7 +54,7 @@
 
 		<p>
 			<%= f.label :scoring_method %>
-			<%= f.select(:scoring_method, @tournament.scoring_methods.map{|method| [method.humanize, method]}) %>
+			<%= f.select(:scoring_method, @tournament.scoring_methods.map{|method| [method.humanize.titleize, method]}) %>
 		</p>
 
 		<p>
@@ -72,27 +72,27 @@
 				<%= setting_fields.label setting.name %>
 				<br>
 				<% case setting.vartype %>
-					<% when 0 %>
-						<%= setting_fields.text_field( setting.name ) %>
-					<% when 1 %>
-						<%= setting_fields.text_area( setting.name ) %>
-					<% when 2 %>
-						<ul>
-						<% setting.type_opt.split(',').each do |option|%>
-							<li><label><%= setting_fields.radio_button( setting.name, option ) %><%= option.humanize %></label></li>
-						<% end %>
-						</ul>
-					<% when 3 %>
-						<ul>
-						<% setting.type_opt.split(',').each do |option|%>
-							<li><label><%= check_box_tag("tournament[settings][#{setting.name}][]", option, setting.value.split(',').include?(option)) %><%= option.humanize %></label></li>
-						<% end %>
-						</ul>
-					<% when 4 %>
-						<%= setting_fields.radio_button( setting.name, "true" ) %> True
-						<%= setting_fields.radio_button( setting.name, "false" ) %> False
-					<% when 5 %>
-						<%= setting_fields.select( setting.name, setting.type_opt.split(',') ) %>
+				<% when 0 %>
+					<%= setting_fields.text_field( setting.name ) %>
+				<% when 1 %>
+					<%= setting_fields.text_area( setting.name ) %>
+				<% when 2 %>
+					<ul>
+					<% setting.type_opt.split(',').each do |option|%>
+						<li><label><%= setting_fields.radio_button( setting.name, option ) %><%= option.humanize %></label></li>
+					<% end %>
+					</ul>
+				<% when 3 %>
+					<ul>
+					<% setting.type_opt.split(',').each do |option|%>
+						<li><label><%= check_box_tag("tournament[settings][#{setting.name}][]", option, setting.value.split(',').include?(option)) %><%= option.humanize %></label></li>
+					<% end %>
+					</ul>
+				<% when 4 %>
+					<%= setting_fields.radio_button( setting.name, "true" ) %> True
+					<%= setting_fields.radio_button( setting.name, "false" ) %> False
+				<% when 5 %>
+					<%= setting_fields.select( setting.name, setting.type_opt.split(',').collect {|opt| opt.humanize.titleize} ) %>
 				<% end %>
 			</p>
 			<% end %>
