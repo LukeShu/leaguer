@@ -1,16 +1,3 @@
-<script type="text/javascript">
-function score_peers() {
-	//get each player in order and assign score here!
-	var $lisp = $('ol#boxes');
-	var comma = ","
-	for(var i=0; i < $lisp.length; i++) {
-		if ( i == lisp.length-1) {
-			comma = "";
-		}
-		$('review_action').value +=  $('ol#boxes:eq(' + i + ')').text() + comma;
-	}
-}
-</script>
 
 <p>
 	<strong>Status:</strong>
@@ -22,11 +9,10 @@ function score_peers() {
 </p>
 
 <%#
-	Match Status 0 =>	Created, waiting to start
-	Match Status 1 =>	Match ready
-	Match Status 2 =>	Match is running, waiting to finish
-	Match Status 3 =>	Match finished, waiting for statistics to populate
-	Match Status 4 =>	Match Totally done. Archived.
+	Match Status 0 =>	Created, waiting to be scheduled
+	Match Status 1 =>	Scheduled, waiting to start
+	Match Status 2 =>	Started, waiting to finish
+	Match Status 3 =>	Finished
 
 	Four views:- (status is Match status)
 	A. Pairings, when status is 1 for either Host or Player Or when status is 2 for player 
@@ -66,52 +52,26 @@ function score_peers() {
 	<%= form_tag(tournament_match_path(@tournament, @match), method: "put") do %>
 		<% case @match.status %>
 		<% when 0 %>
-			<!-- Created, waiting to start -->
+			<!-- Created, waiting to be scheduled -->
+			<p>This match has not yet been scheduled.</p>
+		<% when 1 %>
+			<!-- Scheduled, waiting to start -->
 			<% if @tournament.hosts.include? current_user %>
 				<input type="hidden" name="update_action" value="start">
-				<%= submit_tag("Start Match", :disabled => @match.teams.count < @tournament.min_teams_per_match) %>
+				<%= submit_tag("Start Match") %>
 			<% else %>
 				<p>Match is waiting to start.</p>
 			<% end %>
-		<% when 1 %>
-			<!-- Started, waiting to finish -->
-			<!-- This will depend on the Sampling Method Eventually instead of always being Manual -->
-
-			<%= raw @match.tournament_stage.tournament.sampling_method.camelcase.constantize.render_user_interaction(@match, current_user) %>
-
 		<% when 2 %>
-			<!-- Finished, waiting for peer reviews -->
-			<input type="hidden" name="update_action" value="peer">
-			<input type="hidden" name="review_action" value="">
-			<% users = []; @match.teams.each{|t| users.concat(t.users)}; %>
-			<% if users.include? current_user %>
-				<% @match.teams.each do |team| %>
-					<% if team.users.include?(current_user) %>
-						<ol id="boxes" class="sortable">
-							<% team.users.reject{ |u| (u.user_name == @current_user.user_name) }.collect {|u| u.user_name }.each do |k| %>
-								<li><%= k%>
-									<br>
-									<% if (@tournament.game_id  == 1) %>
-										<%= if @blue2["#{k}"] == nil
-											"Level: #{@purp2["#{k}"]["level"]}  K/D/A: #{@purp2["#{k}"]["championsKilled"]}/#{@purp2["#{k}"]["numDeaths"]}/#{@purp2["#{k}"]["assists"]}  Gold:#{@purp2["#{k}"]["goldEarned"]}"
-											else
-											"Level: #{@blue2["#{k}"]["level"]}  K/D/A: #{@blue2["#{k}"]["championsKilled"]}/#{@blue2["#{k}"]["numDeaths"]}/#{@blue2["#{k}"]["assists"]}  Gold:#{@blue2["#{k}"]["goldEarned"]}"
-										end %>
-									<% end %>
-								</li>
-							<% end %>
-						</ol>
-					<% end %>
-				<% end %>
-				<%= submit_tag("Submit peer evaluation", :onsubmit => "score_peers()") %>
-			<% else %>
-				Waiting for peer evaluations to be submitted.
-			<% end %>
+			<!-- Started, waiting to finish -->
+			<%= @match.render_sampling(current_user) %>
 		<% when 3 %>
-			<!-- Totally done -->
-			This match is done.
-			<input type="hidden" name="update_action" value="reset">
-			<%= submit_tag("Reset Status") %>
-		<% end # case %>
-	<% end # form %>
+			<!-- Finished -->
+			<p>This match is finished.</p>
+			<% if @tournament.hosts.include? current_user %>
+				<input type="hidden" name="update_action" value="reset">
+				<%= submit_tag("Reset Status") %>
+			<% end %>
+		<% end %>
+	<% end %>
 </div>
