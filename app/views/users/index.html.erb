@@ -16,7 +16,7 @@
   <tbody>
     <% @users.each do |user| %>
       <tr>
-        <td><%= link_to("#{user.user_name}", user, nil) %></td>
+        <td><%= image_tag('http://www.gravatar.com/avatar/' + Digest::MD5.hexdigest(user.email) + '?s=30&d=identicon') %> <%= link_to("#{user.user_name}", user, nil) %></td>
         <td><%= user.name %></td>
         <td> ******* </td>
         <td><%= user.user_name %></td>
