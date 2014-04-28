@@ -1,7 +1,7 @@
-<% playerscores = @tournament.players.collect {|player| player => @tournament.statistics.getStatistic(player.matches.last, player, :score) } %>
+<% playerscores = @tournament.players.collect {|player| player => @tournament.statistics.where(match: player.matches.last, user: player, name: :score) } %>
 <% teams = tournament_stage.matches.collect 
 { |match| match.teams.collect { |team| team.id => team.players.collect 
-{ |player| player.user_name => @tournament.statistics.getStatistic(player.matches.last, player, :score } } } %>
+{ |player| player.user_name => @tournament.statistics.where(match: player.matches.last, user: player, name: :score } } } %>
 
 <table>
 	<tr>

@@ -33,7 +33,7 @@ module Seeding
 		end
 
 		def self.previous_score(player, tournament)
-			score = tournament.statistics.getStatistic(player.matches.last, player, :score)
+			score = tournament.statistics.where(match: player.matches.last, user: player, name: :score)
 			if score.nil?
 				return 0
 			end
