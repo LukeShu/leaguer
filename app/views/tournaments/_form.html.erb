@@ -13,7 +13,6 @@
 	</fieldset>
 <% else %>
 	<%= form_for(@tournament, url: tournaments_path, method: "post") do |f| %>
-
 		<p>
 			<%= f.label :name %>
 			<%= f.text_field :name %>
@@ -48,7 +47,7 @@
 
 		<p>
 			<%= f.label :scoring_method %>
-			<%= f.select(:scoring_method, @tournament.scoring_methods.map{|method| [method.humanize, method]}) %>
+			<%= f.select(:scoring_method, @tournament.scoring_methods.map{|method| [method.humanize.titleize, method]}) %>
 		</p>
 
 		<p>
@@ -84,7 +83,7 @@
 					<%= setting_fields.radio_button( setting.name, "true" ) %> True
 					<%= setting_fields.radio_button( setting.name, "false" ) %> False
 				<% when 5 %>
-					<%= setting_fields.select( setting.name, setting.type_opt.split(',') ) %>
+					<%= setting_fields.select( setting.name, setting.type_opt.split(',').collect {|opt| opt.humanize.titleize} ) %>
 				<% end %>
 			</p><% end %>
 		<% end %>
