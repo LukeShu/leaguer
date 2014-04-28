@@ -4,6 +4,10 @@ module Sampling
 			return true
 		end
 
+		def can_get?(setting_name)
+			return 1
+		end
+
 		def self.uses_remote?
 			return false
 		end
@@ -16,11 +20,7 @@ module Sampling
 			raise "This sampling method doesn't use remote usernames."
 		end
 
-		def self.sampling_start(match)
-			# TODO
-		end
-
-		def self.sampling_done?(match)
+		def self.sampling_start(match, statistics)
 			# TODO
 		end
 

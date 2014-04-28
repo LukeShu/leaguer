@@ -31,6 +31,11 @@ module Sampling
 		end
 
 		protected
+		def self.stats_available
+			["win", "numDeaths", "turretsKilled", "championsKilled", "minionsKilled", "assists"]
+		end
+
+		protected
 		class Job < ThrottledApiRequest
 			def initialize(request, args={})
 					@url = Sampling::RiotApi::url(request, args)
@@ -79,6 +84,26 @@ module Sampling
 		end
 
 		##
+		# TODO description
+		public
+		def self.can_get?(user, stat)
+			if user.nil?
+				return 0
+			end
+			summoner = user.get_remote_username(match.tournament_stage.tournament.game)
+			if summoner.nil?
+				return 0
+			end
+			if summoner["id"].nil?
+				return 0
+			end
+			unless stats_available.include?(stat)
+				return 0
+			end
+			return 2
+		end
+
+		##
 		# This sampling method uses remote IDs
 		public
 		def self.uses_remote?
@@ -105,10 +130,10 @@ module Sampling
 				user = User.find(@user_id)
 				game = Game.find(@game_id)
 				
-				normalized_summoner_name = data.keys.first
+				standardized_summoner_name = data.keys.first
 				remote_data = {
-					:id   => data[normalized_summoner_name]["id"],
-					:name => data[normalized_summoner_name]["name"],
+					:id   => data[standardized_summoner_name]["id"],
+					:name => data[standardized_summoner_name]["name"],
 				}
 
 				user.set_remote_username(game, remote_data)
@@ -126,36 +151,42 @@ module Sampling
 		##
 		# Fetch all the statistics for a match.
 		public
-		def self.sampling_start(match)
+		def self.sampling_start(match, stats)
 			@match.teams.each do |team|
 				team.users.each do |user|
-					Delayed::Job.enqueue(MatchJob.new(user, match), :queue => api_name)
+					Delayed::Job.enqueue(MatchJob.new(user, match, stats.map{|stat|stat[:name]}, nil), :queue => api_name)
 				end
 			end
 		end
 		protected
 		class FetchStatisticsJob < Job
-			def initialize(user, match)
+			def initialize(user, match, stats, last_game_id)
 				@user_id = user.id
 				@match_id = match.id
+				@stats = stats
+				@last_game_id = last_game_id
+
 				# Get the summoner id
 				summoner = user.get_remote_username(match.tournament_stage.tournament.game)
-				if summoner.nil?
-					raise "Someone didn't enter their summoner name"
-				end
 				# Generate the request
 				super("v1.3/game/by-summoner/%{summonerId}/recent", { :summonerId => summoner["id"] })
 			end
 			def handle(data)
 				user = User.find(@user_id)
 				match = Match.find(@match_id)
-				Statistic.create(user: user, match: match, value: TODO)
+				if @last_game_id.nil?
+					Delayed::Job.enqueue(MatchJob.new(user, match, data["games"][0]["gameId"]), :queue => api_name)
+				else
+					if @last_game_id == data["games"][0]["gameId"]
+						# TODO: perhaps insert a delay here?
+						Delayed::Job.enqueue(MatchJob.new(user, match, @last_game_id), :queue => api_name)
+					else
+						@stats.each do |stat|
+							Statistic.create(user: user, match: match, name: stat, value: data["games"][0]["stats"][stat])
+						end
+					end
+				end
 			end
-		end
-
-		public
-		def self.sampling_done?(match)
-			# TODO
 		end
 
 		public

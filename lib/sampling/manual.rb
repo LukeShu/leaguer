@@ -4,6 +4,10 @@ module Sampling
 			return true
 		end
 
+		def can_get?(user, setting_name)
+			return 1
+		end
+
 		def self.uses_remote?
 			return false
 		end
@@ -16,16 +20,18 @@ module Sampling
 			raise "This sampling method doesn't use remote usernames."
 		end
 
-		def self.sampling_start(match)
-			# TODO
-		end
-
-		def self.sampling_done?(match)
-			# TODO
+		def self.sampling_start(match, statistics)
+			# do nothing
 		end
 
 		def self.render_user_interaction(match, user)
 			# TODO
+
+			require 'erb'
+			erb_filename = File.join(__FILE__.sub(/\.rb$/, '.svg.erb'))
+			erb = ERB.new(File.read(erb_filename))
+			erb.filename = erb_filename
+			return erb.result.html_safe
 		end
 
 		def self.handle_user_interaction(match, user, sampling_params)
