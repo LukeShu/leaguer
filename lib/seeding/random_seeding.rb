@@ -1,6 +1,6 @@
 module Seeding
 	class RandomSeeding
-		def seed_matches(tournament)
+		def seed(tournament_stage)
 			matches = tournament.current_stage.matches
 			match = matches.first
 			match_num = 0
