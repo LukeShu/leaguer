@@ -23,66 +23,19 @@
 
 }
 
-#tournament-users {
-	ul {
-		list-style: none;
-		padding: 0;
-		margin: 0;
-		li {
-			padding-left: 1em;
-			text-indent: -.7em;
-			&:before {
-				content: "• ";
-				color: #10A010;
-			}
-			color: white;
+ul#tournament-users {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	li {
+		// Make the bullet green, but the text white
+		padding-left: 1em;
+		text-indent: -.7em;
+		&:before {
+			content: "• ";
+			color: #10A010;
 		}
-	}
-}
-
-
-/* Style of a tournament listing div */
-div.tournament-listing {
-	margin: 10px 0px;
-	border-radius: 5px;
-	box-shadow: 0px 0px 3px #B8B8B8;
-	background-color: rgba(0, 0, 0, 0.6);
-	border: 1px solid #AAAAAA;
-	min-height: 100px;
-	padding: 8px 4px;
-
-	/* AKA the listing title */
-	h3 {
-		margin-top: 0px;
-		color: #F0AD4E;
-		font-weight: bold;
-	}
-
-	h3:hover {
-		color: #D09D3E;
-	}
-
-	/* host of the tournament */
-	.host {
-		font-weight: bold;
-		color: #FFF;
-	}
-
-	.col-md-8 {
-		padding: 0;
-		a {
-			padding: 5px 0 0 0;
-		}
-	}
-
-	.t-game{
-		font-weight: bold;
-		text-align: center;
-	}
-
-	.t-image{
-		display: block;
-		margin:auto;
+		color: white;
 	}
 }
 

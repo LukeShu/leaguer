@@ -4,18 +4,12 @@
 /* Layout ***********************************************************/
 
 html {
-	height: 100%;
-
 	body {
-		background: asset-url("bg.png", image) repeat scroll 0 0 $page-color;
+		background: asset-url("bg.png", image) repeat scroll 0 0 $toolbar-color;
 		color: $page-color;
 		font-family: verdana, arial, helvetica, sans-serif;
 		font-size: 13px;
 		line-height: 18px;
-		height: 100%;
-		background-color: $toolbar-color;
-		border-radius: 0px 0px 5px 5px;
-		box-shadow: 0px 0px 5px black;
 
 		header > nav {
 			@extend .navbar;
@@ -44,9 +38,9 @@ html {
 
 			form.search {
 				@extend .navbar-form;
-				@extend .navbar-right;
+				float: right;
 				input[type="submit"] {
-					@extend .btn-warning; margin-top: -3px; margin-right: 8px;
+					@extend .btn-warning;
 				}
 				input[type="text"], input[type="search"] {
 					background-color: #303030;
@@ -76,13 +70,8 @@ html {
 
 		.wrapper {
 			width: 80%;
-			margin-top: 10px;
-			min-height: 80%;
-			height: auto !important;
-			height: 99%;
-			margin: 0 auto;
+			margin: 10px auto 0;
 		}
-
 
 		footer {
 			clear: both;
@@ -236,13 +225,56 @@ div.field, div.actions {
 /* Specific styles **************************************************/
 
 .tournament-listing {
+	margin: 10px 0px;
+	border-radius: 5px;
+	box-shadow: 0px 0px 3px #B8B8B8;
+	background-color: rgba(0, 0, 0, 0.6);
+	border: 1px solid #AAAAAA;
+	min-height: 100px;
+	padding: 8px 4px;
+
 	div.row {
 		margin-left: 2%;
 	}
 	p.message {
 		margin-top: 10px;
 	}
+
+	/* AKA the listing title */
+	h3 {
+		margin-top: 0px;
+		color: #F0AD4E;
+		font-weight: bold;
+	}
+
+	h3:hover {
+		color: #D09D3E;
+	}
+
+	/* host of the tournament */
+	.host {
+		font-weight: bold;
+		color: #FFF;
+	}
+
+	.col-md-8 {
+		padding: 0;
+		a {
+			padding: 5px 0 0 0;
+		}
+	}
+
+	.t-game{
+		font-weight: bold;
+		text-align: center;
+	}
+
+	.t-image{
+		display: block;
+		margin:auto;
+	}
 }
+
 
 .user-listing {
 	margin: 10px 0px;

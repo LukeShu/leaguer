@@ -11,7 +11,7 @@ update = (tournament) ->
 	# Update the user list
 	players = ""
 	for player in tournament["players"]
-		players = players + "<li><span class=\"black\">" + player["user_name"] + "</span></li>"
+		players = players + "<li>"+player["user_name"]+"</li>"
 	$("#tournament-users").html players
 
 	# Enable/disable the "start" button depending on the number of players
