@@ -129,27 +129,37 @@ module Sampling
 		def self.sampling_start(match)
 			@match.teams.each do |team|
 				team.users.each do |user|
-					Delayed::Job.enqueue(MatchJob.new(user, match), :queue => api_name)
+					Delayed::Job.enqueue(MatchJob.new(user, match, nil), :queue => api_name)
 				end
 			end
 		end
 		protected
 		class FetchStatisticsJob < Job
-			def initialize(user, match)
+			def initialize(user, match, last_game_id)
 				@user_id = user.id
 				@match_id = match.id
+				@last_game_id = last_game_id
+
 				# Get the summoner id
 				summoner = user.get_remote_username(match.tournament_stage.tournament.game)
-				if summoner.nil?
-					raise "Someone didn't enter their summoner name"
-				end
 				# Generate the request
 				super("v1.3/game/by-summoner/%{summonerId}/recent", { :summonerId => summoner["id"] })
 			end
 			def handle(data)
 				user = User.find(@user_id)
 				match = Match.find(@match_id)
-				Statistic.create(user: user, match: match, value: TODO)
+				if @last_game_id.nil?
+					Delayed::Job.enqueue(MatchJob.new(user, match, data["games"][0]["gameId"]), :queue => api_name)
+				else
+					if @last_game_id == data["games"][0]["gameId"]
+						# TODO: perhaps insert a delay here?
+						Delayed::Job.enqueue(MatchJob.new(user, match, @last_game_id), :queue => api_name)
+					else
+						for stat in ["win", "numDeaths", "turretsKilled", "championsKilled", "minionsKilled", "assists"] do
+							Statistic.create(user: user, match: match, name: stat, value: data["games"][0]["stats"][stat])
+						end
+					end
+				end
 			end
 		end
 
