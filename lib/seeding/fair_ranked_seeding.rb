@@ -1,6 +1,6 @@
 module Seeding
-	class FairRankedSeeding
-		def seed_matches(tournament)
+	module FairRankedSeeding
+		def self.seed(tournament_stage)
 			matches = tournament.current_stage.matches
 			match = matches.first
 			match_num = 0
@@ -19,17 +19,17 @@ module Seeding
 		end
 
 		private
-		def best_first(tournament)
+		def self.best_first(tournament)
 			tournament.players.sort {|a, b| better(a, b, tournament) }
 		end
 
-		def better(player1, player2, tournament)
-			ps1 = previousScore(player1, tournament)
-			ps2 = previousScore(player2, tournament)
+		def self.better(player1, player2, tournament)
+			ps1 = previous_score(player1, tournament)
+			ps2 = previous_score(player2, tournament)
 			ps1 <=> ps2
 		end
 
-		def previousScore(player, tournament)
+		def self.previous_score(player, tournament)
 			score = tournament.statistics.getStatistic(player.matches.last, player, :score)
 			if score.nil?
 				return 0

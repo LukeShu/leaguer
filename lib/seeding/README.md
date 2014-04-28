@@ -1,4 +1,10 @@
-Files in this directory should implement the following interface:
+Seeding interface
+=================
 
-- seed_matches(tournament)
-	take the matches of a tournament and the players in a tournament, assign players to teams, and teams to matches (all must exist)
+Files in this directory should be _modules_ implement the following
+interface:
+
+ - `seed(TournamentStage)`
+
+   Take a tournament stage, assign players to teams and teams to
+   matches (matches must exist).

@@ -31,6 +31,17 @@ class TournamentsController < ApplicationController
 	# GET /tournaments/new
 	def new
 		@tournament = Tournament.new(tournament_attribute_params)
+		if @tournament.game
+			@tournament.game.settings.each do |game_setting|
+				@tournament.tournament_settings.build(
+					name:          game_setting.name,
+					value:         game_setting.value,
+					vartype:       game_setting.vartype,
+					type_opt:      game_setting.type_opt,
+					description:   game_setting.description,
+					display_order: game_setting.display_order)
+			end
+		end
 	end
 
 	# GET /tournaments/1/edit
@@ -46,17 +57,17 @@ class TournamentsController < ApplicationController
 		ok = true
 		begin
 			ActiveRecord::Base.transaction do
-				ok &= @tournament.save
 				ok &= @tournament.update(tournament_setting_params)
 				ok &= @tournament.hosts.push(current_user)
 				for i in 1..(params[:num_stages].to_i) do
 					begin
-						ok &= @tournament.stages.create(tournament_stage_params(i))
+						ok &= @tournament.stages.build(tournament_stage_params(i))
 					rescue ActionController::ParameterMissing => e
 						ok = false
-						@tournament.errors.add("stages[#{i}]", "Stage #{i} not set")
+						@tournament.errors.add("stages[#{i}]", "needs to be set")
 					end
 				end
+				ok &= @tournament.save
 			end
 		rescue ActiveRecord::RecordNotUnique => e
 			ok = false

@@ -1,10 +1,12 @@
 class Tournament < ActiveRecord::Base
 	belongs_to :game
-	has_many :stages, class_name: "TournamentStage"
+	has_many :tournament_stages
 	has_many :brackets
-	has_many :settings_raw, class_name: "TournamentSetting"
+	has_many :tournament_settings
 	has_and_belongs_to_many :players, class_name: "User", association_foreign_key: "player_id", join_table: "players_tournaments"
 	has_and_belongs_to_many :hosts,   class_name: "User", association_foreign_key: "host_id",   join_table: "hosts_tournaments"
+
+	alias_attribute :stages, :tournament_stages
 
 	# Settings #################################################################
 
@@ -25,7 +27,7 @@ class Tournament < ActiveRecord::Base
 		end
 
 		def [](setting_name)
-			tournament_setting = @tournament.settings_raw.find_by_name(setting_name)
+			tournament_setting = @tournament.tournament_settings.find{|s|s.name==setting_name}
 			if tournament_setting.nil?
 				return nil
 			else
@@ -34,13 +36,13 @@ class Tournament < ActiveRecord::Base
 		end
 
 		def []=(setting_name, val)
-			tournament_setting = @tournament.settings_raw.find_by_name(setting_name)
+			tournament_setting = @tournament.tournament_settings.find{|s|s.name==setting_name}
 			if tournament_setting.nil?
 				game_setting = @tournament.game.settings.find_by_name(setting_name)
-				@tournament.settings_raw.create(name: setting, value: val,
-					vartype: game_setting.vartype,
-					type_opt: game_setting.type_opt,
-					description: game_setting.description,
+				@tournament.tournament_settings.build(name: setting_name, value: val,
+					vartype:       game_setting.vartype,
+					type_opt:      game_setting.type_opt,
+					description:   game_setting.description,
 					display_order: game_setting.display_order)
 			else
 				tournament_setting.value = val
@@ -48,7 +50,7 @@ class Tournament < ActiveRecord::Base
 		end
 
 		def keys
-			@tournament.settings_raw.all.collect { |x| x.name }
+			@tournament.tournament_settings.all.collect { |x| x.name }
 		end
 
 		def empty?() keys.empty? end
@@ -58,9 +60,9 @@ class Tournament < ActiveRecord::Base
 
 		def method_missing(name, *args)
 			if name.to_s.ends_with?('=')
-				self[name.to_s.sub(/=$/, '').to_sym] = args.first
+				self[name.to_s.sub(/=$/, '').to_s] = args.first
 			else
-				return self[name.to_sym]
+				return self[name.to_s]
 			end
 		end
 	end

@@ -7,7 +7,7 @@
 	<p>
 		<%= f.label :game_id, "Select a game type" %>
 		<%= f.select(:game_id, Game.all.map{|game| [game.name, game.id]}) %>
-		<%= submit_tag("Select", :class => "btn") %>
+		<%= f.submit("Select") %>
 	</p>
 
 	<% if @tournament.game.nil? %>
@@ -60,32 +60,31 @@
 
 	<fieldset><legend style="color:rgb(221, 145, 37)">Settings</legend>
 	<%= f.fields_for :settings do |setting_fields| %>
-		<% (@tournament.settings.empty? ? @tournament.game.settings : @tournament.settings).each do |setting| %><p>
-			<% name = setting.name.parameterize.underscore %>
-			<%= setting_fields.label name %>
+		<% @tournament.tournament_settings.each do |setting| %><p>
+			<%= setting_fields.label setting.name %>
 			<br>
 			<% case setting.vartype %>
 			<% when 0 %>
-				<%= setting_fields.text_field( name ) %>
+				<%= setting_fields.text_field( setting.name ) %>
 			<% when 1 %>
-				<%= setting_fields.text_area( name ) %>
+				<%= setting_fields.text_area( setting.name ) %>
 			<% when 2 %>
 				<ul>
 				<% setting.type_opt.split(',').each do |option|%>
-					<li><label><%= setting_fields.radio_button( name, option ) %><%= option %></label></li>
+					<li><label><%= setting_fields.radio_button( setting.name, option ) %><%= option.humanize %></label></li>
 				<% end %>
 				</ul>
 			<% when 3 %>
 				<ul>
 				<% setting.type_opt.split(',').each do |option|%>
-					<li><label><%= check_box_tag(name, value = option, checked = false, options = {}) %><%= option %></label></li>
+					<li><label><%= check_box_tag("tournament[settings][#{setting.name}][]", option, setting.value.split(',').include?(option)) %><%= option.humanize %></label></li>
 				<% end %>
 				</ul>
 			<% when 4 %>
-				<%= setting_fields.radio_button( name, "true" ) %> True
-				<%= setting_fields.radio_button( name, "false" ) %> False
+				<%= setting_fields.radio_button( setting.name, "true" ) %> True
+				<%= setting_fields.radio_button( setting.name, "false" ) %> False
 			<% when 5 %>
-				<%= setting_fields.select( name, setting.type_opt.split(',') ) %>
+				<%= setting_fields.select( setting.name, setting.type_opt.split(',') ) %>
 			<% end %>
 		</p><% end %>
 	<% end %>
@@ -93,8 +92,8 @@
 
 	<%= f.fields_for :stages do |stages_fields| %><fieldset><legend style="color:rgb(221, 145, 37)">Stages</legend>
 		<label for="num_stages">Number of tournament stages</label>
-		<input type="number" name="num_stages" min="1" value="<%= params[:num_stages] ? params[:num_stages].to_i : 1 %>">
-		<%# submit_tag("Set Stages", :class => "btn") %>
+		<input type="number" name="num_stages" min="1" value="<%= params[:num_stages].to_i %>">
+		<%# stage_fields.submit("Set Stages") %>
 		<% for i in 1..(params[:num_stages].to_i) do %>
 			<p>
 				<%= stages_fields.fields_for i.to_s do |stage_fields| %><fieldset><legend style="color:rgb(221, 145, 37)">Stage <%= i %></legend>
