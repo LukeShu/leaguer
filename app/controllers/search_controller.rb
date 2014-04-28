@@ -1,7 +1,6 @@
 class SearchController < ApplicationController
 
 	def go
-		stringMade = false;
 		@games = Game.all
 		@query = params[:query]
 		@gametype = params[:game_type]
@@ -10,21 +9,33 @@ class SearchController < ApplicationController
 			return 
 		end
 
-		qstring = ""
-		if (!@query.empty?)
-			qstring += "name LIKE '%#{@query}%'"
-			stringMade = true
+		tour_filters = []
+		user_filters = []
+		unless @query.empty?
+			tour_filters.push(["name LIKE ?", "%#{@query}%"])
+			user_filters.push(["name LIKE ?", "%#{@query}%"])
 		end
-		if (!@gametype.nil? and !@gametype.empty?)
-			if (stringMade)
-				qstring += " AND "
+		unless @gametype.nil? or @gametype.empty?
+			tour_filters.push(["game_id = ?", @gametype])
+		end
+
+		if tour_filters.empty?
+			@tournamets = []
+		else
+			@tournaments = Tournament
+			tour_filters.each do |filter|
+				@tournaments = @tournaments.where(*filter)
 			end
-			qstring += "game_id=#{@gametype}"
 		end
 
-		@tournaments = Tournament.where(qstring)
-		@players = User.where("name LIKE '%#{@query}%'")
-
+		if user_filters.empty?
+			@players = []
+		else
+			@players = User
+			user_filters.each do |filter|
+				@players = @players.where(*filter)
+			end
+		end
 	end
 
 end
