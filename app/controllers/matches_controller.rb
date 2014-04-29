@@ -13,12 +13,6 @@ class MatchesController < ApplicationController
 	# GET /tournaments/1/matches/1
 	# GET /tournaments/1/matches/1.json
 	def show
-		if @match.tournament_stage.tournament.game_id == 1
-			file_blue = "blue.yaml"
-			file_purple = "purple.yaml"
-			@blue2 = YAML.load_file(file_blue)
-			@purp2 = YAML.load_file(file_purple)
-		end
 	end
 
 	# PATCH/PUT /tournaments/1/matches/1
