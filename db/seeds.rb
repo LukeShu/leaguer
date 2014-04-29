@@ -70,7 +70,7 @@ if Rails.env.development?
 	andrew        = User.create(name: "Andrew Murrell"    , password: "password", email: "murrel@murrel.gov"            , user_name: "ImFromNasa"         , password_confirmation: "password")
 	joey          = User.create(name: "Joseph Adams"      , password: "password", email: "alpha142@fluttershyop.com"    , user_name: "alpha142"           , password_confirmation: "password")
 	panda 	      = User.create(name: "Panda"        	  , password: "password", email: "panda@gmail.com"              , user_name: "InspectorPanderp"   , password_confirmation: "password")
-	mesa 	      = User.create(name: "Mesataki"          , password: "password", email: "mesataki@gmail.com"           , user_name: "Mesataki"           , password_confirmation: "password")
+	mesa 	      = User.create(name: "Mesataki"          , password: "password", email: "mesataki@gmail.com"           , user_name: "Mesakati"           , password_confirmation: "password")
 	guntas_league = User.create(name: "TolkiensButt"      , password: "password", email: "TolkiensButt@gmail.com"       , user_name: "TolkiensButt"       , password_confirmation: "password")
 	lyra          = User.create(name: "Lyra Heartstings"  , password: "password", email: "LyraHeartstings@gmail.com"    , user_name: "Lyra Heartstings"   , password_confirmation: "password")
 	josh_league   = User.create(name: "Josh_league"       , password: "password", email: "josh_league@gmail.com"        , user_name: "Joshoowah"          , password_confirmation: "password")
@@ -161,14 +161,14 @@ if Rails.env.development?
 	andrew.remote_usernames.create(game: league, value: {"name" => "ImFromNasa", "id" => 29782091} )
 	joey.remote_usernames.create(game: league, value: {"name" => "Alpha142", "id" => 29732514} )
 	sarah.remote_usernames.create(game: league, value: {"name" => "LittlexSurah", "id" => 30613787} )
-	mesa.remote_usernames.create(game: league, value: {"name" => "Mesataki", "id" => 37259275} )
+	mesa.remote_usernames.create(game: league, value: {"name" => "Mesakati", "id" => 51552042 } )
 	panda.remote_usernames.create(game: league, value: {"name" => "NalfeinX", "id" => 47953989} )
 	jordan.remote_usernames.create(game: league, value: {"name" => "GTBPhoenix", "id" => 29812020} )
 	josh_league.remote_usernames.create(game: league, value: {"name" => "Joshoowah", "id" => 26083333} )
 	jeff.remote_usernames.create(game: league, value: {"name" => "SenorJeffafa", "id" => 32612067} )
 	lyra.remote_usernames.create(game: league, value: {"name" => "Lyra Heartstings", "id" => 32240762} )
 
-	g.push(davis, joey, panda, mesa, josh_league, jordan, jeff, sarah, foy, andrew)
+	g.push(davis, joey, panda, mesa, lyra, jordan, jeff, sarah, foy, andrew)
 
 	custom = Tournament.create(game: league, name: "Real League Game",
 		min_players_per_team: 5, max_players_per_team: 5,
