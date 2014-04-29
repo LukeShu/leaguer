@@ -23,7 +23,6 @@ class ThrottledApiRequest < Struct.new(:api_name, :limits)
 				end
 			end
 			if sleep_for != -1
-				puts "sleeping for #{sleeping_for}"
 				sleep(sleep_for)
 			else
 				break

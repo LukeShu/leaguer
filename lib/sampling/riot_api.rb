@@ -62,10 +62,11 @@ module Sampling
 				if status[0] != "200"
 					raise "GET #{@url} => #{status.join(" ")}"
 				end
-				self.handle(data)
+				return self.handle(data)
 			end
 
 			def handle(data)
+				return true
 			end
 		end
 
@@ -176,7 +177,6 @@ module Sampling
 				super("v1.3/game/by-summoner/%{summonerId}/recent", { :summonerId => summoner["id"] })
 			end
 			def handle(data)
-				puts("handling...")
 				user = User.find(@user_id)
 				match = Match.find(@match_id)
 				if @last_game_id.nil?
@@ -191,7 +191,6 @@ module Sampling
 						end
 					end
 				end
-				puts("done handling")
 			end
 		end
 
