@@ -54,26 +54,26 @@ if Rails.env.development?
 	players_for_league.push(User.create!(name: "Kaceytron"       , password: "password", email: "Kaceytron@gmail.com"      , user_name: "Kaceytron"       ))
 
 	# Semi-real users
-	guntas   = User.create!(name: "Guntas Grewal"     , password: "password", email: "guntasgrewal@gmail.com"                 , user_name: "guntasgrewal")
-	luke     = User.create!(name: "Luke Shumaker"     , password: "password", email: "lukeshu@emacs4lyfe.com"                 , user_name: "lukeshu"     )
-	tomer    = User.create!(name: "Tomer Kimia"       , password: "password", email: "tomer@2majors4lyfe.com"                 , user_name: "tkimia"      )
-	josh     = User.create!(name: "Josh Huser"        , password: "password", email: "jhuser@iownabusiness.net"               , user_name: "WinterWorks" )
-	dunsmore = User.create!(name: "Professor Dunsmore", password: "password", email: "bxd@purdue.edu"                         , user_name: "Dumbledore"  )
-	marco    = User.create!(name: "Marco Polo"        , password: "password", email: "marco@ta4lyfe.com"                      , user_name: "iCoordinate" )
-	jordan   = User.create!(name: "Geoffrey Webb"     , password: "password", email: "imnotjoffreybarathian@gameofthrones.com", user_name: "GTBPhoenix"  )
-	obama    = User.create!(name: "Obama"             , password: "password", email: "obama@whitehouse.gov"                   , user_name: "Obama"       )
+	guntas   = User.create(name: "Guntas Grewal"     , password: "password", email: "guntasgrewal@gmail.com"                 , user_name: "guntasgrewal")
+	luke     = User.create(name: "Luke Shumaker"     , password: "password", email: "lukeshu@emacs4lyfe.com"                 , user_name: "lukeshu"     )
+	tomer    = User.create(name: "Tomer Kimia"       , password: "password", email: "tomer@2majors4lyfe.com"                 , user_name: "tkimia"      )
+	josh     = User.create(name: "Josh Huser"        , password: "password", email: "jhuser@iownabusiness.net"               , user_name: "WinterWorks" )
+	dunsmore = User.create(name: "Professor Dunsmore", password: "password", email: "bxd@purdue.edu"                         , user_name: "Dumbledore"  )
+	marco    = User.create(name: "Marco Polo"        , password: "password", email: "marco@ta4lyfe.com"                      , user_name: "iCoordinate" )
+	jordan   = User.create(name: "Geoffrey Webb"     , password: "password", email: "imnotjoffreybarathian@gameofthrones.com", user_name: "GTBPhoenix"  )
+	obama    = User.create(name: "Obama"             , password: "password", email: "obama@whitehouse.gov"                   , user_name: "Obama"       )
 
-	davis         = User.create!(name: "Davis Webb"        , password: "password", email: "davislwebb@gmail.com"         , user_name: "TeslasMind"      )
-	foy           = User.create!(name: "Nathaniel Foy"     , password: "password", email: "nfoy@purdue.edu"              , user_name: "NalfeinX"        )
-	andrew        = User.create!(name: "Andrew Murrell"    , password: "password", email: "murrel@murrel.gov"            , user_name: "ImFromNasa"      )
-	joey          = User.create!(name: "Joseph Adams"      , password: "password", email: "alpha142@fluttershyop.com"    , user_name: "alpha142"        )
-	panda 	      = User.create!(name: "Panda"             , password: "password", email: "panda@gmail.com"              , user_name: "InspectorPanderp")
-	mesa 	      = User.create!(name: "Mesataki"          , password: "password", email: "mesataki@gmail.com"           , user_name: "Mesataki"        )
-	guntas_league = User.create!(name: "TolkiensButt"      , password: "password", email: "TolkiensButt@gmail.com"       , user_name: "TolkiensButt"    )
-	lyra          = User.create!(name: "Lyra Heartstings"  , password: "password", email: "LyraHeartstings@gmail.com"    , user_name: "Lyra Heartstings")
-	josh_league   = User.create!(name: "Josh_league"       , password: "password", email: "josh_league@gmail.com"        , user_name: "Joshoowah"       )
-	jeff 		  = User.create!(name: "Jeff Linguinee"    , password: "password", email: "jefflingueeneeeee@gmail.com"  , user_name: "SenorJeffafa"    )
-	sarah         = User.create!(name: "Sarah Lawson"      , password: "password", email: "sarah@gmail.com"              , user_name: "LittlexSurah"    )
+	davis         = User.create(name: "Davis Webb"        , password: "password", email: "davislwebb@gmail.com"         , user_name: "TeslasMind"         )
+	foy           = User.create(name: "Nathaniel Foy"     , password: "password", email: "nfoy@purdue.edu"              , user_name: "NalfeinX"           )
+	andrew        = User.create(name: "Andrew Murrell"    , password: "password", email: "murrel@murrel.gov"            , user_name: "ImFromNasa"         )
+	joey          = User.create(name: "Joseph Adams"      , password: "password", email: "alpha142@fluttershyop.com"    , user_name: "alpha142"           )
+	panda 	      = User.create(name: "Panda"        	  , password: "password", email: "panda@gmail.com"              , user_name: "InspectorPanderp"   )
+	mesa 	      = User.create(name: "Mesataki"          , password: "password", email: "mesataki@gmail.com"           , user_name: "Mesakati"           )
+	guntas_league = User.create(name: "TolkiensButt"      , password: "password", email: "TolkiensButt@gmail.com"       , user_name: "TolkiensButt"       )
+	lyra          = User.create(name: "Lyra Heartstings"  , password: "password", email: "LyraHeartstings@gmail.com"    , user_name: "Lyra Heartstings"   )
+	josh_league   = User.create(name: "Josh_league"       , password: "password", email: "josh_league@gmail.com"        , user_name: "Joshoowah"          )
+	jeff 		  = User.create(name: "Jeff Linguinee"    , password: "password", email: "jefflingueeneeeee@gmail.com"  , user_name: "SenorJeffafa"       )
+	sarah         = User.create(name: "Sarah Lawson"      , password: "password", email: "sarah@gmail.com"              , user_name: "LittlexSurah"       )
 
 	# League of Legends tournament
 	league_tourn = Tournament.create!(
@@ -172,18 +172,19 @@ if Rails.env.development?
 	hearth.join(foy)
 
 	#THE REAL GAME WE ARE PLAYING AT 10
-	davis.remote_usernames.create!(      game: league, value: {"name" => "TeslasMind"      , "id" => 30533514} )
-	foy.remote_usernames.create!(        game: league, value: {"name" => "NalfeinX"        , "id" => 29538130} )
-	andrew.remote_usernames.create!(     game: league, value: {"name" => "ImFromNasa"      , "id" => 29782091} )
-	joey.remote_usernames.create!(       game: league, value: {"name" => "Alpha142"        , "id" => 29732514} )
-	sarah.remote_usernames.create!(      game: league, value: {"name" => "LittlexSurah"    , "id" => 30613787} )
-	mesa.remote_usernames.create!(       game: league, value: {"name" => "Mesataki"        , "id" => 37259275} )
-	panda.remote_usernames.create!(      game: league, value: {"name" => "NalfeinX"        , "id" => 47953989} )
-	jordan.remote_usernames.create!(     game: league, value: {"name" => "GTBPhoenix"      , "id" => 29812020} )
-	josh_league.remote_usernames.create!(game: league, value: {"name" => "Joshoowah"       , "id" => 26083333} )
-	jeff.remote_usernames.create!(       game: league, value: {"name" => "SenorJeffafa"    , "id" => 32612067} )
-	lyra.remote_usernames.create!(       game: league, value: {"name" => "Lyra Heartstings", "id" => 32240762} )
-	g = [davis, joey, panda, mesa, josh_league, jordan, jeff, sarah, foy, andrew]
+	davis.remote_usernames.create(      game: league, value: {"name" => "TeslasMind"      , "id" => 30533514} )
+	foy.remote_usernames.create(        game: league, value: {"name" => "NalfeinX"        , "id" => 29538130} )
+	andrew.remote_usernames.create(     game: league, value: {"name" => "ImFromNasa"      , "id" => 29782091} )
+	joey.remote_usernames.create(       game: league, value: {"name" => "Alpha142"        , "id" => 29732514} )
+	sarah.remote_usernames.create(      game: league, value: {"name" => "LittlexSurah"    , "id" => 30613787} )
+	mesa.remote_usernames.create(       game: league, value: {"name" => "Mesakati"        , "id" => 51552042} )
+	panda.remote_usernames.create(      game: league, value: {"name" => "NalfeinX"        , "id" => 47953989} )
+	jordan.remote_usernames.create(     game: league, value: {"name" => "GTBPhoenix"      , "id" => 29812020} )
+	josh_league.remote_usernames.create(game: league, value: {"name" => "Joshoowah"       , "id" => 26083333} )
+	jeff.remote_usernames.create(       game: league, value: {"name" => "SenorJeffafa"    , "id" => 32612067} )
+	lyra.remote_usernames.create(       game: league, value: {"name" => "Lyra Heartstings", "id" => 32240762} )
+
+	g = [davis, joey, panda, mesa, lyra, jordan, jeff, sarah, foy, andrew]
 
 	custom = Tournament.create!(
 		game: league,
