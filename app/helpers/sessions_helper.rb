@@ -2,25 +2,24 @@ require 'user'
 
 module SessionsHelper
 	def sign_in(user)
-		@session = Session.new(user: user)
-		raw_token = @session.create_token
-		@session.save # FIXME: error handling
+		session = Session.new(user: user)
+		raw_token = session.create_token
+		session.save!
 
-		@token = Session.hash_token(raw_token)
+		token = Session.hash_token(raw_token)
 		cookies.permanent[:remember_token] = { value: raw_token, expires: 20.minutes.from_now.utc }
-
-		#set the current user to be the given user
-		@current_user = user
 	end
 
-	# sets the @current_user instance virable to the user corresponding
+	def current_session
+		Session.find_by(token: Session.hash_token(cookies[:remember_token]))
+	end
+
+	# sets the @current_user instance varable to the user corresponding
 	# to the remember token, but only if @current_user is undefined
 	# since the remember token is hashed, we need to hash the cookie
 	# to find match the remember token
 	def current_user
-		@token ||= Session.hash_token(cookies[:remember_token])
-		@session ||= Session.find_by(token: @token)
-		@current_user ||= (@session.nil? ? User::NilUser.new : @session.user)
+		return (current_session.nil? ? User::NilUser.new : current_session.user)
 	end
 
 	# checks if someone is currently signed in
@@ -30,9 +29,8 @@ module SessionsHelper
 
 	def sign_out
 		if signed_in?
-			@session.destroy
+			current_session.destroy
 		end
-		@current_user = User::NilUser.new
 		cookies.delete(:remember_token)
 	end
 

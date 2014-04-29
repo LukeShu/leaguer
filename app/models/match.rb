@@ -19,7 +19,7 @@ class Match < ActiveRecord::Base
 	# such that the match may be considered finished.
 	def finished?
 		ok = true
-		tournament_stage.scoring.stats_needed.each do |stat|
+		tournament_stage.scoring.stats_needed(self).each do |stat|
 			self.users.each do |user|
 				ok &= statistics.where(match: self, user: user, name: stat)
 			end
@@ -87,7 +87,7 @@ class Match < ActiveRecord::Base
 	def figure_sampling_methods
 		if @sampling_methods.nil?
 			data = {}
-			needed = self.tournament_stage.scoring.stats_needed
+			needed = self.tournament_stage.scoring.stats_needed(self)
 			methods_names = self.tournament_stage.tournament.sampling_methods
 			methods_names.each do |method_name|
 				method_class = "Sampling::#{method_name.camelcase}".constantize
