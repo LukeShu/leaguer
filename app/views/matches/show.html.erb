@@ -5,7 +5,7 @@
 </p>
 <p>
 	<strong>Tournament stage:</strong>
-	<%= @match.tournament_stage %>
+	<%= @tournament.stages.order(:id).index(@match.tournament_stage)+1 %>
 </p>
 
 <%#
