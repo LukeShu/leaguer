@@ -5,7 +5,7 @@ module Sampling
 		end
 
 		def self.can_get?(setting_name)
-			return setting_name.start_with?("feedback_from_") ? 2 : 0
+			return setting_name.start_with?("review_from_") ? 2 : 0
 		end
 
 		def self.uses_remote?
@@ -33,7 +33,7 @@ module Sampling
 		def render_user_interaction(user)
 			@user = user
 			@team = get_team(match)
-			@feedbacks_missing = get_feedbacks_missing(match)
+			@reviews_missing = get_reviews_missing(match)
 
 			require 'erb'
 			erb_filename = File.join(__FILE__.sub(/\.rb$/, '.html.erb'))
@@ -46,7 +46,7 @@ module Sampling
 			i = 0
 			params[:peer_review].to_s.split(',').each do |user_name|
 				reviewed_user = User.find_by_user_name(user_name)
-				user.statistics.create(match: @match, value: i)
+				reviewed_user.statistics.create(match: @match, name: "review_from_#{reviewing_user.user_name}", value: i)
 				i += 1
 			end
 		end
@@ -63,24 +63,24 @@ module Sampling
 			match.teams.find{|t|t.users.include?(@user)}
 		end
 
-		def self.get_feedbacks(match)
+		def self.get_reviews(match)
 			ret = {}
-			match.statistiscs.where("'name' LIKE 'feedback_from_%'").each do |statistic|
+			match.statistiscs.where("'name' LIKE 'review_from_%'").each do |statistic|
 				ret[statistic.user] ||= {}
-				ret[statistic.user][User.find_by_user_name(statistic.name.sub(/^feedback_from_/,''))] = statistic.value
+				ret[statistic.user][User.find_by_user_name(statistic.name.sub(/^review_from_/,''))] = statistic.value
 			end
 			return ret
 		end
 
-		def self.get_feedbacks_missing(match)
+		def self.get_reviews_missing(match)
 			require 'set'
 			ret = Set.new
 
-			feedback = get_feedbacks(match)
+			review = get_reviews(match)
 			users = get_users(match)
 
-			feedback.each do |feedback|
-				(users - feedback.keys).each do |user|
+			review.each do |review|
+				(users - review.keys).each do |user|
 					ret.add(user)
 				end
 			end
