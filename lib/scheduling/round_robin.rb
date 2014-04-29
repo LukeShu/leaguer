@@ -20,7 +20,7 @@ module Scheduling
 
 			# => Create new matches
 			@matches_per_round.times do
-				tournament_stage.matches.create(status: 0, submitted_peer_evaluations: 0)
+				tournament_stage.matches.create
 			end
 
 			# => seed the first time

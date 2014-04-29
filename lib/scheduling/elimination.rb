@@ -11,7 +11,7 @@ module Scheduling
 			num_teams = (tournament.players.count/tournament.min_players_per_team).floor
 			num_matches = (Float(num_teams -  tournament.min_teams_per_match)/(tournament.min_teams_per_match - 1)).ceil + 1
 			for i in 1..num_matches
-				tournament_stage.matches.create(status: 0, submitted_peer_evaluations: 0)
+				tournament_stage.matches.create
 			end
 
 			match_num = num_matches-1
