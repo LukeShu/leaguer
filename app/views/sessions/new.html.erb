@@ -1,23 +1,26 @@
 <h1>Sign in</h1>
-<% if @user.nil? %>
-  <p class="errors"> The email/username or password is incorrect. Verify that CAPS LOCK is not on, and then retype the current email/username and password. </p>
-<% end %>
 
-  <div class="span6 offset3">
-    <%= form_for(:session, url: sessions_path) do |f| %>
-    <p>
-      <%= f.label(:username_or_email, "Username/Email") %><br/>
-      <%= f.text_field :username_or_email%>
-    </p>
-    <p>
-      <%= f.label :password %><br/>
-      <%= f.password_field :password %>
-    </p>
-    <p>
-      <%= f.submit "Log in", class: "signin" %>
-    </p>
-    <% end %>
+<div>
+	<%= form_tag(sessions_path, method: :post, id: :new_session) do %>
+		<% if params[:action] == "create" %>
+			<div id="error_explanation">
+				<p>The username/password pair you entered did
+				not match our records.  Check your typing and
+				try again.</p>
+			</div>
+		<% end %>
+		<p>
+			<%= label_tag(:username_or_email, "Username/Email") %><br/>
+			<%= text_field_tag(:username_or_email) %>
+		</p>
+		<p>
+			<%= label_tag(:password) %><br/>
+			<%= password_field_tag(:password) %>
+		</p>
+		<p>
+			<%= submit_tag("Log in", class: :signin) %>
+		</p>
+	<% end %>
 
-    <p>New user? <%= link_to("Sign up now!", new_user_path) %></p>
-  </div>
-
+	<p>New user? <%= link_to("Sign up now!", new_user_path) %></p>
+</div>

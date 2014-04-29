@@ -2,26 +2,24 @@ class SessionsController < ApplicationController
 
 	# GET /sessions/new
 	def new
-		@user = User.new
-		#@session = Session.new
 	end
 
 	# POST /sessions
 	# POST /sessions.json
 	def create
 		# find the user...
-		@user = User.find_by_email(params[:session][:username_or_email]) || User.find_by_user_name(params[:session][:username_or_email])
+		user = User.find_by_email(params[:username_or_email].to_s) || User.find_by_user_name(params[:username_or_email].to_s)
 
 		#@session = Session.new(@user)
 		# ... and create a new session
 		respond_to do |format|
-			if @user && @user.authenticate(params[:session][:password])
-				sign_in @user
-				format.html { redirect_to root_path }
+			if user && user.authenticate(params[:password].to_s)
+				sign_in user
+				format.html { redirect_to root_path, notice: "Welcome, #{user.name}" } # TODO; previous URL
 				#format.json { # TODO }
 			else
 				format.html { render action: 'new' }
-				format.json { render json: @user.errors, status: :unprocessable_entity }
+				format.json { render json: user.errors, status: :unprocessable_entity }
 			end
 		end
 	end
@@ -38,14 +36,23 @@ class SessionsController < ApplicationController
 	end
 
 	private
-	# Use callbacks to share common setup or constraints between actions.
-	def set_session
-		@token = Session.hash_token(cookies[:remember_token])
-		@session = Session.find_by(token: @token)
+
+	# Only allow creating a session if not logged in.
+	def check_create
+		unless current_user.nil?
+			respond_to do |format|
+				format.html { redirect_to root_path, notice: "You are already logged in" } # TODO: previous URL
+				format.json { render json: {"errors" => ["already logged in"]}, status: :forbidden }
+			end
+		end
 	end
 
-	# Never trust parameters from the scary internet, only allow the white list through.
-	def session_params
-		params.require(:session).permit(:session_email, :session_user_name, :session_password)
+	def check_delete
+		unless signed_in?
+			respond_to do |format|
+				format.html { redirect_to root_path, notice: "You are not logged in" } # TODO: previous URL
+				format.json { render json: {"errors" => ["not logged in"]}, status: :forbidden }
+			end
+		end
 	end
 end
