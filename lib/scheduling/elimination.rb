@@ -38,9 +38,6 @@ module Scheduling
 
 		def finish_match(match)
 			require 'pp'
-			puts('>'*80)
-			pp match
-			puts('>'*80)
 			logBase = match.tournament_stage.tournament.min_teams_per_match
 			matches = match.tournament_stage.matches_ordered
 			cur_match_num = matches.invert[match]
@@ -48,10 +45,10 @@ module Scheduling
 				match.winner.matches.push(matches[(cur_match_num+logBase-2)/logBase])
 			end
 			if matches[(cur_match_num+logBase-2)/logBase].teams.count == match.tournament_stage.tournament.min_teams_per_match
-				puts(80*'><')
-				puts "making the status 1"
-				puts(80*'><')
-				matches[(cur_match_num+logBase-2)/logBase].status = 1
+				puts(">"*80)
+				pp matches[(cur_match_num+logBase-2)/logBase].status
+				matches[(cur_match_num+logBase-2)/logBase].update(status: 1)
+				puts(">"*80)
 			end
 		end
 
