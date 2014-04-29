@@ -52,13 +52,11 @@ class TournamentsController < ApplicationController
 	# POST /tournaments
 	# POST /tournaments.json
 	def create
-		@tournament = Tournament.new(tournament_attribute_params)
-		@tournament.status = 0
 		ok = true
 		begin
 			ActiveRecord::Base.transaction do
+				ok &= @tournament = Tournament.new(tournament_attribute_params.merge({hosts: [current_user]}))
 				ok &= @tournament.update(tournament_setting_params)
-				ok &= @tournament.hosts.push(current_user)
 				for i in 1..(params[:num_stages].to_i) do
 					begin
 						ok &= @tournament.stages.build(tournament_stage_params(i))
