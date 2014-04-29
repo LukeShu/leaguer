@@ -2,14 +2,11 @@
 
 <h4> Make your prediction for the tournament by clicking on the teams you think will win </h4>
 
-<% @bracket.bracket_matches.each do |m| %>
-	<p><b><%= m.match.id %></b></p>
-<% end %>
 
-<svg version="1.1" baseProfile="full"
+<svg id="prediction-svg" version="1.1" baseProfile="full"
 	xmlns="http://www.w3.org/2000/svg"
 	xmlns:xlink="http://www.w3.org/1999/xlink"
-	width="100%" height=<%= "#{@height}"%>>
+	width="100%" height=<%= "#{@height * 0.66}"%>>
 	<defs>
 	<radialGradient id="gradMatch" cx="50%" cy="50%" r="80%" fx="50%" fy="50%">
 	<stop offset="0%" style="stop-color:#fff; stop-opacity:1" />
@@ -17,8 +14,39 @@
 	</radialGradient>
 	</defs>
   <script type="text/ecmascript"><![CDATA[
-      function redirect(i){
-        window.location.replace("<%= request.original_url %>"+"/"+i);
+      <%#
+        This method does two things:
+        1) fill out hidden form with id of matchNum
+        2) calculate where the next text is going, and place it there
+      %>
+      function chooseWinner(matchNum, teamNum, currentBox){
+        console.log(matchNum, teamNum);
+        $id = '#match-'+matchNum+'-pred';
+        $($id).val(teamNum);
+
+        if (matchNum != 1) {
+          $parent = parseFloat(matchNum+<%= @logBase%> -2)/<%=@logBase%>;
+          $textBox = ($parent - Math.floor($parent)) * <%= @logBase %>;
+          $parent = Math.floor($parent);
+          $textBox = Math.round($textBox);
+          $id = "#svg-match-"+$parent+"-team-"+$textBox;
+
+          console.log($id);
+
+          $($id).text("Team "+teamNum);
+          $($id).attr("onclick", "chooseWinner("+$parent+", "+teamNum+", "+$textBox+")");
+        }
+        else
+        {
+          console.log("final countdown");
+          for(var i = 0; i < 3; i++){
+            $id = "#svg-match-"+matchNum+"-team-"+i;
+            $($id).attr("fill", "black");
+          }
+          $id = "#svg-match-"+matchNum+"-team-"+currentBox;
+          $($id).attr("fill", "green");
+          $("#bracket-submit").prop('disabled', false);
+        }
       }
     ]]>
   </script>
@@ -36,34 +64,23 @@
       y="<%= ry = 100/(@logBase**(matchDepth-1)+1) * (i-@base+1) - rh/2 %>%"
       fill="url(#gradMatch)"
       rx="5px"
-      stroke-width="2"
-      <% case @matches[i].status %>
-      <% when 0 %>
-        <% if @matches[i].teams.count < @tournament.min_teams_per_match %>
-          stroke="red"
-          fill-opacity="0.6"
-        <% else %>
-          stroke="green"
-        <% end %>
-      <% when 1 %>
-      stroke="orange"
-      <% when 2 %>
-      stroke="yellow"
-      <% when 3 %>
-      stroke="grey"
-      <% end %>
+      stroke="black"
     />
 
     <% t = 1
 	while t <= @numTeams %>
-	    <rect width="<%= rw-5 %>%" height="<%= rh*Float(30)/(@matchHeight) %>%" x="<%= rx + 2.5 %>%" y="<%= ry + (Float(t-1)/@numTeams)*rh + 1 %>%" fill="<%= @matches[i].teams[t-1] and @matches[i].teams[t-1].include?(current_user) ? "#5BC0DE" : "white" %>" onclick="chooseWinner(<%= @matches[i].id,  %>)" />
-	    <text x="<%= rx + rw/4 %>%" y="<%= ry + (Float(t-1)/@numTeams + Float(33)/(@matchHeight))*rh %>%" font-size="200%">
+	    <rect width="<%= rw-5 %>%" height="<%= rh*Float(30)/(@matchHeight) %>%" x="<%= rx + 2.5 %>%" y="<%= ry + (Float(t-1)/@numTeams)*rh + 1 %>%" fill="white" />
+	    <text id="svg-match-<%= i %>-team-<%= t-1 %>" x="<%= rx + rw/4 %>%" y="<%= ry + (Float(t-1)/@numTeams + Float(33)/(@matchHeight))*rh %>%" font-size="150%" 
+        <% if @matches[i].teams[t-1] %>
+          onclick="chooseWinner(<%= @matches[i].id%>, <%= @matches[i].teams[t-1].id %>)"
+          <% end %>
+          >
 	      <% if @matches[i].teams[t-1] %>
 	      Team <%= @matches[i].teams[t-1].id %>
 	      <% end %>
 	    </text>
 	    <% if (t < @numTeams) %>
-			<text x="<%= rx + 1.3*rw/3 %>%" y="<%= ry + (Float(t)/@numTeams)*rh + 1%>%" font-size="200%"> VS </text>
+			<text x="<%= rx + 1.3*rw/3 %>%" y="<%= ry + (Float(t)/@numTeams)*rh + 1%>%" font-size="150%"> VS </text>
 		<% end %>
 		<% t = t + 1 %>
     <% end %>
@@ -79,5 +96,13 @@
 
   <% end %>
 </SVG>
+
+<%= form_tag(tournament_bracket_path(@tournament, @bracket), method: 'put') do %>
+  <input type="hidden" name="update_action" value="predict">
+  <% for i in 1..@matches.length %>
+    <%= hidden_field_tag('match-'+@matches[i].id.to_s+'-pred', value = nil) %>
+  <% end %>
+  <%= submit_tag("Sumit Prediction", disabled: true, id: "bracket-submit") %>
+<% end %>
 
 <%= link_to 'Back', tournaments_path %>
