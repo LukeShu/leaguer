@@ -2,7 +2,7 @@
 	<input type="hidden" name="update_action" value="finish" >
 	<% @match.teams.each do |team| %>
 		<label>
-			<input type="radio", name="winner", value="<%= team.id %>" >
+			<input type="radio", name="win", value="<%= team.id %>" >
 			<%= "Team #{team.id} Won" %>
 		</label>
 	<% end %>

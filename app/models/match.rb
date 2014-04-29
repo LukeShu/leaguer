@@ -7,8 +7,8 @@ class Match < ActiveRecord::Base
 
 	def finished?
 		ok = true
-		tournament_stage.scoring_method.stats_needed.each do |stat|
-			ok &= statistics.where(match: self, name: stat).nil?
+		tournament_stage.scoring.stats_needed.each do |stat|
+			ok &= !statistics.where(match: self, name: stat).nil?
 		end
 		ok
 	end
