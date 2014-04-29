@@ -33,7 +33,8 @@
 			<% elsif target.players.include?(current_user)%>
 				<p class="message">You've signed up for this tournament!</p>
 			<% end %>
-			<% if target.status == 1 && target.stages.order(:id).first.scheduling_method == "elimination" && target.stages.order(:id).first.matches.order(:id).first.status < 2 %>
+			<% @user_bracket = target.brackets.find_by(user: current_user) %>
+			<% if target.status == 1 && target.stages.order(:id).first.scheduling_method == "elimination" && target.stages.order(:id).first.matches.order(:id).first.status < 2 && !@user_bracket %>
 				<%= form_tag(tournament_brackets_path(target), method: "post") do %>
 					<%= submit_tag("Make Bracket") %>
 				<% end %>
