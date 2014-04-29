@@ -11,7 +11,8 @@ class BracketsController < ApplicationController
 	# GET /brackets/1
 	# GET /brackets/1.json
 	def show
-		@matches = @tournament.stages.first.matches_ordered
+		@results = (@tournament.status == 4)? @bracket.calcResult : nil;
+		@matches = @tournament.stages.order(:id).first.matches_ordered
 		@numTeams = @tournament.min_teams_per_match
 		@logBase = @numTeams
 			
@@ -53,11 +54,11 @@ class BracketsController < ApplicationController
 	# PATCH/PUT /brackets/1.json
 	def update
 		respond_to do |format|
-			if @bracket.update(bracket_params)
-				format.html { redirect_to @tournament, notice: 'Bracket was successfully updated.' }
+			if @bracket.predict_winners(prediction_params)
+				format.html { redirect_to @tournament, notice: 'Your bracket was made! Check back when this stage finishes to see how you did!' }
 				format.json { head :no_content }
 			else
-				format.html { render action: 'edit' }
+				format.html { redirect_to @tournament, notice: 'bracket was not made... :('}
 				format.json { render json: @bracket.errors, status: :unprocessable_entity }
 			end
 		end
@@ -86,7 +87,19 @@ class BracketsController < ApplicationController
 
 	# Never trust parameters from the scary internet, only allow the white list through.
 	def bracket_params
+		# bracket[user_id]
+		# bracket[tournament_id]
+		# bracket[name]
+		# bracket[matches][#{i}]
 		params.require(:bracket).permit(:user_id, :tournament_id, :name)
+	end
+
+	def prediction_params
+		require 'pp'
+		puts "<params"+"<"*80
+		pp params
+		puts ">"*80
+		params.require(:bracket).require(:matches)
 	end
 
 	def is_owner?(bracket)

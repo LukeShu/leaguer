@@ -46,6 +46,12 @@ class Match < ActiveRecord::Base
 		return html.html_safe
 	end
 
+	def start_sampling
+		method_classes.each do |klass|
+			klass.new(self).start
+		end
+	end
+
 	private
 	def figure_sampling_methods
 		if @sampling_methods.nil?

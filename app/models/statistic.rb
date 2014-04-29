@@ -16,7 +16,7 @@ class Statistic < ActiveRecord::Base
 
 	after_save :update_match
 	def update_match
-		if (self.name == "win") and (self.value > 0)
+		if (self.name == "win") and (self.value)
 			self.match.winner = self.match.teams.find{|t| t.users.include? self.user}
 		end
 		if 	(self.match.status == 2) and (self.match.finished?)

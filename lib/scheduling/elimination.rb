@@ -52,6 +52,7 @@ module Scheduling
 			# height of SVG
 			matchHeight = 50*logBase;
 			height = [(matchHeight+50) * logBase**(depth-1) + 100, 500].max;
+			height = height/2;
 
 			str = <<-STRING
 			<svg version="1.1" baseProfile="full"
@@ -109,10 +110,10 @@ module Scheduling
 					color = (matches[i].teams[t-1] and matches[i].teams[t-1].users.include?(current_user)) ? "#5BC0DE" : "white"
 					str += "\t\t<rect width=\"#{rw-5}%\" height=\"#{rh*Float(30)/(matchHeight)}%\" x=\"#{rx + 2.5}%\" y=\"#{ry + (Float(t-1)/numTeams)*rh + 1 }%\" fill=\"#{color}\" />\n"
 					if matches[i].teams[t-1]
-						str += "\t\t<text x=\"#{rx + rw/4}%\" y=\"#{ry + (Float(t-1)/numTeams + Float(33)/(matchHeight))*rh}%\" font-size=\"200%\">Team #{matches[i].teams[t-1].id}</text>\n"
+						str += "\t\t<text x=\"#{rx + rw/4}%\" y=\"#{ry + (Float(t-1)/numTeams + Float(33)/(matchHeight))*rh}%\" font-size=\"120%\">Team #{matches[i].teams[t-1].id}</text>\n"
 					end
 					if (t < numTeams)
-						str += "\t\t<text x=\"#{rx + 1.3*rw/3}%\" y=\"#{ry + (Float(t)/numTeams)*rh + 1}%\" font-size=\"200%\"> VS </text>\n"
+						str += "\t\t<text x=\"#{rx + 1.3*rw/3}%\" y=\"#{ry + (Float(t)/numTeams)*rh + 1}%\" font-size=\"120%\"> VS </text>\n"
 					end
 					t = t + 1
 				end
