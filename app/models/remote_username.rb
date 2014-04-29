@@ -4,7 +4,7 @@ class RemoteUsername < ActiveRecord::Base
 
 	def value
 		begin
-			return JSON.parse(self.json_value)
+			return JSON::restore(self.json_value)
 		rescue
 			return {}
 		end

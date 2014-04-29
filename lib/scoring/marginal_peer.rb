@@ -1,13 +1,14 @@
 module Scoring
 	module MarginalPeer
 		def self.stats_needed
-			return [:rating]
+			return ["rating", "win"]
 		end
 
-		def self.score(match, interface)
+		def self.score(match)
 			scores = {}
-			match.players.each do |player|
-				scores[player.user_name] = interface.get_statistic(match, player, :rating)
+			match.users.each do |user|
+				stats = Statistic.where(user: user, match: match)
+				scores[user] = stats.where(name: "rating").first.value
 			end
 			scores
 		end

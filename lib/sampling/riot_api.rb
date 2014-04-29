@@ -49,7 +49,7 @@ module Sampling
 			def perform
 				response = open(@url)
 				status = response.status
-				data = JSON::parse(response.read)
+				data = JSON::restore(response.read)
 
 				# Error codes that RIOT uses:
 				#   "400"=>"Bad request"

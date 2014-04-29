@@ -26,14 +26,22 @@
 <div>
 	<h2>Teams/users</h2>
 	<ul>
+	<% if @match.status == 3
+	   	scores = @match.tournament_stage.scoring.score(@match)
+	   end
+	%>
 	<% @match.teams.each do |team| %>
 		<li>Team <%= team.id %><ul>
 			<% team.users.each do |user| %>
-				<% if @match.status <= 1 %>
+				<% if @match.status < 3 %>
 					<li><%= user.user_name %></li>
 				<% else %>
-					<% score = user.statistics.where(:name => "score", :match => @match).first %>
-					<li><%= user.user_name %> - SCORE: <%= score ? score.value : 0 %></li>
+					<% stats = Statistic.where(user: user, match: @match) %>
+					<li><%= user.user_name %> - Score: <%= scores[user] %><ul>
+						<% stats.all.reject{|s|s.name=="score"}.each do |stat| %>
+							<li><%= stat.name %>: <%= stat.value %></li>
+						<% end %>
+					</ul></li>
 				<% end %>
 			<% end %>
 		</ul></li>
