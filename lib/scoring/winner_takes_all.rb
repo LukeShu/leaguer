@@ -1,22 +1,16 @@
 module Scoring
 	module WinnerTakesAll
 		def self.stats_needed
-			#return ["win"]
-			["win", "numDeaths", "turretsKilled", "championsKilled", "minionsKilled", "assists"]
+			return ["win"]
 		end
 
 		def self.score(match)
 			scores = {}
 			match.users.each do |user|
 				stats = Statistic.where(user: user, match: match)
-				scores[user] = score_user(stats.where(name: "win").first.value)
+				scores[user] = stats.where(name: "win").first.value ? 1 : 0
 			end
 			scores
-		end
-
-		private
-		def self.score_user(win)
-			win.nil? ? 0.5 : win ? 1 : 0
 		end
 	end
 end

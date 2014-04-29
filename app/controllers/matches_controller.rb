@@ -39,7 +39,7 @@ class MatchesController < ApplicationController
 			end
 		when 2
 			# Started, waiting to finish
-			@match.handle_sampling(@current_user, params)
+			@match.handle_sampling(current_user, params)
 			# The @match.status will be updated by Statistic's after_save hook
 			if @match.status == 3
 				notice = 'Match has finished'

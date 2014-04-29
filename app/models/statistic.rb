@@ -23,8 +23,8 @@ class Statistic < ActiveRecord::Base
 				self.match.winner = self.match.teams.find{|t| t.users.include? self.user}
 			end
 			if 	(self.match.status == 2) and (self.match.finished?)
-				#self.match.tournament_stage.scoring.score(self.match)
 				self.match.status = 3
+				self.match.tournament_stage.scheduling.finish_match(self.match)
 			end
 			self.match.save!
 		end

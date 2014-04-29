@@ -20,7 +20,9 @@ class Match < ActiveRecord::Base
 	def finished?
 		ok = true
 		tournament_stage.scoring.stats_needed.each do |stat|
-			ok &= !statistics.where(match: self, name: stat).nil?
+			self.users.each do |user|
+				ok &= statistics.where(match: self, user: user, name: stat)
+			end
 		end
 		ok
 	end
@@ -46,6 +48,11 @@ class Match < ActiveRecord::Base
 	# Delagates PUT/PATCH HTTP params to the appropriate sampling
 	# methods.
 	def handle_sampling(user, params)
+		require 'pp'
+		puts('>'*80)
+		pp user
+		pp params
+		puts('<'*80)
 		method_classes.each do |klass|
 			klass.new(self).handle_user_interaction(user, params)
 		end

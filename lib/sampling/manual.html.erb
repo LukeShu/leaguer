@@ -1,12 +1,30 @@
 <% if @tournament.hosts.include? @current_user %>
-	<input type="hidden" name="update_action" value="finish" >
+	<fieldset><legend>Winner</legend>
+		<ul>
+			<% @match.teams.each do |team| %>
+				<li><label>
+					<input type="radio" name="manual[winner]" value="<%= team.id %>">
+					Team <%= team.id %>
+				</label></li>
+			<% end %>
+		</ul>
+	</fieldset>
 	<% @match.teams.each do |team| %>
-		<label>
-			<input type="radio", name="win", value="<%= team.id %>" >
-			<%= "Team #{team.id} Won" %>
-		</label>
+		<fieldset><legend>Statistics for Team <%= team.id %></legend>
+			<% team.users.each do |user| %>
+				<fieldset><legend><%= user.name %></legend>
+					<% @stats.reject{|s|s=="win"}.each do |stat| %>
+						<p>
+							<label>
+								<%= stat.titleize %>
+									<input type="numeric" name="manual[statistics][<%= user.id %>][<%= stat %>]">
+							</label>
+						</p>
+					<% end %>
+				</fieldset>
+			<% end %>
+		</fieldset>
 	<% end %>
-	<br>
 	<input type="submit", value="Finish match" >
 <% else %>
 	<p>The match is running; the host has yet to post the scores of the match.</p>

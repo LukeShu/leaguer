@@ -7,6 +7,7 @@ module Scheduling
 			@tournament_stage = tournament_stage
 		end
 
+
 		def create_matches
 			num_teams = (tournament.players.count/tournament.min_players_per_team).floor
 			num_matches = (Float(num_teams -  tournament.min_teams_per_match)/(tournament.min_teams_per_match - 1)).ceil + 1
@@ -15,29 +16,42 @@ module Scheduling
 			end
 
 			match_num = num_matches-1
-			team_num = 0
+			team_num = 1
 
 			tournament.players.shuffle
 
 			# for each grouping of min_players_per_team
 			tournament.players.each_slice(tournament.min_players_per_team) do |team_members|
+				# create a new team in the current match
+				tournament_stage.matches.order(:id)[match_num].teams.push(Team.create(users: team_members))
+
 				# if the match is full, move to the next match, otherwise move to the next team
 				if (team_num == tournament.min_teams_per_match)
+					tournament_stage.matches[match_num].update(status: 1);
 					match_num -= 1
 					team_num = 1
 				else
 					team_num += 1
 				end
-				# create a new team in the current match
-				tournament_stage.matches[match_num].teams.push(Team.create(users: team_members))
 			end
 		end
 
 		def finish_match(match)
+			require 'pp'
+			puts('>'*80)
+			pp match
+			puts('>'*80)
+			logBase = match.tournament_stage.tournament.min_teams_per_match
 			matches = match.tournament_stage.matches_ordered
 			cur_match_num = matches.invert[match]
 			unless cur_match_num == 1
-				match.winner.matches.push(matches[cur_match_num/2])
+				match.winner.matches.push(matches[(cur_match_num+logBase-2)/logBase])
+			end
+			if matches[(cur_match_num+logBase-2)/logBase].teams.count == match.tournament_stage.tournament.min_teams_per_match
+				puts(80*'><')
+				puts "making the status 1"
+				puts(80*'><')
+				matches[(cur_match_num+logBase-2)/logBase].status = 1
 			end
 		end
 
@@ -89,16 +103,16 @@ module Scheduling
 				str += "\t\t<rect height=\"#{rh}%\" width=\"#{rw}%\" x=\"#{rx}%\" y=\"#{ry}%\" fill=\"url(#gradMatch)\" rx=\"5px\" stroke-width=\"2\""
 				case matches[i].status
 				when 0
-					if matches[i].teams.count < @tournament_stage.tournament.min_teams_per_match
+					if matches[i].teams.count == 0
 						str += ' stroke="red"'
 						str += ' fill-opacity="0.6"'
 					else
-						str += ' stroke="green"'
+						str += 'stroke="orange"'
 					end
 				when 1
-					str += ' stroke="orange"'
+					str += '  stroke="green"'
 				when 2
-					str += ' stroke="yellow"'
+					str += ' stroke="lightblue"'
 				when 3
 					str += ' stroke="grey"'
 				end

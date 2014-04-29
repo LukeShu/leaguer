@@ -18,12 +18,13 @@
 				<td><%= "Match #{match.id}" %></td>
 				<td><%= match.status %></td>
 				<td><%= (match.winner.nil? ? "-" : "Team #{match.winner.id}") %></td>
-				<td><%= link_to "Show", tournament_match_path(@tournament, match) %>
-				<td> <%# If user is the host, let them start the tournment %>
-					<% if @tournament.hosts.include?(current_user) %>
+				<td><%= link_to "See Match", tournament_match_path(@tournament, match) %>
+				<td> 
+					<%# NOTE: - fix this permission, if split up by match, this does not work %>
+					<% if @tournament.check_permission(current_user, :edit) %>
 						<%= form_tag(tournament_match_path(@tournament, match), method: "put") do %>
 							<input type="hidden" name="update_action" value="start">
-							<% @startable = (match.status == 0) and (match.teams.count >= @tournament.min_teams_per_match) %>
+							<% @startable = (match.status == 1) and (match.teams.count >= @tournament.min_teams_per_match) %>
 							<%= submit_tag("Start Match", :disabled => ! @startable) %>
 						<% end %>
 					<% end %>
