@@ -1,7 +1,8 @@
 <h2><%= @bracket.name %></h2>
 
-<h4> Make your prediction for the tournament by clicking on the teams you think will win </h4>
-
+<% if !@results %>
+  <h4> Make your prediction for the tournament by clicking on the teams you think will win </h4>
+<% end %>
 
 <svg id="prediction-svg" version="1.1" baseProfile="full"
 	xmlns="http://www.w3.org/2000/svg"
@@ -71,7 +72,7 @@
 	while t <= @numTeams %>
 	    <rect width="<%= rw-5 %>%" height="<%= rh*Float(30)/(@matchHeight) %>%" x="<%= rx + 2.5 %>%" y="<%= ry + (Float(t-1)/@numTeams)*rh + 1 %>%" fill="white" />
 	    <text id="svg-match-<%= i %>-team-<%= t-1 %>" x="<%= rx + rw/4 %>%" y="<%= ry + (Float(t-1)/@numTeams + Float(33)/(@matchHeight))*rh %>%" font-size="150%" 
-        <% if @matches[i].teams[t-1] %>
+        <% if @matches[i].teams[t-1] && !@results %>
           onclick="chooseWinner(<%= @matches[i].id%>, <%= @matches[i].teams[t-1].id %>)"
           <% end %>
           >
@@ -97,12 +98,13 @@
   <% end %>
 </SVG>
 
-<%= form_tag(tournament_bracket_path(@tournament, @bracket), method: 'put') do %>
-  <input type="hidden" name="update_action" value="predict">
-  <% for i in 1..@matches.length %>
-    <%= hidden_field_tag("bracket[matches][#{@matches[i].id.to_s}]", value = nil) %>
+<% if !@results %>
+  <%= form_tag(tournament_bracket_path(@tournament, @bracket), method: 'put') do %>
+    <input type="hidden" name="update_action" value="predict">
+    <% for i in 1..@matches.length %>
+      <%= hidden_field_tag("bracket[matches][#{@matches[i].id.to_s}]", value = nil) %>
+    <% end %>
+    <%= submit_tag("Submit Prediction", disabled: true, id: "bracket-submit") %>
   <% end %>
-  <%= submit_tag("Submit Prediction", disabled: true, id: "bracket-submit") %>
 <% end %>
-
 <%= link_to 'Back', tournaments_path %>

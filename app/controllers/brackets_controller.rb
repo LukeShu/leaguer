@@ -11,6 +11,7 @@ class BracketsController < ApplicationController
 	# GET /brackets/1
 	# GET /brackets/1.json
 	def show
+		@results = (@tournament.status == 4)? @bracket.calcResult : nil;
 		@matches = @tournament.stages.order(:id).first.matches_ordered
 		@numTeams = @tournament.min_teams_per_match
 		@logBase = @numTeams

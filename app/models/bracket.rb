@@ -20,4 +20,13 @@ class Bracket < ActiveRecord::Base
 		end 
 		return true
 	end
+
+
+	def calcResults
+		results = Array.new
+		(0..bracket_matches.count-1).each do |i|
+				results.push(bracket_matches.order(:match_id)[i].predicted_winner == tournament.stages.order(:id).first.matches.order(:id).winner)
+		end 
+		return results
+	end
 end
