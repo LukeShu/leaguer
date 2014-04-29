@@ -39,7 +39,11 @@ module Sampling
 		class Job < ThrottledApiRequest
 			def initialize(request, args={})
 					@url = Sampling::RiotApi::url(request, args)
-					super(api_name, 10.seconds, 10)
+					limits = [
+						{:unit_time => 10.seconds, :requests_per => 10},
+						{:unit_time => 10.minutes, :requests_per => 500},
+					]
+					super(api_name, limits)
 			end
 
 			def perform
@@ -153,7 +157,8 @@ module Sampling
 		def start
 			@match.teams.each do |team|
 				team.users.each do |user|
-					Delayed::Job.enqueue(MatchJob.new(user, @match, @match.stats_from(self.class), nil), :queue => api_name)
+					#For demo purposes, we are hard coding in a league of legends game id.
+					Delayed::Job.enqueue(MatchJob.new(user, @match, @match.stats_from(self.class), 1362730546), :queue => api_name)
 				end
 			end
 		end
@@ -177,7 +182,7 @@ module Sampling
 					Delayed::Job.enqueue(MatchJob.new(user, match, data["games"][0]["gameId"]), :queue => api_name)
 				else
 					if @last_game_id == data["games"][0]["gameId"]
-						# TODO: perhaps insert a delay here?
+						sleep(4.minutes)
 						Delayed::Job.enqueue(MatchJob.new(user, match, @last_game_id), :queue => api_name)
 					else
 						@stats.each do |stat|

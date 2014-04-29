@@ -168,8 +168,7 @@ if Rails.env.development?
 	jeff.remote_usernames.create(game: league, value: {"name" => "SenorJeffafa", "id" => 32612067} )
 	lyra.remote_usernames.create(game: league, value: {"name" => "Lyra Heartstings", "id" => 32240762} )
 
-	g.push(davis, foy, andrew, joey, panda, mesa, jordan, jeff, sarah, josh_league)
-	#g.push(davis, foy, andrew, joey, panda, mesa, jordan, jeff, sarah, guntas_league)
+	g.push(davis, joey, panda, mesa, josh_league, jordan, jeff, sarah, foy, andrew)
 
 	custom = Tournament.create(game: league, name: "Real League Game",
 		min_players_per_team: 5, max_players_per_team: 5,
