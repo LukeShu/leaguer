@@ -55,7 +55,7 @@ bundle exec rails generate model       game_setting       game:references name:s
 bundle exec rails generate model tournament_setting tournament:references name:string vartype:integer type_opt:text description:text display_order:integer   value:text
 
 bundle exec rails generate model tournament_stage tournament:references structure:text scheduling_method:string seeding_method:string
-bundle exec rails generate model statistic user:references match:references name:string value:integer
+bundle exec rails generate model statistic user:references match:references name:string json_value:text
 
 bundle exec rails generate model remote_username game:references user:references json_value:text
 

@@ -5,7 +5,7 @@ module Sampling
 		end
 
 		def self.can_get?(setting_name)
-			return setting_name.start_with?("feedback_from_")
+			return setting_name.start_with?("feedback_from_") ? 2 : 0
 		end
 
 		def self.uses_remote?
@@ -36,10 +36,10 @@ module Sampling
 			@feedbacks_missing = get_feedbacks_missing(match)
 
 			require 'erb'
-			erb_filename = File.join(__FILE__.sub(/\.rb$/, '.svg.erb'))
+			erb_filename = File.join(__FILE__.sub(/\.rb$/, '.html.erb'))
 			erb = ERB.new(File.read(erb_filename))
 			erb.filename = erb_filename
-			return erb.result.html_safe
+			return erb.result(binding).html_safe
 		end
 
 		def handle_user_interaction(reviewing_user, params)
@@ -74,14 +74,14 @@ module Sampling
 
 		def self.get_feedbacks_missing(match)
 			require 'set'
-			ret = Set.new()
+			ret = Set.new
 
 			feedback = get_feedbacks(match)
 			users = get_users(match)
 
 			feedback.each do |feedback|
 				(users - feedback.keys).each do |user|
-					ret.push(user)
+					ret.add(user)
 				end
 			end
 

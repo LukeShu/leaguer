@@ -1,13 +1,13 @@
 module Scoring
 	module WinnerTakesAll
 		def self.stats_needed
-			return []
+			return ["win"]
 		end
 
 		def self.score(match, interface)
 			scores = {}
 			match.players.each do |player|
-				scores[player.user_name] = score_user(match.win?(player))
+				scores[player.user_name] = score_user(player.statistics.where(:match => match, :name => "win").value)
 			end
 			scores
 		end

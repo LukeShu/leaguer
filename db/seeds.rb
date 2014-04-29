@@ -54,25 +54,38 @@ if Rails.env.development?
 	players_for_league.push(User.create(name: "Kaceytron"       , password: "password", email: "Kaceytron@gmail.com"      , user_name: "Kaceytron"       , password_confirmation: "password"))
 
 	# Semi-real users
-	davis    = User.create(name: "Davis Webb"        , password: "password", email: "davislwebb@gmail.com"                   , user_name: "TeslasMind"  , password_confirmation: "password")
-	foy      = User.create(name: "Nathaniel Foy"     , password: "password", email: "nfoy@notreal.com"                       , user_name: "Nalfeinx"    , password_confirmation: "password")
 	guntas   = User.create(name: "Guntas Grewal"     , password: "password", email: "guntasgrewal@gmail.com"                 , user_name: "guntasgrewal", password_confirmation: "password")
 	luke     = User.create(name: "Luke Shumaker"     , password: "password", email: "lukeshu@emacs4lyfe.com"                 , user_name: "lukeshu"     , password_confirmation: "password")
 	tomer    = User.create(name: "Tomer Kimia"       , password: "password", email: "tomer@2majors4lyfe.com"                 , user_name: "tkimia"      , password_confirmation: "password")
-	andrew   = User.create(name: "Andrew Murrell"    , password: "password", email: "murrel@murrel.gov"                      , user_name: "ImFromNasa"  , password_confirmation: "password")
-	joey     = User.create(name: "Joseph Adams"      , password: "password", email: "alpha142@fluttershyop.com"              , user_name: "alpha142"    , password_confirmation: "password")
 	josh     = User.create(name: "Josh Huser"        , password: "password", email: "jhuser@iownabusiness.net"               , user_name: "WinterWorks" , password_confirmation: "password")
 	dunsmore = User.create(name: "Professor Dunsmore", password: "password", email: "bxd@purdue.edu"                         , user_name: "Dumbledore"  , password_confirmation: "password")
 	marco    = User.create(name: "Marco Polo"        , password: "password", email: "marco@ta4lyfe.com"                      , user_name: "iCoordinate" , password_confirmation: "password")
 	jordan   = User.create(name: "Geoffrey Webb"     , password: "password", email: "imnotjoffreybarathian@gameofthrones.com", user_name: "GTBPhoenix"  , password_confirmation: "password")
 	obama    = User.create(name: "Obama"             , password: "password", email: "obama@whitehouse.gov"                   , user_name: "Obama"       , password_confirmation: "password")
 
+	g = Array.new
+
+	davis         = User.create(name: "Davis Webb"        , password: "password", email: "davislwebb@gmail.com"         , user_name: "TeslasMind"         , password_confirmation: "password")
+	foy           = User.create(name: "Nathaniel Foy"     , password: "password", email: "nfoy@purdue.edu"              , user_name: "NalfeinX"           , password_confirmation: "password")
+	andrew        = User.create(name: "Andrew Murrell"    , password: "password", email: "murrel@murrel.gov"            , user_name: "ImFromNasa"         , password_confirmation: "password")
+	joey          = User.create(name: "Joseph Adams"      , password: "password", email: "alpha142@fluttershyop.com"    , user_name: "alpha142"           , password_confirmation: "password")
+	panda 	      = User.create(name: "Panda"        	  , password: "password", email: "panda@gmail.com"              , user_name: "InspectorPanderp"   , password_confirmation: "password")
+	mesa 	      = User.create(name: "Mesataki"          , password: "password", email: "mesataki@gmail.com"           , user_name: "Mesataki"           , password_confirmation: "password")
+	guntas_league = User.create(name: "TolkiensButt"      , password: "password", email: "TolkiensButt@gmail.com"       , user_name: "TolkiensButt"       , password_confirmation: "password")
+	lyra          = User.create(name: "Lyra Heartstings"  , password: "password", email: "LyraHeartstings@gmail.com"    , user_name: "Lyra Heartstings"   , password_confirmation: "password")
+	josh_league   = User.create(name: "Josh_league"       , password: "password", email: "josh_league@gmail.com"        , user_name: "Joshoowah"          , password_confirmation: "password")
+	jeff 		  = User.create(name: "Jeff Linguinee"    , password: "password", email: "jefflingueeneeeee@gmail.com"  , user_name: "SenorJeffafa"       , password_confirmation: "password")
+	sarah         = User.create(name: "Sarah Lawson"      , password: "password", email: "sarah@gmail.com"              , user_name: "LittlexSurah"       , password_confirmation: "password")
+
+
 	# League of Legends tournament
 	league_tourn = Tournament.create(game: league, name: "League of Legends Seed",
 		min_players_per_team: 5, max_players_per_team: 5,
 		min_teams_per_match: 2, max_teams_per_match: 2,
-		scoring_method: "TODO")
-	# TODO: create stages
+		scoring_method: "winner_takes_all")
+
+	league_tourn.stages.create(scheduling_method: "round_robin" , seeding_method: "random_seeding")
+
 	league_tourn.hosts.push(User.find(1))
 	players_for_league.each do |player|
 		league_tourn.join(player)
@@ -82,8 +95,10 @@ if Rails.env.development?
 	chess_tourn = Tournament.create(game: chess, name: "Chess Seed",
 		min_players_per_team: 1, max_players_per_team: 1,
 		min_teams_per_match: 2, max_teams_per_match: 2,
-		scoring_method: "TODO")
-	# TODO: create stages
+		scoring_method: "winner_takes_all")
+
+	chess_tourn.stages.create(scheduling_method: "round_robin" , seeding_method: "random_seeding")
+
 	chess_tourn.hosts.push(davis)
 	chess_tourn.join(davis)
 	chess_tourn.join(foy)
@@ -92,8 +107,8 @@ if Rails.env.development?
 	rps = Tournament.create(game: rockpaperscissors, name: "Rock, Paper, Scissors Seed",
 		min_players_per_team: 1, max_players_per_team: 3,
 		min_teams_per_match: 2, max_teams_per_match: 2,
-		scoring_method: "TODO")
-	rps.stages.create(scheduling_method: "elimination" , seeding_method: "random_seeding")
+		scoring_method: "winner_takes_all")
+	rps.stages.create(scheduling_method: "round_robin" , seeding_method: "random_seeding")
 	rps.hosts.push(davis)
 	rps.join(davis)
 	rps.join(foy)
@@ -103,20 +118,21 @@ if Rails.env.development?
 	tourn5 = Tournament.create(game: league, name: "5 Teams, 2 Teams Per Match",
 		min_players_per_team: 1, max_players_per_team: 1,
 		min_teams_per_match: 2, max_teams_per_match: 2,
-		scoring_method: "TODO")
+		scoring_method: "winner_takes_all")
 	tourn5.hosts.push(User.find(1))
 	players_for_league.each do |player|
 		tourn5.join(player)
 	end
-	tourn5.stages.create(scheduling_method: "elimination" , seeding_method: "random_seeding")
+	tourn5.stages.create(scheduling_method: "round_robin" , seeding_method: "random_seeding")
 
 	# Yet another League tournament
 	tourn6 = Tournament.create(game_id: 1, name: "3 teams per match",
 		min_players_per_team: 1, max_players_per_team: 1,
 		min_teams_per_match: 3, max_teams_per_match: 3,
-		scoring_method: "TODO")
+		scoring_method: "winner_takes_all")
+
 	tourn6.hosts.push(User.find(1))
-	tourn6.stages.create(scheduling_method: "elimination" , seeding_method: "random_seeding")
+	tourn6.stages.create(scheduling_method: "round_robin" , seeding_method: "random_seeding")
 	players_for_league.each do |player|
 		tourn6.join(player)
 	end
@@ -128,4 +144,44 @@ if Rails.env.development?
 	tourn6.join(jordan)
 	tourn6.join(obama)
 	tourn6.join(joey)
+
+	#Hearthstone tournament
+	hearth = Tournament.create(game: hearthstone, name: "Hearthstone Seed", min_teams_per_match: 1, min_players_per_team: 1, 
+	                           max_teams_per_match: 2, max_players_per_team: 1, scoring_method: "winner_takes_all")
+
+	hearth.join(davis)
+	hearth.join(foy)
+
+	hearth.stages.create(scheduling_method: "round_robin" , seeding_method: "random_seeding")
+
+	#THE REAL GAME WE ARE PLAYING AT 10
+	davis.remote_usernames.create(game: league, value: {"name" => "TeslasMind", "id" => 30533514} )
+	foy.remote_usernames.create(game: league, value: {"name" => "NalfeinX", "id" => 29538130} )
+	andrew.remote_usernames.create(game: league, value: {"name" => "ImFromNasa", "id" => 29782091} )
+	joey.remote_usernames.create(game: league, value: {"name" => "Alpha142", "id" => 29732514} )
+	sarah.remote_usernames.create(game: league, value: {"name" => "LittlexSurah", "id" => 30613787} )
+	mesa.remote_usernames.create(game: league, value: {"name" => "Mesataki", "id" => 37259275} )
+	panda.remote_usernames.create(game: league, value: {"name" => "NalfeinX", "id" => 47953989} )
+	jordan.remote_usernames.create(game: league, value: {"name" => "GTBPhoenix", "id" => 29812020} )
+	josh_league.remote_usernames.create(game: league, value: {"name" => "Joshoowah", "id" => 26083333} )
+	jeff.remote_usernames.create(game: league, value: {"name" => "SenorJeffafa", "id" => 32612067} )
+	lyra.remote_usernames.create(game: league, value: {"name" => "Lyra Heartstings", "id" => 32240762} )
+
+	g.push(davis, foy, andrew, joey, panda, mesa, jordan, jeff, sarah, josh_league)
+	#g.push(davis, foy, andrew, joey, panda, mesa, jordan, jeff, sarah, guntas_league)
+
+	custom = Tournament.create(game: league, name: "Real League Game",
+		min_players_per_team: 5, max_players_per_team: 5,
+		min_teams_per_match: 2, max_teams_per_match: 2,
+		scoring_method: "winner_takes_all")
+
+	custom.stages.create(scheduling_method: "round_robin" , seeding_method: "random_seeding")
+
+
+	custom.hosts.push(User.find(1))
+	g.each do |player|
+		custom.join(player)
+	end
+
 end
+

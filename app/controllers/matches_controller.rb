@@ -44,19 +44,11 @@ class MatchesController < ApplicationController
 			end
 		when 2
 			# Started, waiting to finish
-			@match.handle_sampling(params)
-			if @match.finished?
-				@match.status = 3
-				respond_to do |format|
-					if @match.save
-						format.html { redirect_to tournament_match_path(@tournament, @match), notice: 'Match has finished.' }
-						format.json { head :no_content }
-					else
-						format.html { render action: 'show' }
-						format.json { render json: @match.errors, status: :unprocessable_entity }
-					end
-				end
-				return
+			@match.handle_sampling(@current_user, params)
+			# The @match.status will be updated by Statistic's after_save hook
+			respond_to do |format|
+				format.html { redirect_to tournament_match_path(@tournament, @match), notice: 'Match has finished.' }
+				format.json { head :no_content }
 			end
 		when 3
 			if (@tournament.hosts.include? current_user) and (params[:update_action] == "start")
@@ -77,8 +69,9 @@ class MatchesController < ApplicationController
 				end
 				return
 			end
+		else
+			redirect_to tournament_match_path(@tournament, @match)
 		end
-		redirect_to tournament_match_path(@tournament, @match)
 	end
 
 	private

@@ -1,0 +1,54 @@
+commit 10f01633176ca214e7aec6be61ed3344035ec77e
+Merge: 99dff7e 20f7b74
+Author: webb39 <webb39@purdue.edu>
+Date:   Mon Mar 10 20:41:27 2014 -0400
+
+    Merge branch 'master' of https://github.com/LukeShu/Leaguer
+
+commit 99dff7e01a65986338824804651367e97a0d1923
+Merge: 1f00553 f0c03cd
+Author: webb39 <webb39@purdue.edu>
+Date:   Mon Mar 10 20:41:16 2014 -0400
+
+    Merge https://github.com/LukeShu/Leaguer
+    
+    Conflicts:
+    	doc/Sprint1-Retrospective.md
+
+commit 1f00553cbc5d281efe3ac1b434d16537a17bc969
+Author: webb39 <webb39@purdue.edu>
+Date:   Mon Mar 10 20:36:31 2014 -0400
+
+    added match controller information
+
+diff --git a/doc/Sprint1-Retrospective.md b/doc/Sprint1-Retrospective.md
+index 3da3669..ae1b07a 100644
+--- a/doc/Sprint1-Retrospective.md
++++ b/doc/Sprint1-Retrospective.md
+@@ -97,13 +97,24 @@ f
+ f
+ 
+ ## Login (UI) {#login-ui}
+-
++  
+ ## Tournament settings {#tourney-settings}
+-
++  
+ ## Tournament registration {#tourney-registration}
+ 
+ ## Match controller {#match-controller}
+ 
++The Match Controller creates the separate matches for a specific tournament.
++When a tournament is started, it begins with an initial match that contains
++no players.  Currently, a player must join a match by entering the specific
++tournament (by clicking the 'show' button on the tournament), 
++then they must enter the match (again by clicking the 'show' button but this
++time on the match they desire to participate in) and then finally clicking
++the 'join' button.  This updates the match with the user as a participant in
++the matc and then finally clicking the 'join' button.  This updates the match
++with the user as a participant in the match.  A match can also be destroyed 
++by clicking the 'delete' button on the no longer desired match on the page.
++
+ ## Permissions system {#permissions}
+ 
+ ## Tournament view {#tourney-view}

@@ -4,10 +4,10 @@ one:
   user_id: 
   match_id: 
   name: MyString
-  value: 1
+  json_value: MyText
 
 two:
   user_id: 
   match_id: 
   name: MyString
-  value: 1
+  json_value: MyText

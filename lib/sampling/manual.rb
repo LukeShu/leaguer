@@ -4,7 +4,7 @@ module Sampling
 			return true
 		end
 
-		def can_get?(setting_name)
+		def self.can_get?(setting_name)
 			return 1
 		end
 
@@ -31,15 +31,16 @@ module Sampling
 		end
 
 		def render_user_interaction(user)
+			@tournament = @match.tournament_stage.tournament
 			@current_user = user
 			@users = @match.users
 			@stats = @match.stats_from(self.class)
 
 			require 'erb'
-			erb_filename = File.join(__FILE__.sub(/\.rb$/, '.svg.erb'))
+			erb_filename = File.join(__FILE__.sub(/\.rb$/, '.html.erb'))
 			erb = ERB.new(File.read(erb_filename))
 			erb.filename = erb_filename
-			return erb.result.html_safe
+			return erb.result(binding).html_safe
 		end
 
 		def handle_user_interaction(user, sampling_params)
