@@ -1,6 +1,6 @@
 module Scoring
 	module WinnerTakesAll
-		def self.stats_needed
+		def self.stats_needed(match)
 			return ["win"]
 		end
 

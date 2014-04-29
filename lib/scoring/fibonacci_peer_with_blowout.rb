@@ -1,7 +1,7 @@
 module Scoring
 	module FibonacciPeerWithBlowout
-		def self.stats_needed
-			return ["votes", "win", "blowout"] + @match.users.map{|u|"review_from_#{u.user_name}"}
+		def self.stats_needed(match)
+			return ["votes", "win", "blowout"] + match.users.map{|u|"review_from_#{u.user_name}"}
 		end
 
 		def self.score(match)

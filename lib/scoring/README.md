@@ -4,7 +4,7 @@ Scoring interface
 Files in this directory should be _modules_ implementing the following
 interface:
 
- - `stats_needed(Match) => Array[]=Symbol`
+ - `stats_needed(Match) => Array[]=String`
 
    Returns which statistics need to be collected for this scoring
    algorithm.
