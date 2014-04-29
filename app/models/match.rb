@@ -5,6 +5,18 @@ class Match < ActiveRecord::Base
 
 	belongs_to :winner, class_name: "Team"
 
+	# status:integer
+	before_save { self.status ||= 0 }
+
+	# tournament_stage:references
+	validates_presence_of :tournament_stage
+
+	# winner:references
+	# not validated
+
+	##
+	# Returns whether or not all the statistics have been collected
+	# such that the match may be considered finished.
 	def finished?
 		ok = true
 		tournament_stage.scoring.stats_needed.each do |stat|
@@ -13,26 +25,35 @@ class Match < ActiveRecord::Base
 		ok
 	end
 
-	def win?(player)
-		winner.players.include? player
-	end
-
+	##
+	# Returns all players involved in this match (from all teams).
 	def users
 		ret = []
 		self.teams.each{|t| ret.concat(t.users)}
 		return ret
 	end
 
+	##
+	# Given a sampling class (a class that implements the interface
+	# described in `/lib/sampling/README.md`), this returns which
+	# statistics (in an Array of Strings) an instance of the class
+	# should collect.
 	def stats_from(sampling_class)
 		figure_sampling_methods.map{|stat,klass| (sampling_class==klass) ? stat : nil}.select{|s| not s.nil?}
 	end
 
+	##
+	# Delagates PUT/PATCH HTTP params to the appropriate sampling
+	# methods.
 	def handle_sampling(user, params)
 		method_classes.each do |klass|
 			klass.new(self).handle_user_interaction(user, params)
 		end
 	end
 
+	##
+	# Delagates out rendering forms to the appropriate sampling
+	# methods.
 	def render_sampling(user)
 		require 'set'
 		html = ''
@@ -46,6 +67,9 @@ class Match < ActiveRecord::Base
 		return html.html_safe
 	end
 
+	##
+	# Calls `Sampling#start` on every sampling method that this match
+	# uses.
 	def start_sampling
 		method_classes.each do |klass|
 			klass.new(self).start

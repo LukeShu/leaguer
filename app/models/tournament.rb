@@ -1,14 +1,59 @@
 class Tournament < ActiveRecord::Base
 	belongs_to :game
-	has_many :tournament_stages
-	has_many :brackets
-	has_many :tournament_settings
-	has_and_belongs_to_many :players, class_name: "User", association_foreign_key: "player_id", join_table: "players_tournaments"
-	has_and_belongs_to_many :hosts,   class_name: "User", association_foreign_key: "host_id",   join_table: "hosts_tournaments"
 
+	has_many :tournament_stages
+	# Don't validate presence of stages; sadly, it seems to break things
+	#validates_presence_of :tournament_stages
 	alias_attribute :stages, :tournament_stages
 
+	has_many :brackets
+
+	has_many :tournament_settings
+
+	has_and_belongs_to_many :players, class_name: "User", association_foreign_key: "player_id", join_table: "players_tournaments"
+
+	has_and_belongs_to_many :hosts,   class_name: "User", association_foreign_key: "host_id",   join_table: "hosts_tournaments"
+	validates_presence_of :hosts
+
+	validates_presence_of :game
+
 	before_save { self.status ||= 0 }
+
+	validates(:name,
+		presence: true,
+		length: {minimum: 5},
+		uniqueness: {case_sensitive: true})
+
+	validates(:min_players_per_team,
+		presence: true,
+		numericality: {
+			only_integer: true,
+			less_than_or_equal_to: :max_players_per_team,
+		})
+	validates(:max_players_per_team,
+		presence: true,
+		numericality: {
+			only_integer: true,
+			greater_than_or_equal_to: :min_players_per_team,
+		})
+
+	validates(:min_teams_per_match,
+		presence: true,
+		numericality: {
+			only_integer: true,
+			less_than_or_equal_to: :max_teams_per_match,
+		})
+	validates(:max_teams_per_match,
+		presence: true,
+		numericality: {
+			only_integer: true,
+			greater_than_or_equal_to: :min_teams_per_match,
+		})
+
+	validate :validate_scoring_method
+	def validate_scoring_method
+		(not self.scoring_method.try(:empty?)) and (scoring_methods.include? scoring_method)
+	end
 
 	# Settings #################################################################
 
@@ -69,16 +114,10 @@ class Tournament < ActiveRecord::Base
 		end
 	end
 
-	# Misc. ####################################################################
-
-	def open?
-		return true
-	end
-
 	# Joining/Leaving ##########################################################
 
 	def joinable_by?(user)
-		return (open? and user.can?(:join_tournament) and !players.include?(user))
+		return (status==0 and user.can?(:join_tournament) and !players.include?(user))
 	end
 
 	def join(user)
@@ -100,32 +139,42 @@ class Tournament < ActiveRecord::Base
 		@scoring ||= "Scoring::#{self.scoring_method.camelcase}".constantize
 	end
 
-	# YISSSSSS
+	# Options for configured methods/modules ###################################
+	# We're conflicted about whether these should be `self.` or not. ###########
 
-	def scoring_methods
+	def self.scoring_methods
 		make_methods "scoring"
+	end
+	def scoring_methods
+		self.class.scoring_methods
 	end
 
 	def sampling_methods
-		make_methods("sampling").select do |name|
+		self.class.make_methods("sampling").select do |name|
 			"Sampling::#{name.camelcase}".constantize.works_with?(self.game)
 		end
 	end
 
-	def scheduling_methods
+	def self.scheduling_methods
 		make_methods "scheduling"
 	end
+	def scheduling_methods
+		self.class.scheduling_methods
+	end
 
-	def seeding_methods
+	def self.seeding_methods
 		make_methods "seeding"
+	end
+	def seeding_methods
+		self.class.seeding_methods
 	end
 
 	private
-	def make_methods(dir)
-		@@methods ||= {}
-		if @@methods[dir].nil? or Rails.env.development?
-			@@methods[dir] = Dir.glob("#{Rails.root}/lib/#{dir}/*.rb").map{|filename| File.basename(filename, ".rb") }
+	def self.make_methods(dir)
+		@methods ||= {}
+		if @methods[dir].nil? or Rails.env.development?
+			@methods[dir] = Dir.glob("#{Rails.root}/lib/#{dir}/*.rb").map{|filename| File.basename(filename, ".rb") }
 		end
-		return @@methods[dir]
+		return @methods[dir]
 	end
 end

@@ -1,6 +1,16 @@
 class TournamentStage < ActiveRecord::Base
 	belongs_to :tournament
+	validates_presence_of :tournament
+
 	has_many :matches
+
+	validates(:scheduling_method,
+		presence: true,
+		inclusion: {in: Tournament.new.scheduling_methods})
+
+	validates(:seeding_method,
+		presence: true,
+		inclusion: {in: Tournament.new.seeding_methods})
 
 	# A 1-indexed hash of matches
 	def matches_ordered
