@@ -19,9 +19,9 @@ class Match < ActiveRecord::Base
 	# such that the match may be considered finished.
 	def finished?
 		ok = true
-		tournament_stage.scoring.stats_needed(self).each do |stat|
+		self.tournament_stage.scoring.stats_needed(self).each do |stat|
 			self.users.each do |user|
-				ok &= statistics.where(match: self, user: user, name: stat)
+				ok &= self.statistics.where(user: user, name: stat).first
 			end
 		end
 		ok
