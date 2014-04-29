@@ -38,6 +38,11 @@
 				<%= form_tag(tournament_brackets_path(target), method: "post") do %>
 					<%= submit_tag("Make Bracket") %>
 				<% end %>
+			<% elsif @user_bracket && target.status == 4 %>
+				<%= form_tag(tournament_bracket_path(@tournament, @bracket), method: 'put') do %>
+  					<input type="hidden" name="update_action" value="results">
+  					<%= submit_tag("Bracket Results") %>
+				<% end %>
 			<% end %>
 		<% end %>
 	</div>
