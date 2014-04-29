@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140428223939) do
+ActiveRecord::Schema.define(version: 20140429074555) do
 
   create_table "alerts", force: true do |t|
     t.integer  "author_id"
@@ -111,8 +111,6 @@ ActiveRecord::Schema.define(version: 20140428223939) do
     t.integer  "status"
     t.integer  "tournament_stage_id"
     t.integer  "winner_id"
-    t.text     "remote_id"
-    t.integer  "submitted_peer_evaluations"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

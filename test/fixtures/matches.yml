@@ -4,12 +4,8 @@ one:
   status: 1
   tournament_stage_id: 
   winner_id: 
-  remote_id: MyText
-  submitted_peer_evaluations: 1
 
 two:
   status: 1
   tournament_stage_id: 
   winner_id: 
-  remote_id: MyText
-  submitted_peer_evaluations: 1
