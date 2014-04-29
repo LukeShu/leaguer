@@ -70,8 +70,4 @@ class TeamsController < ApplicationController
 	def team_params
 		params[:team]
 	end
-
-	def is_owner?(object)
-		object.users.include?(current_user)
-	end
 end

@@ -3,6 +3,10 @@ class Bracket < ActiveRecord::Base
 	belongs_to :tournament
 	has_many :bracket_matches
 
+	def owned_by?(tuser)
+		self.user == tuser
+	end
+
 	def create_matches
 		tournament.stages.order(:id).first.matches.order(:id).each do |m|
 			bracket_matches.create(match: m)

@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
 	include SimpleCaptcha::ControllerHelpers
 
 	def check_permission(verb, object=nil)
-		unless current_user.can?((verb.to_s+"_"+noun).to_sym) or (!object.nil? and is_owner?(object))
+		unless current_user.can?("#{verb.to_s}_#{noun}".to_sym) or object.try(:check_permission, current_user, verb)
 			respond_to do |format|
 				format.html do
 					if object.nil?
@@ -46,10 +46,5 @@ class ApplicationController < ActionController::Base
 	def check_delete
 		object = send("set_"+noun)
 		check_permission(:edit, object)
-	end
-
-	# Override this
-	def is_owner?(object)
-		return false
 	end
 end

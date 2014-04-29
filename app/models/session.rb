@@ -1,6 +1,10 @@
 class Session < ActiveRecord::Base
 	belongs_to :user
 
+	def owned_by?(tuser)
+		self.user == tuser
+	end
+
 	##
 	# Create a random remember token for the user. This will be
 	# changed every time the user creates a new session.

@@ -48,8 +48,4 @@ class SessionsController < ApplicationController
 	def session_params
 		params.require(:session).permit(:session_email, :session_user_name, :session_password)
 	end
-
-	def is_owner?(object)
-		object.user == current_user
-	end
 end

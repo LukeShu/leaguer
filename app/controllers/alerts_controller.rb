@@ -73,10 +73,6 @@ class AlertsController < ApplicationController
 		@alert = Alert.find(params[:id])
 	end
 
-	def is_owner?(object)
-		object.author == current_user
-	end
-
 	# Never trust parameters from the scary internet, only allow the white list through.
 	def alert_params
 		params.require(:alert).permit(:author_id, :message)

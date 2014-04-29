@@ -210,10 +210,6 @@ class TournamentsController < ApplicationController
 		params.require(:tournament).require(:stages).require(i.to_s).permit(:scheduling_method, :seeding_method)
 	end
 
-	def is_owner?(object)
-		object.hosts.include?(current_user)
-	end
-
 	# Turn of check_edit, since our #update is flexible
 	def check_edit
 		set_tournament

@@ -93,10 +93,6 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])
 	end
 
-	def is_owner?(object)
-		object == current_user
-	end
-
 	# Never trust parameters from the scary internet, only allow the white list through.
 	def user_params
 		permitted = [ :name, :email, :user_name, :password, :password_confirmation ]

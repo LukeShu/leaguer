@@ -55,6 +55,10 @@ class Tournament < ActiveRecord::Base
 		(not self.scoring_method.try(:empty?)) and (scoring_methods.include? scoring_method)
 	end
 
+	def owned_by?(user)
+		self.hosts.include?(user)
+	end
+
 	# Settings #################################################################
 
 	def settings

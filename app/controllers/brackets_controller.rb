@@ -101,8 +101,4 @@ class BracketsController < ApplicationController
 		puts ">"*80
 		params.require(:bracket).require(:matches)
 	end
-
-	def is_owner?(bracket)
-		bracket.user == current_user
-	end
 end
