@@ -1,13 +1,19 @@
 module Scoring
 	module FibonacciPeerWithBlowout
 		def self.stats_needed
-			return [:votes]
+			return [:votes, :win, :blowout]
 		end
 
 		def self.score(match)
 			scores = {}
 			match.players.each do |player|
-				scores[player] = self.score_user(match.statistics.where(user: player, name: :votes).first, match.win?(player), match.blowout)
+				stats = Statistics.where(user: player, match: match)
+
+				votes   = stats.where(name: :votes  ).first
+				win     = stats.where(name: :win    ).first
+				blowout = stats.where(name: :blowout).first
+
+				scores[player] = self.score_user(votes, win, blowout)
 			end
 			scores
 		end
