@@ -44,7 +44,10 @@ module Sampling
 		end
 
 		def handle_user_interaction(user, sampling_params)
-			# TODO
+			# => Save sampling_params as statistics
+			sampling_params.select {|name, value| @match.stats_from(self.class).include? name }.each do |name, value|
+				Statistic.create(name: value, user: user, match: @match)
+			end
 		end
 	end
 end
