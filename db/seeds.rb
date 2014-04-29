@@ -177,7 +177,7 @@ if Rails.env.development?
 
 	custom.hosts.push(User.find(1))
 
-	custom.stages.create(scheduling_method: "round_robin" , seeding_method: "random_seeding")
+	custom.stages.create(scheduling_method: "round_robin" , seeding_method: "early_bird")
 
 
 	custom.hosts.push(User.find(1))
