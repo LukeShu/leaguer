@@ -123,7 +123,7 @@ if Rails.env.development?
 	players_for_league.each do |player|
 		tourn5.join(player)
 	end
-	tourn5.stages.create(scheduling_method: "round_robin" , seeding_method: "random_seeding")
+	tourn5.stages.create(scheduling_method: "elimination" , seeding_method: "random_seeding")
 
 	# Yet another League tournament
 	tourn6 = Tournament.create(game_id: 1, name: "3 teams per match",
