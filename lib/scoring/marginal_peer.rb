@@ -1,6 +1,6 @@
 module Scoring
 	module MarginalPeer
-		def self.stats_needed
+		def self.stats_needed(match)
 			return ["rating", "win"]
 		end
 
