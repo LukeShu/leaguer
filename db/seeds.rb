@@ -148,6 +148,7 @@ if Rails.env.development?
 	#Hearthstone tournament
 	hearth = Tournament.create(game: hearthstone, name: "Hearthstone Seed", min_teams_per_match: 1, min_players_per_team: 1, 
 	                           max_teams_per_match: 2, max_players_per_team: 1, scoring_method: "winner_takes_all")
+	hearth.hosts.push(User.find(1))
 
 	hearth.join(davis)
 	hearth.join(foy)
@@ -175,6 +176,8 @@ if Rails.env.development?
 		min_teams_per_match: 2, max_teams_per_match: 2,
 		scoring_method: "winner_takes_all")
 
+	custom.hosts.push(User.find(1))
+
 	custom.stages.create(scheduling_method: "round_robin" , seeding_method: "random_seeding")
 
 
@@ -182,6 +185,4 @@ if Rails.env.development?
 	g.each do |player|
 		custom.join(player)
 	end
-
 end
-
