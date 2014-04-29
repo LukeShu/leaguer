@@ -31,6 +31,7 @@ class MatchesController < ApplicationController
 			# Scheduled, waiting to start
 			if (@tournament.hosts.include? current_user) and (params[:update_action] == "start")
 				@match.status = 2
+				@match.start_sampling
 				respond_to do |format|
 						if @match.save
 							format.html { redirect_to tournament_match_path(@tournament, @match), notice: 'Match has started.' }

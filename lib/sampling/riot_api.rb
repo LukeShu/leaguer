@@ -17,7 +17,7 @@ module Sampling
 
 		protected
 		def self.url(request, args={})
-			"https://prod.api.pvp.net/api/lol/#{region}/#{request % args.merge(args){|k,v|url_escape(v)}}?#{api_key}"
+			"https://prod.api.pvp.net/api/lol/#{region}/#{request % args.merge(args){|k,v|url_escape(v)}}?api_key=#{api_key}"
 		end
 
 		protected
@@ -43,7 +43,7 @@ module Sampling
 						{:unit_time => 10.seconds, :requests_per => 10},
 						{:unit_time => 10.minutes, :requests_per => 500},
 					]
-					super(api_name, limits)
+					super(RiotApi::api_name, limits)
 			end
 
 			def perform
@@ -110,7 +110,7 @@ module Sampling
 		# When given a summoner name for a user, figure out the summoner ID.
 		public
 		def self.set_remote_name(user, game, summoner_name)
-			Delayed::Job.enqueue(UsernameJob.new(user, game, summoner_name), :queue => api_name)
+			Delayed::Job.enqueue(UsernameJob.new(user, game, summoner_name), :queue => RiotApi::api_name)
 		end
 		protected
 		class UsernameJob < Job
@@ -158,7 +158,7 @@ module Sampling
 			@match.teams.each do |team|
 				team.users.each do |user|
 					#For demo purposes, we are hard coding in a league of legends game id.
-					Delayed::Job.enqueue(MatchJob.new(user, @match, @match.stats_from(self.class), 1362730546), :queue => api_name)
+					Delayed::Job.enqueue(FetchStatisticsJob.new(user, @match, @match.stats_from(self.class), 10546), :queue => RiotApi::api_name)
 				end
 			end
 		end
@@ -176,20 +176,22 @@ module Sampling
 				super("v1.3/game/by-summoner/%{summonerId}/recent", { :summonerId => summoner["id"] })
 			end
 			def handle(data)
+				puts("handling...")
 				user = User.find(@user_id)
 				match = Match.find(@match_id)
 				if @last_game_id.nil?
-					Delayed::Job.enqueue(MatchJob.new(user, match, data["games"][0]["gameId"]), :queue => api_name)
+					Delayed::Job.enqueue(FetchStatisticsJob.new(user, match, data["games"][0]["gameId"]), :queue => RiotApi::api_name)
 				else
 					if @last_game_id == data["games"][0]["gameId"]
 						sleep(4.minutes)
-						Delayed::Job.enqueue(MatchJob.new(user, match, @last_game_id), :queue => api_name)
+						Delayed::Job.enqueue(FetchStatisticsJob.new(user, match, @last_game_id), :queue => RiotApi::api_name)
 					else
 						@stats.each do |stat|
 							Statistic.create(user: user, match: match, name: stat, value: data["games"][0]["stats"][stat])
 						end
 					end
 				end
+				puts("done handling")
 			end
 		end
 

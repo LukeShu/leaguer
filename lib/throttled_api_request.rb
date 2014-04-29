@@ -8,9 +8,9 @@ class ThrottledApiRequest < Struct.new(:api_name, :limits)
 		loop do
 			sleep_for = -1
 			ActiveRecord::Base.transaction do
-				ApiRequests.create(:api_name => self.api_name)
+				ApiRequest.create(:api_name => self.api_name)
 				self.limits.each do |limit|
-					recent_requests = ApiRequets.
+					recent_requests = ApiRequest.
 						where(:api_name => self.api_name).
 						where("updated_at > ?", Time.now.utc - limit[:unit_time]).
 						order(:updated_at)
@@ -23,6 +23,7 @@ class ThrottledApiRequest < Struct.new(:api_name, :limits)
 				end
 			end
 			if sleep_for != -1
+				puts "sleeping for #{sleeping_for}"
 				sleep(sleep_for)
 			else
 				break
