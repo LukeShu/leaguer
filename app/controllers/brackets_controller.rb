@@ -37,7 +37,7 @@ class BracketsController < ApplicationController
 		@bracket.name =  current_user.user_name + "'s Prediction for " + @tournament.name
 
 		respond_to do |format|
-			if @tournament.status == 1 && @tournament.stages.first.scheduling_method == "elimination" && @tournament.stages.first.matches.first.status == 0
+			if @tournament.status == 1 && @tournament.stages.first.scheduling_method == "elimination" && @tournament.stages.first.matches.first.status < 2
 				@bracket.save
 				@bracket.create_matches
 				format.html { redirect_to @bracket, notice: 'Bracket was successfully created.' }
@@ -54,7 +54,7 @@ class BracketsController < ApplicationController
 	def update
 		respond_to do |format|
 			if @bracket.update(bracket_params)
-				format.html { redirect_to @bracket, notice: 'Bracket was successfully updated.' }
+				format.html { redirect_to @tournament, notice: 'Bracket was successfully updated.' }
 				format.json { head :no_content }
 			else
 				format.html { render action: 'edit' }
