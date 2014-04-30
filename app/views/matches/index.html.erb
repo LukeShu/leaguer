@@ -20,8 +20,7 @@
 				<td><%= (match.winner.nil? ? "-" : "Team #{match.winner.id}") %></td>
 				<td><%= link_to "See Match", tournament_match_path(@tournament, match) %>
 				<td> 
-					<%# NOTE: - fix this permission, if split up by match, this does not work %>
-					<% if @tournament.check_permission(current_user, :edit) %>
+					<% if match.check_permission(current_user, :edit) %>
 						<%= form_tag(tournament_match_path(@tournament, match), method: "put") do %>
 							<input type="hidden" name="update_action" value="start">
 							<% @startable = (match.status == 1) and (match.teams.count >= @tournament.min_teams_per_match) %>

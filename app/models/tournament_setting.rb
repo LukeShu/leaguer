@@ -4,6 +4,10 @@ class TournamentSetting < ActiveRecord::Base
 	validates(:vartype, presence: true, numericality: {only_integer: true})
 	validates(:type_opt, presence: true, if: :needs_type_opt?)
 
+	def owned_by?(user)
+		self.tournament.owned_by?(user)
+	end
+
 	def needs_type_opt?
 		[
 			GameSetting.types[:pick_one_radio],

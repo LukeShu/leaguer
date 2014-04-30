@@ -7,6 +7,10 @@ class Pm < ActiveRecord::Base
 		return current_user.name
 	end
 
+	def owned_by?(user)
+		self.author == user
+	end
+
 =begin
 	def mailboxer_email(email)
 		return current_user.email

@@ -12,6 +12,10 @@ class TournamentStage < ActiveRecord::Base
 		presence: true,
 		inclusion: {in: Tournament.new.seeding_methods})
 
+	def owned_by?(user)
+		self.tournament.owned_by?(user)
+	end
+
 	# A 1-indexed hash of matches
 	def matches_ordered
 		h = {}

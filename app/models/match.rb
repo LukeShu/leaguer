@@ -14,6 +14,10 @@ class Match < ActiveRecord::Base
 	# winner:references
 	# not validated
 
+	def owned_by?(user)
+		self.tournament_stage.owned_by?(user)
+	end
+
 	##
 	# Returns whether or not all the statistics have been collected
 	# such that the match may be considered finished.
