@@ -48,11 +48,6 @@ class Match < ActiveRecord::Base
 	# Delagates PUT/PATCH HTTP params to the appropriate sampling
 	# methods.
 	def handle_sampling(user, params)
-		require 'pp'
-		puts('>'*80)
-		pp user
-		pp params
-		puts('<'*80)
 		method_classes.each do |klass|
 			klass.new(self).handle_user_interaction(user, params)
 		end

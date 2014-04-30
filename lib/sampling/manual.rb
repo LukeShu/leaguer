@@ -44,17 +44,10 @@ module Sampling
 
 		def handle_user_interaction(user, params)
 			# => Save sampling_params as statistics
-			require 'pp'
-			puts('>'*80)
-			pp @match
-			puts('>'*80)
 			if (@match.tournament_stage.tournament.hosts.include? user)
 				manual_params = params.require(:manual)
 				winner = Team.find(manual_params[:winner])
 				@match.users.each do |user|
-					puts('>'*80)
-					pp "MAKING statistics BIIIIIIIITCH"
-					puts('>'*80)
 					Statistic.create(match: @match, user: user,
 					                 name: "win", value: winner.users.include?(user))
 					@match.stats_from(self.class).reject{|s|s=="win"}.each do |stat|

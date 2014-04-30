@@ -37,7 +37,6 @@ module Scheduling
 		end
 
 		def finish_match(match)
-			require 'pp'
 			logBase = match.tournament_stage.tournament.min_teams_per_match
 			matches = match.tournament_stage.matches_ordered
 			cur_match_num = matches.invert[match]
@@ -45,10 +44,7 @@ module Scheduling
 				match.winner.matches.push(matches[(cur_match_num+logBase-2)/logBase])
 			end
 			if matches[(cur_match_num+logBase-2)/logBase].teams.count == match.tournament_stage.tournament.min_teams_per_match
-				puts(">"*80)
-				pp matches[(cur_match_num+logBase-2)/logBase].status
 				matches[(cur_match_num+logBase-2)/logBase].update(status: 1)
-				puts(">"*80)
 			end
 		end
 
@@ -81,20 +77,14 @@ module Scheduling
 			pBase = 1
 			(1..matches.count).each do |i|
 				matchDepth = Math.log(i*(logBase-1), logBase).floor+1
-				puts matchDepth
 				if matchDepth > Math.log(base*(logBase-1), logBase).floor+1
 					pBase = base
 					base = i
 				end
-				puts base
 				rh = 100 / (logBase**(depth-1)+1) - 100/height;
-				puts rh
 				rw = 100/(depth+1) - 5
-				puts rw
 				rx = 50/(depth+1) + 100/(depth+1)*(depth-matchDepth)
-				puts rx
 				ry = 100/(logBase**(matchDepth-1)+1) * (i-base+1) - rh/2
-				puts ry
 
 				str += "\t<a id=\"svg-match-#{i}\" xlink:href=\"#{match_path(matches[i])}\"><g>\n"
 				str += "\t\t<rect height=\"#{rh}%\" width=\"#{rw}%\" x=\"#{rx}%\" y=\"#{ry}%\" fill=\"url(#gradMatch)\" rx=\"5px\" stroke-width=\"2\""

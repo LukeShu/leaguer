@@ -15,10 +15,6 @@ class Bracket < ActiveRecord::Base
 
 
 	def predict_winners(predictions)
-		require 'pp'
-		puts("<"*80)
-		pp predictions
-		puts(">"*80)
 		(0..bracket_matches.count-1).each do |i|
 			bracket_matches.order(:match_id)[i].update(predicted_winner: Team.find(predictions[(i+1).to_s]));
 		end 

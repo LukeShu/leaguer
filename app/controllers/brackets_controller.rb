@@ -95,10 +95,6 @@ class BracketsController < ApplicationController
 	end
 
 	def prediction_params
-		require 'pp'
-		puts "<params"+"<"*80
-		pp params
-		puts ">"*80
 		params.require(:bracket).require(:matches)
 	end
 end
