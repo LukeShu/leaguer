@@ -13,37 +13,37 @@ several days.
 +---------------------------------------------------------+------+------------+----+
 | Tasks Implemented and Working                           | Size | Person\*   | US |
 +=========================================================+======+============+====+
-| [Intelligent Error Handling] (#error-hand)              |   3  | Andrew     | 3  |
+| [Intelligent Error Handling](#error-hand)               |   3  | Andrew     | 3  |
 +---------------------------------------------------------+------+------------+----+
-| [Search] (#search)                                      |   5  | Tomer      | 6  |
+| [Search](#search)                                       |   5  | Tomer      | 6  |
 +---------------------------------------------------------+------+------------+----+
-| [Remote Game UserNames] (#remote_user)                  |   3  | Davis      | 12 |
+| [Remote Game UserNames](#remote_user)                   |   3  | Davis      | 12 |
 +---------------------------------------------------------+------+------------+----+
-| [Email verification] (#email-varify)                    |   8  | Luke       | 2  |
+| [Email verification](#email-varify)                     |   8  | Luke       | 2  |
 +---------------------------------------------------------+------+------------+----+
-| [Alternate Scoring and pairing methods] (#alt-score-par)|   5  | G, A, D    | 7,8|
+| [Alternate Scoring and pairing methods](#alt-score-par) |   5  | G, A, D    | 7,8|
 +---------------------------------------------------------+------+------------+----+
-| [Tournament preference interface] (#tourn-prefer)        |   3  | Andrew     | 9  |
+| [Tournament preference interface](#tourn-prefer)        |   3  | Andrew     | 9  |
 +---------------------------------------------------------+------+------------+----+
-| [More types of seeded settings] (#seed)                 |   2  | Andrew     | 9  |
+| [More types of seeded settings](#seed)                  |   2  | Andrew     | 9  |
 +---------------------------------------------------------+------+------------+----+
-| [Asynchronous Riot Pulls] (#async)                      |   5  | Nathaniel  | 11 |
+| [Asynchronous Riot Pulls](#async)                       |   5  | Nathaniel  | 11 |
 +---------------------------------------------------------+------+------------+----+
-| [Map out brackets scaffolding] (#brack-scaff)           |   5  | Tomer      | 10 |
+| [Map out brackets scaffolding](#brack-scaff)            |   5  | Tomer      | 10 |
 +---------------------------------------------------------+------+------------+----+
-| [Create braket creation and submission gui] (#brack-gui)|   3  | Tomer      | 10 |
+| [Create braket creation and submission gui](#brack-gui) |   3  | Tomer      | 10 |
 +---------------------------------------------------------+------+------------+----+
-| [General Interface Cleanups] (#interface-cleean)        |   2  | Tomer      | 1  |
+| [General Interface Cleanups](#interface-cleean)         |   2  | Tomer      | 1  |
 +---------------------------------------------------------+------+------------+----+
-| [Make it look professional] (#professional)             |   3  | All        | 1  |
+| [Make it look professional](#professional)              |   3  | All        | 1  |
 +---------------------------------------------------------+------+------------+----+
-| [Expand Peer Evaluation] (#peer-expansion)              |   3  | G, A, D    | 7  |
+| [Expand Peer Evaluation](#peer-expansion)               |   3  | G, A, D    | 7  |
 +---------------------------------------------------------+------+------------+----+
-| [Private Messages] (#priv-messages)                     |   5  | N, L       | 5  |
+| [Private Messages](#priv-messages)                      |   5  | N, L       | 5  |
 +---------------------------------------------------------+------+------------+----+
-| [Alerts] (#alerts)                                      |   3  | Guntas     | 4  |
+| [Alerts](#alerts)                                       |   3  | Guntas     | 4  |
 +---------------------------------------------------------+------+------------+----+
-| [Project Leaguer Logo] (#logo)                          | spike| G, D       | 1  |
+| [Project Leaguer Logo](#logo)                           | spike| G, D       | 1  |
 +---------------------------------------------------------+------+------------+----+
 
 
