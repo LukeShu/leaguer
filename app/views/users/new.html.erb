@@ -1,34 +1,34 @@
 <h1> Sign Up </h1>
 
 <%= form_for @user do |f| %>
-  <%= render "common/error_messages", :target => @user %>
-  <p>
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.label :email %><br>
-    <%= f.text_field(:email, type: "email") %>
-  </p>
-  <p>
-    <%= f.label :user_name %><br>
-    <%= f.text_field :user_name %>
-  </p>
-  <p>
-    <%= f.label :password %><br>
-    <%= f.password_field :password %>
-  </p>
-  <p>
-    <%= f.label(:password_confirmation, "Confirm Password") %><br>
-    <%= f.password_field :password_confirmation %>
-  </p>
-  <p>
-	<%= show_simple_captcha %>
-
-    <%= f.submit("Be a Leaguer", :class => "signup") %>
-  </p>
+	<%= render "common/error_messages", :target => @user %>
+	<div class="field">
+		<%= f.label :name %><br>
+		<%= f.text_field :name %>
+	</div>
+	<div class="field">
+		<%= f.label :email %><br>
+		<%= f.text_field(:email, type: "email") %>
+	</div>
+	<div class="field">
+		<%= f.label :user_name %><br>
+		<%= f.text_field :user_name %>
+	</div>
+	<div class="field">
+		<%= f.label :password %><br>
+		<%= f.password_field :password %>
+	</div>
+	<div class="field">
+		<%= f.label(:password_confirmation, "Confirm Password") %><br>
+		<%= f.password_field :password_confirmation %>
+	</div>
+	<div class="field">
+		<%= show_simple_captcha %>
+	</div>
+	<div class="actions">
+		<%= f.submit("Be a Leaguer", :class => "signup") %>
+	</div>
 <% end %>
-
 
 <%= link_to 'Already Have an Account? Log in', new_session_path, :class => "signin" %>
 

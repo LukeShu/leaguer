@@ -7,8 +7,8 @@
 			<%= f.select(:game_id, Game.all.map{|game| [game.name, game.id]}) %>
 		</div>
 		<div class="field">
-		    <label for="num_stages">Number of Tournament Stages</label>
-		    <input type="number" id="num_stages" name="num_stages" min="1" value="<%= params[:num_stages].to_i %>">
+			<label for="num_stages">Number of Tournament Stages</label>
+			<input type="number" id="num_stages" name="num_stages" min="1" value="<%= params[:num_stages].to_i %>">
 		</div>
 		<% if @tournament.game %>
 			<%= f.submit("Update (Will reset the rest of the form)", class: "btn-danger") %>
@@ -98,12 +98,12 @@
 					<fieldset>
 						<legend>Stage <%= i %></legend>
 						<div class="field">
-						    <%= stage_fields.label :scheduling_method, :scheduling_method.to_s.titleize %>
-						    <%= stage_fields.select(:scheduling_method, @tournament.scheduling_methods.map{|method| [method.humanize.titleize, method]}) %>
+							<%= stage_fields.label :scheduling_method, :scheduling_method.to_s.titleize %>
+							<%= stage_fields.select(:scheduling_method, @tournament.scheduling_methods.map{|method| [method.humanize.titleize, method]}) %>
 						</div>
 						<div class="field">
-						    <%= stage_fields.label :seeding_method, :seeding_method.to_s.titleize %>
-						    <%= stage_fields.select(:seeding_method, @tournament.seeding_methods.map{|method| [method.humanize.titleize, method]}) %>
+							<%= stage_fields.label :seeding_method, :seeding_method.to_s.titleize %>
+							<%= stage_fields.select(:seeding_method, @tournament.seeding_methods.map{|method| [method.humanize.titleize, method]}) %>
 						</div>
 					</fieldset>
 					<% end %>

@@ -2,56 +2,55 @@
 <h1> <%= @user.user_name %>'s Profile </h1>
 
 <p>
-  <%= image_tag 'http://www.gravatar.com/avatar/' + Digest::MD5.hexdigest(@user.email) + '?s=100&d=identicon' %>
+	<%= image_tag 'http://www.gravatar.com/avatar/' + Digest::MD5.hexdigest(@user.email) + '?s=100&d=identicon' %>
 </p>
 
 <p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
+	<strong>Name:</strong>
+	<%= @user.name %>
+<p>
 
 <p>
-  <strong>Preferred name:</strong>
-  <%= @user.user_name %>
+	<strong>Alias:</strong>
+	<%= @user.user_name %>
+<p>
+	<strong>Email:</strong>
+	<%= @user.email %>
 </p>
 
-<p>
-  <strong>Relationship Status:</strong>
-  too single
-</p>
-
-
-<p>
-<% if @user.remote_usernames[0].nil? %>
+<% if @user.remote_usernames.empty? and @user.check_permission(current_user, :edit) %>
 	<%= form_for @user do |f| %>
-		<label>Have a League of Legends Account?
-			<input type=text name="user[remote_usernames][League of Legends]">
-		</label>
-		<%= f.submit "Add Username", :class => 'signup' %>
+		<div class="field">
+			<label for="summoner_name">Have a League of Legends Account?</label>
+			<div class="simple-input-group">
+				<input type="text" id="summoner_name" name="user[remote_usernames][League of Legends]">
+				<%= f.submit "Add Username", :class => 'signup' %>
+			</div>
+		</div>
 	<% end %>
 <% end %>
-</p>
-
 
 <div class="row">
 	<div class="col-md-6">
-	  	<h3> Recent Tournaments Played </h3>
+		<h3>Recent Tournaments Played</h3>
 		<ul>
 			<% @user.tournaments_played.each do |t| %>
 				<li><%= t.name %></li>
 			<% end %>
 		</ul>
-	  </div>
-    <div class="col-md-6">
-    	<h3> Recent Tournaments Hosted </h3>
-    	<% if  @user.tournaments_hosted.count == 0 %> <p> <%= @user.user_name %> has never hosted a tournament </p> <%end %>
-		<ul>
-			<% @user.tournaments_hosted.each do |t| %>
-				<li><%= t.name %></li>
-			<% end %>
-		</ul>
+	</div>
+	<div class="col-md-6">
+		<h3>Recent Tournaments Hosted</h3>
+		<% if  @user.tournaments_hosted.empty? %>
+			<p><%= @user.user_name %> has never hosted a tournament.</p>
+		<% else %>
+			<ul>
+				<% @user.tournaments_hosted.each do |t| %>
+					<li><%= t.name %></li>
+				<% end %>
+			</ul>
+		<% end %>
 	</div>
 </div>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'All Users', users_path %>
+<%= link_to 'Edit', edit_user_path(@user), role: :button %>
