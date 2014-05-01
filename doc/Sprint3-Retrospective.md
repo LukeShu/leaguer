@@ -21,8 +21,6 @@ several days.
 +---------------------------------------------------------+------+------------+----+
 | [Alternate Scoring and pairing methods](#alt-score-par) |   5  | G, A, D    | 7,8|
 +---------------------------------------------------------+------+------------+----+
-| [Tournament preference interface](#tourn-prefer)        |   3  | Andrew     | 9  |
-+---------------------------------------------------------+------+------------+----+
 | [Asynchronous Riot Pulls](#async)                       |   5  | Nathaniel  | 11 |
 +---------------------------------------------------------+------+------------+----+
 | [Map out brackets scaffolding](#brack-scaff)            |   5  | Tomer      | 10 |
@@ -42,11 +40,13 @@ several days.
 +---------------------------------------------------------+------+------------+----+
 | Tasks Implemented and Not Working Well                  | Size | Person     | US |
 +=========================================================+======+============+====+
-| [Expand Peer Evaluation](#peer-expansion)               |   3  | G, A, D    | 7  |
-+---------------------------------------------------------+------+------------+----+
 | [Remote Game UserNames](#remote_user)                   |   3  | Davis      | 12 |
 +---------------------------------------------------------+------+------------+----+
+| [Tournament preference interface](#tourn-prefer)        |   3  | Andrew     | 9  |
++---------------------------------------------------------+------+------------+----+
 | [More types of seeded settings](#seed)                  |   2  | Andrew     | 9  |
++---------------------------------------------------------+------+------------+----+
+| [Expand Peer Evaluation](#peer-expansion)               |   3  | G, A, D    | 7  |
 +---------------------------------------------------------+------+------------+----+
 | [Project Leaguer Logo](#logo)                           | spike| G, D       | 1  |
 +---------------------------------------------------------+------+------------+----+
@@ -91,10 +91,6 @@ statistics needed for its scoring methods which replaced their manual configurat
 We introduced Tournament Stages to accomodate a wider range of tournament types
 and modes and designed the library modules to be general enough to use results of
 past stages or player statistics to affect future ones.
-
-## More types of seeded settings (#seed)
-
-TODO
 
 ## Asynchronous Riot Pulls (#async)
 
@@ -171,18 +167,6 @@ appeared only when there is a new alert.
 
 # Implemented but not working well
 
-## Expand Peer Evaluation (#peer-expansion)
-
-We created scoring modules for users to select the preferred scoring method and 
-preferred peer evaluation for users to choose from when creating a tournament.
-The peer evaluation modules calculate the score correctly but do not grab the 
-statistics from the submission forms. The skeletons for three such scoring methods 
-namely, winnerTakesAll, FibonacciPeerWithBlowout, MarginalPeer, have been created.
-The for MarginalPeer we do not have a view but we do have the methods that would 
-calculate the score provided the stats are in the database. For WinnerTakesAll and
-FibonacciWithPeerBlowout we do have views and data being collected from the interface
-and used to calculate score.
-
 ## Remote Game UserNames (#remote_user)
 
 The idea behind remote usernames is that a Leaguer user would be able to add
@@ -198,6 +182,26 @@ The point of the Leaguer logo is to set a definitive symbol for our product.  Th
 current logo is a rough draft and will more than likely not be truly done for some time
 if ever.  For now, we have a decent looking logo and are planning on placing it into the
 product documents.  Other than that, this is not yet complete.
+
+## Tournament preference interface (#tourn-prefer)
+
+Tournament Settings are handled correctly and securely, the permission system is
+robust enough to handle custom preferences, and the database structure exists to
+handle them, even the icons for adding them were created, however, the interface
+for adding them was deemed low priority for this sprint in comparison to the lib
+modules and permissions overhauls.
+
+## Expand Peer Evaluation (#peer-expansion)
+
+We created scoring modules for users to select the preferred scoring method and 
+preferred peer evaluation for users to choose from when creating a tournament.
+The peer evaluation modules calculate the score correctly but do not grab the 
+statistics from the submission forms. The skeletons for three such scoring methods 
+namely, winnerTakesAll, FibonacciPeerWithBlowout, MarginalPeer, have been created.
+The for MarginalPeer we do not have a view but we do have the methods that would 
+calculate the score provided the stats are in the database. For WinnerTakesAll and
+FibonacciWithPeerBlowout we do have views and data being collected from the interface
+and used to calculate score.
 
 ## More types of seeded settings (#seed)
 
@@ -222,14 +226,6 @@ creation.  The seeding methods we have currently are:
 
 Early bird and random seeding are  completed, but fair ranked has yet
 to be done. 
-
-## Tournament preference interface (#tourn-prefer)
-
-Tournament Settings are handled correctly and securely, the permission system is
-robust enough to handle custom preferences, and the database structure exists to
-handle them, even the icons for adding them were created, however, the interface
-for adding them was deemed low priority for this sprint in comparison to the lib
-modules and permissions overhauls.
 
 
 # Not implemented
