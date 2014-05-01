@@ -121,7 +121,15 @@ TODO
 
 ## Private Messages (#priv-messages)
 
-TODO
+Private Messsaging in Project Leaguer is possible between two registered users.
+Project Leaguer uses the gem 'Mailboxer' to achieve private messaging. A user
+is able to interact with the private messaging system by clicking on the "Messages"
+located in the header toolbar at the top of every page. This results in the index
+page, which lists all unread and read conversations. You can then click on a 
+conversation to view all of its messages and from there you can also reply.
+Creating a new message is as simple as: click the "start a new conversation",
+list the user you wish to pm with, write the conversation's subject, and write
+the message itself.
 
 ## Alerts (#alerts)
 
