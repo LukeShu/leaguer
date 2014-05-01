@@ -69,7 +69,9 @@ TODO
 
 ## Intelligent Error Handling (#error-hand)
 
-TODO
+Several important cases for error redirection were handled via standard permissions
+changes and in the end only a few specific redirections needed to be coded directly
+(such as correctly handling redirections away from a destoryed tournament or match).
 
 ## Search (#search)
 
@@ -85,7 +87,16 @@ TODO
 
 ## Alternate Scoring and pairing methods (#alt-score-par)
 
-TODO
+We overhaulted the entire tournament structure and introduced a modular/pluggable
+system for seeding, scheduling, sampling, and scoring, lovingly called the 4S Module
+System.  We relocated code from other places into these modules in the 'lib'
+directory including form HTML which is retrieved dynamically from these modules.
+In the case of sampling (retrieving and populating statistics for scoring) we built
+an intelligent system for populating available modules for a game-type based on the
+statistics needed for its scoring methods which replaced their manual configuration.
+We introduced Tournament Stages to accomodate a wider range of tournament types
+and modes and designed the library modules to be general enough to use results of
+past stages or player statistics to affect future ones.
 
 ## Tournament preference interface (#tourn-prefer)
 
