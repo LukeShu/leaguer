@@ -1,5 +1,5 @@
 ---
-title: "Team 6 - Project Leaguer: Sprint 2 Retrospective"
+title: "Team 6 - Project Leaguer: Sprint 3 Retrospective"
 author: [ Nathaniel Foy, Guntas Grewal, Tomer Kimia, Andrew Murrell, Luke Shumaker, Davis Webb ]
 ---
 
@@ -11,7 +11,7 @@ to take less than an hour.  A '3' is expected to take 3-6 hours.  A
 several days.
 
 +---------------------------------------------------------+------+------------+----+
-| Tasks Implemented and Working                           | Size | Person\*   | US |
+| Tasks Implemented and Working                           | Size | Person     | US |
 +=========================================================+======+============+====+
 | [Intelligent Error Handling](#error-hand)               |   3  | Andrew     | 3  |
 +---------------------------------------------------------+------+------------+----+
@@ -48,21 +48,56 @@ several days.
 
 
 +---------------------------------------------------------+------+------------+----+
-| Tasks Implemented and Not Working Well                  | Size | Person\*   | US |
+| Tasks Implemented and Not Working Well                  | Size | Person     | US |
 +=========================================================+======+============+====+
 | [Expand Peer Evaluation](#peer-expansion)               |   3  | G, A, D    | 7  |
 +---------------------------------------------------------+------+------------+----+
 
 
+## Remote Game UserNames (#remote_user)
 
+	The idea behind remote usernames is that a Leaguer user would be able to add
+a username from another online service to our database (such as add their riot
+username to our database) so that information from that outer source could be used
+in our tournament statistics.  This is constructed by adding a reference to the user
+to the remote_username column of the SQL database and giving it a value. This value
+is a hash that can contain any sort of information needed. 
+
+## Project Leaguer Logo (#logo))
+
+	The point of the Leaguer logo is to set a definitive symbol for our product.  The
+current logo is a rough draft and will more than likely not be truly done for some time
+if ever.  For now, we have a decent looking logo and are planning on placing it into the
+product documents.  Other than that, this is not yet complete.
+
+## More types of seeded settings (#seed)
+
+The idea behind the seeding settings is have different methods of team 
+creation.  The seeding methods we have currently are:
+	I.  Early bird
+		- Which is the method of creating a team based on who joins the 
+		tournament first.  So if there are five players per team, then 
+		the first five players to join the tournament would be on team
+		one and so on. 
+
+	II.  Random 
+		- Which will take an array of the players and shuffle them, as 
+		to randomize their order, and then place them in teams based on the 
+		maximum team size. So the first five in team one, the next five in 
+		team two, and so on.
+
+	III.  Fair Ranked
+		- Which will place users of a tournament into teams based on their
+		skill level.  This will ensure the five best players of a tournament
+		are not on the same team, as to allow fair gameplay.
+
+Early bird and random seeding are  completed, but fair ranked has yet
+to be done. 
 
 +---------------------------------------------------------+------+------------+----+
-| Tasks Not Implemented                                   | Size | Person\*   | US |
+| Tasks Not Implemented                                   | Size | Person     | US |
 +=========================================================+======+============+====+
 TODO
-
-
-
 
 # Implemented and working
 
@@ -80,10 +115,6 @@ database and the tournaments dadtabase. We've moved the tournament and player
 display methods so that the search would display players and tournaments in the same
 way that they've been displaying in their respective "index.html.erb" page. Advanced
 search was added so that users could search tournaments by their game type.
-
-## Remote Game UserNames (#remote_user)
-
-TODO
 
 ## Email verification (#email-varify)
 
@@ -108,7 +139,13 @@ TODO
 
 ## Asynchronous Riot Pulls (#async)
 
-TODO
+Project Leaguer handles asynchronous API pulling with the Delayed Job gem. A
+separate daemons server runs concurrently in order to use this functionality.
+The algorithm for Riot API pulling makes sure that the server does not go over the
+limited number of pulls set by Riot (no more than 10 per 10 seconds and 500 in ten
+minutes). It auto-grabs data for a League of Legends match by comparing games from
+a user in the match every four minutes. When their last match data changes, we know
+to then grab the rest of the data for the match.
 
 ## Map out brackets scaffolding (#brack-scaff)
 
@@ -171,11 +208,6 @@ anyone who had permissions to create an alert and all users were notified when a
 alert was created with a live update, a pop up notification which redirects to the
 list of alerts, in the navigation bar of the recieving users. The alerts icon 
 appeared only when there is a new alert. 
-
-## Project Leaguer Logo (#logo))
-
-TODO
-
 
 
 # Implemented but not working well
