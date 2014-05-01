@@ -125,7 +125,12 @@ TODO
 
 ## Alerts (#alerts)
 
-TODO
+The alerts system was implemented with the help of the Mailboxer gem which 
+is the same as the personal message system. The Alert system was made available to anyone
+who had permissions to create an alert and all users were notified when an alert
+was created with live update, a pop up notification which redirects to the list of alerts,
+in the navigation bar of the recieving users. The alerts icon appered only when there is a 
+new alert. 
 
 ## Project Leaguer Logo (#logo))
 
