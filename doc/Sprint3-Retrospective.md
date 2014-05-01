@@ -19,7 +19,7 @@ several days.
 +---------------------------------------------------------+------+------------+----+
 | [Remote Game UserNames](#remote_user)                   |   3  | Davis      | 12 |
 +---------------------------------------------------------+------+------------+----+
-| [Email verification](#email-varify)                     |   8  | Luke       | 2  |
+| [Email verification](#email-verify)                     |   8  | Luke       | 2  |
 +---------------------------------------------------------+------+------------+----+
 | [Alternate Scoring and pairing methods](#alt-score-par) |   5  | G, A, D    | 7,8|
 +---------------------------------------------------------+------+------------+----+
@@ -33,11 +33,9 @@ several days.
 +---------------------------------------------------------+------+------------+----+
 | [Create braket creation and submission gui](#brack-gui) |   3  | Tomer      | 10 |
 +---------------------------------------------------------+------+------------+----+
-| [General Interface Cleanups](#interface-clean)         |   2  | Tomer      | 1  |
+| [General Interface Cleanups](#interface-clean)          |   2  | Tomer      | 1  |
 +---------------------------------------------------------+------+------------+----+
 | [Make it look professional](#professional)              |   3  | All        | 1  |
-+---------------------------------------------------------+------+------------+----+
-| [Expand Peer Evaluation](#peer-expansion)               |   3  | G, A, D    | 7  |
 +---------------------------------------------------------+------+------------+----+
 | [Private Messages](#priv-messages)                      |   5  | N, L       | 5  |
 +---------------------------------------------------------+------+------------+----+
@@ -52,7 +50,8 @@ several days.
 +---------------------------------------------------------+------+------------+----+
 | Tasks Implemented and Not Working Well                  | Size | Person\*   | US |
 +=========================================================+======+============+====+
-TODO
+| [Expand Peer Evaluation](#peer-expansion)               |   3  | G, A, D    | 7  |
++---------------------------------------------------------+------+------------+----+
 
 
 
@@ -121,10 +120,6 @@ Tournament creation and listing also received tune ups, with images listed with
 each tournament to help display its game type and a better creation page when
 creating a tournament.
 
-## Expand Peer Evaluation (#peer-expansion)
-
-TODO
-
 ## Private Messages (#priv-messages)
 
 Private Messsaging in Project Leaguer is possible between two registered users.
@@ -139,12 +134,12 @@ the message itself.
 
 ## Alerts (#alerts)
 
-The alerts system was implemented with the help of the Mailboxer gem which 
-is the same as the personal message system. The Alert system was made available to anyone
-who had permissions to create an alert and all users were notified when an alert
-was created with live update, a pop up notification which redirects to the list of alerts,
-in the navigation bar of the recieving users. The alerts icon appered only when there is a 
-new alert. 
+The alerts system was implemented with the help of the 'Mailboxer' gem which 
+is the same as the private message system. The Alert system was made available to
+anyone who had permissions to create an alert and all users were notified when an 
+alert was created with a live update, a pop up notification which redirects to the
+list of alerts, in the navigation bar of the recieving users. The alerts icon 
+appeared only when there is a new alert. 
 
 ## Project Leaguer Logo (#logo))
 
@@ -154,8 +149,17 @@ TODO
 
 # Implemented but not working well
 
-TODO
+## Expand Peer Evaluation (#peer-expansion)
 
+We created a scoring modules for users to select the preferred scoring method and 
+preferred peer evaluation for users to choose from when creating a tournament.
+The peer evaluation modules calculate the score correctly but do not grab the 
+statistics from the submission forms. The skeletons for three such scoring methods 
+namely, winnerTakesAll, FibonacciPeerWithBlowout, MarginalPeer, have been created.
+The for MarginalPeer we do not have a view but we do have the methods that would 
+calculate the score provided the stats are in the database. For WinnerTakesAll and
+FibonacciWithPeerBlowout we do have views and data being collected from the interface
+and used to calculate score.
 
 
 # Not implemented
