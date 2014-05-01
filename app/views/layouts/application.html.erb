@@ -51,7 +51,7 @@
 				<% end %>
 				<%= form_tag("/search", method: :get, :id => "search") do %><div>
 					<%= text_field_tag(:query, params[:query], type: :search) %>
-					<button type="submit">Search</button>
+					<%= submit_tag "Search" %>
 				</div><% end %>
 			</div>
 		</div>
