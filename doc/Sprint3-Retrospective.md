@@ -55,7 +55,12 @@ several days.
 +---------------------------------------------------------+------+------------+----+
 | Tasks Not Implemented                                   | Size | Person     | US |
 +=========================================================+======+============+====+
-TODO
+| [Nothing cause we are great](#success)                  | 0    | ---        | 0  |
++---------------------------------------------------------+------+------------+----+
+
+
+# [How to improve](#improve)
+
 
 
 # Implemented and working
@@ -230,9 +235,21 @@ to be done.
 
 # Not implemented
 
-TODO
+## Nothing cause we are great (#success)
+
+We implemented everything we planned to implement.
 
 
-# How to improve
 
-TODO
+# How to improve (#improve)
+
+1. We can work at a preferable pace since we can decide our own deadlines and work
+without other classes dividing our time and energy.
+
+2. We can better prepare and handle presentations of our software in the future:
+	A. Do not work on project while waiting for our presentation's turn.
+	B. Practice our demo (we were effectively a day behind where we needed to be).
+	C. Follow the presentation grade outline.
+
+3. We can better decide what to do in a sprint. We bit off a bit more work than
+we could effectively chew for this sprint.
