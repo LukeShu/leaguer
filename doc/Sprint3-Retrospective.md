@@ -109,7 +109,12 @@ TODO
 
 ## General Interface Cleanups (#interface-clean)
 
-TODO
+Project Leaguer better handled tournament interface in this iteration. Tournaments
+are listed more cleanly on the index page. Each game type has an icon listed with
+it to better identify different game types on the index page. Each tournament's
+host's gravatar is also listed on the index page. Creating a tournament itself is
+also cleaner. Customization categories are clearly separated and use the correct
+selection or input types for easy use.
 
 ## Make it look professional (#professional)
 
