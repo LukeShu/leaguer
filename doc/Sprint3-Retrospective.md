@@ -68,11 +68,18 @@ TODO
 
 ## Intelligent Error Handling (#error-hand)
 
-TODO
+Several important cases for error redirection were handled via standard permissions
+changes and in the end only a few specific redirections needed to be coded directly
+(such as correctly handling redirections away from a destoryed tournament or match).
 
 ## Search (#search)
 
-TODO
+Search was given its own controller, and a static page callled "go.html.erb". The 
+search controller essentially took the query, and made an SQL call to the users
+database and the tournaments dadtabase. We've moved the tournament and player
+display methods so that the search would display players and tournaments in the same
+way that they've been displaying in their respective "index.html.erb" page. Advanced
+search was added so that users could search tournaments by their game type.
 
 ## Remote Game UserNames (#remote_user)
 
@@ -84,7 +91,16 @@ TODO
 
 ## Alternate Scoring and pairing methods (#alt-score-par)
 
-TODO
+We overhaulted the entire tournament structure and introduced a modular/pluggable
+system for seeding, scheduling, sampling, and scoring, lovingly called the 4S Module
+System.  We relocated code from other places into these modules in the 'lib'
+directory including form HTML which is retrieved dynamically from these modules.
+In the case of sampling (retrieving and populating statistics for scoring) we built
+an intelligent system for populating available modules for a game-type based on the
+statistics needed for its scoring methods which replaced their manual configuration.
+We introduced Tournament Stages to accomodate a wider range of tournament types
+and modes and designed the library modules to be general enough to use results of
+past stages or player statistics to affect future ones.
 
 ## Tournament preference interface (#tourn-prefer)
 
@@ -100,25 +116,44 @@ TODO
 
 ## Map out brackets scaffolding (#brack-scaff)
 
-TODO
+Brackets are structures that have a users' prediction of the winners of a 
+tournaments matches. Essentially, a tournament has many brackets, each bracket has
+a user that creates it, and each bracket has bracket-matches that correspond to the
+matches of the tournament the bracket belongs to. Bracket matches are only models, 
+as the user should be able to predit all winners from a single view that belongs to
+a bracket. Brackets on the other hand have a model, controller, and views, so that
+users may create, edit, and view them.
 
 ## Create braket creation and submission gui (#brack-gui)
 
-TODO
+The bracket creation gui looks simple to the user, but does a lot on the backend.
+When the user presses "Make a bracket" on a tournament, a bracket is created based
+on the user, the tournament, and the tournament's matches. The bracket's submission
+GUI looks a lot like an elimination tournament's SVG, however the user is able to
+click on teams to advance them forward. The SVG has javascript functions that both
+advance the teams visually on the SVG, and write the user's prediction in a hidden
+form. When the user clicks submit, the predictions are saved in the bracket's 
+matches.
 
 ## General Interface Cleanups (#interface-clean)
 
-TODO
+Project Leaguer better handled tournament interface in this iteration. Tournaments
+are listed more cleanly on the index page. Each game type has an icon listed with
+it to better identify different game types on the index page. Each tournament's
+host's gravatar is also listed on the index page. Creating a tournament itself is
+also cleaner. Customization categories are clearly separated and use the correct
+selection or input types for easy use.
 
 ## Make it look professional (#professional)
 
 The team decided on a color scheme for Leaguer during this sprint. This scheme
-was applied to every page in the site. We implemented Gravatar in a few more
-spots as well, helping to distinguish between users more easily. The default
-image was changed to give each user a unique avatar even if they've not set one.
-Tournament creation and listing also received tune ups, with images listed with
-each tournament to help display its game type and a better creation page when
-creating a tournament.
+was applied to every page in the site. Since e-sport players often spend hours in
+front of screens, it was important to reduce eye strain by making our interface dark
+while keeping it sleek and modern. We implemented Gravatar in a few more spots as
+well, helping to distinguish between users more easily. The default image was
+changed to give each user a unique avatar even if they've not set one. Tournament
+creation and listing also received tune ups, with images listed with each tournament
+to help display its game type and a better creation page when creating a tournament.
 
 ## Private Messages (#priv-messages)
 
