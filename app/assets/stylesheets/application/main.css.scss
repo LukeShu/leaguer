@@ -26,9 +26,11 @@ $legend-border-color: #ccc; // matches the default $input-border and $btn-defaul
    where .input-group does. */
 .simple-input-group {
 	white-space: nowrap;
+	display: table;
 	.btn, .form-control {
 		display: table-cell;
 		&:not(:last-child) {
+			float: left;
 			@include border-right-radius(0);
 		}
 		&:not(:first-child) {
@@ -47,16 +49,6 @@ $legend-border-color: #ccc; // matches the default $input-border and $btn-defaul
 	text-align: center;
 }
 
-#error_explanation {
-	@extend .panel-danger;
-	@extend .container;
-	padding-left: 0;
-	padding-right: 0;
-	ul {
-		list-style: disc outside none;
-	}
-}
-
 #alerts-ajax {
 	display: none;
 }
@@ -70,11 +62,33 @@ form#search {
 #user-actions {
 	@extend .navbar-btn;
 	@extend .navbar-left;
-	* { display: table-cell; }
-	div {
-		@extend .simple-input-group;
+	@extend .simple-input-group;
+	span {
 		padding-right: .25em;
 	}
+}
+
+#error_explanation ul {
+	list-style: disc outside none;
+}
+
+#players-needed {
+	text-align: center;
+	font-style: italic;
+}
+
+#tournament-side-params {
+	background: none repeat scroll 0 0 rgba(0,0,0,0.5);
+	border-radius: 5px;
+	float: right;
+	font-size: 7px;
+	padding: 10px;
+
+	p {
+		font-size: 10px;
+		margin-bottom: 5px;
+	}
+
 }
 
 /* Classes **********************************************************/
@@ -98,12 +112,8 @@ form#search {
 }
 */
 
-.field_with_errors {
-	@extend .has-error;
+form[role="button"] {
 	display: inline;
-	label {
-		@extend .control-label;
-	}
 }
 
 /* Elements *********************************************************/

@@ -1,10 +1,16 @@
 @import "bootstrap";
 
+// Connect Bootstrap classes to reasonable defaults
+
 .btn {
 	@extend .btn-default;
 }
 
-a[role="button"], button, input[type="submit"] {
+button,
+a[role="button"],
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
 	@extend .btn;
 }
 
@@ -20,21 +26,21 @@ a[role="button"], button, input[type="submit"] {
 	}
 }
 form {
+	// This list of types is taken from the 2014-04-29 draft of
+	// the HTML5 spec:
+	//     http://www.w3.org/TR/2014/CR-html5-20140429/forms.html#attr-input-type
 	input[type="text"],
 	input[type="search"],
 	input[type="tel"],
 	input[type="url"],
 	input[type="email"],
 	input[type="password"],
-	input[type="datetime"],
 	input[type="date"],
-	input[type="month"],
-	input[type="week"],
 	input[type="time"],
 	input[type="number"],
 	input[type="range"],
 	input[type="color"],
-	select, textarea{
+	select, textarea {
 		@extend .form-control;
 	}
 	label {
@@ -63,4 +69,23 @@ header nav {
 		@extend .panel-heading;
 		@extend .panel-title;
 	}
+}
+
+// Connect built-in Rails classes to the Bootstrap classes.
+
+form {
+	.field {
+		@extend .form-group;
+	}
+	.field_with_errors {
+		@extend .has-error;
+		display: inline;
+	}
+}
+
+#error_explanation {
+	@extend .panel-danger;
+	@extend .container;
+	padding-left: 0;
+	padding-right: 0;
 }
