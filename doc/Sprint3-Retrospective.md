@@ -33,7 +33,7 @@ several days.
 +---------------------------------------------------------+------+------------+----+
 | [Create braket creation and submission gui](#brack-gui) |   3  | Tomer      | 10 |
 +---------------------------------------------------------+------+------------+----+
-| [General Interface Cleanups](#interface-cleean)         |   2  | Tomer      | 1  |
+| [General Interface Cleanups](#interface-clean)          |   2  | Tomer      | 1  |
 +---------------------------------------------------------+------+------------+----+
 | [Make it look professional](#professional)              |   3  | All        | 1  |
 +---------------------------------------------------------+------+------------+----+
@@ -125,17 +125,25 @@ advance the teams visually on the SVG, and write the user's prediction in a hidd
 form. When the user clicks submit, the predictions are saved in the bracket's 
 matches.
 
-## General Interface Cleanups (#interface-cleean)
+## General Interface Cleanups (#interface-clean)
 
-There was a generaly lack of consistency within the color scheme of the website by
-the end of sprint 2. Since e-sport players often spend hours in front of screens, it
-was important to reduce eye strain by making our interface dark while keeping it
-sleek and modern. We've also chosen to stick to a small pallette color within the wrapper
-div of the pages.
+Project Leaguer better handled tournament interface in this iteration. Tournaments
+are listed more cleanly on the index page. Each game type has an icon listed with
+it to better identify different game types on the index page. Each tournament's
+host's gravatar is also listed on the index page. Creating a tournament itself is
+also cleaner. Customization categories are clearly separated and use the correct
+selection or input types for easy use.
 
 ## Make it look professional (#professional)
 
-TODO
+The team decided on a color scheme for Leaguer during this sprint. This scheme
+was applied to every page in the site. Since e-sport players often spend hours in
+front of screens, it was important to reduce eye strain by making our interface dark
+while keeping it sleek and modern. We implemented Gravatar in a few more spots as
+well, helping to distinguish between users more easily. The default image was
+changed to give each user a unique avatar even if they've not set one. Tournament
+creation and listing also received tune ups, with images listed with each tournament
+to help display its game type and a better creation page when creating a tournament.
 
 ## Expand Peer Evaluation (#peer-expansion)
 
@@ -143,11 +151,24 @@ TODO
 
 ## Private Messages (#priv-messages)
 
-TODO
+Private Messsaging in Project Leaguer is possible between two registered users.
+Project Leaguer uses the gem 'Mailboxer' to achieve private messaging. A user
+is able to interact with the private messaging system by clicking on the "Messages"
+located in the header toolbar at the top of every page. This results in the index
+page, which lists all unread and read conversations. You can then click on a 
+conversation to view all of its messages and from there you can also reply.
+Creating a new message is as simple as: click the "start a new conversation",
+list the user you wish to pm with, write the conversation's subject, and write
+the message itself.
 
 ## Alerts (#alerts)
 
-TODO
+The alerts system was implemented with the help of the Mailboxer gem which 
+is the same as the personal message system. The Alert system was made available to anyone
+who had permissions to create an alert and all users were notified when an alert
+was created with live update, a pop up notification which redirects to the list of alerts,
+in the navigation bar of the recieving users. The alerts icon appered only when there is a 
+new alert. 
 
 ## Project Leaguer Logo (#logo))
 
