@@ -73,7 +73,12 @@ TODO
 
 ## Search (#search)
 
-TODO
+Search was given its own controller, and a static page callled "go.html.erb". The 
+search controller essentially took the query, and made an SQL call to the users
+database and the tournaments dadtabase. We've moved the tournament and player
+display methods so that the search would display players and tournaments in the same
+way that they've been displaying in their respective "index.html.erb" page. Advanced
+search was added so that users could search tournaments by their game type.
 
 ## Remote Game UserNames (#remote_user)
 
@@ -101,15 +106,32 @@ TODO
 
 ## Map out brackets scaffolding (#brack-scaff)
 
-TODO
+Brackets are structures that have a users' prediction of the winners of a 
+tournaments matches. Essentially, a tournament has many brackets, each bracket has
+a user that creates it, and each bracket has bracket-matches that correspond to the
+matches of the tournament the bracket belongs to. Bracket matches are only models, 
+as the user should be able to predit all winners from a single view that belongs to
+a bracket. Brackets on the other hand have a model, controller, and views, so that
+users may create, edit, and view them.
 
 ## Create braket creation and submission gui (#brack-gui)
 
-TODO
+The bracket creation gui looks simple to the user, but does a lot on the backend.
+When the user presses "Make a bracket" on a tournament, a bracket is created based
+on the user, the tournament, and the tournament's matches. The bracket's submission
+GUI looks a lot like an elimination tournament's SVG, however the user is able to
+click on teams to advance them forward. The SVG has javascript functions that both
+advance the teams visually on the SVG, and write the user's prediction in a hidden
+form. When the user clicks submit, the predictions are saved in the bracket's 
+matches.
 
 ## General Interface Cleanups (#interface-cleean)
 
-TODO
+There was a generaly lack of consistency within the color scheme of the website by
+the end of sprint 2. Since e-sport players often spend hours in front of screens, it
+was important to reduce eye strain by making our interface dark while keeping it
+sleek and modern. We've also chosen to stick to a small pallette color within the wrapper
+div of the pages.
 
 ## Make it look professional (#professional)
 
