@@ -1,5 +1,5 @@
 ---
-title: "Team 6 - Project Leaguer: Sprint 2 Retrospective"
+title: "Team 6 - Project Leaguer: Sprint 3 Retrospective"
 author: [ Nathaniel Foy, Guntas Grewal, Tomer Kimia, Andrew Murrell, Luke Shumaker, Davis Webb ]
 ---
 
@@ -11,7 +11,7 @@ to take less than an hour.  A '3' is expected to take 3-6 hours.  A
 several days.
 
 +---------------------------------------------------------+------+------------+----+
-| Tasks Implemented and Working                           | Size | Person\*   | US |
+| Tasks Implemented and Working                           | Size | Person     | US |
 +=========================================================+======+============+====+
 | [Intelligent Error Handling](#error-hand)               |   3  | Andrew     | 3  |
 +---------------------------------------------------------+------+------------+----+
@@ -33,7 +33,7 @@ several days.
 +---------------------------------------------------------+------+------------+----+
 | [Create braket creation and submission gui](#brack-gui) |   3  | Tomer      | 10 |
 +---------------------------------------------------------+------+------------+----+
-| [General Interface Cleanups](#interface-clean)         |   2  | Tomer      | 1  |
+| [General Interface Cleanups](#interface-clean)          |   2  | Tomer      | 1  |
 +---------------------------------------------------------+------+------------+----+
 | [Make it look professional](#professional)              |   3  | All        | 1  |
 +---------------------------------------------------------+------+------------+----+
@@ -50,7 +50,7 @@ several days.
 
 
 +---------------------------------------------------------+------+------------+----+
-| Tasks Implemented and Not Working Well                  | Size | Person\*   | US |
+| Tasks Implemented and Not Working Well                  | Size | Person     | US |
 +=========================================================+======+============+====+
 TODO
 
@@ -58,7 +58,7 @@ TODO
 
 
 +---------------------------------------------------------+------+------------+----+
-| Tasks Not Implemented                                   | Size | Person\*   | US |
+| Tasks Not Implemented                                   | Size | Person     | US |
 +=========================================================+======+============+====+
 TODO
 
@@ -97,7 +97,13 @@ TODO
 
 ## Asynchronous Riot Pulls (#async)
 
-TODO
+Project Leaguer handles asynchronous API pulling with the Delayed Job gem. A
+separate daemons server runs concurrently in order to use this functionality.
+The algorithm for Riot API pulling makes sure that the server does not go over the
+limited number of pulls set by Riot (no more than 10 per 10 seconds and 500 in ten
+minutes). It auto-grabs data for a League of Legends match by comparing games from
+a user in the match every four minutes. When their last match data changes, we know
+to then grab the rest of the data for the match.
 
 ## Map out brackets scaffolding (#brack-scaff)
 
