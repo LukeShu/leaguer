@@ -39,9 +39,6 @@ several days.
 +---------------------------------------------------------+------+------------+----+
 
 
-
-
-
 +---------------------------------------------------------+------+------------+----+
 | Tasks Implemented and Not Working Well                  | Size | Person     | US |
 +=========================================================+======+============+====+
@@ -59,6 +56,7 @@ several days.
 | Tasks Not Implemented                                   | Size | Person     | US |
 +=========================================================+======+============+====+
 TODO
+
 
 # Implemented and working
 
@@ -187,7 +185,7 @@ and used to calculate score.
 
 ## Remote Game UserNames (#remote_user)
 
-	The idea behind remote usernames is that a Leaguer user would be able to add
+The idea behind remote usernames is that a Leaguer user would be able to add
 a username from another online service to our database (such as add their riot
 username to our database) so that information from that outer source could be used
 in our tournament statistics.  This is constructed by adding a reference to the user
@@ -196,7 +194,7 @@ is a hash that can contain any sort of information needed.
 
 ## Project Leaguer Logo (#logo))
 
-	The point of the Leaguer logo is to set a definitive symbol for our product.  The
+The point of the Leaguer logo is to set a definitive symbol for our product.  The
 current logo is a rough draft and will more than likely not be truly done for some time
 if ever.  For now, we have a decent looking logo and are planning on placing it into the
 product documents.  Other than that, this is not yet complete.
@@ -237,7 +235,6 @@ modules and permissions overhauls.
 # Not implemented
 
 TODO
-
 
 
 # How to improve
