@@ -33,7 +33,7 @@ several days.
 +---------------------------------------------------------+------+------------+----+
 | [Create braket creation and submission gui](#brack-gui) |   3  | Tomer      | 10 |
 +---------------------------------------------------------+------+------------+----+
-| [General Interface Cleanups](#interface-cleean)         |   2  | Tomer      | 1  |
+| [General Interface Cleanups](#interface-clean)         |   2  | Tomer      | 1  |
 +---------------------------------------------------------+------+------------+----+
 | [Make it look professional](#professional)              |   3  | All        | 1  |
 +---------------------------------------------------------+------+------------+----+
@@ -107,13 +107,19 @@ TODO
 
 TODO
 
-## General Interface Cleanups (#interface-cleean)
+## General Interface Cleanups (#interface-clean)
 
 TODO
 
 ## Make it look professional (#professional)
 
-TODO
+The team decided on a color scheme for Leaguer during this sprint. This scheme
+was applied to every page in the site. We implemented Gravatar in a few more
+spots as well, helping to distinguish between users more easily. The default
+image was changed to give each user a unique avatar even if they've not set one.
+Tournament creation and listing also received tune ups, with images listed with
+each tournament to help display its game type and a better creation page when
+creating a tournament.
 
 ## Expand Peer Evaluation (#peer-expansion)
 
@@ -121,7 +127,15 @@ TODO
 
 ## Private Messages (#priv-messages)
 
-TODO
+Private Messsaging in Project Leaguer is possible between two registered users.
+Project Leaguer uses the gem 'Mailboxer' to achieve private messaging. A user
+is able to interact with the private messaging system by clicking on the "Messages"
+located in the header toolbar at the top of every page. This results in the index
+page, which lists all unread and read conversations. You can then click on a 
+conversation to view all of its messages and from there you can also reply.
+Creating a new message is as simple as: click the "start a new conversation",
+list the user you wish to pm with, write the conversation's subject, and write
+the message itself.
 
 ## Alerts (#alerts)
 
