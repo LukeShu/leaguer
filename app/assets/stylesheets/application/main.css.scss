@@ -1,0 +1,241 @@
+// See this file for a complete list of variables:
+//    vendor/bundle/ruby/2.0.0/gems/bootstrap-sass-3.1.1.1/vendor/assets/stylesheets/bootstrap/_variables.scss
+/*
+$gray-darker:            lighten(#000, 13.5%) !default; // #222
+$gray-dark:              lighten(#000, 20%) !default;   // #333
+$gray:                   lighten(#000, 33.5%) !default; // #555
+$gray-light:             lighten(#000, 60%) !default;   // #999
+$gray-lighter:           lighten(#000, 93.5%) !default; // #eee
+
+$brand-primary:         #428bca !default;
+$brand-success:         #5cb85c !default;
+$brand-info:            #5bc0de !default;
+$brand-warning:         #f0ad4e !default;
+$brand-danger:          #d9534f !default;
+*/
+$legend-border-color: #ccc; // matches the default $input-border and $btn-default-border
+@import "bootstrapify";
+
+/* Mixins ***********************************************************/
+/* These are just here for other things to @extend. */
+/* Ok, they're really classes, but we don't use them like it. */
+
+/* More elegant version of .input-group, which is over-complicated
+   because it supports all kind of things we don't always need to.
+   This is useful because it doesn't require extra HTML elements,
+   where .input-group does. */
+.simple-input-group {
+	white-space: nowrap;
+	.btn, .form-control {
+		display: table-cell;
+		&:not(:last-child) {
+			@include border-right-radius(0);
+		}
+		&:not(:first-child) {
+			@include border-left-radius(0);
+			border-left: 0;
+		}
+	}
+}
+
+/* IDs **************************************************************/
+/* Specific page elements */
+
+#notice {
+	@extend .alert-success;
+	@extend .container;
+	text-align: center;
+}
+
+#error_explanation {
+	@extend .panel-danger;
+	@extend .container;
+	padding-left: 0;
+	padding-right: 0;
+	ul {
+		list-style: disc outside none;
+	}
+}
+
+#alerts-ajax {
+	display: none;
+}
+
+
+form#search {
+	@extend .navbar-right;
+	@extend .simple-input-group;
+}
+
+#user-actions {
+	@extend .navbar-btn;
+	@extend .navbar-left;
+	* { display: table-cell; }
+	div {
+		@extend .simple-input-group;
+		padding-right: .25em;
+	}
+}
+
+/* Classes **********************************************************/
+
+/*
+.btn {
+	&.user    { @extend .btn-info; }
+	&.signup  { @extend .btn-success; }
+	&.signin  { @extend .btn-warning; }
+	&.signout { @extend .btn-danger; }
+	&.server  { @extend .btn-warning; }
+	&.create-alert {
+		color: white;
+		background-color: rgb(255, 69, 0);
+		border-color: rgb(255, 69, 0);
+	}
+	&.alerts {
+		color: white;
+		background-color: hsl(0, 69%, 22%);
+	}
+}
+*/
+
+.field_with_errors {
+	@extend .has-error;
+	display: inline;
+	label {
+		@extend .control-label;
+	}
+}
+
+/* Elements *********************************************************/
+
+footer {
+	@extend .container;
+	margin-top: 1em;
+	border-top: solid 1px $hr-border;
+	text-align: center;
+}
+
+fieldset {
+	border: solid 1px $legend-border-color;
+	border-radius: .5em;
+	padding: 1em;
+	margin: 1em 0;
+	legend {
+		display: block;
+		margin: 0;
+		padding: .25em .5em;
+		width: auto;
+		border: solid 1px $legend-border-color;
+		border-radius: .5em;
+	}
+}
+
+form ul {
+	list-style: none;
+}
+
+pre {
+	text-align: left;
+}
+
+/* Misc *************************************************************/
+
+.tournament-listing {
+	margin: 10px 0px;
+	border-radius: 5px;
+	box-shadow: 0px 0px 3px #B8B8B8;
+	background-color: rgba(0, 0, 0, 0.6);
+	border: 1px solid #AAAAAA;
+	min-height: 100px;
+	padding: 8px 4px;
+
+	div.row {
+		margin-left: 2%;
+	}
+	p.message {
+		margin-top: 10px;
+	}
+
+	/* AKA the listing title */
+	h3 {
+		margin-top: 0px;
+		color: #F0AD4E;
+		font-weight: bold;
+	}
+
+	h3:hover {
+		color: #D09D3E;
+	}
+
+	/* host of the tournament */
+	.host {
+		font-weight: bold;
+		color: #FFF;
+	}
+
+	.col-md-8 {
+		padding: 0;
+		a {
+			padding: 5px 0 0 0;
+		}
+	}
+
+	.t-game{
+		font-weight: bold;
+		text-align: center;
+	}
+
+	.t-image{
+		display: block;
+		margin:auto;
+	}
+}
+
+
+.user-listing {
+	margin: 10px 0px;
+	border-radius: 5px;
+	box-shadow: 0px 0px 3px #B8B8B8;
+	background-color: rgba(0, 0, 0, 0.6);
+	border: 1px solid #AAAAAA;
+	min-height: 100px;
+	padding: 8px 4px;
+	display: inline-table;
+
+	/* AKA the listing title */
+	h3 {
+		margin-top: 0px;
+		color: #F0AD4E;
+		font-weight: bold;
+	}
+
+	h3:hover {
+		color: #D09D3E;
+	}
+
+	.things {
+		padding: 0px 10px;
+	}
+
+	p {
+		margin: 0;
+	}
+	div.row {
+		margin-left: 2%;
+	}
+}
+
+// Limitation: Only one box can be expanded at a time
+.collapsible {
+	.collapsed { display: block; }
+	.expanded { display: none; }
+	&:target {
+		.collapsed { display: none; }
+		.expanded { display: block; }
+	}
+}
+
+.simple_captcha {
+	background-color: rgba(255, 255, 255, 0.7);
+	margin: 10px 0px;
+}

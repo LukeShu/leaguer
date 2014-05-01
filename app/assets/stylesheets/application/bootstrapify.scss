@@ -1,0 +1,66 @@
+@import "bootstrap";
+
+.btn {
+	@extend .btn-default;
+}
+
+a[role="button"], button, input[type="submit"] {
+	@extend .btn;
+}
+
+.navbar {
+	form {
+		@extend .navbar-form;
+	}
+	.nav {
+		@extend .navbar-nav;
+	}
+	ul {
+		@extend .nav;
+	}
+}
+form {
+	input[type="text"],
+	input[type="search"],
+	input[type="tel"],
+	input[type="url"],
+	input[type="email"],
+	input[type="password"],
+	input[type="datetime"],
+	input[type="date"],
+	input[type="month"],
+	input[type="week"],
+	input[type="time"],
+	input[type="number"],
+	input[type="range"],
+	input[type="color"],
+	select, textarea{
+		@extend .form-control;
+	}
+	label {
+		@extend .control-label;
+	}
+}
+
+header nav {
+	@extend .navbar;
+	@extend .navbar-default;
+}
+
+.alert { @extend .alert-default; }
+.alert-success { @extend .alert; }
+.alert-info    { @extend .alert; }
+.alert-warning { @extend .alert; }
+.alert-danger  { @extend .alert; }
+
+.panel-primary { @extend .panel; }
+.panel-success { @extend .panel; }
+.panel-info    { @extend .panel; }
+.panel-warning { @extend .panel; }
+.panel-danger  { @extend .panel; }
+.panel {
+	h1, h2, h3, h4, h5, h6 {
+		@extend .panel-heading;
+		@extend .panel-title;
+	}
+}

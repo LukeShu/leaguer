@@ -6,7 +6,7 @@
 			<legend>Default permissions for new users</legend>
 			<ul>
 				<% @server.default_user_abilities.keys.each do |ability| %>
-					<li><label><%= a.check_box(ability) %> <%= ability.to_s.humanize %></label></li>
+					<li><%= a.check_box(ability) %> <%= a.label(ability) %></li>
 				<% end %>
 			</ul>
 		</fieldset>

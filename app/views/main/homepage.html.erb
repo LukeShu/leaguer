@@ -1,18 +1,13 @@
-<div role="main" class="container theme-showcase">
-
-      <div class="jumbotron">
-        <h1>Welcome to Leaguer</h1>
-        <p>This is a tournment management system designed to be used for any team sport. Our peer review system ensures that the best players move on to the next round! Try creating a new tournament and having people sign up for it. </p>
-        <p id="jumbo-buttons">
-        <% if !signed_in? %>
-        <%= link_to 'Log In', new_session_path, :class => "btn btn-warning btn-lg", :role => "button" %>
-        <%= link_to 'Sign Up', new_user_path, :class => "btn btn-warning btn-lg", :role => "button" %>
-        <% else %>
-        <%= link_to 'Start a Tournament', new_tournament_path, :class => "btn btn-warning btn-lg", :role => "button" %> 
-        <% end %>
-        <%= link_to 'See Ongoing Tournaments', tournaments_path, :class => "btn btn-warning btn-lg", :role => "button" %>
-
-         </p>
-      </div>
-
-    </div>
+<div class="jumbotron">
+	<h1>Welcome to Leaguer</h1>
+	<p>This is a tournment management system designed to be used for any team sport. Our peer review system ensures that the best players move on to the next round! Try creating a new tournament and having people sign up for it. </p>
+	<p id="jumbo-buttons">
+		<% if !signed_in? %>
+			<%= link_to 'Log In', new_session_path, :class => "signin", :role => "button" %>
+			<%= link_to 'Sign Up', new_user_path, :class => "signup", :role => "button" %>
+		<% else %>
+			<%= link_to 'Start a Tournament', new_tournament_path, :role => "button" %>
+		<% end %>
+		<%= link_to 'See Ongoing Tournaments', tournaments_path, :role => "button" %>
+	</p>
+</div>

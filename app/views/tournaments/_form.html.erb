@@ -86,7 +86,7 @@
 			<fieldset>
 				<legend>Stages</legend>
 				<label for="num_stages">Number of Tournament Stages</label>
-				<input type="number" name="num_stages" min="1" value="<%= params[:num_stages].to_i %>">
+				<input type="number" id="num_stages" name="num_stages" min="1" value="<%= params[:num_stages].to_i %>">
 				<%# stage_fields.submit("Set Stages") %>
 				<% for i in 1..(params[:num_stages].to_i) do %>
 					<%= stages_fields.fields_for i.to_s do |stage_fields| %>
