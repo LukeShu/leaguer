@@ -94,9 +94,7 @@ We introduced Tournament Stages to accomodate a wider range of tournament types
 and modes and designed the library modules to be general enough to use results of
 past stages or player statistics to affect future ones.
 
-## Tournament preference interface (#tourn-prefer)
-
-TODO
+## More types of seeded settings (#seed)
 
 TODO
 
@@ -177,7 +175,7 @@ appeared only when there is a new alert.
 
 ## Expand Peer Evaluation (#peer-expansion)
 
-We created a scoring modules for users to select the preferred scoring method and 
+We created scoring modules for users to select the preferred scoring method and 
 preferred peer evaluation for users to choose from when creating a tournament.
 The peer evaluation modules calculate the score correctly but do not grab the 
 statistics from the submission forms. The skeletons for three such scoring methods 
@@ -226,6 +224,15 @@ creation.  The seeding methods we have currently are:
 
 Early bird and random seeding are  completed, but fair ranked has yet
 to be done. 
+
+## Tournament preference interface (#tourn-prefer)
+
+Tournament Settings are handled correctly and securely, the permission system is
+robust enough to handle custom preferences, and the database structure exists to
+handle them, even the icons for adding them were created, however, the interface
+for adding them was deemed low priority for this sprint in comparison to the lib
+modules and permissions overhauls.
+
 
 # Not implemented
 
