@@ -3,7 +3,7 @@
 <div>
 	<%= form_tag(sessions_path, method: :post, id: :new_session) do %>
 		<% if params[:action] == "create" %>
-			<div id="error_explanation">
+			<div class="alert-danger">
 				<p>The username/password pair you entered did
 				not match our records.  Check your typing and
 				try again.</p>
