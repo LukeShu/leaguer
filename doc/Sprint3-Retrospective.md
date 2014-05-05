@@ -85,7 +85,10 @@ consistently, and avoid code duplication.
 
 ## Email verification (#email-varify)
 
-TODO
+Email verification was (finally) implemented.  It uses delayed_job
+(see [asynchronous Riot pulls](#async)) to avoid blocking the page if
+the MX isn't responding.  However, email password resets are not yet
+implemented, which is the obvious use-case for verified emails.
 
 ## Alternate Scoring and pairing methods (#alt-score-par)
 
@@ -265,4 +268,5 @@ this sprint because different methods didn't work together as we thought they wo
 We spent a lot of time reworking things that should have already been complete
 simply because of incomptability issues; the transitions between steps in our flow
 didn't function as we intended. Moving forward, we have more time to ensure that
-components work together properly and are tested in a more comprehensive manner.
+components work together properly and are tested in a more
+comprehensive manner.
