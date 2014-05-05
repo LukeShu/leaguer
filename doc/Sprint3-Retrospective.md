@@ -264,4 +264,5 @@ match the polished codebase which will then be able to speak for itself.
 this sprint because different methods didn't work together as we thought they would.
 We spent a lot of time reworking things that should have already been complete
 simply because of incomptability issues; the transitions between steps in our flow
-didn't function as we intended.
+didn't function as we intended. Moving forward, we have more time to ensure that
+components work together properly and are tested in a more comprehensive manner.
