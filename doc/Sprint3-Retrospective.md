@@ -256,7 +256,8 @@ permissions overhauls.
 
 # Not implemented {#success}
 
-We implemented everything we planned to implement and much more.
+We implemented everything we planned to, though much of it was not
+working in time for the demonstration on Tuesday.
 
 # How to improve {#improve}
 
