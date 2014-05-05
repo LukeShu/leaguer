@@ -1,4 +1,4 @@
- ---
+---
 title: "Team 6 - Project Leaguer: Sprint 3 Retrospective"
 author: [ Nathaniel Foy, Guntas Grewal, Tomer Kimia, Andrew Murrell, Luke Shumaker, Davis Webb ]
 ---
