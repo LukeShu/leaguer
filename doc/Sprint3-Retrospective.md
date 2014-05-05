@@ -241,17 +241,16 @@ modules and permissions overhauls.
 
 # Not implemented
 
-We implemented everything we planned to implement.
+We implemented everything we planned to implement and much more.
 
 # How to improve (#improve)
 
-1. We can work at a preferable pace since we can decide our own deadlines and work
-without other classes dividing our time and energy.
+1. In this sprint our primary mistake was in planning. We were too nonspecific in
+deciding what to get done and accepted too many tasks as essential. We should have
+scaled down our efforts and focused on only the most essential tasks.
 
-2. We can better prepare and handle presentations of our software in the future:
-	A. Do not work on project while waiting for our presentation's turn.
-	B. Practice our demo (we were effectively a day behind where we needed to be).
-	C. Follow the presentation grade outline.
-
-3. We can better decide what to do in a sprint. We bit off a bit more work than
-we could effectively chew for this sprint.
+2. Also because of last-minute alterations and refactors, nearly EVERYTHING that
+could have gone wrong in our presentation went wrong (the wifi connectivity dropped,
+our presentation server on demo.projectleaguer.net wasn't updating, even Andrew's
+window manager segfaulted). Much of this could have been fixed if we simply had another
+few hours to prepare for the presentation.
