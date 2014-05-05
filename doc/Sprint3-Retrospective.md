@@ -247,10 +247,17 @@ We implemented everything we planned to implement and much more.
 
 1. In this sprint our primary mistake was in planning. We were too nonspecific in
 deciding what to get done and accepted too many tasks as essential. We should have
-scaled down our efforts and focused on only the most essential tasks.
+scaled down our efforts and focused on only the most essential tasks. In the future,
+more time will be spent on designing and planning sprints and dividing workload.
 
 2. Also because of last-minute alterations and refactors, nearly EVERYTHING that
 could have gone wrong in our presentation went wrong (the wifi connectivity dropped,
 our presentation server on demo.projectleaguer.net wasn't updating, even Andrew's
-window manager segfaulted). Much of this could have been fixed if we simply had another
-few hours to prepare for the presentation.
+window manager segfaulted). Much of this could have been fixed if we simply a little
+better prepared and had frozen our codebase a specified time prior to the
+presentation. Realistically, things would have worked phenomenally better had we
+another few hours to prepare for the presentation. In the future when presenting to
+potential users or stakeholders we will be sure to have a practiced presentation to
+match the polished codebase which will then be able to speak for itself.
+
+3. 
