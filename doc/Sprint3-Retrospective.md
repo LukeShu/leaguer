@@ -68,12 +68,15 @@ changes and in the end only a few specific redirections needed to be coded direc
 
 ## Search (#search)
 
-Search was given its own controller, and a static page callled "go.html.erb". The 
-search controller essentially took the query, and made an SQL call to the users
-database and the tournaments dadtabase. We've moved the tournament and player
-display methods so that the search would display players and tournaments in the same
-way that they've been displaying in their respective "index.html.erb" page. Advanced
-search was added so that users could search tournaments by their game type.
+A basic SearchController and simple view were implemented.  The search controller
+took the query, and queried the "name" columns in the user and tournament database
+tables.  An "advanced" search mode allows filtering tournaments by game type.  We
+would like to be able to search based on other parameters and settings of the
+tournament, and other user attributes.
+
+To more easily render the search results, we moved the tournament and player
+display blocks from their respective index pages to be shared, to display them
+consistently, and avoid code duplication.
 
 ## Email verification (#email-varify)
 
@@ -82,7 +85,7 @@ TODO
 ## Alternate Scoring and pairing methods (#alt-score-par)
 
 We overhaulted the entire tournament structure and introduced a modular/pluggable
-system for seeding, scheduling, sampling, and scoring, lovingly called the 4S Module
+system for seeding, scheduling, sampling, and scoring, lovingly called the 4S-Module
 System.  We relocated code from other places into these modules in the 'lib'
 directory including form HTML which is retrieved dynamically from these modules.
 In the case of sampling (retrieving and populating statistics for scoring) we built
@@ -94,17 +97,34 @@ past stages or player statistics to affect future ones.
 
 ## More types of seeded settings (#seed)
 
-TODO
+We implemented seeding for initial placement of players within a tournament as part
+of the 4S-Module System. Three seeding modules were implemented.
+
+	I.  Early bird
+		- Team rosters are based on order of registration for the tournament.
+
+	II.  Random
+		- Team rosters are randomized.
+
+	III.  Fair Ranked
+		- Players are distributed evenly on teams according to their performance in
+		the previous tournament stage. This method only works for tournaments with
+		multiple stages.
 
 ## Asynchronous Riot Pulls (#async)
 
-Project Leaguer handles asynchronous API pulling with the Delayed Job gem. A
-separate daemons server runs concurrently in order to use this functionality.
-The algorithm for Riot API pulling makes sure that the server does not go over the
-limited number of pulls set by Riot (no more than 10 per 10 seconds and 500 in ten
-minutes). It auto-grabs data for a League of Legends match by comparing games from
-a user in the match every four minutes. When their last match data changes, we know
-to then grab the rest of the data for the match.
+Prior to this iteration, calls to the Riot Games API here hard-coded, and blocked
+the page from loading while the requests were made.  We needed to (1) create an
+interface for doing this flexibly (2) make the calls asynchrounous to avoid blocking
+the page load.  To perform the asynchronous requets, we used the "delayed_job" gem
+to run each request as a separate job process.  A challenge with this was that most
+API's (including Riot Games') place an artifical limit on API requests within a
+given period of time (in the case of Riot Games, 10 requests per 10 seconds, and
+500 per 10 minutes).  So the background job making requests must be throttled from
+making too many within several given rolling blocks of unit time.  To do this,
+we implemented a ThrottledApiRequest base class that makes it simple to create
+throttled asynchronous API requests, which we used to create the "RiotAPI" sampling
+method, but is applicable in a much wider variety of situations.
 
 ## Map out brackets scaffolding (#brack-scaff)
 
@@ -129,11 +149,11 @@ matches.
 
 ## General Interface Cleanups (#interface-clean)
 
-Project Leaguer better handled tournament interface in this iteration. Tournaments
-are listed more cleanly on the index page. Each game type has an icon listed with
-it to better identify different game types on the index page. Each tournament's
-host's gravatar is also listed on the index page. Creating a tournament itself is
-also cleaner. Customization categories are clearly separated and use the correct
+Project Leaguer better handled tournament interface in this iteration.  Tournaments
+are listed more cleanly on the index page.  Each game type has an icon listed with
+it to better identify different game types on the index page.  Each tournament's
+host's gravatar is also listed on the index page.  Creating a tournament itself is
+also cleaner.  Customization categories are clearly separated and use the correct
 selection or input types for easy use.
 
 ## Make it look professional (#professional)
@@ -142,7 +162,7 @@ The team decided on a color scheme for Leaguer during this sprint. This scheme
 was applied to every page in the site. Since e-sport players often spend hours in
 front of screens, it was important to reduce eye strain by making our interface dark
 while keeping it sleek and modern. We implemented Gravatar in a few more spots as
-well, helping to distinguish between users more easily. The default image was
+well, helping to distinguish between users more easily.  he default image was
 changed to give each user a unique avatar even if they've not set one. Tournament
 creation and listing also received tune ups, with images listed with each tournament
 to help display its game type and a better creation page when creating a tournament.
@@ -168,75 +188,45 @@ alert was created with a live update, a pop up notification which redirects to t
 list of alerts, in the navigation bar of the recieving users. The alerts icon 
 appeared only when there is a new alert. 
 
-
 # Implemented but not working well
 
 ## Expand Peer Evaluation (#peer-expansion)
 
-We created scoring modules for users to select the preferred scoring method and 
-preferred peer evaluation for users to choose from when creating a tournament.
-The peer evaluation modules calculate the score correctly but do not grab the 
-statistics from the submission forms. The skeletons for three such scoring methods 
-namely, winnerTakesAll, FibonacciPeerWithBlowout, MarginalPeer, have been created.
-The for MarginalPeer we do not have a view but we do have the methods that would 
-calculate the score provided the stats are in the database. For WinnerTakesAll and
-FibonacciWithPeerBlowout we do have views and data being collected from the interface
-and used to calculate score.
+We created scoring modules for users to select the preferred scoring method,
+including options for peer review, during tournament creation. We created three
+scoring modules: winnerTakesAll, FibonacciPeerWithBlowout, and MarginalPeer, two
+of which work. Since winnerTakesAll and FibonacciPeerWithBlowout demonstrated the
+extremes, the testing of MarginalPeer was considered low priority. As a whole the
+scoring modules' interface, outlined in the 4S-Module README for scoring was
+designed much better than than our implementations were able to show off by the
+end of the sprint.
 
 ## Remote Game UserNames (#remote_user)
 
-The idea behind remote usernames is that a Leaguer user would be able to add
-a username from another online service to our database (such as add their riot
-username to our database) so that information from that outer source could be used
-in our tournament statistics.  This is constructed by adding a reference to the user
-to the remote_username column of the SQL database and giving it a value. This value
-is a hash that can contain any sort of information needed. 
+Project Leaguer stores for each user and game-type a reference to a remote username.
+This allows a user to register her accounts with the system and for API requests to
+be completed for a registered game-type. The interface for this was only partially
+completed, and being integrated into a player's profile page directly, it only
+allowed registration of League of Legends remote usernames.
 
 ## Project Leaguer Logo (#logo))
 
-The point of the Leaguer logo is to set a definitive symbol for our product.  The
-current logo is a rough draft and will more than likely not be truly done for some time
-if ever.  For now, we have a decent looking logo and are planning on placing it into the
-product documents.  Other than that, this is not yet complete.
-
-## More types of seeded settings (#seed)
-
-The idea behind the seeding settings is have different methods of team 
-creation.  The seeding methods we have currently are:
-	I.  Early bird
-		- Which is the method of creating a team based on who joins the 
-		tournament first.  So if there are five players per team, then 
-		the first five players to join the tournament would be on team
-		one and so on. 
-
-	II.  Random 
-		- Which will take an array of the players and shuffle them, as 
-		to randomize their order, and then place them in teams based on the 
-		maximum team size. So the first five in team one, the next five in 
-		team two, and so on.
-
-	III.  Fair Ranked
-		- Which will place users of a tournament into teams based on their
-		skill level.  This will ensure the five best players of a tournament
-		are not on the same team, as to allow fair gameplay.
-
-Early bird and random seeding are  completed, but fair ranked has yet
-to be done. 
+While a suitable logo was created, it was deemed too unprofessional for use by the
+project at this time. The search for a more amicable logo remains underway.
 
 ## Tournament preference interface (#tourn-prefer)
 
 Tournament Settings are handled correctly and securely, the permission system is
-robust enough to handle custom preferences, and the database structure exists to
-handle them, even the icons for adding them were created, however, the interface
+robust enough to handle custom preferences, the database structure exists to
+handle them, and even the icons for adding them were created, however, the interface
 for adding them was deemed low priority for this sprint in comparison to the lib
 modules and permissions overhauls.
-
 
 # Not implemented
 
 TODO
 
-
+giat 
 # How to improve
 
 TODO
