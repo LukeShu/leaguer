@@ -21,8 +21,6 @@ several days.
 +---------------------------------------------------------+------+------------+----+
 | [Alternate Scoring and pairing methods](#alt-score-par) |   5  | G, A, D    | 7,8|
 +---------------------------------------------------------+------+------------+----+
-| [Tournament preference interface](#tourn-prefer)        |   3  | Andrew     | 9  |
-+---------------------------------------------------------+------+------------+----+
 | [Asynchronous Riot Pulls](#async)                       |   5  | Nathaniel  | 11 |
 +---------------------------------------------------------+------+------------+----+
 | [Map out brackets scaffolding](#brack-scaff)            |   5  | Tomer      | 10 |
@@ -33,6 +31,8 @@ several days.
 +---------------------------------------------------------+------+------------+----+
 | [Make it look professional](#professional)              |   3  | All        | 1  |
 +---------------------------------------------------------+------+------------+----+
+| [Expand Peer Evaluation](#peer-expansion)               |   3  | G, A, D    | 7  |
++---------------------------------------------------------+------+------------+----+
 | [Private Messages](#priv-messages)                      |   5  | N, L       | 5  |
 +---------------------------------------------------------+------+------------+----+
 | [Alerts](#alerts)                                       |   3  | Guntas     | 4  |
@@ -42,9 +42,9 @@ several days.
 +---------------------------------------------------------+------+------------+----+
 | Tasks Implemented and Not Working Well                  | Size | Person     | US |
 +=========================================================+======+============+====+
-| [Expand Peer Evaluation](#peer-expansion)               |   3  | G, A, D    | 7  |
-+---------------------------------------------------------+------+------------+----+
 | [Remote Game UserNames](#remote_user)                   |   3  | Davis      | 12 |
++---------------------------------------------------------+------+------------+----+
+| [Tournament preference interface](#tourn-prefer)        |   3  | Andrew     | 9  |
 +---------------------------------------------------------+------+------------+----+
 | [More types of seeded settings](#seed)                  |   2  | Andrew     | 9  |
 +---------------------------------------------------------+------+------------+----+
@@ -55,7 +55,12 @@ several days.
 +---------------------------------------------------------+------+------------+----+
 | Tasks Not Implemented                                   | Size | Person     | US |
 +=========================================================+======+============+====+
-TODO
+| [Nothing cause we are great](#success)                  | 0    | ---        | 0  |
++---------------------------------------------------------+------+------------+----+
+
+
+# [How to improve](#improve)
+
 
 
 # Implemented and working
@@ -167,6 +172,18 @@ changed to give each user a unique avatar even if they've not set one. Tournamen
 creation and listing also received tune ups, with images listed with each tournament
 to help display its game type and a better creation page when creating a tournament.
 
+## Expand Peer Evaluation (#peer-expansion)
+
+We created a scoring modules for users to select the preferred scoring method and 
+preferred peer evaluation for users to choose from when creating a tournament.
+The peer evaluation modules calculate the score correctly and grab the 
+statistics from the submission forms. The skeletons for three such scoring methods 
+namely, winnerTakesAll, FibonacciPeerWithBlowout, MarginalPeer, have been created.
+For the MarginalPeer we do not have a view but we do have the methods that would 
+calculate the score provided the stats are in the database. For WinnerTakesAll and
+FibonacciWithPeerBlowout we do have views and data being collected from the interface
+and used to calculate score.
+
 ## Private Messages (#priv-messages)
 
 Private Messsaging in Project Leaguer is possible between two registered users.
@@ -224,9 +241,17 @@ modules and permissions overhauls.
 
 # Not implemented
 
-TODO
+We implemented everything we planned to implement.
 
-giat 
-# How to improve
+# How to improve (#improve)
 
-TODO
+1. We can work at a preferable pace since we can decide our own deadlines and work
+without other classes dividing our time and energy.
+
+2. We can better prepare and handle presentations of our software in the future:
+	A. Do not work on project while waiting for our presentation's turn.
+	B. Practice our demo (we were effectively a day behind where we needed to be).
+	C. Follow the presentation grade outline.
+
+3. We can better decide what to do in a sprint. We bit off a bit more work than
+we could effectively chew for this sprint.
