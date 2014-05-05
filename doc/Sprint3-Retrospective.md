@@ -260,4 +260,8 @@ another few hours to prepare for the presentation. In the future when presenting
 potential users or stakeholders we will be sure to have a practiced presentation to
 match the polished codebase which will then be able to speak for itself.
 
-3. 
+3. We can better plan our project's flow and layout. We refactored a lot of code in
+this sprint because different methods didn't work together as we thought they would.
+We spent a lot of time reworking things that should have already been complete
+simply because of incomptability issues; the transitions between steps in our flow
+didn't function as we intended.
