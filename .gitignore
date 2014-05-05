@@ -23,6 +23,7 @@
 
 # The rest is from Luke.
 /vendor/bundle
+/public/assets
 nohup.out
 # As noted above, you probably want to add the following to your global git config.
 .~lock.*
