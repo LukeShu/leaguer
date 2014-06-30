@@ -13,8 +13,12 @@ gem 'httparty'
 gem 'simple_captcha2', require: 'simple_captcha'
 
 group :development, :test do
-	# Use sqlite3 as the database for Active Record
+	# Use sqlite3 as the database
 	gem 'sqlite3'
+end
+group :production do
+	# USe PostgresQL as the database
+	gem 'pg'
 end
 
 # group :test do
