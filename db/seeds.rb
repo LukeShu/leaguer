@@ -26,7 +26,7 @@ rockpaperscissors.settings.create!(display_order: 6, name: "check_boxes"        
 
 if Rails.env.development? or (ENV['FORCE_SEED'] and not ENV['FORCE_SEED'].empty?)
 	# User 1, the ADMIN
-	admin = User.create!(name: "Administrator", user_name: "admin", email: "root@localhost.lan", password: "password", permissions: 0xFFFFFFF)
+	admin = User.create!(name: "Administrator", user_name: "admin", email: "root@localhost.lan", password: "password", permissions: 0x7FFFFFFF)
 
 	# John Doe's for testing
 	User.create!(name: "John 0", password: "password", email: "john0@gmail.com", user_name: "johndoe0")
