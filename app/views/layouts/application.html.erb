@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 	<title>Leaguer</title>
 
 	<%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
-	<%= stylesheet_link_tag "#{params[:controller]}", media: "all", "data-turbolinks-track" => true %>
 
 	<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
 	<%= javascript_include_tag "#{params[:controller]}", "data-turbolinks-track" => true %>
@@ -16,42 +15,51 @@
 <body>
 <header>
 	<nav>
-	<%# This is the logo %>
-	<div class="navbar-brand"><%= link_to('Leaguer', root_path) %></div>
-
-	<%# This is the search bar  #%>
-	<div>
-		<%= form_tag("/search", method: "get", :class => "search") do %>
-			<%= text_field_tag(:query, params[:query], type: "search") %>
-			<%= submit_tag("Search", :name=>nil) %>
-		<% end %>
-	</div>
-
-	<%# these are the log in buttons #%>
-	<div id="log-buttons">
-		<% if signed_in? %>
-			<%= link_to current_user.user_name, current_user, :class => "user" %>
-			<%= link_to "Messages", pms_path, :class => "signup" %>
-			<% if current_user.can? :edit_server %>
-				<%= link_to "Server settings", edit_server_path, :class => "server" %>
-			<% end %>
-			<% if current_user.can? :create_alert %>
-				<%= link_to "Create Alert", new_alert_path, :class => "create-alert" %>
-			<% end %>
-			<%= link_to "Sign out", session_path("current"), method: "delete", :class => "signout" %>
-			<%# if there is an unread alert then I wanna be able to show the notification icon by saying :style => display:inline. This will be Done by Guntas once he figures out how to get unread alerts. Psuedo if alerts.unread > 0 then display else don't.%>
-			<%= link_to "", alerts_path, :class => "alerts", :id => "alerts-ajax"%>
-		<% else %>
-			<%= link_to "Log in", new_session_path, :class => "signin" %>
-			<%= link_to "Sign up", new_user_path, :class => "signup" %>
-		<% end %>
-	</div>
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<%= link_to('Leaguer', root_path, class: "navbar-brand") %>
+			</div>
+			<div class="navbar-collapse">
+				<div id="user-actions">
+					<span>
+						<% if signed_in? %>
+							<%= link_to current_user.user_name, current_user, :class => "user", :role => :button %>
+							<%= link_to "Sign out", session_path("current"), method: "delete", :class => "signout", :role => :button %>
+						<% else %>
+							<%= link_to "Log in", new_session_path, :class => "signin", :role => :button %>
+							<%= link_to "Sign up", new_user_path, :class => "signup", :role => :button %>
+						<% end %>
+					</span>
+					<% if current_user.can? :create_alert %>
+						<span><%= link_to "Create Alert", new_alert_path, :class => "create-alert", :role => :button %></span>
+					<% end %>
+				</div>
+				<% if signed_in? %>
+					<ul>
+						<li><%= link_to "Messages", pms_path %></li>
+						<% if current_user.can? :edit_server %>
+							<li><%= link_to "Server settings", edit_server_path, :class => "server" %></li>
+						<% end %>
+					</ul>
+					<%# If there is an unread alert then I want to be able
+					    to show the notification icon by saying :style =>
+					    display:inline. This will be Done by Guntas once
+					    he figures out how to get unread alerts. Psuedo if
+					    alerts.unread > 0 then display else don't.%>
+					<%= link_to "", alerts_path, :class => "alerts", :id => "alerts-ajax"%>
+				<% end %>
+				<%= form_tag("/search", method: :get, :id => "search") do %><div>
+					<%= text_field_tag(:query, params[:query], type: :search) %>
+					<%= submit_tag "Search" %>
+				</div><% end %>
+			</div>
+		</div>
 	</nav>
 </header>
 
 <% if notice %><div id="notice"><p><%= notice %></p></div><% end %>
 
-<div class="wrapper">
+<div class="container">
 	<%= yield %>
 </div>
 

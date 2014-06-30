@@ -1,48 +1,46 @@
-<p>
-  <strong>Participants:</strong>
-  <% receps = @pm.conversation.participants %>
-  <% receps.each do |recep| %>
-    <% #unless recep == @pm.conversation.last_sender %>
-      <%= recep.user_name %>
-      <%= "," %>
-    <% #end %>
-  <% end %>
-  <%= "and the NSA" %>
-</p>
+<%= link_to '« Back to all private messages', pms_path, class: :breadcrumb %>
 
-<p>
-  <strong>Subject:</strong>
-  <%= @pm.conversation.subject %>
-</p>
+<div>
+	<p>
+		<strong>Participants:</strong>
+		<% receps = @pm.conversation.participants %>
+		<% receps.each do |recep| %>
+			<% #unless recep == @pm.conversation.last_sender %>
+				<%= recep.user_name %>,
+			<% #end %>
+		<% end %>
+		<%= "and the NSA" %>
+	</p>
+
+	<p>
+		<strong>Subject:</strong>
+		<%= @pm.conversation.subject %>
+	</p>
+</div>
 
 <% receipts = @pm.conversation.receipts_for current_user %>
 <% receipts.each do |receipt| %>
-  <% message = receipt.message %>
-
-  <p> ________________________________________________ </p>
-
-  <p>
-    <b><%= message.sender.user_name %></b>
-    <%= ":" %>
-    <%= message.body %>
-  </p>
-
+	<% message = receipt.message %>
+	<hr>
+	<p>
+		<strong><%= message.sender.user_name %>:</strong>
+		<%= message.body %>
+	</p>
 <% end %>
 
-<p> ________________________________________________ </p>
-<p> 
-  <% @pm.message = "" %>
-  <%= form_for(@pm) do |f| %>
-    <div class="field">
-    <%= f.text_area :message %>
-    </div>
+<hr>
 
-    <div class="actions">
-    <%= submit_tag("Reply", :class => "signup") %>
-    </div>
+<div>
+	<% @pm.message = "" %>
+	<%= form_for(@pm) do |f| %>
+		<div class="field">
+			<%= f.text_area :message %>
+		</div>
 
- <% end %>
-</p>
+		<div class="actions">
+			<%= submit_tag("Reply", :class => "signup") %>
+		</div>
+	<% end %>
+</div>
 
 <% @pm.conversation.mark_as_read(current_user) %>
-<%= link_to 'Back', pms_path %>

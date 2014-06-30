@@ -31,7 +31,7 @@
     <ul>
     <%= fields_for "user[abilities]", @user.abilities do |abilities_fields| %>
       <% @user.abilities.keys.each do |ability| %>
-      <li><label><%= abilities_fields.check_box(ability) %> <%= ability.to_s.humanize %></label></li>
+      <li><%= abilities_fields.check_box(ability) %> <%= abilities_fields.label(ability) %></li>
       <% end %>
     <% end %>
     </ul>

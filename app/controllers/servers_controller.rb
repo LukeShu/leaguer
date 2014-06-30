@@ -13,7 +13,7 @@ class ServersController < ApplicationController
 	def update
 		respond_to do |format|
 			if @server.update(server_params)
-				format.html { redirect_to @server, notice: 'Server was successfully updated.' }
+				format.html { redirect_to edit_server_url, notice: 'Server was successfully updated.' }
 				format.json { head :no_content }
 			else
 				format.html { render action: 'edit' }

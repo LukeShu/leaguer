@@ -3,23 +3,23 @@
 <div>
 	<%= form_tag(sessions_path, method: :post, id: :new_session) do %>
 		<% if params[:action] == "create" %>
-			<div id="error_explanation">
+			<div class="alert-danger">
 				<p>The username/password pair you entered did
 				not match our records.  Check your typing and
 				try again.</p>
 			</div>
 		<% end %>
-		<p>
+		<div class="field">
 			<%= label_tag(:username_or_email, "Username/Email") %><br/>
 			<%= text_field_tag(:username_or_email) %>
-		</p>
-		<p>
+		</div>
+		<div class="field">
 			<%= label_tag(:password) %><br/>
 			<%= password_field_tag(:password) %>
-		</p>
-		<p>
+		</div>
+		<div class="field">
 			<%= submit_tag("Log in", class: :signin) %>
-		</p>
+		</div>
 	<% end %>
 
 	<p>New user? <%= link_to("Sign up now!", new_user_path) %></p>

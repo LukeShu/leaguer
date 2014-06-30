@@ -1,0 +1,91 @@
+@import "bootstrap";
+
+// Connect Bootstrap classes to reasonable defaults
+
+.btn {
+	@extend .btn-default;
+}
+
+button,
+a[role="button"],
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+	@extend .btn;
+}
+
+.navbar {
+	form {
+		@extend .navbar-form;
+	}
+	.nav {
+		@extend .navbar-nav;
+	}
+	ul {
+		@extend .nav;
+	}
+}
+form {
+	// This list of types is taken from the 2014-04-29 draft of
+	// the HTML5 spec:
+	//     http://www.w3.org/TR/2014/CR-html5-20140429/forms.html#attr-input-type
+	input[type="text"],
+	input[type="search"],
+	input[type="tel"],
+	input[type="url"],
+	input[type="email"],
+	input[type="password"],
+	input[type="date"],
+	input[type="time"],
+	input[type="number"],
+	input[type="range"],
+	input[type="color"],
+	select, textarea {
+		@extend .form-control;
+	}
+	label {
+		@extend .control-label;
+	}
+}
+
+header nav {
+	@extend .navbar;
+	@extend .navbar-default;
+}
+
+.alert { @extend .alert-default; }
+.alert-success { @extend .alert; }
+.alert-info    { @extend .alert; }
+.alert-warning { @extend .alert; }
+.alert-danger  { @extend .alert; }
+
+.panel-primary { @extend .panel; }
+.panel-success { @extend .panel; }
+.panel-info    { @extend .panel; }
+.panel-warning { @extend .panel; }
+.panel-danger  { @extend .panel; }
+.panel {
+	h1, h2, h3, h4, h5, h6 {
+		@extend .panel-heading;
+		@extend .panel-title;
+	}
+}
+
+// Connect built-in Rails classes to the Bootstrap classes.
+
+form {
+	.field {
+		@extend .form-group;
+	}
+	.field_with_errors {
+		@extend .has-error;
+		display: inline;
+	}
+}
+
+#error_explanation {
+	@extend .panel-danger;
+	@extend .container;
+	padding-left: 0;
+	padding-right: 0;
+}
