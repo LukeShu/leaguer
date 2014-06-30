@@ -22,10 +22,12 @@
 /config/application.yml
 
 # The rest is from Luke.
+/config/database.yml
 /vendor/bundle
 /public/assets
-nohup.out
+
 # As noted above, you probably want to add the following to your global git config.
+nohup.out
 .~lock.*
 *~
 *#
