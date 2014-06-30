@@ -28,13 +28,13 @@ class UsersController < ApplicationController
 	# POST /users.json
 	def create
 		@user = User.new(user_params)
-		unless (simple_captcha_valid?)
-			respond_to do |format|
-				format.html { render action: 'new', status: :unprocessable_entity }
-				format.json { render json: @user.errors, status: :unprocessable_entity }
-			end
-			return
-		end
+		#unless (simple_captcha_valid?)
+		#	respond_to do |format|
+		#		format.html { render action: 'new', status: :unprocessable_entity }
+		#		format.json { render json: @user.errors, status: :unprocessable_entity }
+		#	end
+		#	return
+		#end
 
 		respond_to do |format|
 			if @user.save
