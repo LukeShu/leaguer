@@ -41,7 +41,7 @@ class UsersController < ApplicationController
 				sign_in @user
 				if @user.id == 1
 					# This is the first user, so give them all the power
-					@user.permissions = 0xFFFFFFFF
+					@user.permissions = 0x7FFFFFFF
 					@user.save
 				end
 				format.html { redirect_to root_path, notice: 'User was successfully created.' }
