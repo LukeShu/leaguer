@@ -4,5 +4,4 @@ PATH=$bindir:$PATH
 
 set -e
 rake db:drop
-rake db:migrate
-rake db:seed
+rake db:setup

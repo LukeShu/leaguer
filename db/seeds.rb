@@ -24,7 +24,7 @@ rockpaperscissors.settings.create!(display_order: 4, name: "lizard_spock_allowed
 rockpaperscissors.settings.create!(display_order: 5, name: "favorite_object"     , description: "What is your favorite object in RPS?", vartype: GameSetting::types[:pick_one_radio], type_opt: "rock,paper,scissors", default: "rock")
 rockpaperscissors.settings.create!(display_order: 6, name: "check_boxes"         , description: "Example boxes"                       , vartype: GameSetting::types[:pick_several]  , type_opt: "i_do_not_know,there_is_now_spoon,wow,because_electricity,wat?", default: "wow,wat?")
 
-if Rails.env.development?
+if Rails.env.development? or (ENV['FORCE_SEED'] and not ENV['FORCE_SEED'].empty?)
 	# User 1, the ADMIN
 	admin = User.create!(name: "Administrator", user_name: "admin", email: "root@localhost.lan", password: "password", permissions: 0xFFFFFFFF)
 
