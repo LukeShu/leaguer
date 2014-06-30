@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+bindir="$(dirname "$(dirname "$(readlink -f "$0")")")"
+PATH=$bindir:$PATH
+
+set -e
+rake db:drop
+rake db:migrate
+rake db:seed

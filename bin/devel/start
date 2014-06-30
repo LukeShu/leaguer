@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+bindir="$(dirname "$(dirname "$(readlink -f "$0")")")"
+PATH=$bindir:$PATH
+
+rails server --daemon "$@"
+delayed_job start
