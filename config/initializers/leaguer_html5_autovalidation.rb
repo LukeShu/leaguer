@@ -3,9 +3,9 @@ module ActionView
 		module Tags
 			class Base
 				def initialize_with_html5_validators(object_name, method_name, template_object, options = {})
-					initialize_without_html5_validators(object_name, method_name, template_object, options = {})
+					initialize_without_html5_validators(object_name, method_name, template_object, options)
 
-					if /(Area|Button|Box|Field|Select)$/ =~ self.class.name
+					if /(Area|Button|Box|Field|Select)$/ =~ self.class.name and @object.respond_to? :_validators
 						inject_html5_validators(@object._validators[@method_name.to_sym])
 						if @method_name.to_s.end_with?("_confirmation")
 							orig_method_name = @method_name.to_s.sub(/_confirmation$/,'').to_sym
