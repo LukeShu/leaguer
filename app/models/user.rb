@@ -52,7 +52,7 @@ class User < ActiveRecord::Base
 	validates(:user_name,
 		presence: true,
 		length:{maximum: 50},
-		format: {with: /\A[a-zA-Z0-9 _\-]+\z/},
+		format: {with: /\A[a-zA-Z0-9_-]+\z/},
 		uniqueness: {case_sensitive: false })
 
 	# password_digest:string

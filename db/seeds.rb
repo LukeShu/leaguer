@@ -50,7 +50,7 @@ if Rails.env.development? or (ENV['FORCE_SEED'] and not ENV['FORCE_SEED'].empty?
 	players_for_league.push(User.create!(name: "M9Fumjaa"        , password: "password", email: "M9Fumjaa@gmail.com"       , user_name: "M9Fumjaa"        ))
 	players_for_league.push(User.create!(name: "spikevsnaruto"   , password: "password", email: "spikevsnaruto@gmail.com"  , user_name: "spikevsnaruto"   ))
 	players_for_league.push(User.create!(name: "GoogleMaSkills"  , password: "password", email: "GoogleMaSkills@gmail.com" , user_name: "GoogleMaSkills"  ))
-	players_for_league.push(User.create!(name: "james chamberlan", password: "password", email: "jameschamberlan@gmail.com", user_name: "james chamberlan"))
+	players_for_league.push(User.create!(name: "james chamberlan", password: "password", email: "jameschamberlan@gmail.com", user_name: "jameschamberlan" ))
 	players_for_league.push(User.create!(name: "Kaceytron"       , password: "password", email: "Kaceytron@gmail.com"      , user_name: "Kaceytron"       ))
 
 	# Semi-real users
@@ -70,7 +70,7 @@ if Rails.env.development? or (ENV['FORCE_SEED'] and not ENV['FORCE_SEED'].empty?
 	panda 	      = User.create(name: "Panda"        	  , password: "password", email: "panda@gmail.com"              , user_name: "InspectorPanderp"   )
 	mesa 	      = User.create(name: "Mesataki"          , password: "password", email: "mesataki@gmail.com"           , user_name: "Mesakati"           )
 	guntas_league = User.create(name: "TolkiensButt"      , password: "password", email: "TolkiensButt@gmail.com"       , user_name: "TolkiensButt"       )
-	lyra          = User.create(name: "Lyra Heartstings"  , password: "password", email: "LyraHeartstings@gmail.com"    , user_name: "Lyra Heartstings"   )
+	lyra          = User.create(name: "Lyra Heartstings"  , password: "password", email: "LyraHeartstings@gmail.com"    , user_name: "LyraHeartstings"    )
 	josh_league   = User.create(name: "Josh_league"       , password: "password", email: "josh_league@gmail.com"        , user_name: "Joshoowah"          )
 	jeff 		  = User.create(name: "Jeff Linguinee"    , password: "password", email: "jefflingueeneeeee@gmail.com"  , user_name: "SenorJeffafa"       )
 	sarah         = User.create(name: "Sarah Lawson"      , password: "password", email: "sarah@gmail.com"              , user_name: "LittlexSurah"       )
