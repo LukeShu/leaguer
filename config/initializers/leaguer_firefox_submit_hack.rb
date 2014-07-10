@@ -1,4 +1,7 @@
 # -*- ruby-indent-level: 2; indent-tabs-mode: nil -*-
+# This hacks around <input type="submit"> being sized weird by replacing it with <button type="submit">
+# This was nescessary in FF28, no longer in FF30.
+# I have no idea about Chrome or Safari; I imagine browsers are converging on making it sized sanely.
 module ActionView
   module Helpers
     module FormTagHelper
