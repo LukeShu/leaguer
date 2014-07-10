@@ -61,13 +61,13 @@
 					</tr>
 					<tr>
 						<th>Players per Team: </th>
-						<td><%= f.text_field(:min_players_per_team, type: :number, min: 1) %></td>
-						<td><%= f.text_field(:max_players_per_team, type: :number, min: 1) %></td>
+						<td><%= f.number_field(:min_players_per_team, min: 1) %></td>
+						<td><%= f.number_field(:max_players_per_team, min: 1) %></td>
 					</tr>
 					<tr>
 						<th>Teams per Match: </th>
-						<td><%= f.text_field(:min_teams_per_match, type: :number, min: 1) %></td>
-						<td><%= f.text_field(:max_teams_per_match, type: :number, min: 1) %></td>
+						<td><%= f.number_field(:min_teams_per_match, min: 1) %></td>
+						<td><%= f.number_field(:max_teams_per_match, min: 1) %></td>
 					</tr>
 				</tbody>
 			</table>
