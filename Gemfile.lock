@@ -101,6 +101,7 @@ GEM
     rdoc (4.1.1)
       json (~> 1.4)
     ref (1.0.5)
+    ruby-prof (0.15.1)
     sass (3.2.19)
     sass-rails (4.0.3)
       railties (>= 4.0.0, < 5.0)
@@ -154,6 +155,7 @@ DEPENDENCIES
   mailboxer
   pg
   rails (= 4.0.2)
+  ruby-prof
   sass-rails (~> 4.0.0)
   sdoc
   simple_captcha2
