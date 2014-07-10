@@ -32,10 +32,12 @@
 .simple-input-group {
 	white-space: nowrap;
 	display: table;
-	.btn, .form-control {
+	span {
 		display: table-cell;
+	}
+	.btn, .form-control {
+		display: table-cell !important;
 		&:not(:last-child) {
-			float: left;
 			@include border-right-radius(0);
 		}
 		&:not(:first-child) {
@@ -60,13 +62,15 @@
 
 
 form#search {
-	@extend .navbar-right;
-	@extend .simple-input-group;
+	@extend .navbar-left;
+	div {
+		@extend .simple-input-group;
+	}
 }
 
 #user-actions {
 	@extend .navbar-btn;
-	@extend .navbar-left;
+	@extend .navbar-right;
 	@extend .simple-input-group;
 	span {
 		padding-right: .25em;
@@ -154,8 +158,14 @@ form#search {
 }
 */
 
-form[role="button"] {
+form.button_to, form.button_to div {
 	display: inline;
+}
+
+div.field span.help-block {
+	float: right;
+	margin-top: 0;
+	margin-bottom: 0;
 }
 
 /* Elements *********************************************************/

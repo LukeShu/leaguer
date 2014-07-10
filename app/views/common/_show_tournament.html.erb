@@ -47,7 +47,7 @@
 	<div class="col-md-2 col-sm-2 col-xs-2">
 		<% if signed_in? %>
 			<% if !target.players.include?(current_user) && target.status == 0 %>
-				<%= form_tag(tournament_path(target), method: "put", role: :button) do %>
+				<%= form_tag(tournament_path(target), method: "put", class: :button_to) do %>
 					<input type="hidden" name="update_action" value="join">
 					<%= submit_tag("Join")%>
 				<% end %>
@@ -56,11 +56,11 @@
 			<% end %>
 			<% @user_bracket = target.brackets.find_by(user: current_user) %>
 			<% if target.status == 1 && target.stages.order(:id).first.scheduling_method == "elimination" && target.stages.order(:id).first.matches.order(:id).first.status < 2 && !@user_bracket %>
-				<%= form_tag(tournament_brackets_path(target), method: "post", role: :button) do %>
+				<%= form_tag(tournament_brackets_path(target), method: "post", class: :button_to) do %>
 					<%= submit_tag("Make Bracket") %>
 				<% end %>
 			<% elsif @user_bracket && target.status == 4 %>
-				<%= form_tag(tournament_bracket_path(@tournament, @bracket), method: 'put', role: :button) do %>
+				<%= form_tag(tournament_bracket_path(@tournament, @bracket), method: 'put', class: :button_to) do %>
   					<input type="hidden" name="update_action" value="results">
   					<%= submit_tag("Bracket Results") %>
 				<% end %>

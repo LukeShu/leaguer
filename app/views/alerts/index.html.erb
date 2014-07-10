@@ -19,7 +19,7 @@
           <td><%= alert.message %></td>
           <td><%= link_to 'Show', alert %></td>
           <td><%= link_to 'Edit', edit_alert_path(alert) %></td>
-          <td><%= link_to 'Destroy', alert, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= button_to 'Destroy', alert, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
       <% end %> 
     <% else %>

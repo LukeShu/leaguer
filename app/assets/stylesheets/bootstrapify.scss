@@ -30,7 +30,7 @@
 }
 
 button,
-a[role="button"],
+*[role="button"],
 input[type="submit"],
 input[type="reset"],
 input[type="button"] {
@@ -99,10 +99,12 @@ header nav {
 form {
 	.field {
 		@extend .form-group;
+		.field_with_errors {
+			display: inline !important;
+		}
 	}
 	.field_with_errors {
 		@extend .has-error;
-		display: inline;
 	}
 }
 

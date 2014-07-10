@@ -26,24 +26,37 @@
 <%= form_for @user do |f| %>
 	<%= render "common/error_messages", :target => @user %>
 	<div class="field">
-		<%= f.label :name %><br>
+		<%= f.label :user_name %>
+		<span class="help-block">
+		  This is the name you will use to log in.
+		  It may consist of letters, numbers, <kbd>_</kbd>, and <kbd>-</kbd>.
+		</span>
+		<br>
+		<%= f.text_field :user_name %>
+	</div>
+	<div class="field">
+		<%= f.label :password %>
+		<span class="help-block">
+		  Must be at least 6 characters long.
+		</span>
+		<br>
+		<%= f.password_field(:password, required: :required, minlength: 6) %>
+	</div>
+	<div class="field">
+		<%= f.label(:password_confirmation, "Confirm Password") %><br>
+		<%= f.password_field(:password_confirmation, required: :required, minlength: 6) %>
+	</div>
+	<div class="field">
+		<%= f.label :name %>
+		<span class="help-block">
+		  A display name; perhaps your real name, or perhaps an alias.
+		</span>
+		<br>
 		<%= f.text_field :name %>
 	</div>
 	<div class="field">
 		<%= f.label :email %><br>
-		<%= f.text_field(:email, type: "email") %>
-	</div>
-	<div class="field">
-		<%= f.label :user_name %><br>
-		<%= f.text_field :user_name %>
-	</div>
-	<div class="field">
-		<%= f.label :password %><br>
-		<%= f.password_field :password %>
-	</div>
-	<div class="field">
-		<%= f.label(:password_confirmation, "Confirm Password") %><br>
-		<%= f.password_field :password_confirmation %>
+		<%= f.email_field(:email) %>
 	</div>
 	<div class="field">
 		<%= show_simple_captcha %>
