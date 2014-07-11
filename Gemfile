@@ -14,11 +14,13 @@ gem 'simple_captcha2', require: 'simple_captcha'
 
 group :development, :test do
 	# Use sqlite3 as the database
-	gem 'sqlite3'
+	gem 'sqlite3', platforms: [ :mri ]
+	gem 'activerecord-jdbcsqlite3-adapter', platforms: [ :jruby ]
 end
 group :production do
 	# USe PostgresQL as the database
-	gem 'pg'
+	gem 'pg', platforms: [ :mri ]
+	gem 'activerecord-jdbcpostgresql-adapter', platforms: [ :jruby ]
 end
 
 # group :test do
@@ -38,7 +40,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-gem 'therubyracer', platforms: :ruby
+gem 'therubyracer', platforms: [ :mri ]
+gem 'therubyrhino', platforms: [ :jruby ]
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

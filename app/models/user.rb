@@ -46,7 +46,7 @@ class User < ActiveRecord::Base
 	validates(:email,
 		presence: true,
 		# This regex is taken from http://www.w3.org/TR/html5/forms.html#e-mail-state-%28type=email%29
-		format: {with: /\A[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*\z/},
+		format: { with: /\A[a-zA-Z0-9.!\#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*\z/ },
 		uniqueness: { case_sensitive: false })
 
 	# user_name:string_uniq
