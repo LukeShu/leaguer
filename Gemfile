@@ -66,6 +66,7 @@ group :doc do
 	gem 'sdoc', require: false
 end
 
+gem "warbler", require: false, platforms: [ :jruby ], groups: [ :development ]
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'

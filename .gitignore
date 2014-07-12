@@ -25,6 +25,7 @@
 /config/database.yml
 /vendor/bundle
 /public/assets
+/*.war
 
 # As noted above, you probably want to add the following to your global git config.
 nohup.out
