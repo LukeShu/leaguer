@@ -58,6 +58,7 @@
 				</div>
 				<% if signed_in? %>
 					<ul>
+					        <li><%= link_to "Tournaments", tournaments_path %></li>
 						<li><%= link_to "Messages", pms_path %></li>
 						<% if current_user.can? :edit_server %>
 							<li><%= link_to "Server settings", edit_server_path, :class => "server" %></li>
