@@ -37,6 +37,8 @@
 	}
 	.btn, .form-control {
 		display: table-cell !important;
+		/* .simple-input-group .btn:not(:last-child),
+		 * .simple-input-group .form-control:not(:last-child) { ... } */
 		&:not(:last-child) {
 			@include border-right-radius(0);
 		}
@@ -51,8 +53,8 @@
 /* Specific page elements */
 
 #notice {
-	@extend .alert-success;
-	@extend .container;
+	&:extend(.alert-success);
+	&:extend(.container);
 	text-align: center;
 }
 
@@ -62,16 +64,16 @@
 
 
 form#search {
-	@extend .navbar-left;
+	&:extend(.navbar-left);
 	div {
-		@extend .simple-input-group;
+		&:extend(.simple-input-group);
 	}
 }
 
 #user-actions {
-	@extend .navbar-btn;
-	@extend .navbar-right;
-	@extend .simple-input-group;
+	&:extend(.navbar-btn);
+	&:extend(.navbar-right);
+	&:extend(.simple-input-group);
 	span {
 		padding-right: .25em;
 	}
@@ -129,7 +131,7 @@ form#search {
 
 /**** INDEX PAGE - TABLE AND GRAPH ****/
 #matches-table {
-    @extend .table;
+    &:extend(.table);
     color: #FFF;
 
     form {
@@ -141,11 +143,11 @@ form#search {
 
 /*
 .btn {
-	&.user    { @extend .btn-info; }
-	&.signup  { @extend .btn-success; }
-	&.signin  { @extend .btn-warning; }
-	&.signout { @extend .btn-danger; }
-	&.server  { @extend .btn-warning; }
+	&.user:extend(.btn-info) {}
+	&.signup:extend(.btn-success) {}
+	&.signin:extend(.btn-warning) {}
+	&.signout:extend(.btn-danger) {}
+	&.server:extend(.btn-warning) {}
 	&.create-alert {
 		color: white;
 		background-color: rgb(255, 69, 0);
@@ -171,7 +173,7 @@ div.field span.help-block {
 /* Elements *********************************************************/
 
 footer {
-	@extend .container;
+	&:extend(.container);
 	margin-top: 1em;
 	border-top: solid 1px $hr-border;
 	text-align: center;
