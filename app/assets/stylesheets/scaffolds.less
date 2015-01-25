@@ -40,14 +40,15 @@
 		/* .simple-input-group .btn:not(:last-child),
 		 * .simple-input-group .form-control:not(:last-child) { ... } */
 		&:not(:last-child) {
-			@include border-right-radius(0);
+			.border-right-radius(0);
 		}
 		&:not(:first-child) {
-			@include border-left-radius(0);
+			.border-left-radius(0);
 			border-left: 0;
 		}
 	}
 }
+
 
 /* IDs **************************************************************/
 /* Specific page elements */
@@ -172,15 +173,14 @@ div.field span.help-block {
 
 /* Elements *********************************************************/
 
-footer {
-	&:extend(.container);
+footer:extend(.container) {
 	margin-top: 1em;
-	border-top: solid 1px $hr-border;
+	border-top: solid 1px @hr-border;
 	text-align: center;
 }
 
 fieldset {
-	border: solid 1px $legend-border-color;
+	border: solid 1px @legend-border-color;
 	border-radius: .5em;
 	padding: 1em;
 	margin: 1em 0;
@@ -189,7 +189,7 @@ fieldset {
 		margin: 0;
 		padding: .25em .5em;
 		width: auto;
-		border: solid 1px $legend-border-color;
+		border: solid 1px @legend-border-color;
 		border-radius: .5em;
 	}
 }
